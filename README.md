@@ -1,6 +1,6 @@
 # EcoFlow
 
-[Logo](https://github.com/eco-flow/ecoflow.github.io/image832.png)
+[Logo]([https://github.com/eco-flow/ecoflow.github.io/image832.png](https://github.com/Eco-Flow/ecoflow.github.io/blob/publish/logo_sm.png))
 
 Welcome to the EcoFlow
 
