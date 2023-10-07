@@ -1,4 +1,4 @@
-.workspaceLocation: gitpod/gitpod-ws.code-workspace
+workspaceLocation: gitpod/gitpod-ws.code-workspace
 checkoutLocation: gitpod
 
 github:
@@ -15,6 +15,12 @@ github:
         addComment: true
         # add a "Review in Gitpod" button to pull requests (defaults to false)
         addBadge: false
+
+# See .github/Dockerfile
+image: ghcr.io/nextflow-io/training:latest
+
+tasks:
+    - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
 
 vscode:
     extensions: # based on nf-core.nf-core-extensionpack
