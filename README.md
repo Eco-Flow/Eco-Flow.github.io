@@ -1,6 +1,11 @@
-# EcoFlow 
+# EcoFlow
 
-Welcome to the EcoFlow, an organisation funded by the BBSRC to prmote the development of Nextflow in argi-ecology and environmental research. 
+[Logo](https://github.com/eco-flow/ecoflow.github.io/image832.png)
+
+Welcome to the EcoFlow
+
+An organisation funded by the BBSRC to promote the development of Nextflow in argi-ecology and environmental research.
+
 Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
 
 # Contents
@@ -10,5 +15,3 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 3. Examples of current pipelines
 4. Who are our current research partners ?
 5. Citations
-
-
