@@ -1,6 +1,6 @@
-# Our academic partners
+# Partners
 
-We build this project with the support of a number of UK based agri-ecology academics, without which this project would not have been possible.
+We built this project with the support of a number of UK based agri-ecology academics, without which this project would not have been possible.
 
 # Our supporters:
 
