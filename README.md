@@ -10,6 +10,6 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 
 1. [Who are we ?](about.md)
 2. [What services can we provide ?](services.md)
-3. Examples of current pipelines
-4. Who are our current research partners ?
-5. Citations
+3. [Examples of current pipelines](pipelines.md)
+4. [Who are our current research partners ?](partners.md)
+5. [Citations](citations.md)
