@@ -1,6 +1,6 @@
 ![logo](./logo_sm.png)
 
-Welcome to the EcoFlow
+# Welcome to the EcoFlow
 
 An organisation funded by the BBSRC to promote the development of Nextflow in argi-ecology and environmental research.
 
