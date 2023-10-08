@@ -1,2 +1,7 @@
 theme: minima
 
+header_pages:
+  - about.md
+  - partners.md
+  - pipelines.md
+  - services.md
