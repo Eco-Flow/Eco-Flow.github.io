@@ -1,6 +1,6 @@
 ![logo](./bitmap.png)
 
-# Welcome to the EcoFlow
+# Welcome to EcoFlow
 
 An organisation funded by the BBSRC to promote the development of an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
@@ -14,3 +14,6 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 4. [Who are our current research partners ?](partners.md)
 5. [Citations](citations.md)
 
+# Useful links
+
+Github: https://github.com/Eco-Flow/Eco-Flow.github.io
