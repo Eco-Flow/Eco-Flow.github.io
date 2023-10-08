@@ -18,4 +18,4 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 
 [Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
 
-[Home Page](https://github.com/Eco-Flow/Eco-Flow.github.io/home.md)
+[Home Page](home.md)
