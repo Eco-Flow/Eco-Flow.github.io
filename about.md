@@ -1,9 +1,12 @@
 # About us
 
-Hey we are a team of four academics...
+Hey we are a team of four researchers comprised of:
 
-f
+Ecology Supervisor             : Seirian Sumner
+Informatics/Ecology Supervisor : Yannick Wurm
+Co-investigator lead           : Chris Wyatt
+Research lead                  :
 
-w
-ef
-wfe
+
+
+
