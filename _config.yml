@@ -5,6 +5,7 @@ url: "https://eco-flow.github.io"
 
 plugins:
   - jekll-feed
+  - jekyll-titles-from-headings
 
 author: Chris Wyatt
 twitter_username: Wyatt1Chris
