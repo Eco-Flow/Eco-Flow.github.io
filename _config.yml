@@ -7,7 +7,6 @@ plugins:
   -jekll-feed
 
 header_pages:
-  - home.md
   - about.md
   - partners.md
   - pipelines.md
