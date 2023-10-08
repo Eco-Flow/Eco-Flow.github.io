@@ -1,6 +1,9 @@
 theme: minima
+name: home
+title: null
 
 header_pages:
+  - readme.md
   - about.md
   - partners.md
   - pipelines.md
