@@ -1,6 +1,6 @@
 theme: minima
-name: home
-title: null
+name: Home
+
 
 header_pages:
   - README.md
