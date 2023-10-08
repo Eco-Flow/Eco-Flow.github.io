@@ -3,7 +3,7 @@ name: Home
 
 
 header_pages:
-  - README.md
+  - home.md
   - about.md
   - partners.md
   - pipelines.md
