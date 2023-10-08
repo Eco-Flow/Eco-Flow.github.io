@@ -2,7 +2,7 @@
 
 # Welcome to the EcoFlow
 
-An organisation funded by the BBSRC to promote the development of Next**flow** in agri-**eco**logy and environmental research.
+An organisation funded by the BBSRC to promote the development of an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
 Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
 
