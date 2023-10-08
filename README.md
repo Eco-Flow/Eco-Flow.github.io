@@ -1,3 +1,7 @@
+---
+title: Title
+---
+
 ![logo](./logo_sm.png)
 
 Welcome to the EcoFlow
