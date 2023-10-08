@@ -18,4 +18,6 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 
 [Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
 
+Twitter - to be added
+
 [Home Page](home.md)
