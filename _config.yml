@@ -1,6 +1,10 @@
 theme: minima
 title: Home
+description: A community of Nextflow ecologists
+url: "https://eco-flow.github.io"
 
+plugins:
+  -jekll-feed
 
 header_pages:
   - home.md
