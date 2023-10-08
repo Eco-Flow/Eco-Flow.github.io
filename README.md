@@ -16,4 +16,4 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 
 # Useful links
 
-Github: https://github.com/Eco-Flow/Eco-Flow.github.io
+[Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
