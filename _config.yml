@@ -4,7 +4,7 @@ description: A community of Nextflow ecologists
 url: "https://eco-flow.github.io"
 
 plugins:
-  -jekll-feed
+  - jekll-feed
 
 author: Chris Wyatt
 twitter_username: Wyatt1Chris
