@@ -9,7 +9,7 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 # Contents
 
 1. [Who are we ?](about.md)
-2. What services can we provide ?
+2. [What services can we provide ?](services.md)
 3. Examples of current pipelines
 4. Who are our current research partners ?
 5. Citations
