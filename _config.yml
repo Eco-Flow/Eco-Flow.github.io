@@ -6,6 +6,8 @@ url: "https://eco-flow.github.io"
 plugins:
   -jekll-feed
 
+author: Chris Wyatt
+
 header_pages:
   - about.md
   - partners.md
