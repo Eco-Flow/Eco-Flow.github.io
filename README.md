@@ -1,4 +1,4 @@
-![logo](./logo_sm.png)
+![logo](./bitmap.png)
 
 # Welcome to the EcoFlow
 
