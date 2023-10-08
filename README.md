@@ -13,3 +13,11 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 3. Examples of current pipelines
 4. Who are our current research partners ?
 5. Citations
+
+
+
+<!-- template -->
+{{ ./logo_sm.png:img?width=250 alt='steam-fish-1' }}
+
+<!-- output -->
+<a href="./logo_sm.png" width='250' height='YYY' alt='steam-fish-1'>
