@@ -1,4 +1,4 @@
-#About Us
+# About Us
 
 We are a team of four researchers comprised of:
 
