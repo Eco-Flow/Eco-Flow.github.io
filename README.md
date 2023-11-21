@@ -1,4 +1,4 @@
-![logo](./bitmap.png)
+![logo](./bitmap2.png)
 
 # Welcome to EcoFlow
 
@@ -17,7 +17,8 @@ Our goal is to help researchers develop Nextflow code, teach basic and advanced 
 # Useful links
 
 [Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
+[Nexflow](https://www.nextflow.io/)
 
-Twitter - to be added
+
 
 [Home Page](home.md)
