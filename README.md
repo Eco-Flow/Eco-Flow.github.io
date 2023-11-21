@@ -1,4 +1,4 @@
-![logo](./bitmap2.png)
+<img width="600" src="./bitmap2.png" />
 
 <img align="right" width="150" src="./img/nextflowlogoTopmargin.png" />
 
@@ -8,7 +8,11 @@ An organisation funded by the BBSRC to promote the development of an agri-**eco*
 
 Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
 
+<img align="left" width="200" src="./img/leaf.png" />
 
+# Why
+
+Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. In the UK, we have some of the world leading research labs trying to tackle these key issues. However, bioinformatics skills in these areas lag far behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published, with a knock-on effect to hampering recommendations for urgently-needed policy change.
 
 # Contents
 
