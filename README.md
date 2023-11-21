@@ -1,6 +1,6 @@
-<img width="600" src="./bitmap2.png" />
+<img width="500" src="./bitmap2.png" />
 
-<img align="right" width="150" src="./img/nextflowlogoTopmargin.png" style="border: 30px white;"  />
+<img align="right" width="130" src="./img/nextflowlogoTopmargin.png" style="border: 30px white;"  />
 
 # Welcome to EcoFlow
 
@@ -8,7 +8,7 @@ An organisation funded by the BBSRC to promote the development of an agri-**eco*
 
 Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
 
-<img align="left" width="200" src="./img/leaf.png"  style="border: 30px white;" />
+<img align="left" width="200" src="./img/leaf.png"  style="border: 30px black;" />
 
 # Why
 
@@ -16,7 +16,7 @@ Agri-ecology research is critical for our understanding of the natural environme
 
 # Our plan
 
-<img align="right" width="150" src="./img/building.png" style="border: 30px white;" />
+<img align="right" width="150" src="./img/building_headspace.png" style="border: 30px white;" />
 
  **1. BUILDING**
 
