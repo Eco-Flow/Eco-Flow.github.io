@@ -1,6 +1,6 @@
 ![logo](./bitmap2.png)
 
-<img align="right" width="150" src="./img/nextflow_logo-1.png" />
+<img align="right" width="150" src="./img/nextflowlogoTopmargin.png" />
 
 # Welcome to EcoFlow
 
