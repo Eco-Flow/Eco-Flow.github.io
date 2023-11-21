@@ -11,6 +11,7 @@ We built this project with the support of a number of UK based agri-ecology acad
 5. [Professor Eamonn Mallon](https://le.ac.uk/people/eamonn-mallon)
 6. [Dr Peter Graystock](https://www.imperial.ac.uk/people/p.graystock)
 7. [Professor Mark J.F. Brown](https://pure.royalholloway.ac.uk/en/persons/mark-j-f-brown)
+8. [Dr Fabio Manfredini](https://www.abdn.ac.uk/people/fabio.manfredini/)
 
 We are also associated with some industrial partners:
 
