@@ -6,6 +6,8 @@ An organisation funded by the BBSRC to promote the development of an agri-**eco*
 
 Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
 
+![nextflow](nextflow_logo-1.png)
+
 # Contents
 
 1. [Who are we ?](about.md)
