@@ -23,9 +23,9 @@ The project was also supported by Seqera, the inventors of Nextflow. Who provide
 
 1. Seqera labs (Barcelona)
 
-<img align="left" width="180" src="./img/handshake.png"  style="border: 2px solid  gray;" />
-
 # Open to collaboration
+
+<img align="left" width="180" src="./img/handshake.png" />
 
 Our project is always open to new collaborative partners. We will consider all applications for partnership within UK based research based institutes.
 
