@@ -1,6 +1,6 @@
-# Ambassaors and Partners
+# Ambassadors and Partners
 
-# Our ambassadors:
+# Our Ambassadors:
 
 We built this project with the support of a number of UK based agri-ecology academic ambassadors, without which this project would not have been possible.
 
