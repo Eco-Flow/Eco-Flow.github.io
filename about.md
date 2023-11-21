@@ -1,10 +1,10 @@
 # About us
 
-# 
+# We are
 
 <img width="500" src="./bitmap2.png" />
 
-We are a team of four researchers and bioinformatians comprised of:
+A team of four researchers and bioinformatians comprised of:
 
 <img width="350" src="./img/personel.png" />
 
