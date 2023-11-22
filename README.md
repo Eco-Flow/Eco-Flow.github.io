@@ -22,7 +22,7 @@ Agri-ecology research is critical for our understanding of the natural environme
 
 We will develop (within end-user communities) reproducible, easy-to-use, modular bioinformatics pipelines suitable for the most useful analyses required by ecologists in the application of omics data to address critical ecological questions. Specifically, we will use Nextflow (https://www.nextflow.io/), a world leading pipeline development structure to create these pipelines.
 
-<img align="left" width="150" src="./img/testing.png" style="border: 30px white;" />
+<img align="left" width="150" src="./img/chain_break.png" style="border: 30px white;" />
 
  **2. TESTING**
 
