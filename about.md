@@ -46,7 +46,7 @@ UCL (University College London) is the host university of Sumner, Wyatt and our 
 
 # Queen Mary
 
-Queen Mary university is the host univeristy of Yannick Wurm
+Queen Mary university is the host university of Yannick Wurm
 
 # nf-core
 

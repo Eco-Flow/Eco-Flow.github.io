@@ -29,5 +29,5 @@ The project was also supported by Seqera, the inventors of Nextflow. Who provide
 
 Our project is always open to new collaborative partners. We will consider all applications for partnership within UK based research based institutes.
 
-Please send an email: c.wyatt@ucl.ac.uk , and we will get back to you ASAP.
+Please send an email: c dot wyatt at ucl.ac.uk , and we will get back to you ASAP.
 
