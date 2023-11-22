@@ -1,6 +1,6 @@
 theme: minima
 title: Home
-description: A community of Nextflow ecologists
+description: A community of computational agri-ecologists
 url: "https://eco-flow.github.io"
 
 plugins:
