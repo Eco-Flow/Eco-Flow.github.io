@@ -1,30 +1,30 @@
 # About us
 
-<img width="500" src="./bitmap2.png" />
+<img width="500" src="./img/bitmap2.png" />
 <br><br>
 
 The Eco-flow team is comprised of four core researchers/bioinformatians:
 <br><br>
 
-<img align="left" width="100" src="./img/chris.png" />
+<img style="margin-right: 1.0rem" align="left" width="100" src="./img/chris.png" />
 
 # Co-investigator lead           : Chris Wyatt
  Chris is the lead bioinformatician on the project, with a background in omic technologies and pipeline development
 <br><br>
 
-<img align="left" width="100" src="./img/blackbox.png" />
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/blackbox.png" />
 
 # Technical lead                  : To be announced
 
 <br><br>
 
-<img align="left" width="100" src="./img/seirian.png" />
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/seirian.png" />
 
 # Ecology Supervisor             : Seirian Sumner
  Professor Seirian Sumner is a leading researcher in ecology and genomics 
 <br><br>
 
-<img align="left" width="100" src="./img/yannick.png" />
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/yannick.png" />
 
 # Informatics/Ecology Supervisor : Yannick Wurm
 Yannick is a data scientist expert on genome analysis and evolution

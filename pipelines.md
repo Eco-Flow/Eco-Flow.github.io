@@ -1,6 +1,6 @@
 # Pipelines
 
-<img align="center" width="300" src="./img/work_in_progress.png" style="border: 30px white;" />
+<img align="middle" width="300" src="./img/work_in_progress.png" style="border: 30px white;" />
 
 <br><br>
 
