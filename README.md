@@ -4,11 +4,11 @@
 
 <img align="right" width="130" src="./img/nextflowlogoTopmargin.png" style="border: 30px white;"  />
 
-# Welcome to EcoFlow
+# Welcome to Eco-Flow
 
-An organisation funded by the BBSRC to promote the development of an agri-**eco**logy specific Next**flow** pipeline community and development program.
+An organisation funded by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
-Our goal is to help researchers develop Nextflow code, teach basic and advanced topics around the UK and build functional pipelines to super charge UK research.
+Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br><br>
 
 <img align="left" width="150" src="./img/leaf.png"  style="border: 30px black;" />
