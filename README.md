@@ -54,7 +54,8 @@ We address this mismatch by building resource bridges between ecologists – esp
 
 # Useful links
 
-[Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
+[Github](https://github.com/Eco-Flow/)
+[Webpage Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
 [Nexflow](https://www.nextflow.io/)
 
 
