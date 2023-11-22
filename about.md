@@ -1,8 +1,10 @@
 # About us
 
 <img width="500" src="./bitmap2.png" />
+<br><br>
 
 The Eco-flow team is comprised of four core researchers/bioinformatians:
+<br><br>
 
 <img align="left" width="100" src="./img/chris.png" />
 
@@ -26,7 +28,7 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
 
 # Informatics/Ecology Supervisor : Yannick Wurm
 Yannick is a data scientist expert on genome analysis and evolution
-<br><br>
+<br><br><br><br>
 
 # Involved organisations
 
@@ -54,7 +56,7 @@ Nf-core is an organisation that sets the standards of bioinformatics workflows u
 
 Seqera sponsored this initiative and provide technical support<br>
 
-<br>
+<br><br><br>
 
 
 # Contact
