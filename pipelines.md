@@ -1,9 +1,18 @@
 # Pipelines
 
-This is a list of our current working projects
+<img align="center" width="300" src="./img/work_in_progress.png" style="border: 30px white;" />
 
-Feel free to contact us if you want to be involved in the creation of these pipelines, or want more information.
+<br><br>
+
+# Current status
+
+We are currently working on a variety of example pipelines to prepare for our launch event.
+
+We will add pipelines to this section as they are completed
+
+Watch this space.
 
 
-Pipelines:
+
+
 
