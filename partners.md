@@ -1,4 +1,4 @@
-# Ambassadors and Partners
+# Ambassadors
 
 # Our Ambassadors:
 
@@ -13,7 +13,7 @@ We built this project with the support of a number of UK based agri-ecology acad
 7. [Professor Mark J.F. Brown](https://pure.royalholloway.ac.uk/en/persons/mark-j-f-brown)
 8. [Dr Fabio Manfredini](https://www.abdn.ac.uk/people/fabio.manfredini/)
 
-We are also associated with some industrial partners:
+In addition, we are also associated with some industrial partners:
 
 <img align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
 
