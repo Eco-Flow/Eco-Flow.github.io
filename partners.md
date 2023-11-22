@@ -1,7 +1,5 @@
 # Ambassadors
 
-# Our Ambassadors:
-
 We built this project with the support of a number of UK based agri-ecology academic ambassadors, without which this project would not have been possible.
 
 1. [Professor Jane K. Hill](https://www.york.ac.uk/biology/research/ecology-evolution/jane-k-hill/)
@@ -13,15 +11,21 @@ We built this project with the support of a number of UK based agri-ecology acad
 7. [Professor Mark J.F. Brown](https://pure.royalholloway.ac.uk/en/persons/mark-j-f-brown)
 8. [Dr Fabio Manfredini](https://www.abdn.ac.uk/people/fabio.manfredini/)
 
+
+
 In addition, we are also associated with some industrial partners:
 
-<img align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
+<br><br>
 
-# Our Partners
+<img style="margin-top: 5rem ;margin-left: 1rem" align="right" width="330" src="./img/seqera.png" />
 
-The project was also supported by Seqera, the inventors of Nextflow. Who provide technical and financial support for this initiative. 
+# Partners
 
-1. Seqera labs (Barcelona)
+The project is also supported by Seqera, the inventors of Nextflow. Who provide technical and financial support for this initiative. 
+
+[Seqera labs](https://seqera.io/)
+
+<br><br>
 
 # Open to collaboration
 
