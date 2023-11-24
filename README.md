@@ -11,7 +11,7 @@ An organisation [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by 
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-<img style="margin-right: 1.5rem; margin-top: 3.5rem; margin-bottom: 3.5rem" align="left" width="150" src="./img/leaf.png"  style="border: 30px black;" />
+<img style="margin-right: 1.5rem; margin-top: 3.5rem; margin-bottom: 3.5rem" align="left" width="150" src="./img/leaf_whitespace.png"  style="border: 30px black;" />
 
 # Why
 
