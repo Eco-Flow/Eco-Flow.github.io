@@ -2,7 +2,7 @@
 
 <br><br>
 
-<img style="margin-left: 1.5rem; margin-top: 3.5rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
+<img style="margin-left: 1.5rem; margin-top: 1rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
 
 # Welcome to Eco-Flow
 
