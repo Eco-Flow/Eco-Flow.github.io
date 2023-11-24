@@ -6,7 +6,7 @@
 
 # Welcome to Eco-Flow
 
-An organisation [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
+An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
