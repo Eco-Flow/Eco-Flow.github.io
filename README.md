@@ -11,11 +11,13 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-<img style="margin-right: 1.5rem; margin-top: 3.5rem; margin-bottom: 3.5rem" align="left" width="180" src="./img/leaf_whitespace.png"  style="border: 30px black;" />
+<img align="left" width="180" src="./img/leaf_whitespace.png"  style="border: 30px black;" />
 
 # Why
 
-Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. In the UK, we have some of the world leading research labs trying to tackle these key issues. However, bioinformatics skills in these areas lag behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published.  
+Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
+
+However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published. In addition, research is often not reproducible, accessible or scalable.
 <br><br>
 
 # Our plan
@@ -34,13 +36,21 @@ We will develop (within end-user communities) reproducible, easy-to-use, modular
 Once we have developed our pipelines, we will ensure each module has unit testing (using [nf-test](https://shorturl.at/kpQ39)), as well as end to end pipeline tests with example data. Alongside our ambassadors and partner labs we can ensure pipelines are continuously tested and improved, so they remain active and relevant. 
 <br><br>
 
-<img style="margin-left: 1.5rem ; margin-top: 2rem" align="right" width="150" src="./img/blackbox.png" style="border: 30px white;" />
+<img style="margin-left: 1.5rem ; margin-top: 2rem" align="right" width="120" src="./img/blackbox.png" style="border: 30px white;" />
 
  **3. TRAINING**
 
 We address this mismatch by building resource bridges between ecologists – especially those working at the interface of insect ecology and agriculture - and bioinformatics; we will empower them with the autonomy to access and use the most appropriate cutting-edge analyses. Let’s remove the black box of bioinformatics!
 <br><br>
 
+<img style="margin-left: 1.5rem ; margin-top: 2rem" align="left" width="170" src="./img/handshake.png" style="border: 30px white;" />
+<br>
+
+**4. COMMUNITY**
+
+Finally, while fulfilling the previous steps, we will build a community of pipeline developers in the UK. Pipeline development should be collaborative, interactive and accessible, so we will be hosting additional networking and hackathon events to build a community of developers that will compliment code devlopment.
+
+<br><br>
 
 # Contents
 
