@@ -2,7 +2,7 @@
 
 <br><br>
 
-<img style="margin-left: 1.5rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" style="border: 30px white;"  />
+<img style="margin-left: 1.5rem; margin-top: 3.5rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
 
 # Welcome to Eco-Flow
 
@@ -11,7 +11,7 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-<img align="left" width="180" src="./img/leaf_whitespace.png"  style="border: 30px black;" />
+<img align="left" width="180" src="./img/leaf_whitespace.png" style="margin-top: 2.5rem"  />
 
 # Why
 
@@ -29,19 +29,19 @@ However, tooling lags behind other research fields such as medicine; this bottle
 We will develop (within end-user communities) reproducible, easy-to-use, modular bioinformatics pipelines suitable for the most useful analyses required by ecologists in the application of omics data to address critical ecological questions. Specifically, we will use [Nextflow](https://www.nextflow.io/), a world leading pipeline development structure to create these pipelines.
 <br><br>
 
-<img style="margin-right: 1.5rem ; margin-top: 2rem" align="left" width="150" src="./img/chain_break.png" style="border: 30px white;" />
+<img style="margin-right: 1.5rem ; margin-top: 3rem" align="left" width="150" src="./img/chain_break.png" style="border: 30px white;" />
 
  **2. TESTING**
 
 Once we have developed our pipelines, we will ensure each module has unit testing (using [nf-test](https://shorturl.at/kpQ39)), as well as end to end pipeline tests with example data. Alongside our ambassadors and partner labs we can ensure pipelines are continuously tested and improved, so they remain active and relevant. 
 <br><br>
 
-<img style="margin-left: 1.5rem ; margin-top: 2rem" align="right" width="120" src="./img/blackbox.png" style="border: 30px white;" />
+<img style="margin-left: 1.5rem ; margin-top: 2.5rem" align="right" width="120" src="./img/blackbox.png" style="border: 30px white;" />
 
  **3. TRAINING**
 
 We address this mismatch by building resource bridges between ecologists – especially those working at the interface of insect ecology and agriculture - and bioinformatics; we will empower them with the autonomy to access and use the most appropriate cutting-edge analyses. Let’s remove the black box of bioinformatics!
-<br><br>
+<br>
 
 <img style="margin-left: 1.5rem ; margin-top: 2rem" align="left" width="170" src="./img/handshake.png" style="border: 30px white;" />
 <br>
