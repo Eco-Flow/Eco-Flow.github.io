@@ -31,18 +31,20 @@ Yannick is a data scientist expert on genome analysis and evolution.
 <br><br><br><br>
 
 <br><br>
-<img align="left" width="350" src="./img/BBSRC.png" />
 
 # Funding
+
+<img align="left" width="250" src="./img/BBSRC.png" />
 
 ## BBSRC
 
 BBSRC funded this initiative<br>
 See our grant [here](https://shorturl.at/bjAI3)<br>
-This is part of the Bioinformatics and Biological Resources Fund<br>
+This is part of the Bioinformatics and Biological Resources Fund
 
+<br><br>
 
-<img align="left" width="350" src="./img/seqera.png" />
+<img align="left" width="250" src="./img/seqera.png" />
 
 ## Seqera Labs
 
@@ -50,23 +52,23 @@ Seqera sponsors this initiative and provides technical support<br>
 
 # Host universities
 
-<img align="left" width="350" src="./img/ucl.png" />
+<img align="left" width="250" src="./img/ucl.png" />
 
 ## UCL
 
 UCL (University College London) is the host university of Sumner, Wyatt and our technical lead
+<br><br>
 
-<img align="left" width="350" src="./img/QM.png" />
+<img align="left" width="250" src="./img/QM.png" />
 
 ## Queen Mary
 
 Queen Mary university is the host university of Yannick Wurm
 
-
 <br><br>
 # Associated organisations
 
-<img align="left" width="350" src="./img/nfcore.png" />
+<img align="left" width="250" src="./img/nfcore.png" />
 
 # nf-core
 
