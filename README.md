@@ -20,6 +20,14 @@ Agri-ecology research is critical for our understanding of the natural environme
 However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published. In addition, research is often not reproducible, accessible or scalable.
 <br><br>
 
+# Sign Up !
+
+We are currently accepting expressions of interest in the program. Follow this URL: https://forms.gle/yjTU9GYCd27iC7CS8
+
+-by signing up: 
+we will keep you informed of our progress, invite you to occaisional events (including our launch event- 22nd February 2024) and you will get a vote on pipelines that we work on!
+
+
 # Our plan
 
 <img style="margin-left: 1.5rem" align="right" width="150" src="./img/building_headspace.png" style="border: 30px white;" />
