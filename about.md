@@ -14,7 +14,7 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
 
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/blackbox.png" />
 
-# Technical lead                  : To be announced
+# Technical lead                  : Simon Murray
 
 <br><br>
 
