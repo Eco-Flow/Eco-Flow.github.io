@@ -12,7 +12,7 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
  Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
 <br><br>
 
-<img style="margin-right: 1.5rem" align="left" width="100" src="./img/blackbox.png" />
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
 
 # Technical lead                  : Simon Murray
 
