@@ -11,9 +11,9 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-<img align="left" width="130" src="./img/logo.png" style="margin-top: 2.5rem"  />
-
 # Why
+
+<img align="left" width="100" src="./img/logo.png" style="margin-top: 2.5rem"  />
 
 Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
 
