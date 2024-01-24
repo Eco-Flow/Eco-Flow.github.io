@@ -13,7 +13,7 @@ Our goal is to help researchers develop Nextflow code, teach basic/advanced topi
 
 # Why
 
-<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="left" width="125" src="./img/logo.png"/>
+<img style="margin-right: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="left" width="125" src="./img/logo.png"/>
 
 Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
 
