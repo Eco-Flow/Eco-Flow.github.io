@@ -1,4 +1,4 @@
-<img width="500" src="./img/bitmap2.png" />
+<img src="./img/ECOFLOW-BLACK-BANNER.png" />
 
 <br><br>
 
@@ -11,7 +11,7 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-<img align="left" width="180" src="./img/leaf_whitespace.png" style="margin-top: 2.5rem"  />
+<img align="left" width="200" src="./img/logo.png" style="margin-top: 2.5rem"  />
 
 # Why
 
