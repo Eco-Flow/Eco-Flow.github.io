@@ -1,6 +1,6 @@
 # About us
 
-<img width="500" src="./img/bitmap2.png" />
+<img src="./img/ECOFLOW-BLACK-BANNER.png" />
 <br><br>
 
 The Eco-flow team is comprised of four core researchers/bioinformatians:
@@ -15,7 +15,7 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
 
 # Technical lead                  : Simon Murray
-
+ Simon is a senior bioinformatician on the project, with a background in pipeline development and containerisation.
 <br><br>
 
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/seirian.png" />
