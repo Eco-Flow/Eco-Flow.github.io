@@ -9,25 +9,25 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
 <img style="margin-right: 1.0rem" align="left" width="100" src="./img/chris.png" />
 
 # Project lead           : Chris Wyatt
- Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
+Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
 <br><br>
 
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
 
 # Technical lead                  : Simon Murray
- Simon is a senior bioinformatician on the project, with a background in pipeline development and containerisation.
+Simon is a senior bioinformatician on the project, with a background in pipeline development and containerisation.
 <br><br>
 
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/seirian.png" />
 
 # Ecology Advisor             : Seirian Sumner
- Professor Seirian Sumner is a leading researcher in ecology and genomics.
+Professor Seirian Sumner is a leading researcher in ecology and genomics.
 <br><br>
 
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/yannick.png" />
 
 # Bioinformatics Advisor : Yannick Wurm
-Yannick is a data scientist expert on genome analysis and evolution.
+Professor Yannick Wurm is a data scientist expert on genome analysis and evolution.
 <br><br><br><br>
 
 <br><br>
