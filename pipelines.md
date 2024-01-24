@@ -1,14 +1,14 @@
-# Pipelines
+# Published Pipelines
 
-<img align="middle" width="300" src="./img/work_in_progress.png" style="border: 30px white;" />
+* [Eco-Flow/synteny](https://github.com/Eco-Flow/synteny) - A pipeline that compares gene synteny between chromosome level genome assemblies.
 
 <br><br>
 
-# Current status
+# Pipelines in Development
 
-We are currently working on a variety of example pipelines to prepare for our launch event.
+At the launch event we will collate a list of pipelines needed by the community to start developing.
 
-We will add pipelines to this section as they are completed
+We will add those pipelines to this section as they are completed.
 
 Watch this space.
 
