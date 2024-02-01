@@ -2,8 +2,6 @@
 
 * [Eco-Flow/synteny](https://github.com/Eco-Flow/synteny) - A pipeline that compares gene synteny between chromosome level genome assemblies.
 
-<br><br>
-
 # Custom config files
 
 * [Eco-Flow/configs](https://github.com/Eco-Flow/configs/tree/main) - A repository to store custom configuration files we develop for our community.
