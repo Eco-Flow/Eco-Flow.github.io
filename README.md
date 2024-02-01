@@ -73,9 +73,11 @@ Finally, while fulfilling the previous steps, we will build a community of pipel
 # Useful links
 
 [Github](https://github.com/Eco-Flow/)
-[Webpage Github](https://github.com/Eco-Flow/Eco-Flow.github.io)
+
+[Webpage Github Repository](https://github.com/Eco-Flow/Eco-Flow.github.io)
+
 [Nexflow](https://www.nextflow.io/)
 
-
+[nf-core](https://nf-co.re/)
 
 [Home Page](home.md)

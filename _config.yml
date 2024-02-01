@@ -12,8 +12,8 @@ titles_from_headings:
   strip_title: true
   collections: false
 
-author: Chris Wyatt
-email: c dot wyatt at ucl.ac.uk
+authors: Chris Wyatt, Simon Muray
+email: c . wyatt at ucl . ac . uk, simon . murray at ucl . ac . uk 
 
 header_pages:
   - about.md
