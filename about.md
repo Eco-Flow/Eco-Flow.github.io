@@ -81,11 +81,14 @@ Nf-core is an organisation that sets the standards of bioinformatics workflows u
 
 # Contact
 
-To learn more about this initiative or enquire about a collaboration contact Chris Wyatt
--> c . wyatt AT ucl . ac .  uk
+To learn more about this initiative or enquire about a collaboration contact:
 
-Or Simon Murray
--> simon . murray AT ucl . ac .  uk
+Chris Wyatt - `c . wyatt AT ucl . ac .  uk`
 
-Or 
--> ecoflow . ucl AT gmail . com
+AND
+
+Simon Murray - `simon . murray AT ucl . ac .  uk`
+
+OR
+
+`ecoflow . ucl AT gmail . com`
