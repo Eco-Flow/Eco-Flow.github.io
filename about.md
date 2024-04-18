@@ -12,12 +12,6 @@ The Eco-flow team is comprised of four core researchers/bioinformatians:
 Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
 <br><br>
 
-<img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
-
-# Technical lead                  : Simon Murray
-Simon is a senior bioinformatician on the project, with a background in pipeline development and containerisation.
-<br><br>
-
 <img style="margin-right: 1.5rem" align="left" width="100" src="./img/seirian.png" />
 
 # Ecology Advisor             : Seirian Sumner
@@ -28,6 +22,15 @@ Professor Seirian Sumner is a leading researcher in ecology and genomics.
 
 # Bioinformatics Advisor : Yannick Wurm
 Professor Yannick Wurm is a data scientist expert on genome analysis and evolution. He works with [ants and pollinators](https://wurmlab.com), and creates intuitive [software for comparative genomics](https://sequenceserver.com).
+<br><br>
+
+# Previous Team Members
+<br><br>
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
+# Technical lead                  : Simon Murray
+Simon was a senior bioinformatician on the project, with a background in pipeline development and containerisation. He left in May 2024 to work at Genomcis England as a bioinformatics engineer.
+
+
 <br><br><br><br>
 
 <br><br>
@@ -84,10 +87,6 @@ Nf-core is an organisation that sets the standards of bioinformatics workflows u
 To learn more about this initiative or enquire about a collaboration contact:
 
 Chris Wyatt - `c . wyatt AT ucl . ac .  uk`
-
-AND
-
-Simon Murray - `simon . murray AT ucl . ac .  uk`
 
 OR
 
