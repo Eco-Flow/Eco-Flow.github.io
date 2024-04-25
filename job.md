@@ -16,7 +16,9 @@
 
 **Requirements**: Undergraduate degree (Master’s/ PhD preferred)
 
-**Role**: Write and develop bioinformatics workflows for the agri-ecology community 
+**Role**: Write and develop bioinformatics workflows for the agri-ecology community
+
+**Deadline**: 25 May 2024
 
 **Summary**: Omics approaches are revolutionising all aspects of the biosciences, including agriculture and food production. The BBSRC recognises this and the critical role that agri-ecologists play in mitigating these challenges. Yet, this community is at risk of falling through the omics gap, and their potential curtailed due to mismatch in the productivity of agri-ecologists and the bioinformatics skills and resources they need to analyse their data. 
 

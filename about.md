@@ -1,10 +1,10 @@
 # About us
 
-<img src="./img/ECOFLOW-BLACK-BANNER.png" />
+
+The Eco-flow team is currently comprised of three core researchers/bioinformatians:
 <br><br>
 
-The Eco-flow team is comprised of four core researchers/bioinformatians:
-<br><br>
+# Current team
 
 <img style="margin-right: 1.0rem" align="left" width="100" src="./img/chris.png" />
 
@@ -24,11 +24,11 @@ Professor Seirian Sumner is a leading researcher in ecology and genomics.
 Professor Yannick Wurm is a data scientist expert on genome analysis and evolution. He works with [ants and pollinators](https://wurmlab.com), and creates intuitive [software for comparative genomics](https://sequenceserver.com).
 <br><br>
 
-# Plus a new technical job opening:<br>
+# Plus a Research Technician:<br>
 
 **Research Technician – Bioinformatics**
 
-Apply: https://t.ly/Kny9r
+Apply Now (until 25th May 2024): https://t.ly/Kny9r
 
 # Previous Team Members
 <br><br>
