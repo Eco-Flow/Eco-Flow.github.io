@@ -2,13 +2,19 @@
 
 ## Workflow developer and advocate
 
-**Location**: UCL, London</br>
-**Salary**: Up to spine point 25 (6b): £34,605–£39,980</br>
-**Contract length**: 2 years (Full time)</br>
-**Fully funded by**: BBSRC- Bioinformatics and Biological Resources Fund</br>
-**Goal**: Building a Bioinformatics Ecosystem for Agri-Ecologists</br>
-**Start date**: Between May 2023 – August 2023</br>
-**Requirements**: Undergraduate degree (Master’s/ PhD preferred)</br>
+**Location**: UCL, London
+
+**Salary**: Up to spine point 25 (6b): £34,605–£39,980 
+
+**Contract length**: 2 years (Full time)
+
+**Fully funded by**: BBSRC- Bioinformatics and Biological Resources Fund
+
+**Goal**: Building a Bioinformatics Ecosystem for Agri-Ecologists
+
+**Start date**: Between May 2023 – August 2023
+
+**Requirements**: Undergraduate degree (Master’s/ PhD preferred)
 
 **Role**: Write and develop bioinformatics workflows for the agri-ecology community 
 
