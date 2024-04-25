@@ -12,7 +12,7 @@
 
 **Goal**: Building a Bioinformatics Ecosystem for Agri-Ecologists
 
-**Start date**: Between May 2023 – August 2023
+**Start date**: Between May 2024 – August 2024
 
 **Requirements**: Undergraduate degree (Master’s/ PhD preferred)
 
