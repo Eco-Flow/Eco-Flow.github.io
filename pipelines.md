@@ -1,6 +1,8 @@
 # Published Pipelines
 
-* [Eco-Flow/synteny](https://github.com/Eco-Flow/synteny) - A pipeline that compares gene synteny between chromosome level genome assemblies.
+* [Eco-Flow/synteny](https://github.com/Eco-Flow/synteny) - A pipeline that compares gene synteny between chromosome level genome assemblies. It takes genomes and gff (annotation) files and compares the macrosynteny using a variety of programs.
+
+* [Eco-Flow/excon](https://github.com/Eco-Flow/excon) - A pipeline that runs gene family expansion and contraction analysis (via CAFE). This pipeline automates the analysis to run the basic steps in EXpansion and CONtraction of gene families, as well as running GO enrichment analysis on the output.
 
 # Custom config files
 
@@ -8,9 +10,7 @@
 
 # Pipelines in Development
 
-At the launch event we will collate a list of pipelines needed by the community to start developing.
-
-We will add those pipelines to this section as they are completed.
+* [Eco-Flow/pollen-metabarcoding](https://github.com/Eco-Flow/pollen-metabarcoding) - A pipeline to process meta barcoding data and assign species and produce tables/figures appropriate for this analysis.
 
 Watch this space.
 
