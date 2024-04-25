@@ -19,10 +19,10 @@ However, tooling lags behind other research fields such as medicine; this bottle
 
 # Sign Up !
 
-We are currently accepting expressions of interest in the program. Follow this URL: [https://forms.gle/yjTU9GYCd27iC7CS8](https://forms.gle/yjTU9GYCd27iC7CS8)
+We are currently accepting expressions of interest in the program.<br> If you want us to build a pipeline or help you build a pipeline, let us know!<br>
+Follow this URL: [https://forms.gle/zq7iSSRCY5iHM9f89](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about the kind of porject you want us to build/help with. 
 
--by signing up: 
-we will keep you informed of our progress, invite you to occaisional events (including our launch event- 22nd February 2024, with limits on in-person places) and you will get a vote on pipelines that we work on!
+We will get back to as soon as possible, and let you know how we can help.
 
 # Jobs 
 
