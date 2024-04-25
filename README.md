@@ -1,7 +1,4 @@
-<img src="./img/ECOFLOW-BLACK-BANNER.png" />
-
-<br><br>
-
+<br>
 <img style="margin-left: 1.5rem; margin-top: 1rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
 
 # Welcome to Eco-Flow
@@ -27,6 +24,11 @@ We are currently accepting expressions of interest in the program. Follow this U
 -by signing up: 
 we will keep you informed of our progress, invite you to occaisional events (including our launch event- 22nd February 2024, with limits on in-person places) and you will get a vote on pipelines that we work on!
 
+# Jobs 
+
+We have an opening for a **Bioinformatics research role**. Come join our team!<br><br>
+For more details: [click here](job.md)<br>
+Check out the job opening: https://t.ly/Kny9r<br>
 
 # Our plan
 
