@@ -1,5 +1,5 @@
 <br>
-<img style="margin-left: 1.5rem; margin-top: 1rem" align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
+<img align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
 
 # Welcome to Eco-Flow
 
@@ -10,7 +10,7 @@ Our goal is to help researchers develop Nextflow code, teach basic/advanced topi
 
 # Why
 
-<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="160" src="./img/logo.png"/>
+<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="130" src="./img/logo_fit.png"/>
 
 Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
 
