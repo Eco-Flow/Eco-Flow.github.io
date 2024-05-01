@@ -10,17 +10,18 @@ Our goal is to help researchers develop Nextflow code, teach basic/advanced topi
 
 # Why
 
-<img style="margin-right: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="left" width="125" src="./img/logo.png"/>
+<img style="margin-right: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="left" width="160" src="./img/logo.png"/>
 
 Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
 
 However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published. In addition, research is often not reproducible, accessible or scalable.
 <br><br>
+<br>
 
 # Sign Up !
 
 We are currently accepting expressions of interest in the program.<br> If you want us to build a pipeline or help you build a pipeline, let us know!<br>
-Follow this URL: [https://forms.gle/zq7iSSRCY5iHM9f89](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about the kind of porject you want us to build/help with. 
+Follow this [URL](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about the kind of project you want us to build/help with. 
 
 We will get back to as soon as possible, and let you know how we can help.
 
