@@ -20,6 +20,8 @@ However, tooling lags behind other research fields such as medicine; this bottle
 
 # Sign Up !
 
+<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="130" src="./img/greentick.png"/>
+
 We are currently accepting expressions of interest in the program.<br> If you want us to build a pipeline or help you build a pipeline, let us know!<br>
 Follow this [URL](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about the kind of project you want us to build/help with. 
 
