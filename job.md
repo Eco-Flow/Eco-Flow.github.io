@@ -1,4 +1,4 @@
-# Open Jobs
+# Jobs
 
 ## Workflow developer and advocate
 
