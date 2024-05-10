@@ -6,7 +6,7 @@ The Eco-flow team is currently comprised of three core researchers/bioinformatia
 
 # Current team
 
-<img style="margin-right: 1.0rem" align="left" width="100" src="./img/chris_n.png" />
+<img style="margin-right: 1.0rem" align="left" width="100" src="./img/chris_n.jpg" />
 
 # Project lead           : Chris Wyatt
 Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
