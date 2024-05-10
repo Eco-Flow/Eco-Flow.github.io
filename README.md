@@ -8,7 +8,7 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-[WE ARE RECRUITING](job.md)
+[WE ARE RECRUITING!](job.md)
 
 # Why
 
@@ -32,8 +32,7 @@ We will get back to as soon as possible, and let you know how we can help.
 # Jobs 
 
 We have an opening for a **Bioinformatics research role**. Come join our team!<br><br>
-For more details: [click here](job.md)<br>
-Check out the job opening: https://t.ly/Kny9r<br>
+For more details: [click here](job.md)<br>Or to apply [click here](https://t.ly/Kny9r)<br>
 
 # Our plan
 
