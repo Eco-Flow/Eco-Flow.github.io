@@ -80,7 +80,7 @@ Finally, while fulfilling the previous steps, we will build a community of pipel
 
 [Github](https://github.com/Eco-Flow/)
 
-[Webpage Github Repository](https://github.com/Eco-Flow/Eco-Flow.github.io)
+[Webpage Repo](https://github.com/Eco-Flow/Eco-Flow.github.io)
 
 [Nexflow](https://www.nextflow.io/)
 
