@@ -28,11 +28,12 @@ Professor Yannick Wurm is a data scientist expert on genome analysis and evoluti
 
 **Research Technician – Bioinformatics**
 
-Apply Now (until 25th May 2024): https://t.ly/Kny9r
+[Apply Now (until 21st May 2024)](https://t.ly/Kny9r)
 
 # Previous Team Members
-<br><br>
-<img style="margin-right: 1.5rem" align="left" width="100" src="./img/Simon.png" />
+
+<img style="margin-right: 1.5rem" align="left" width="120" src="./img/Simon.png" />
+
 # Technical lead                  : Simon Murray
 Simon was a senior bioinformatician on the project, with a background in pipeline development and containerisation. He left in May 2024 to work at Genomics England as a bioinformatics engineer.
 
