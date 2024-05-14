@@ -12,7 +12,7 @@ The Eco-flow team is currently comprised of three core researchers/bioinformatia
 Chris is a senior bioinformatician on the project, with a background in omic technologies and pipeline development.
 <br><br>
 
-<img style="margin-right: 1.5rem" align="left" width="100" src="./img/seirian.jpg" />
+<img style="margin-right: 1.5rem" align="left" width="100" src="./img/ssumner.png" />
 
 # Ecology Advisor             : Seirian Sumner
 Professor Seirian Sumner is a leading researcher in ecology and genomics.
