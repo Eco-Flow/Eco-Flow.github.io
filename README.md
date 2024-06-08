@@ -27,11 +27,6 @@ Follow this [URL](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about 
 
 We will get back to as soon as possible, and let you know how we can help.
 
-# Jobs 
-
-We have an opening for a **Bioinformatics research role**. Come join our team!<br><br>
-For more details: [click here](job.md)<br>Or to apply [click here](https://t.ly/Kny9r)<br>
-
 # Our plan
 
 <img style="margin-left: 1.5rem" align="right" width="150" src="./img/building_headspace.png" style="border: 30px white;" />
