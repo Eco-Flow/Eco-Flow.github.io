@@ -8,8 +8,6 @@ An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by th
 Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
-[WE ARE RECRUITING!](job.md)
-
 # Why
 
 <img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="130" src="./img/logo_fit.png"/>
