@@ -26,13 +26,13 @@ Fernando is a bioinoformatician on the project, with an interest in genomics and
 
 # Previous Team Members
 
-<img style="margin-right: 1.5rem" align="left" width="120" src="./img/Simon.png" />
+<img style="margin-right: 1.0rem" align="left" width="100" src="./img/Simon.png" />
 
 # Technical lead                  : Simon Murray
 Simon was a senior bioinformatician on the project, with a background in pipeline development and containerisation. He left in May 2024 to work at Genomics England as a bioinformatics engineer.
 <br><br>
 
-<img style="margin-right: 1.5rem" align="left" width="100" src="./img/yannick.png" />
+<img style="margin-right: 1.0rem" align="left" width="100" src="./img/yannick.png" />
 
 # Bioinformatics Advisor : Yannick Wurm
 Professor Yannick Wurm is a data scientist expert on genome analysis and evolution. He works with [ants and pollinators](https://wurmlab.com), and creates intuitive [software for comparative genomics](https://sequenceserver.com).
