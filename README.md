@@ -5,7 +5,7 @@
 
 An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
-Our goal is to help researchers develop Nextflow code, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
+Our goal is to help researchers develop Nextflow pipelines under the nf-core framework, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
 <br><br>
 
 # Why
@@ -14,7 +14,13 @@ Our goal is to help researchers develop Nextflow code, teach basic/advanced topi
 
 Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
 
-However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published. In addition, research is often not reproducible, accessible or scalable.
+However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published.
+
+#### Why Nextflow
+
+Research in the field of agri-ecology is often not reproducible, accessible or scalable. Buy building pipelines for processing and analysing for ecology using Nextflow and the nf-core framework we ensure and ecourage research that is in line with the the FAIR (Findable, Accessible, Interoperable, Reusable) Data Principles.
+
+
 <br><br>
 <br>
 
@@ -33,7 +39,7 @@ We will get back to as soon as possible, and let you know how we can help.
 
  **1. BUILDING**
 
-We will develop (within end-user communities) reproducible, easy-to-use, modular bioinformatics pipelines suitable for the most useful analyses required by ecologists in the application of omics data to address critical ecological questions. Specifically, we will use [Nextflow](https://www.nextflow.io/), a world leading pipeline development structure to create these pipelines.
+We will develop (within end-user communities) reproducible, easy-to-use, modular bioinformatics pipelines suitable for the most useful analyses required by ecologists in the application of omics data to address critical ecological questions. Specifically, we will use [Nextflow](https://www.nextflow.io/), a world leading pipeline development structure to create these pipelines, and the [nf-core](https://nf-co.re/) framework, a community effort to build curated Nextflow pipelines.
 <br><br>
 
 <img style="margin-right: 1.5rem ; margin-top: 3rem" align="left" width="150" src="./img/chain_break.png" style="border: 30px white;" />
@@ -47,7 +53,7 @@ Once we have developed our pipelines, we will ensure each module has unit testin
 
  **3. TRAINING**
 
-We address this mismatch by building resource bridges between ecologists – especially those working at the interface of insect ecology and agriculture - and bioinformatics; we will empower them with the autonomy to access and use the most appropriate cutting-edge analyses. Let’s remove the black box of bioinformatics!
+We address this mismatch by building resource bridges between ecologists – especially those working at the interface of ecology and agriculture - and bioinformatics; we will empower them with the autonomy to access and use the most appropriate cutting-edge analyses. Let’s remove the black box of bioinformatics!
 <br>
 
 <img style="margin-left: 1.5rem ; margin-top: 2rem" align="left" width="170" src="./img/handshake.png" style="border: 30px white;" />

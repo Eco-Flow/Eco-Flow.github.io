@@ -1,6 +1,6 @@
 ## Pipelines
 
-### Pipelines (near publication)
+### Released pipelines
 
 These are pipelines we should publish soon. If you wish to use them, let us know and we can help you.
 
@@ -8,9 +8,15 @@ These are pipelines we should publish soon. If you wish to use them, let us know
 
 * [Eco-Flow/excon](https://github.com/Eco-Flow/excon) - A pipeline that runs gene family expansion and contraction analysis (via CAFE). This pipeline automates the analysis to run the basic steps in EXpansion and CONtraction of gene families, as well as running GO enrichment analysis on the output.
 
+* [Eco-Flow/pollen-metabarcoding](https://github.com/Eco-Flow/pollen-metabarcoding) - A pipeline to process meta barcoding data and assign species and produce tables/figures appropriate for this analysis.
+
 ### Pipelines in Development
 
-* [Eco-Flow/pollen-metabarcoding](https://github.com/Eco-Flow/pollen-metabarcoding) - A pipeline to process meta barcoding data and assign species and produce tables/figures appropriate for this analysis.
+* [nf-core/genomeqc](https://github.com/nf-core/genomeqc) - A pipeline to for the quality control of genome assemblies.
+
+* [nf-core/gwas](https://github.com/nf-core/gwas) - A pipeline to conduct genome-wide association studies (GWAS).
+
+* [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for the processing and annotation of napore metabarcoding data. This repository is private for now.
 
 ### Custom config files
 
