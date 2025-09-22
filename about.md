@@ -68,20 +68,12 @@ Seqera sponsors this initiative and provides technical support<br>
 UCL (University College London) is the host university of Sumner, Wyatt and our technical lead
 <br><br>
 
-<img align="left" width="250" src="./img/QM.png" />
 
-## Queen Mary
-
-Queen Mary university is the host university of Yannick Wurm
-
-<br><br>
 # Associated organisations
 
 <img align="left" width="250" src="./img/nfcore.png" />
 
-# nf-core
-
-Nf-core is an organisation that sets the standards of bioinformatics workflows using Nextflow and is central to the philosophy of our initiative.
+nf-core is an organisation that sets the standards of bioinformatics workflows using Nextflow and is central to the philosophy of our initiative.
 
 
 
