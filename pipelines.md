@@ -1,5 +1,11 @@
 ## Pipelines
 
+Here are a list of our main Eco-flow contributed pipelines. 
+
+Those hosted on https://github.com/Eco-Flow were built using a basic nextflow/nf-core framework for specific research projects, whereas those hosted at https://github.com/nf-core are part of the bigger nf-core community, and follow strict nf-core guidelines and practise and are more application to a wider scientific community.
+
+Not all our current pipelines are mentioned here, as some end-users prefer to keep them in private repositories until the paper is published. We encourage our users to publish as quick as possible, and be open with their code, but in some circumstances we cannot acheive that.
+
 ### Released pipelines
 
 These are pipelines we should publish soon. If you wish to use them, let us know and we can help you.
@@ -8,7 +14,7 @@ These are pipelines we should publish soon. If you wish to use them, let us know
 
 * [Eco-Flow/excon](https://github.com/Eco-Flow/excon) - A pipeline that runs gene family expansion and contraction analysis (via CAFE). This pipeline automates the analysis to run the basic steps in EXpansion and CONtraction of gene families, as well as running GO enrichment analysis on the output.
 
-* [Eco-Flow/pollen-metabarcoding](https://github.com/Eco-Flow/pollen-metabarcoding) - A pipeline to process meta barcoding data and assign species and produce tables/figures appropriate for this analysis.
+* [Eco-Flow/pollen-metabarcoding](https://github.com/Eco-Flow/pollen-metabarcoding) - A pipeline to process meta barcoding data and assign species and produce tables/figures appropriate for this analysis. Paper: https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2656.70126?af=R
 
 ### Pipelines in Development
 
@@ -16,7 +22,7 @@ These are pipelines we should publish soon. If you wish to use them, let us know
 
 * [nf-core/gwas](https://github.com/nf-core/gwas) - A pipeline to conduct genome-wide association studies (GWAS).
 
-* [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for the processing and annotation of napore metabarcoding data. This repository is private for now.
+* [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for the processing and annotation of nanopore metabarcoding data. This repository is private.
 
 ### Custom config files
 
@@ -24,7 +30,7 @@ These are pipelines we should publish soon. If you wish to use them, let us know
 
 ### Request a Pipeline
 
-If you would like to request a pipeline then open a new GitHub Issue on our [pipeline discussions](https://github.com/Eco-Flow/pipeline-discussions) repository.
+If you would like to request a pipeline then open a new GitHub Issue on our [pipeline discussions](https://github.com/Eco-Flow/pipeline-discussions) repository. Or email us at: ecoflow.ucl @ gmail.com
 
 ### Request a Feature
 If you would like to request an additional feature to a published pipeline then please open a new issue on that pipeline's GitHub repository.
