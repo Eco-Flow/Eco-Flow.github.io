@@ -1,4 +1,4 @@
-image: nfcore/gitpod:latest
+image: gitpod/workspace-ruby-3
 
 github:
     prebuilds:
