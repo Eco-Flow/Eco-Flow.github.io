@@ -8,7 +8,7 @@ Not all our current pipelines are mentioned here, as some end-users prefer to ke
 
 ### Released pipelines
 
-These are pipelines we should publish soon. If you wish to use them, let us know and we can help you.
+These are pipelines that have passed the initial development stage and are now ready for publication or release:
 
 * [Eco-Flow/synteny](https://github.com/Eco-Flow/synteny) - A pipeline that compares gene synteny between chromosome level genome assemblies. It takes genomes and gff (annotation) files and compares the macrosynteny using a variety of programs.
 
@@ -18,11 +18,15 @@ These are pipelines we should publish soon. If you wish to use them, let us know
 
 ### Pipelines in Development
 
-* [nf-core/genomeqc](https://github.com/nf-core/genomeqc) - A pipeline to for the quality control of genome assemblies.
+Pipelines that are still in development but are already functional and close to be released:
+
+* [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for processing - quality control, demultiplexing, and clustering - and annotate nanopore metabarcoding data. Annotation is performed at different taxonomic levels on the consensus sequences, using the BLASTnt database and [taxonomizr](https://github.com/sherrillmix/taxonomizr).
+
+* [nf-core/genomeqc](https://github.com/nf-core/genomeqc) - A pipeline to for the quality control of genome assemblies and their respective annotations using common tools such as Quast, BUSCO, AGAT, FCS-GX, etc. It also runs orthofinder for quick phylogeny, and it presents the results as a tree plot with the different statistics.
+
+Pipelines that are still in early stages of development:
 
 * [nf-core/gwas](https://github.com/nf-core/gwas) - A pipeline to conduct genome-wide association studies (GWAS).
-
-* [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for the processing and annotation of nanopore metabarcoding data. This repository is private.
 
 ### Custom config files
 
