@@ -19,10 +19,7 @@ However, tooling lags behind other research fields such as medicine; this bottle
 #### Why Nextflow
 
 Research in the field of agri-ecology is often not reproducible, accessible or scalable. Buy building pipelines for processing and analysing for ecology using Nextflow and the nf-core framework we ensure and ecourage research that is in line with the the FAIR (Findable, Accessible, Interoperable, Reusable) Data Principles.
-
-
 <br><br>
-<br>
 
 # Sign Up !
 
