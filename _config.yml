@@ -12,11 +12,12 @@ titles_from_headings:
   strip_title: true
   collections: false
 
-authors: Chris Wyatt, Simon Muray
+authors: Chris Wyatt, Fernando Duarte
 
 header_pages:
   - about.md
   - partners.md
   - pipelines.md
+  - blogs.md
   - services.md
   - citations.md
