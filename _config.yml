@@ -4,7 +4,7 @@ description: A community of computational agri-ecologists
 url: "https://eco-flow.github.io"
 
 plugins:
-  - jekll-feed
+  - jekyll-feed
   - jekyll-titles-from-headings
 
 titles_from_headings:
