@@ -9,14 +9,22 @@
   justify-content: space-between; /* pushes left & right apart */
 }
 
-.footer-col-1 {
+.footer-col-2 {
   white-space: nowrap;
+  text-align: right;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 0.7;
+  flex: 1.5;
 }
 
-.footer-col-2 {
-  text-align: left;
+.footer-col-1 {
+  text-align: center;
   flex: 0.3;
+  color: #000000;
+}
+
+.footer-col-1 ul {
+  list-style: none;             /* remove bullet points */
+  margin: 0;                    /* reset margins for cleaner look */
+  padding: 0;                   /* remove extra left padding */
 }
