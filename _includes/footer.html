@@ -7,7 +7,7 @@
 
 
     <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
+<!--      <div class="footer-col footer-col-1">
         <ul class="contact-list">
           <li class="p-name">
             {%- if site.author -%}
@@ -21,13 +21,25 @@
             {%- endif -%}
         </ul>
       </div>
+-->
 
-      <div class="footer-col footer-col-2">
+
+<!--      <div class="footer-col footer-col-2">
         {%- include social.html -%}
       </div>
-
-      <div class="footer-col footer-col-3">
+    -->
+      <div class="footer-col footer-col-1">
         <p>{{- site.description | escape -}}</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h3>Useful Links</h3>
+        <ul class="useful-links">
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="https://github.com/Eco-Flow/">Github</a></li>
+          <li><a href="https://www.nextflow.io/">Nexflow</a></li>
+          <li><a href="https://nf-co.re/">nf-core</a></li>
+        </ul>
       </div>
     </div>
 

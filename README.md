@@ -69,9 +69,3 @@ Finally, while fulfilling the previous steps, we will build a community of pipel
 3. [Examples of current pipelines](pipelines.md)
 4. [Who are our current research partners ?](partners.md)
 5. [Citations](citations.md)
-
-<br><br>
-
-# Useful links
-
-[Github](https://github.com/Eco-Flow/) [Webpage Repo](https://github.com/Eco-Flow/Eco-Flow.github.io) [Nexflow](https://www.nextflow.io/) [nf-core](https://nf-co.re/) [Home Page](home.md)

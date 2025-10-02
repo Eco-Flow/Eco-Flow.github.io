@@ -1,0 +1,22 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+.footer-col-wrapper {
+  display: flex;
+  justify-content: space-between; /* pushes left & right apart */
+}
+
+.footer-col-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 0.7;
+}
+
+.footer-col-2 {
+  text-align: left;
+  flex: 0.3;
+}
