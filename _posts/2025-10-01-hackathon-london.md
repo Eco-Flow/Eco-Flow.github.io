@@ -1,6 +1,6 @@
 ---
 title: 'nf-core Hackathon London 2025'
-pubDate: 01-10-2025
+date: 2025-10-01
 description: 'Blog post related to the nf-core hckathon we hosted in London in 2025.'
 author: 'Fernando Duarte'
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
