@@ -1,6 +1,6 @@
 ---
 title: 'nf-core Hackathon London 2025'
-date: 2025-10-01
+date: 2025-04-01
 description: 'Blog post related to the nf-core hckathon we hosted in London in 2025.'
 author: 'Fernando Duarte'
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
@@ -10,7 +10,7 @@ tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
 
 <br>
 
-Last spring, we organised a local site for the **[2025 nf-core Hackathon](https://nf-co.re/events/2025/hackathon-march-2025)** in London with great success. nf-core Hackathons are events held every year, where Nextflow enthusiasts from all over the world join forces to **hack together, building community and connections, and collaborating on new or existing projects**. This year's spring Hackathon was held across multiple local sites worldwide, hosted by Nextflow experts and nf-core members. These communities also had the opportunity to connect online and collaborate on joint projects.
+Last week, we organised a local site for the **[2025 nf-core Hackathon](https://nf-co.re/events/2025/hackathon-march-2025)** in London with great success. nf-core Hackathons are events held every year, where Nextflow enthusiasts from all over the world join forces to **hack together, building community and connections, and collaborating on new or existing projects**. This year's spring Hackathon was held across multiple local sites worldwide, hosted by Nextflow experts and nf-core members. These communities also had the opportunity to connect online and collaborate on joint projects.
 
 We proudly hosted dozens of Nextflow experts – and those curious but not very experienced – at the **University College London (UCL)** East campus, for three days of hacking, **making our local site the largest one**. Participants included academic researchers from UCL, Queen Mary University, and King’s College London, as well as professionals from the public service and industry.
 
