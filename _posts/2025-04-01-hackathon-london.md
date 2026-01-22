@@ -1,5 +1,5 @@
 ---
-title: 'nf-core hackathon London 2025'
+title: 'nf-core hackathon London'
 date: 2025-04-01
 description: 'Blog post related to the nf-core hackathon we hosted in London in 2025.'
 author: 'Fernando Duarte'
