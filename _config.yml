@@ -3,6 +3,10 @@ title: Home
 description: A community of computational agri-ecologists
 url: "https://eco-flow.github.io"
 
+
+# Allow future-dated posts to be published
+future: true
+
 plugins:
   - jekyll-feed
   - jekyll-titles-from-headings
