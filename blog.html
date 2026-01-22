@@ -1,18 +1,31 @@
 ---
 layout: default
-title: Events and Blogs
+title: Blog
 permalink: /blog/
 ---
-<h1>Events and Blogs</h1>
+<h1>Blog</h1>
 
-<p>A collection of our training events, hackathon experiences, and bioinformatics insights.</p>
+<p>Updates from our workshops, hackathons, training events, and bioinformatics projects.</p>
 
-<p>Also check our upcoming events!</p>
-
-
-<h2>All Events</h2>
+<h2>Upcoming Events</h2>
 <ul>
-  {% for post in site.posts %}
+  {% assign upcoming = site.posts | where_exp: "post", "post.date > site.time" | sort: "date" %}
+  {% if upcoming.size > 0 %}
+    {% for post in upcoming %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <small>{{ post.date | date: "%B %d, %Y" }}</small>
+      </li>
+    {% endfor %}
+  {% else %}
+    <li>No upcoming events scheduled.</li>
+  {% endif %}
+</ul>
+
+<h2>Past Events & Posts</h2>
+<ul>
+  {% assign past = site.posts | where_exp: "post", "post.date <= site.time" | sort: "date" | reverse %}
+  {% for post in past %}
     <li>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       <small>{{ post.date | date: "%B %d, %Y" }}</small>
