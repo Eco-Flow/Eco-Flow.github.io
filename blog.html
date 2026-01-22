@@ -9,26 +9,33 @@ permalink: /blog/
 
 <h2>Upcoming Events</h2>
 <ul>
-  {% assign upcoming = site.posts | where_exp: "post", "post.date > site.time" | sort: "date" %}
-  {% if upcoming.size > 0 %}
-    {% for post in upcoming %}
+  {% assign today = 'now' | date: '%Y%m%d' %}
+  {% assign upcoming_count = 0 %}
+  {% for post in site.posts reversed %}
+    {% assign post_date = post.date | date: '%Y%m%d' %}
+    {% if post_date >= today %}
+      {% assign upcoming_count = upcoming_count | plus: 1 %}
       <li>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <small>{{ post.date | date: "%B %d, %Y" }}</small>
       </li>
-    {% endfor %}
-  {% else %}
+    {% endif %}
+  {% endfor %}
+  {% if upcoming_count == 0 %}
     <li>No upcoming events scheduled.</li>
   {% endif %}
 </ul>
 
 <h2>Past Events & Posts</h2>
 <ul>
-  {% assign past = site.posts | where_exp: "post", "post.date <= site.time" | sort: "date" | reverse %}
-  {% for post in past %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <small>{{ post.date | date: "%B %d, %Y" }}</small>
-    </li>
+  {% assign today = 'now' | date: '%Y%m%d' %}
+  {% for post in site.posts %}
+    {% assign post_date = post.date | date: '%Y%m%d' %}
+    {% if post_date < today %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <small>{{ post.date | date: "%B %d, %Y" }}</small>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>
