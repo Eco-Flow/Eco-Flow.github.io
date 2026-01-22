@@ -1,5 +1,5 @@
 ---
-title: 'Boston nf-core hackathon'
+title: 'nf-core hackathon Boston May 2025'
 date: 2025-05-13
 description: 'Description of the nf-core hackathon GWAS group'
 author: 'Christpher Wyatt'
