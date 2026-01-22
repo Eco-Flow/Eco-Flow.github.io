@@ -1,5 +1,5 @@
 ---
-title: 'nf-core hackathon London March 2026'
+title: 'nf-core hackathon London'
 date: 2026-03-11
 description: 'The March 2026 nf-core hackathon in London.'
 author: 'Christopher Wyatt'
