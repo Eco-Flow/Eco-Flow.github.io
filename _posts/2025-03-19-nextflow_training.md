@@ -1,5 +1,5 @@
 ---
-title: 'Eco-flow nextflow basic (watch party) training'
+title: 'Eco-flow nextflow (watch party) training'
 date: 2025-03-19
 description: 'Blog post related to our Eco-flow basic nextflow training course.'
 author: 'Christpher Wyatt'
