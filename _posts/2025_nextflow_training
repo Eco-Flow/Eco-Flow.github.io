@@ -14,4 +14,8 @@ Every year we host a free Nextflow basic training in London. This involved using
 
 We covered the topics of Nextflow basics, channels, processes and operators, as well as a dive into making our first RNA-Seq piepline in Nextflow. Further, we touched on more advanced topics, such as nf-core and how to debug running of complex nextflow pipelines. 
 
-We are always up for hosting more events, also across the UK. So stay tuned for more Nextflow training !
+We are always up for hosting more events, also across the UK. So stay tuned for more Nextflow training!
+
+Also the free online Seqera Nextflow training is starting on the 9th of February->
+
+https://seqera.io/events/nextflow-training-week-self-feb-2026/
