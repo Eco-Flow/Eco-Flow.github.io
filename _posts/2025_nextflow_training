@@ -10,7 +10,7 @@ tags: ["nextflow", "training", "nf-core"]
 
 <br>
 
-Every year we host a free Nextflow basic training in London. This involved using the Nextflow video content plus custom content alongside a group of 30 attendees. 
+Every year we host a free Nextflow basic training in London. This involved using the Nextflow video content plus custom content alongside a group of 30 attendees from both UCL and Queen Marys university. 
 
 We covered the topics of Nextflow basics, channels, processes and operators, as well as a dive into making our first RNA-Seq piepline in Nextflow. Further, we touched on more advanced topics, such as nf-core and how to debug running of complex nextflow pipelines. 
 
