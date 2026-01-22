@@ -6,7 +6,7 @@ author: 'Fernando Duarte'
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
 ---
 
-<img align="top" width="" src="/img/hackathon-london-2025.jpg" />
+<img align="top" width="" src="/img/Londonhack.jpeg" />
 
 <br>
 
