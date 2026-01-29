@@ -22,7 +22,7 @@ Pipelines that are still in development but are already functional and close to 
 
 * [Eco-Flow/nanoporemetabarcoding](https://github.com/Eco-Flow/nanoporemetabarcoding) - A pipeline for processing - quality control, demultiplexing, and clustering - and annotate nanopore metabarcoding data. Annotation is performed at different taxonomic levels on the consensus sequences, using the BLASTnt database and [taxonomizr](https://github.com/sherrillmix/taxonomizr).
 
-* [nf-core/genomeqc](https://github.com/nf-core/genomeqc) - A pipeline to for the quality control of genome assemblies and their respective annotations using common tools such as Quast, BUSCO, AGAT, FCS-GX, etc. It also runs orthofinder for quick phylogeny, and it presents the results as a tree plot with the different statistics.
+* [nf-core/genomeqc](https://github.com/nf-core/genomeqc) - A pipeline to assess the quality of genome assemblies and their respective annotations using common tools such as Quast, BUSCO, AGAT, FCS-GX, etc. It also runs orthofinder for quick phylogeny, and it presents the results as a tree plot with the different statistics.
 
 Pipelines that are still in early stages of development:
 
