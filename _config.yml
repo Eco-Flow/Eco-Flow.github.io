@@ -16,12 +16,17 @@ titles_from_headings:
   strip_title: true
   collections: false
 
+collections:
+  pipelines:
+    output: true
+
 authors: Chris Wyatt, Fernando Duarte
 
-header_pages:
-  - about.md
-  - partners.md
-  - pipelines.md
-  - blog.html
-  - services.md
-  - citations.md
+minima:
+  nav_pages:
+    - index.md
+    - about.md
+    - services.md
+    - pipelines.md
+    - partners.md
+    - blog.html
