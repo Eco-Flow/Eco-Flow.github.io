@@ -14,6 +14,6 @@ We  plan to organise a local site for the **[2026 nf-core Hackathon](https://nf-
 
 More details will come soon, but the idea is that we come together for three days to work on nf-core related project. We will canvas the community to see which nf-core projects people want to work on. Then onto the hacking.
 
-Last year was a huge success, see our blog post: https://eco-flow.github.io/2025/04/01/hackathon-london.html
+Last year was a huge success, see [our blog post](https://eco-flow.github.io/2025/04/01/hackathon-london.html).
 
-For more information early, please contact ecoflow.ucl@gmail.com
+For more early information, please contact us at ecoflow.ucl@gmail.com

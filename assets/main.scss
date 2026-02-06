@@ -28,3 +28,63 @@
   margin: 0;                    /* reset margins for cleaner look */
   padding: 0;                   /* remove extra left padding */
 }
+
+/* Dropdown support for Minima */
+
+// Dropdown styles
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  // Style the trigger link to match other nav items
+  > a {
+    color: inherit;  // Inherit color from parent
+    text-decoration: none;  // Remove underline
+    cursor: pointer;
+    
+    &:visited {
+      color: inherit;  // Keep same color after visiting
+    }
+    
+    &:hover {
+      text-decoration: none;  // No underline on hover
+    }
+  }
+
+  // Dropdown menu hidden by default
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      border-bottom: 1px solid #ddd;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
+  }
+
+  // Show dropdown on hover
+  &:hover .dropdown-menu {
+    display: block;
+  }
+}
