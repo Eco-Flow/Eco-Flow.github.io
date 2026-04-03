@@ -99,11 +99,13 @@ results/
 
 ### Try it
 
-The fastest way to see excon in action is with the bundled test profile, which uses a small insect dataset:
+The fastest way to see excon in action is with the bundled test profile, which uses a small mycoplasma dataset:
 
 ```bash
-NXF_VER=24.10.1 nextflow run main.nf -resume -profile docker,test_bacteria
+NXF_VER=25.10.4 nextflow run main.nf -resume -profile docker,test_bacteria
 ```
+
+If you wish to run on bigger datasets, you will need to use a computer with at least 12 cpus and 200GB memory. So a powerful computer or an HPC are recommended. Ask us if you want to deploy this, and we can help.
 
 ---
 
