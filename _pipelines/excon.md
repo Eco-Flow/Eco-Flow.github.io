@@ -94,6 +94,15 @@ results/
     └── software_versions.yml        # Versions of all tools used
 ```
 
+And here is some of the basic figures. Not exactly publication ready, but the raw data is also available for plotting in alt formats.
+As expected _Mycoplasma genitalium_ has a noticeable contraction in the most Orthogroups.
+
+<img src="../img/excon_summary.png" width="600" />
+
+Top: A phylogenetic tree of mycoplasma input, with the number of significant expansion or contraction orthogroups.
+Left: Example Gene Onyology enrichment analysis showing terms significantly expansed in this species.
+Right: A heatmap of shared significant GO terms across all species (and nodes- when significant)
+Bottom: A phylogenetic tree tracing the number of gene copies of a single Orthogroup. Red = sig expansion, Blue sig contraction.
 
 ---
 
