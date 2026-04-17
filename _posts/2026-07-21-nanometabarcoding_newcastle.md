@@ -10,7 +10,7 @@ tags: ["nextflow", "nfcore", "nanopore", "metabarcoding"]
 
 <br>
 
-We are running a nanometabarcoding workshop, as part of the Dietary Interactions in Ecology Through Sequencing (DIETS) Symposium in Newcastle. Full details to be shared soon.
+We are running a nanometabarcoding workshop, as part of the Dietary Interactions in Ecology Through Sequencing (DIETS) Symposium in Durham. Full details to be shared soon.
 
 This workshop will introduce, demonstrate and provide hands-on experience with running nanopore metabarcoding using custom nextflow/nf-core pipelines. The workshop will provide an introduction to running nf-core pipelines locally and on high-performance computing clusters (HPCs), alongside debugging pipelines and the basics of nextflow. All of this knowledge will then be applied to running a practical example of nf-core running an RNA-Seq analysis and a metabarcoding analysis.
 
