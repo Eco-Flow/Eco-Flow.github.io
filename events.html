@@ -1,0 +1,41 @@
+---
+layout: default
+title: Events
+permalink: /events/
+---
+<h1>Events</h1>
+
+<p>Upcoming events, such as trainning, workshops, hackathons, etc.</p>
+
+<h2>Upcoming Events</h2>
+<ul>
+  {% assign today = 'now' | date: '%Y%m%d' %}
+  {% assign upcoming_count = 0 %}
+  {% for event in site.events reversed %}
+    {% assign event_date = event.date | date: '%Y%m%d' %}
+    {% if event_date >= today %}
+      {% assign upcoming_count = upcoming_count | plus: 1 %}
+      <li>
+        <a href="{{ event.url | relative_url }}">{{ event.title }}</a>
+        <small>{{ event.date | date: "%B %d, %Y" }}</small>
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if upcoming_count == 0 %}
+    <li>No upcoming events scheduled.</li>
+  {% endif %}
+</ul>
+
+<h2>Past Events</h2>
+<ul>
+  {% assign today = 'now' | date: '%Y%m%d' %}
+  {% for event in site.events %}
+    {% assign event_date = event.date | date: '%Y%m%d' %}
+    {% if event_date < today %}
+      <li>
+        <a href="{{ event.url | relative_url }}">{{ event.title }}</a>
+        <small>{{ event.date | date: "%B %d, %Y" }}</small>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

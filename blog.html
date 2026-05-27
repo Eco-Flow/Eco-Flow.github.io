@@ -1,32 +1,13 @@
 ---
 layout: default
-title: Events
+title: Blog
 permalink: /blog/
 ---
-<h1>Events</h1>
+<h1>Blog</h1>
 
-<p>Updates from our workshops, hackathons, training events, and bioinformatics projects.</p>
+<p>Posts about our workshops, training sessions, projects, and other things related to Nextflow/nf-core.</p>
 
-<h2>Upcoming Events</h2>
-<ul>
-  {% assign today = 'now' | date: '%Y%m%d' %}
-  {% assign upcoming_count = 0 %}
-  {% for post in site.posts reversed %}
-    {% assign post_date = post.date | date: '%Y%m%d' %}
-    {% if post_date >= today %}
-      {% assign upcoming_count = upcoming_count | plus: 1 %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <small>{{ post.date | date: "%B %d, %Y" }}</small>
-      </li>
-    {% endif %}
-  {% endfor %}
-  {% if upcoming_count == 0 %}
-    <li>No upcoming events scheduled.</li>
-  {% endif %}
-</ul>
-
-<h2>Past Events & Posts</h2>
+<h2>Posts</h2>
 <ul>
   {% assign today = 'now' | date: '%Y%m%d' %}
   {% for post in site.posts %}
@@ -39,3 +20,4 @@ permalink: /blog/
     {% endif %}
   {% endfor %}
 </ul>
+
