@@ -19,6 +19,8 @@ titles_from_headings:
 collections:
   pipelines:
     output: true
+  events:
+    output: true
 
 authors: Chris Wyatt, Fernando Duarte
 
@@ -30,3 +32,4 @@ minima:
     - pipelines.md
     - partners.md
     - blog.html
+    - events.html
