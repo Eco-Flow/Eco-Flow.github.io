@@ -7,41 +7,17 @@
 
 
     <div class="footer-col-wrapper">
-<!--      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">
-            {%- if site.author -%}
-              {{ site.author | escape }}
-            {%- else -%}
-              <a href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
-            {%- endif -%}
-            </li>
-            {%- if site.email -%}
-            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {%- endif -%}
-        </ul>
-      </div>
--->
 
-
-<!--      <div class="footer-col footer-col-2">
-        {%- include social.html -%}
+      <div class="footer-brand">
+        <a href="{{ '/' | relative_url }}"><img src="{{ '/img/logo_fit.png' | relative_url }}" alt="Eco-Flow" class="footer-ecoflow-logo"></a>
+        <p class="footer-tagline">{{- site.description | escape -}}</p>
       </div>
-    -->
 
-    <div class="footer-col footer-col-1">
-      <h3>Useful Links</h3>
-      <ul class="useful-links">
-        <li><a href="{{ '/' | relative_url }}">Home</a></li>
-        <li><a href="https://github.com/Eco-Flow/">Github</a></li>
-        <li><a href="https://www.nextflow.io/">Nexflow</a></li>
-        <li><a href="https://nf-co.re/">nf-core</a></li>
-      </ul>
-    </div>
-    
-      <div class="footer-col footer-col-2">
-        <p>{{- site.description | escape -}}</p>
+      <div class="footer-logos">
+        <a href="https://www.nextflow.io/"><img src="{{ '/img/nextflow-logo-bg-light.png' | relative_url }}" alt="Nextflow" class="footer-nextflow-logo"></a>
+        <a href="https://nf-co.re/"><img src="{{ '/img/nfcore.png' | relative_url }}" alt="nf-core"></a>
       </div>
+
     </div>
 
   </div>

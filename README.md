@@ -62,10 +62,10 @@ Finally, while fulfilling the previous steps, we will build a community of pipel
 
 <br><br>
 
-# Contents
+<!-- # Contents
 
 1. [Who are we ?](about.md)
 2. [What services can we provide ?](services.md)
 3. [Examples of current pipelines](pipelines.md)
 4. [Who are our current research partners ?](partners.md)
-5. [Citations](citations.md)
+5. [Citations](citations.md) -->

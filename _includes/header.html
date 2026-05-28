@@ -13,6 +13,11 @@
         </label>
 
         {% include nav-items.html paths = page_paths %}
+
+        <span class="nav-separator">|</span>
+        <a href="https://github.com/Eco-Flow/" class="header-github-link">
+          <img src="{{ '/img/github-mark.png' | relative_url }}" alt="GitHub" height="24">
+        </a>
       </nav>
     {%- endunless %}
   </div>
