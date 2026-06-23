@@ -6,8 +6,7 @@ author: 'Chris Wyatt'
 tags: ["website", "community", "news"]
 ---
 
-<!-- Tip: swap this for a screenshot of the new homepage when you have one. -->
-<img src="/img/ECOFLOW-BLACK-BANNER.png" alt="Eco-Flow" />
+<img src="/img/new-website-2026.png" alt="The redesigned Eco-Flow homepage" />
 
 <br>
 
