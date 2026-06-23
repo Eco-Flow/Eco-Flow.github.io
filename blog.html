@@ -2,22 +2,35 @@
 layout: default
 title: Blog
 permalink: /blog/
+description: Posts about our workshops, training sessions, projects and all things Nextflow/nf-core.
 ---
-<h1>Blog</h1>
 
-<p>Posts about our workshops, training sessions, projects, and other things related to Nextflow/nf-core.</p>
+<div class="page-head">
+  <div class="wrap">
+    <h1>Blog</h1>
+    <p>Posts about our workshops, training sessions, projects, and other things related to Nextflow and nf-core.</p>
+  </div>
+</div>
 
-<h2>Posts</h2>
-<ul>
-  {% assign today = 'now' | date: '%Y%m%d' %}
-  {% for post in site.posts %}
-    {% assign post_date = post.date | date: '%Y%m%d' %}
-    {% if post_date < today %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <small>{{ post.date | date: "%B %d, %Y" }}</small>
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
-
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <ul class="post-list">
+      {%- assign today = 'now' | date: '%Y%m%d' -%}
+      {%- for post in site.posts -%}
+        {%- assign post_date = post.date | date: '%Y%m%d' -%}
+        {%- if post_date <= today -%}
+        <li class="post-item">
+          <div class="post-item__meta">{{ post.date | date: "%B %-d, %Y" }}{% if post.author %} · {{ post.author }}{% endif %}</div>
+          <h2 class="post-item__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {%- if post.description -%}<p class="post-item__excerpt">{{ post.description }}</p>{%- endif -%}
+          {%- if post.tags and post.tags.size > 0 -%}
+          <div class="post-item__tags">
+            {%- for tag in post.tags limit: 4 -%}<span class="chip">{{ tag }}</span>{%- endfor -%}
+          </div>
+          {%- endif -%}
+        </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>

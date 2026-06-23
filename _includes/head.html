@@ -1,0 +1,38 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%} Title + description {%- endcomment -%}
+  {%- if page.title -%}
+    {%- assign page_title = page.title | append: " · " | append: site.title -%}
+  {%- else -%}
+    {%- assign page_title = site.title -%}
+  {%- endif -%}
+  {%- assign page_desc = page.description | default: site.description -%}
+  {%- assign canonical = page.url | absolute_url -%}
+
+  <title>{{ page_title | escape }}</title>
+  <meta name="description" content="{{ page_desc | escape }}">
+  <link rel="canonical" href="{{ canonical }}">
+
+  {%- comment -%} Open Graph / Twitter cards {%- endcomment -%}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:description" content="{{ page_desc | escape }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ '/img/ECOFLOW-BLACK-BANNER.png' | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {%- comment -%} Favicon {%- endcomment -%}
+  <link rel="icon" type="image/png" href="{{ '/img/leaf.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/img/leaf.png' | relative_url }}">
+
+  {%- comment -%} Fonts {%- endcomment -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  {%- feed_meta -%}
+</head>

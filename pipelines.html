@@ -1,0 +1,69 @@
+---
+layout: default
+title: Pipelines
+permalink: /pipelines/
+description: Open, tested and documented Nextflow pipelines for agri-ecology research.
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>Pipelines</h1>
+    <p>
+      Our main Eco-Flow contributed pipelines. Those on
+      <a href="https://github.com/Eco-Flow">github.com/Eco-Flow</a> are built on a Nextflow/nf-core
+      framework for specific research projects; those on
+      <a href="https://github.com/nf-core">github.com/nf-core</a> follow the stricter nf-core
+      guidelines for the wider community. Some pipelines stay private until their paper is published.
+    </p>
+  </div>
+</div>
+
+{%- assign pipes = site.pipelines | where_exp: "p", "p.nav_order > 1" | sort: "nav_order" -%}
+
+{%- assign groups = "Released,In development,Early development" | split: "," -%}
+{%- for group in groups -%}
+  {%- assign in_group = pipes | where: "status", group -%}
+  {%- if in_group.size > 0 -%}
+  <section class="section{% if forloop.index == 2 %} section--soft{% endif %}">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="eyebrow">
+          {%- if group == "Released" -%}Ready to use
+          {%- elsif group == "In development" -%}Functional &amp; close to release
+          {%- else -%}Early stage{%- endif -%}
+        </span>
+        <h2>{{ group }}</h2>
+      </div>
+      <div class="grid grid--3">
+        {%- for p in in_group -%}
+        <a class="card pipeline-card" href="{{ p.url | relative_url }}">
+          <div class="pipeline-card__top">
+            <span class="pipeline-card__name">{{ p.title }}</span>
+          </div>
+          {%- if p.summary -%}<p>{{ p.summary }}</p>{%- endif -%}
+          <span class="chip{% if group == 'Released' %} chip--status{% elsif group == 'In development' %} chip--dev{% else %} chip--early{% endif %}">{{ group }}</span>
+        </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid grid--2">
+      <div class="card">
+        <div class="card__icon">+</div>
+        <h3>Request a pipeline</h3>
+        <p>Open an issue on our <a href="https://github.com/Eco-Flow/pipeline-discussions">pipeline discussions</a> repository, or email us.</p>
+        <p><a class="btn btn--ghost" href="mailto:ecoflow.ucl@gmail.com">ecoflow.ucl@gmail.com</a></p>
+      </div>
+      <div class="card">
+        <div class="card__icon">⚙</div>
+        <h3>Custom config files</h3>
+        <p>We maintain <a href="https://github.com/Eco-Flow/configs/tree/main">custom configuration files</a> so our pipelines run on your institution's infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+# The four-pillar story (from the project mission).
+- num: "01"
+  title: Building
+  body: >
+    We develop reproducible, easy-to-use, modular bioinformatics pipelines for the
+    analyses ecologists need — built with Nextflow and the nf-core framework.
+- num: "02"
+  title: Testing
+  body: >
+    Every module gets unit testing with nf-test, plus end-to-end pipeline tests with
+    example data, so pipelines stay active, reliable and relevant.
+- num: "03"
+  title: Training
+  body: >
+    We bridge ecology and bioinformatics — empowering researchers to access and run
+    cutting-edge analyses themselves. No more black box.
+- num: "04"
+  title: Community
+  body: >
+    We grow a UK community of pipeline developers through networking events and
+    hackathons, because development should be collaborative and accessible.

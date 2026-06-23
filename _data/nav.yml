@@ -1,0 +1,14 @@
+# Main navigation. "pipelines" item renders as a dropdown built from the
+# _pipelines collection (sorted by nav_order).
+- title: About
+  url: /about/
+- title: Services
+  url: /services/
+- title: Pipelines
+  dropdown: pipelines
+- title: Partners
+  url: /partners/
+- title: Blog
+  url: /blog/
+- title: Events
+  url: /events/

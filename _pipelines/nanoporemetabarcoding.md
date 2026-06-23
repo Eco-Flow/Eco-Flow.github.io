@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: pipeline
 title: "Eco-Flow/nanoporemetabarcoding"
 nav_order: 4
+status: In development
+summary: "Process and annotate nanopore metabarcoding data across taxonomic levels."
 ---
-
-## Eco-Flow/nanoporemetabarcoding
 
 **Eco-Flow/nanoporemetabarcoding** is a **Nextflow pipeline** -written using the **[nf-core standards](https://nf-co.re/)**- for processing -quality control, demultiplexing, and clustering- and annotate **nanopore metabarcoding data**. Annotation is performed at different taxonomic levels on the consensus sequences, using the **BLASTnt database** and **taxonomizr**.
 

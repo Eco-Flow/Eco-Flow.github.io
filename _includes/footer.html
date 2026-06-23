@@ -1,25 +1,41 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
 
-  <div class="wrapper">
-
-   <!-- <h2 class="footer-heading">{{ site.title | escape }}</h2> -->
-
-
-    <div class="footer-col-wrapper">
-
-      <div class="footer-brand">
-        <a href="{{ '/' | relative_url }}"><img src="{{ '/img/logo_fit.png' | relative_url }}" alt="Eco-Flow" class="footer-ecoflow-logo"></a>
-        <p class="footer-tagline">{{- site.description | escape -}}</p>
+      <div class="footer__brand">
+        <img src="{{ '/img/logo_fit.png' | relative_url }}" alt="Eco-Flow">
+        <p class="footer__tagline">{{ site.description | escape }}</p>
+        <div class="footer__partners">
+          <a href="https://www.nextflow.io/"><img src="{{ '/img/nextflowlogo.png' | relative_url }}" alt="Nextflow"></a>
+          <a href="https://nf-co.re/"><img src="{{ '/img/nfcore.png' | relative_url }}" alt="nf-core"></a>
+        </div>
       </div>
 
-      <div class="footer-logos">
-        <a href="https://www.nextflow.io/"><img src="{{ '/img/nextflow-logo-bg-light.png' | relative_url }}" alt="Nextflow" class="footer-nextflow-logo"></a>
-        <a href="https://nf-co.re/"><img src="{{ '/img/nfcore.png' | relative_url }}" alt="nf-core"></a>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+          <li><a href="{{ '/services/' | relative_url }}">Services</a></li>
+          <li><a href="{{ '/pipelines/' | relative_url }}">Pipelines</a></li>
+          <li><a href="{{ '/partners/' | relative_url }}">Partners</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+          <li><a href="{{ '/events/' | relative_url }}">Events</a></li>
+          <li><a href="https://github.com/Eco-Flow/">GitHub</a></li>
+          <li><a href="mailto:ecoflow.ucl@gmail.com">ecoflow.ucl@gmail.com</a></li>
+        </ul>
       </div>
 
     </div>
 
+    <div class="footer__bottom">
+      <span>© {{ site.time | date: "%Y" }} Eco-Flow · Hosted at UCL</span>
+      <span>Funded by the BBSRC · Supported by Seqera</span>
+    </div>
   </div>
-
 </footer>

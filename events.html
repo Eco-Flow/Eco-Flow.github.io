@@ -2,40 +2,51 @@
 layout: default
 title: Events
 permalink: /events/
+description: Upcoming and past training, workshops and hackathons from Eco-Flow.
 ---
-<h1>Events</h1>
 
-<p>Upcoming events, such as trainning, workshops, hackathons, etc.</p>
+<div class="page-head">
+  <div class="wrap">
+    <h1>Events</h1>
+    <p>Training, workshops, hackathons and other events — upcoming and past.</p>
+  </div>
+</div>
 
-<h2>Upcoming Events</h2>
-<ul>
-  {% assign today = 'now' | date: '%Y%m%d' %}
-  {% assign upcoming_count = 0 %}
-  {% for event in site.events reversed %}
-    {% assign event_date = event.date | date: '%Y%m%d' %}
-    {% if event_date >= today %}
-      {% assign upcoming_count = upcoming_count | plus: 1 %}
-      <li>
-        <a href="{{ event.url | relative_url }}">{{ event.title }}</a>
-        <small>{{ event.date | date: "%B %d, %Y" }}</small>
-      </li>
-    {% endif %}
-  {% endfor %}
-  {% if upcoming_count == 0 %}
-    <li>No upcoming events scheduled.</li>
-  {% endif %}
-</ul>
+<section class="section">
+  <div class="wrap wrap--narrow">
+    {%- assign today = 'now' | date: '%Y%m%d' -%}
 
-<h2>Past Events</h2>
-<ul>
-  {% assign today = 'now' | date: '%Y%m%d' %}
-  {% for event in site.events %}
-    {% assign event_date = event.date | date: '%Y%m%d' %}
-    {% if event_date < today %}
-      <li>
-        <a href="{{ event.url | relative_url }}">{{ event.title }}</a>
-        <small>{{ event.date | date: "%B %d, %Y" }}</small>
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+    <div class="section__head"><span class="eyebrow">Coming up</span><h2>Upcoming events</h2></div>
+    <ul class="post-list">
+      {%- assign upcoming = 0 -%}
+      {%- for event in site.events reversed -%}
+        {%- assign event_date = event.date | date: '%Y%m%d' -%}
+        {%- if event_date >= today -%}
+          {%- assign upcoming = upcoming | plus: 1 -%}
+          <li class="post-item">
+            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}</div>
+            <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
+            {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if upcoming == 0 -%}
+        <li class="post-item"><p class="post-item__excerpt" style="margin:0">No upcoming events scheduled — check back soon.</p></li>
+      {%- endif -%}
+    </ul>
+
+    <div class="section__head" style="margin-top:3rem"><span class="eyebrow">Archive</span><h2>Past events</h2></div>
+    <ul class="post-list">
+      {%- for event in site.events -%}
+        {%- assign event_date = event.date | date: '%Y%m%d' -%}
+        {%- if event_date < today -%}
+          <li class="post-item">
+            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}</div>
+            <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
+            {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>

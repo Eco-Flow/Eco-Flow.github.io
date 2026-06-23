@@ -1,0 +1,124 @@
+---
+layout: default
+title: Home
+description: A community of computational agri-ecologists building reproducible Nextflow pipelines for ecology.
+---
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <img class="hero__leaf" src="{{ '/img/leaf.png' | relative_url }}" alt="">
+  <div class="wrap hero__inner">
+    <span class="eyebrow">BBSRC-funded · UCL · nf-core</span>
+    <h1>Bioinformatics pipelines, built for agri-ecology.</h1>
+    <p class="hero__lead">
+      Eco-Flow is a community of computational agri-ecologists. We build reproducible,
+      open Nextflow pipelines, teach the skills to run them, and grow a UK network of
+      pipeline developers.
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="https://forms.gle/zq7iSSRCY5iHM9f89">Request a pipeline</a>
+      <a class="btn btn--ghost" href="{{ '/pipelines/' | relative_url }}">Explore pipelines</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ STATS ============================ -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="stats">
+      <div><div class="stats__num">{{ site.pipelines | size }}+</div><div class="stats__label">Pipelines</div></div>
+      <div><div class="stats__num">FAIR</div><div class="stats__label">By design</div></div>
+      <div><div class="stats__num">nf-core</div><div class="stats__label">Standards</div></div>
+      <div><div class="stats__num">UK-wide</div><div class="stats__label">Community</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MISSION / WHY ============================ -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Why Eco-Flow</span>
+      <h2>Closing the omics gap in ecology</h2>
+      <p>
+        Agri-ecology research is critical for understanding the natural environment and
+        securing our food supply — yet its tooling lags behind fields like medicine.
+        We build the bridges, so research is reproducible, accessible and scalable.
+      </p>
+    </div>
+    <div class="grid grid--4 pillar">
+      {%- for p in site.data.pillars -%}
+      <div class="card">
+        <div class="card__icon">{{ p.num }}</div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.body }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PIPELINES ============================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">What we build</span>
+      <h2>Featured pipelines</h2>
+      <p>Open, tested and documented Nextflow workflows — hosted on Eco-Flow and nf-core.</p>
+    </div>
+    <div class="grid grid--3">
+      {%- assign featured = site.pipelines | where_exp: "p", "p.nav_order > 1" | sort: "nav_order" -%}
+      {%- for p in featured limit: 6 -%}
+      <a class="card pipeline-card" href="{{ p.url | relative_url }}">
+        <div class="pipeline-card__name">{{ p.title }}</div>
+        {%- if p.summary -%}<p>{{ p.summary }}</p>{%- endif -%}
+      </a>
+      {%- endfor -%}
+    </div>
+    <div style="margin-top:2rem">
+      <a class="btn btn--ghost" href="{{ '/pipelines/' | relative_url }}">View all pipelines</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LATEST POSTS ============================ -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">From the community</span>
+      <h2>Latest news &amp; events</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- assign today = 'now' | date: '%Y%m%d' -%}
+      {%- assign shown = 0 -%}
+      {%- for post in site.posts -%}
+        {%- assign pd = post.date | date: '%Y%m%d' -%}
+        {%- if pd <= today and shown < 3 -%}
+          {%- assign shown = shown | plus: 1 -%}
+          <a class="card" href="{{ post.url | relative_url }}">
+            <div class="post-item__meta">{{ post.date | date: "%b %-d, %Y" }}</div>
+            <h3>{{ post.title }}</h3>
+            {%- if post.description -%}<p>{{ post.description }}</p>{%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div style="margin-top:2rem">
+      <a class="btn btn--ghost" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Want us to build a pipeline with you?</h2>
+      <p>
+        We're accepting expressions of interest. Tell us about your project and we'll
+        get back to you as soon as we can.
+      </p>
+      <a class="btn btn--light" href="https://forms.gle/zq7iSSRCY5iHM9f89">Express your interest</a>
+    </div>
+  </div>
+</section>

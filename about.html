@@ -1,0 +1,98 @@
+---
+layout: default
+title: About
+permalink: /about/
+description: The team, funders and partners behind the Eco-Flow agri-ecology pipeline initiative.
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>About us</h1>
+    <p>
+      Eco-Flow is a BBSRC-funded initiative to build an agri-ecology-specific Nextflow
+      pipeline community. We develop pipelines, run training, and grow a UK network of developers.
+    </p>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Who we are</span>
+      <h2>Current team</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- for m in site.data.team.current -%}
+      <div class="card person">
+        <img src="{{ m.photo | relative_url }}" alt="{{ m.name }}">
+        <div class="person__name">{{ m.name }}</div>
+        <div class="person__role">{{ m.role }}</div>
+        <p>{{ m.bio }}{% if m.link %} <a href="{{ m.link }}">Learn more →</a>{% endif %}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- PREVIOUS TEAM -->
+<section class="section section--soft section--tight">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">With thanks to</span>
+      <h2>Previous team &amp; advisors</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- for m in site.data.team.previous -%}
+      <div class="card person">
+        <img src="{{ m.photo | relative_url }}" alt="{{ m.name }}">
+        <div class="person__name">{{ m.name }}</div>
+        <div class="person__role">{{ m.role }}</div>
+        <p>{{ m.bio }}{% if m.link %} <a href="{{ m.link }}">Learn more →</a>{% endif %}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING & PARTNERS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Backed by</span>
+      <h2>Funding &amp; partners</h2>
+    </div>
+    <div class="grid grid--2">
+      {%- for f in site.data.funders.funding -%}
+      <div class="card">
+        <h3>{{ f.name }}</h3>
+        <p>{{ f.note }}</p>
+        <p><a href="{{ f.url }}">Find out more →</a></p>
+      </div>
+      {%- endfor -%}
+    </div>
+
+    <div style="margin-top:3rem">
+      <p class="eyebrow" style="display:block;text-align:center">Host &amp; associated organisations</p>
+      <div class="logos">
+        {%- for h in site.data.funders.hosts -%}
+          <a href="{{ h.url }}"><img src="{{ h.logo | relative_url }}" alt="{{ h.name }}"></a>
+        {%- endfor -%}
+        {%- for a in site.data.funders.associated -%}
+          <a href="{{ a.url }}"><img src="{{ a.logo | relative_url }}" alt="{{ a.name }}"></a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Get in touch</h2>
+      <p>To learn more about Eco-Flow or enquire about a collaboration, drop us a line.</p>
+      <a class="btn btn--light" href="mailto:ecoflow.ucl@gmail.com">ecoflow.ucl@gmail.com</a>
+    </div>
+  </div>
+</section>
