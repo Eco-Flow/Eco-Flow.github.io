@@ -20,8 +20,10 @@ previous:
     role: Technical Lead
     photo: /img/Simon.png
     bio: Senior bioinformatician in pipeline development and containerisation. Now a bioinformatics engineer at Genomics England.
+    linkedin: https://www.linkedin.com/in/simon-murray-856102156/
   - name: Yannick Wurm
     role: Bioinformatics Advisor
     photo: /img/yannick.png
     bio: Professor and data scientist expert on genome analysis and evolution, working with ants and pollinators.
     link: https://wurmlab.com
+    linkedin: https://www.linkedin.com/in/sectgenomics/
