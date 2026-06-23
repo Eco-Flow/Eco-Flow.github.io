@@ -148,30 +148,31 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 // --- Team / person cards ---------------------------------------------------
 
 .person { text-align: center; }
+.person__avatar { position: relative; width: 110px; margin: 0 auto 1rem; }
 .person img {
   width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
-  margin: 0 auto 1rem; border: 3px solid $green-tint;
+  display: block; border: 3px solid $green-tint;
+}
+.person__badge {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #0a66c2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $white;
+  box-shadow: 0 1px 4px rgba(18, 59, 41, .25);
+  transition: background .15s ease, transform .15s ease;
+  &:hover { background: #084d92; color: #fff; text-decoration: none; transform: translateY(-1px); }
+  svg { width: 15px; height: 15px; fill: currentColor; }
 }
 .person__name { font-family: $font-head; font-weight: 600; font-size: 1.1rem; }
 .person__role { color: $green; font-size: .9rem; font-weight: 500; margin-bottom: .6rem; }
 .person p { font-size: .92rem; color: $muted; }
-.person__linkedin {
-  align-self: center;
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  margin-top: .9rem;
-  padding: .4rem .9rem;
-  border-radius: 999px;
-  font-family: $font-head;
-  font-weight: 500;
-  font-size: .85rem;
-  background: #0a66c2;
-  color: #fff;
-  transition: background .15s ease, transform .15s ease;
-  &:hover { background: #084d92; color: #fff; text-decoration: none; transform: translateY(-1px); }
-  svg { width: 16px; height: 16px; fill: currentColor; }
-}
 
 // --- Logo wall -------------------------------------------------------------
 
