@@ -3,14 +3,17 @@ current:
     role: Project Lead
     photo: /img/chris_n.jpg
     bio: Senior bioinformatician with a background in omic technologies and pipeline development.
+    linkedin: https://www.linkedin.com/in/christopher-wyatt-653800235/
   - name: Seirian Sumner
     role: Ecology Advisor
     photo: /img/sumner.jpg
     bio: Professor and leading researcher in ecology and genomics.
+    linkedin: https://www.linkedin.com/in/seirian-sumner/
   - name: Fernando Duarte Frutos
     role: Research Technician
     photo: /img/fernando.jpg
     bio: Bioinformatician with an interest in genomics and pipeline development.
+    linkedin: https://www.linkedin.com/in/fernando-duarte-frutos/
 
 previous:
   - name: Simon Murray

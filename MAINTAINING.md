@@ -114,7 +114,8 @@ pipeline won't show up in a group on the listing page.
 These pages are built from YAML data files — edit the data, not the page:
 
 - **Team** (About page): [`_data/team.yml`](_data/team.yml) — `current:` and `previous:`
-  lists, each entry with `name`, `role`, `photo`, `bio`, and optional `link`.
+  lists, each entry with `name`, `role`, `photo`, `bio`, and optional `link` and
+  `linkedin` (a LinkedIn URL; adds a "Connect" button to that person's card).
 - **Funders / hosts / associated orgs** (About page):
   [`_data/funders.yml`](_data/funders.yml) — `funding:`, `hosts:`, `associated:`.
 - **Ambassadors** (Partners page): [`_data/ambassadors.yml`](_data/ambassadors.yml) —

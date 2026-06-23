@@ -155,6 +155,23 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 .person__name { font-family: $font-head; font-weight: 600; font-size: 1.1rem; }
 .person__role { color: $green; font-size: .9rem; font-weight: 500; margin-bottom: .6rem; }
 .person p { font-size: .92rem; color: $muted; }
+.person__linkedin {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: .9rem;
+  padding: .4rem .9rem;
+  border-radius: 999px;
+  font-family: $font-head;
+  font-weight: 500;
+  font-size: .85rem;
+  background: #0a66c2;
+  color: #fff;
+  transition: background .15s ease, transform .15s ease;
+  &:hover { background: #084d92; color: #fff; text-decoration: none; transform: translateY(-1px); }
+  svg { width: 16px; height: 16px; fill: currentColor; }
+}
 
 // --- Logo wall -------------------------------------------------------------
 
