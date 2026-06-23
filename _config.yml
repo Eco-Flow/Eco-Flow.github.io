@@ -13,6 +13,8 @@ future: true
 plugins:
   - jekyll-feed
   - jekyll-titles-from-headings
+  - jekyll-redirect-from
+  - jekyll-sitemap
 
 titles_from_headings:
   enabled:     true

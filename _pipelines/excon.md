@@ -4,6 +4,8 @@ title: "Eco-Flow/excon"
 nav_order: 2
 status: Released
 summary: "Automated gene family expansion & contraction analysis with CAFE5, plus GO enrichment."
+redirect_from:
+  - /pipelines/excon.html
 ---
 
 Have you ever wondered whether gene families are growing or shrinking across species? **excon** automates the full journey using the popular tool [CAFE](https://github.com/hahnlab/CAFE5)— from raw genome assemblies to publication-ready figures showing which gene families have expanded or contracted, and what biological processes they're involved in.

@@ -4,6 +4,8 @@ title: "nf-core/gwas"
 nav_order: 7
 status: Early development
 summary: "Conduct genome-wide association studies (GWAS) with plink."
+redirect_from:
+  - /pipelines/gwas.html
 ---
 
 <img src="/img/gwas-logo.png" />

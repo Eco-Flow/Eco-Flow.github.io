@@ -2,6 +2,8 @@
 layout: page
 title: Citations
 permalink: /citations/
+redirect_from:
+  - /citations.html
 description: How to cite Eco-Flow pipelines in your research.
 ---
 

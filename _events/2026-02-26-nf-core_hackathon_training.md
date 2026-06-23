@@ -4,6 +4,8 @@ date: 2026-03-05
 description: 'Pre hackathon training in London.'
 author: 'Christopher Wyatt'
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
+redirect_from:
+  - /events/2026-02-26-nf-core_hackathon_training.html
 ---
 
 <br>

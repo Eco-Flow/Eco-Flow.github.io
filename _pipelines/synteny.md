@@ -4,6 +4,8 @@ title: "Eco-Flow/synteny"
 nav_order: 3
 status: Released
 summary: "Compare gene macrosynteny between chromosome-level genome assemblies."
+redirect_from:
+  - /pipelines/synteny.html
 ---
 
 **Eco-Flow/synteny** is a **Nextflow pipeline** -written using the **[nf-core standards](https://nf-co.re/)**- for comparing **gene synteny** between chromosome level genome assemblies. It takes genomes and annotations files as inputs and assesses **macrosynteny** using a suit of tools.
