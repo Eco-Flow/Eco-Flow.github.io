@@ -12,6 +12,8 @@ I'm delighted to share that I will be a [**BioFAIR**](https://biofair.uk/) Fello
 
 [BioFAIR](https://biofair.uk/) is a UK initiative working towards a [national data and analytics infrastructure](https://biofair.uk/about-us/) for the biosciences, helping researchers make their data and workflows **FAIR — Findable, Accessible, Interoperable and Reusable**.
 
+Launched in 2024, BioFAIR is a [£34 million investment](https://www.ukri.org/news/ukri-given-green-light-for-game-changing-biofair-investment/) from UK Research and Innovation (UKRI), delivered through the BBSRC and the Medical Research Council (MRC). It is organised around four interconnected "Commons" that together provide end-to-end FAIR data management, analysis and training for the UK life sciences — and, as a BBSRC-funded project ourselves, it's a community we're glad to be part of.
+
 This fellowship sits naturally alongside the work we already do at Eco-Flow. From the start, our goal has been to build pipelines and training that make agri-ecology research more reproducible, accessible and scalable — exactly the principles that FAIR data is built on. This also fits well with the work of nf-core (of which we are a part), which strives to adhere to the FAIR principles by default (but there is always room to be more FAIR!).
 
 ### What I hope to achieve

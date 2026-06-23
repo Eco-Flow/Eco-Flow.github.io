@@ -10,7 +10,7 @@ tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
 
 <br>
 
-Just like we did last year, we organised a local site for the **[2026 nf-core Hackathon](https://nf-co.re/events/2025/hackathon-march-2026)** at the UCL East campus. Over the course of 3 dayss, we welcomed 25 Nextflow and nf-core enthusiasts from a range of backgrounds, spanning both academia and industry.
+Just like we did last year, we organised a local site for the **[2026 nf-core Hackathon](https://nf-co.re/events/2026/hackathon-march-2026)** at the UCL East campus. Over the course of 3 dayss, we welcomed 25 Nextflow and nf-core enthusiasts from a range of backgrounds, spanning both academia and industry.
 
 During the hackathon, people focused on different tasks. Some attendees worked on building **nf-core modules** (these are modules of popular bioinformatic tools, such as Blast, samtools, BUSCO, etc.). For example, one contributor tried to build an nf-core module based on [earlgrey](https://github.com/TobyBaril/EarlGrey), which is a tool for transposable elements annotation. Others worked on updating existing modules, by bumping up tool versions or adapting them to the new Nextflow syntax and channels (such as migrating to the [topic channels](https://nf-co.re/docs/developing/migration-guides/update-pipelines)).
 
