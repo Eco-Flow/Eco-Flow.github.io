@@ -41,6 +41,7 @@ authors: Chris Wyatt, Fernando Duarte
 # Internal docs / config that should not be published as pages.
 exclude:
   - README.md
+  - MAINTAINING.md
   - test_locally.md
   - website-structure.md
   - Gemfile

@@ -3,6 +3,9 @@
 
 # Welcome to Eco-Flow
 
+> **Maintaining this website?** See **[MAINTAINING.md](MAINTAINING.md)** for how to add posts,
+> events and pipelines, run the site locally, and publish changes.
+
 An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
 
 Our goal is to help researchers develop Nextflow pipelines under the nf-core framework, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
