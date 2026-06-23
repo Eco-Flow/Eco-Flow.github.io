@@ -11,7 +11,7 @@ tags: ["website", "community", "news"]
 
 <br>
 
-If the site looks a little different today — that's because it is. We've given the Eco-Flow website a complete redesign. And our proud to admit, that we took advantage of Claude to push this forward, with alot of our input!
+If the site looks a little different today — that's because it is. We've given the Eco-Flow website a complete redesign. And we're proud to admit that we took advantage of Claude to push this forward, with a lot of our input!
 
 The old site did its job, but as the project has grown so has everything we want to share: more pipelines, more training, more events, and a growing community. It was time for a refresh that could keep up.
 
