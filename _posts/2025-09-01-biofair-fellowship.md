@@ -6,11 +6,11 @@ author: 'Chris Wyatt'
 tags: ["biofair", "fair", "community", "news"]
 ---
 
-<!-- Optional: add a BioFAIR logo or relevant image here, e.g. /img/biofair.png -->
+<a href="https://biofair.uk/"><img src="/img/biofair-logo.png" alt="BioFAIR" style="max-width:300px;box-shadow:none;"></a>
 
-I'm delighted to share that I will be a **BioFAIR Fellow** this year.
+I'm delighted to share that I will be a [**BioFAIR**](https://biofair.uk/) Fellow this year.
 
-BioFAIR is a UK initiative working towards a national data and analytics infrastructure for the biosciences, helping researchers make their data and workflows **FAIR — Findable, Accessible, Interoperable and Reusable**.
+[BioFAIR](https://biofair.uk/) is a UK initiative working towards a [national data and analytics infrastructure](https://biofair.uk/about-us/) for the biosciences, helping researchers make their data and workflows **FAIR — Findable, Accessible, Interoperable and Reusable**.
 
 This fellowship sits naturally alongside the work we already do at Eco-Flow. From the start, our goal has been to build pipelines and training that make agri-ecology research more reproducible, accessible and scalable — exactly the principles that FAIR data is built on. This also fits well with the work of nf-core (of which we are a part), which strives to adhere to the FAIR principles by default (but there is always room to be more FAIR!).
 
