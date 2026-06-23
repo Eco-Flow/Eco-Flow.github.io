@@ -151,8 +151,20 @@
   @include md { grid-template-columns: 1fr; gap: 2rem; }
 }
 
-.footer__brand img { height: 40px; margin-bottom: 1rem; }
+.footer__logo { height: 72px; width: auto; margin-bottom: 1.1rem; }
 .footer__tagline { color: #9fc6b0; max-width: 32ch; }
+
+.footer__runwith { margin-top: 1.4rem; }
+.footer__runwith-label {
+  display: block;
+  font-family: $font-head;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #7ba890;
+  margin-bottom: .6rem;
+}
 
 .footer__col h4 {
   color: $white;
@@ -164,17 +176,17 @@
 .footer__col ul { list-style: none; margin: 0; padding: 0; }
 .footer__col li { margin-bottom: .5rem; }
 
-.footer__partners { display: flex; gap: .8rem; align-items: center; margin-top: 1.2rem; flex-wrap: wrap; }
+.footer__partners { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
 .footer__partners a {
-  background: #fff;
-  border-radius: 8px;
-  padding: .5rem .7rem;
   display: inline-flex;
   align-items: center;
-  transition: transform .15s ease;
-  &:hover { transform: translateY(-1px); }
+  opacity: .9;
+  transition: opacity .15s ease;
+  &:hover { opacity: 1; }
 }
-.footer__partners img { height: 22px; width: auto; display: block; }
+.footer__partners img { width: auto; display: block; }
+.footer__partners .logo-nextflow { height: 24px; }
+.footer__partners .logo-nfcore   { height: 22px; }
 
 .footer__bottom {
   margin-top: 2.5rem;
