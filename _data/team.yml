@@ -1,0 +1,24 @@
+current:
+  - name: Chris Wyatt
+    role: Project Lead
+    photo: /img/chris_n.jpg
+    bio: Senior bioinformatician with a background in omic technologies and pipeline development.
+  - name: Seirian Sumner
+    role: Ecology Advisor
+    photo: /img/sumner.jpg
+    bio: Professor and leading researcher in ecology and genomics.
+  - name: Fernando Duarte Frutos
+    role: Research Technician
+    photo: /img/fernando.jpg
+    bio: Bioinformatician with an interest in genomics and pipeline development.
+
+previous:
+  - name: Simon Murray
+    role: Technical Lead
+    photo: /img/Simon.png
+    bio: Senior bioinformatician in pipeline development and containerisation. Now a bioinformatics engineer at Genomics England.
+  - name: Yannick Wurm
+    role: Bioinformatics Advisor
+    photo: /img/yannick.png
+    bio: Professor and data scientist expert on genome analysis and evolution, working with ants and pollinators.
+    link: https://wurmlab.com

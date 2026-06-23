@@ -1,24 +1,40 @@
 <header class="site-header">
+  <div class="wrap nav">
+    <a class="nav__brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/img/logo_fit.png' | relative_url }}" alt="">
+      <span>Eco-Flow</span>
+    </a>
 
-  <div class="wrapper">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.minima.nav_pages | default: default_paths -%}
-    {%- assign page_titles = site.pages | map: 'title' | compact %}
-    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+    <input type="checkbox" id="nav-check">
+    <label class="nav__toggle" for="nav-check" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
 
-    {%- unless page_titles == empty %}
-      <nav class="site-nav">
-        <label for="nav-trigger">
-          <span class="menu-icon"></span>
-        </label>
-
-        {% include nav-items.html paths = page_paths %}
-
-        <span class="nav-separator">|</span>
-        <a href="https://github.com/Eco-Flow/" class="header-github-link">
-          <img src="{{ '/img/github-mark.png' | relative_url }}" alt="GitHub" height="24">
+    <ul class="nav__links">
+      {%- for item in site.data.nav -%}
+        {%- if item.dropdown == "pipelines" -%}
+          <li class="nav__dropdown">
+            <a href="{{ '/pipelines/' | relative_url }}" class="nav__link nav__dropdown-toggle">Pipelines ▾</a>
+            <ul class="nav__menu">
+              {%- assign pipes = site.pipelines | sort: "nav_order" -%}
+              {%- for p in pipes -%}
+                <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- else -%}
+          {%- assign current = page.url | downcase -%}
+          {%- assign target = item.url | downcase -%}
+          <li>
+            <a class="nav__link{% if current == target %} is-active{% endif %}" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      <li>
+        <a class="nav__gh" href="https://github.com/Eco-Flow/" aria-label="GitHub">
+          <img src="{{ '/img/github-mark.png' | relative_url }}" alt="GitHub">
         </a>
-      </nav>
-    {%- endunless %}
+      </li>
+    </ul>
   </div>
 </header>

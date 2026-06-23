@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: pipeline
 title: "Eco-Flow/pollen-metabarcoding"
 nav_order: 5
+status: Released
+summary: "Process pollen metabarcoding data with VSEARCH and assign species to barcodes."
 ---
-
-## Eco-Flow/pollen-metabarcoding
 
 **Eco-Flow/pollen-metabarcoding** is a **Nextflow pipeline** -written using the **[nf-core standards](https://nf-co.re/)**- to process **metabarcoding data using VSEARCH**.
 

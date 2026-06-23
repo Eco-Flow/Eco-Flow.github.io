@@ -1,0 +1,215 @@
+// ===========================================================================
+// Components: hero, buttons, cards, chips, prose, lists
+// ===========================================================================
+
+// --- Buttons ---------------------------------------------------------------
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: $font-head;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: .7rem 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all .15s ease;
+  &:hover { text-decoration: none; transform: translateY(-1px); }
+}
+.btn--primary { background: $green; color: $white; &:hover { background: $green-dark; color: $white; } }
+.btn--ghost  { border-color: $border; color: $ink; background: $white; &:hover { border-color: $green; color: $green-dark; } }
+.btn--light  { background: $white; color: $green-deep; &:hover { background: $green-tint; color: $green-deep; } }
+
+// --- Eyebrow / section headers ---------------------------------------------
+
+.eyebrow {
+  display: inline-block;
+  font-family: $font-head;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: $green;
+  margin-bottom: .8rem;
+}
+
+.section__head { max-width: 640px; margin-bottom: 2.5rem; }
+.section__head--center { margin-left: auto; margin-right: auto; text-align: center; }
+.section__head p { color: $muted; font-size: 1.08rem; margin-bottom: 0; }
+
+// --- Hero ------------------------------------------------------------------
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 480px at 78% -8%, rgba(15,168,144,.14), transparent 60%),
+    linear-gradient(180deg, $green-tint 0%, $bg 72%);
+  padding: 5.5rem 0 4.5rem;
+}
+.hero__inner { max-width: 720px; }
+.hero h1 {
+  font-size: clamp(2.4rem, 5.2vw, 3.6rem);
+  margin-bottom: 1.1rem;
+}
+.hero__lead {
+  font-size: 1.25rem;
+  color: $muted;
+  margin-bottom: 2rem;
+  max-width: 60ch;
+}
+.hero__cta { display: flex; gap: .9rem; flex-wrap: wrap; }
+.hero__leaf {
+  position: absolute;
+  right: -40px;
+  bottom: -50px;
+  width: 320px;
+  opacity: .12;
+  pointer-events: none;
+  @include md { display: none; }
+}
+
+// --- Generic page header band ----------------------------------------------
+
+.page-head {
+  background: linear-gradient(180deg, $green-tint 0%, $bg 100%);
+  padding: 3.2rem 0 2.6rem;
+  border-bottom: 1px solid $border;
+}
+.page-head h1 { margin-bottom: .4rem; }
+.page-head p { color: $muted; max-width: 60ch; margin-bottom: 0; }
+
+// --- Stat strip ------------------------------------------------------------
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
+.stats__num { font-family: $font-head; font-size: 2.4rem; font-weight: 600; color: $green-dark; }
+.stats__label { color: $muted; font-size: .95rem; }
+@include sm { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+// --- Card grids ------------------------------------------------------------
+
+.grid { display: grid; gap: 1.5rem; }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+@include md { .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@include sm { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+
+.card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 1.6rem;
+  box-shadow: $shadow;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  display: flex;
+  flex-direction: column;
+}
+a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shadow-hover; border-color: rgba(47,158,100,.35); text-decoration: none; }
+.card h3 { margin-bottom: .5rem; }
+.card p { color: $muted; font-size: .98rem; }
+.card__icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: $green-tint; color: $green-dark;
+  display: flex; align-items: center; justify-content: center;
+  font-family: $font-head; font-weight: 600; font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+// Pillar card (numbered)
+.pillar .card__icon { font-size: 1.05rem; }
+
+// --- Chips / tags ----------------------------------------------------------
+
+.chip {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 500;
+  padding: .2rem .65rem;
+  border-radius: 999px;
+  background: $green-tint;
+  color: $green-dark;
+  margin: 0 .35rem .35rem 0;
+}
+.chip--status { background: $green; color: $white; }
+.chip--dev { background: #fff3da; color: #8a6300; }
+.chip--early { background: #eef0f3; color: #57606a; }
+
+// --- Pipeline cards --------------------------------------------------------
+
+.pipeline-card { }
+.pipeline-card__top { display: flex; align-items: center; gap: .8rem; margin-bottom: .8rem; }
+.pipeline-card__name { font-family: $font-head; font-weight: 600; font-size: 1.1rem; color: $ink; }
+.pipeline-card__src { font-size: .8rem; color: $faint; font-family: $font-mono; }
+.pipeline-card .chip { margin-top: auto; }
+
+// --- Team / person cards ---------------------------------------------------
+
+.person { text-align: center; }
+.person img {
+  width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto 1rem; border: 3px solid $green-tint;
+}
+.person__name { font-family: $font-head; font-weight: 600; font-size: 1.1rem; }
+.person__role { color: $green; font-size: .9rem; font-weight: 500; margin-bottom: .6rem; }
+.person p { font-size: .92rem; color: $muted; }
+
+// --- Logo wall -------------------------------------------------------------
+
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2.5rem; }
+.logos img { height: 54px; width: auto; filter: grayscale(1); opacity: .65; transition: all .2s; }
+.logos a:hover img { filter: none; opacity: 1; }
+
+// --- Post / event lists ----------------------------------------------------
+
+.post-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.2rem; }
+.post-item {
+  display: flex; flex-direction: column;
+  border: 1px solid $border; border-radius: $radius; padding: 1.4rem 1.6rem;
+  background: $white; box-shadow: $shadow; transition: all .18s ease;
+}
+.post-item:hover { transform: translateY(-2px); box-shadow: $shadow-hover; border-color: rgba(47,158,100,.35); }
+.post-item__meta { font-size: .82rem; color: $faint; font-family: $font-mono; margin-bottom: .35rem; }
+.post-item__title { font-family: $font-head; font-size: 1.2rem; font-weight: 600; margin: 0 0 .4rem; }
+.post-item__title a { color: $ink; &:hover { color: $green-dark; text-decoration: none; } }
+.post-item__excerpt { color: $muted; font-size: .95rem; margin: 0; }
+.post-item__tags { margin-top: .8rem; }
+
+// --- Prose (article body) --------------------------------------------------
+
+.prose {
+  max-width: $wrap-narrow;
+  margin: 0 auto;
+  img { border-radius: $radius-sm; margin: 1.6rem auto; box-shadow: $shadow; }
+  h2 { margin-top: 2.2rem; }
+  h3 { margin-top: 1.8rem; }
+  > p:first-of-type { font-size: 1.12rem; color: $ink; }
+}
+
+.article-head { max-width: $wrap-narrow; margin: 0 auto 2rem; }
+.article-head .post-item__meta { margin-bottom: .6rem; }
+.article-head h1 { font-size: clamp(2rem, 4vw, 2.8rem); }
+
+.back-link { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; color: $muted; }
+
+// --- CTA band --------------------------------------------------------------
+
+.cta-band {
+  background: linear-gradient(120deg, $green-dark, $green-deep);
+  color: $white;
+  border-radius: $radius;
+  padding: 3rem;
+  text-align: center;
+  h2 { color: $white; }
+  p { color: #bfe2cf; max-width: 52ch; margin: 0 auto 1.6rem; }
+  @include sm { padding: 2rem 1.4rem; }
+}
+
+// --- Definition rows (job page) --------------------------------------------
+
+.spec-list { display: grid; grid-template-columns: 180px 1fr; gap: .2rem 1.5rem; margin: 1.5rem 0; }
+.spec-list dt { font-family: $font-head; font-weight: 600; color: $green-deep; padding: .55rem 0; border-bottom: 1px solid $border; }
+.spec-list dd { margin: 0; padding: .55rem 0; border-bottom: 1px solid $border; color: $muted; }
+@include sm { .spec-list { grid-template-columns: 1fr; gap: 0; } .spec-list dt { border-bottom: 0; padding-bottom: 0; } }

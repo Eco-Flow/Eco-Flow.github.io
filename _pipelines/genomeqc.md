@@ -1,12 +1,12 @@
 ---
-layout: default
+layout: pipeline
 title: "nf-core/genomeqc"
 nav_order: 6
+status: In development
+summary: "Assess genome assembly and annotation quality with an ensuite of tools, plus phylogeny."
 ---
 
-## nf-core/genomeqc
-
-<img src="../img/genomeqc-logo.png" />
+<img src="/img/genomeqc-logo.png" />
 
 **nf-core/genomeqc** is an **[nf-core pipeline](https://github.com/nf-core/genomeqc)** written in Nextflow designed to assess the quality of genome assemblies and their respective annotations using an ensuite of tools and custom scripts.
 
@@ -27,6 +27,6 @@ nav_order: 6
 
 Additionally, the pipeline runs OrthoFinder for phylogenetic orthology inference and plots the results in an easy-to-visualize and comparable way.
 
-<img src="../img/genomeqc-tree-plot.png" />
+<img src="/img/genomeqc-tree-plot.png" />
 
 For additional details, usage instructions, and examples, please refer to the [nf-core/genomeqc GitHub repository](https://github.com/nf-core/genomeqc).

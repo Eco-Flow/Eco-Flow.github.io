@@ -1,0 +1,180 @@
+// ===========================================================================
+// Layout primitives: wrapper, header, footer, sections
+// ===========================================================================
+
+.wrap {
+  max-width: $wrap;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.wrap--narrow { max-width: $wrap-narrow; }
+
+.section { padding: 4.5rem 0; }
+.section--soft { background: $bg-soft; }
+.section--tight { padding: 3rem 0; }
+
+@include md {
+  .section { padding: 3rem 0; }
+}
+
+// --- Site header / nav -----------------------------------------------------
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, .9);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid $border;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: $font-head;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: $ink;
+  &:hover { text-decoration: none; color: $green-dark; }
+  img { height: 30px; width: auto; }
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  font-size: .96rem;
+  font-weight: 500;
+  color: $ink;
+  &:hover { color: $green; text-decoration: none; }
+  &.is-active { color: $green-dark; }
+}
+
+.nav__gh img { height: 22px; width: 22px; opacity: .8; transition: opacity .15s; }
+.nav__gh:hover img { opacity: 1; }
+
+// Dropdown
+.nav__dropdown { position: relative; }
+.nav__dropdown-toggle { cursor: pointer; display: inline-flex; align-items: center; gap: .25rem; }
+.nav__menu {
+  position: absolute;
+  top: calc(100% + .6rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 230px;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-hover;
+  padding: .4rem;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .15s ease, transform .15s ease;
+  li { margin: 0; }
+  a {
+    display: block;
+    padding: .55rem .7rem;
+    border-radius: 7px;
+    color: $ink;
+    font-size: .92rem;
+    &:hover { background: $green-tint; color: $green-dark; text-decoration: none; }
+  }
+}
+.nav__dropdown:hover .nav__menu,
+.nav__dropdown:focus-within .nav__menu {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+
+// Mobile nav
+.nav__toggle { display: none; background: none; border: 0; cursor: pointer; padding: .4rem; }
+.nav__toggle span {
+  display: block; width: 24px; height: 2px; background: $ink; margin: 5px 0; border-radius: 2px;
+}
+
+#nav-check { display: none; }
+
+@include md {
+  .nav__toggle { display: block; }
+  .nav__links {
+    position: fixed;
+    inset: 68px 0 auto 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: $white;
+    border-bottom: 1px solid $border;
+    box-shadow: $shadow;
+    padding: .5rem 1.5rem 1.2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+  }
+  #nav-check:checked ~ .nav__links { max-height: 90vh; padding-top: 1rem; }
+  .nav__link, .nav__dropdown { width: 100%; padding: .55rem 0; border-bottom: 1px solid $border; }
+  .nav__menu {
+    position: static; transform: none; opacity: 1; visibility: visible;
+    box-shadow: none; border: 0; padding: .3rem 0 .3rem 1rem; min-width: 0;
+  }
+}
+
+// --- Footer ----------------------------------------------------------------
+
+.site-footer {
+  background: $green-deep;
+  color: #c9e3d4;
+  padding: 3.5rem 0 2rem;
+  font-size: .95rem;
+  a { color: #eafff3; &:hover { color: $white; } }
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 2.5rem;
+  @include md { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.footer__brand img { height: 40px; margin-bottom: 1rem; }
+.footer__tagline { color: #9fc6b0; max-width: 32ch; }
+
+.footer__col h4 {
+  color: $white;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 1rem;
+}
+.footer__col ul { list-style: none; margin: 0; padding: 0; }
+.footer__col li { margin-bottom: .5rem; }
+
+.footer__partners { display: flex; gap: 1.2rem; align-items: center; margin-top: 1.2rem; flex-wrap: wrap; }
+.footer__partners img { height: 28px; filter: brightness(0) invert(1); opacity: .85; }
+
+.footer__bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem;
+  color: #8fb5a0;
+  font-size: .85rem;
+}

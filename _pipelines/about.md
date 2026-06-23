@@ -1,10 +1,9 @@
 ---
-layout: default
+layout: pipeline
 title: "About our pipelines"
 nav_order: 1
+summary: "How we build, host and standardise our Nextflow pipelines."
 ---
-
-## About our pipelines
 
 Our pipelines are generally written in **Nextflow**, and we try to follow **nf-core standards** as closely as possible. Pipelines hosted at https://github.com/Eco-Flow were developed using a basic **Nextflow/nf-core framework** for specific research projects, whereas those hosted at https://github.com/nf-core are part of the wider **nf-core community**. These follow stricter nf-core guidelines and are designed for broader use across the scientific community.
 

@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: pipeline
 title: "Eco-Flow/excon"
 nav_order: 2
+status: Released
+summary: "Automated gene family expansion & contraction analysis with CAFE5, plus GO enrichment."
 ---
-
-## Eco-Flow/excon
 
 Have you ever wondered whether gene families are growing or shrinking across species? **excon** automates the full journey using the popular tool [CAFE](https://github.com/hahnlab/CAFE5)— from raw genome assemblies to publication-ready figures showing which gene families have expanded or contracted, and what biological processes they're involved in.
 
@@ -97,7 +97,7 @@ results/
 And here is some of the basic figures. Not exactly publication ready, but the raw data is also available for plotting in alt formats.
 As expected _Mycoplasma genitalium_ has a noticeable contraction in the most Orthogroups.
 
-<img src="../img/excon_summary.png" width="600" />
+<img src="/img/excon_summary.png" width="600" />
 
 Top: A phylogenetic tree of mycoplasma input, with the number of significant expansion or contraction orthogroups.
 Left: Example Gene Onyology enrichment analysis showing terms significantly expansed in this species.

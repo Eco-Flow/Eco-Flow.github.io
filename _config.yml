@@ -1,10 +1,13 @@
+# We ship a fully custom theme: our own _layouts, _includes, _sass and
+# assets/main.scss shadow everything minima provides. minima is named only to
+# stop the github-pages gem injecting its jekyll-theme-primer default.
 theme: minima
-title: Home
-description: A community of computational agri-ecologists
+
+title: Eco-Flow
+description: A community of computational agri-ecologists building reproducible Nextflow pipelines for ecology.
 url: "https://eco-flow.github.io"
 
-
-# Allow future-dated posts to be published
+# Allow future-dated posts/events to be published
 future: true
 
 plugins:
@@ -19,17 +22,28 @@ titles_from_headings:
 collections:
   pipelines:
     output: true
+    permalink: /pipelines/:name/
   events:
     output: true
+    permalink: /events/:name/
+
+# Default layouts per content type so individual files don't need to set them.
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: "post" }
+  - scope: { path: "", type: "events" }
+    values: { layout: "event" }
+  - scope: { path: "", type: "pipelines" }
+    values: { layout: "pipeline" }
 
 authors: Chris Wyatt, Fernando Duarte
 
-minima:
-  nav_pages:
-    - index.md
-    - about.md
-    - services.md
-    - pipelines.md
-    - partners.md
-    - blog.html
-    - events.html
+# Internal docs / config that should not be published as pages.
+exclude:
+  - README.md
+  - test_locally.md
+  - website-structure.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitpod.yml
+  - vendor

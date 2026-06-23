@@ -1,0 +1,22 @@
+# Funders, hosts and associated organisations (shown as logo wall + cards).
+funding:
+  - name: BBSRC
+    logo: /img/BBSRC.png
+    url: https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1
+    note: Funds this initiative through the Bioinformatics and Biological Resources Fund.
+  - name: Seqera Labs
+    logo: /img/seqera.png
+    url: https://seqera.io/
+    note: Sponsors the initiative and provides technical support.
+
+hosts:
+  - name: UCL
+    logo: /img/ucl.png
+    url: https://www.ucl.ac.uk/
+    note: Host university for Sumner, Wyatt and the technical team.
+
+associated:
+  - name: nf-core
+    logo: /img/nfcore.png
+    url: https://nf-co.re/
+    note: Sets the standards for Nextflow bioinformatics workflows — central to our philosophy.

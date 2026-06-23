@@ -1,0 +1,61 @@
+---
+layout: default
+title: Partners
+permalink: /partners/
+description: Our UK academic ambassadors and industry partners.
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>Ambassadors &amp; partners</h1>
+    <p>
+      Eco-Flow was built with the support of UK-based agri-ecology academic ambassadors and
+      our industry partners — without whom this project would not be possible.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Academic network</span>
+      <h2>Our ambassadors</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- for a in site.data.ambassadors -%}
+      <div class="card">
+        <div class="person__name" style="font-size:1.05rem">{{ a.name }}</div>
+        <div class="person__role">{{ a.affiliation }}</div>
+        <p><a href="{{ a.url }}">Profile →</a></p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Industry</span>
+      <h2>Our partners</h2>
+      <p>
+        The project is supported by <a href="https://seqera.io/">Seqera Labs</a>, the creators of
+        <a href="https://nextflow.io">Nextflow</a>, who provide technical and financial support.
+      </p>
+    </div>
+    <div class="logos">
+      <a href="https://seqera.io/"><img src="{{ '/img/seqera.png' | relative_url }}" alt="Seqera Labs"></a>
+      <a href="https://nf-co.re/"><img src="{{ '/img/nfcore.png' | relative_url }}" alt="nf-core"></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Collaborate with us</h2>
+      <p>We're always open to new partners and will consider all applications from UK-based research institutes.</p>
+      <a class="btn btn--light" href="mailto:ecoflow.ucl@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</section>
