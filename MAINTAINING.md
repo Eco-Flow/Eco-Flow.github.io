@@ -120,6 +120,9 @@ These pages are built from YAML data files — edit the data, not the page:
   [`_data/funders.yml`](_data/funders.yml) — `funding:`, `hosts:`, `associated:`.
 - **Ambassadors** (Partners page): [`_data/ambassadors.yml`](_data/ambassadors.yml) —
   `name`, `affiliation`, `url`.
+- **External projects** (Pipelines page "Projects we support"):
+  [`_data/external_projects.yml`](_data/external_projects.yml) — projects we advise on
+  but don't own. Each entry: `name`, `org`, `url` (links out to the repo), `summary`.
 - **Homepage mission pillars**: [`_data/pillars.yml`](_data/pillars.yml).
 - **Top navigation**: [`_data/nav.yml`](_data/nav.yml).
 

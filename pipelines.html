@@ -52,6 +52,30 @@ description: Open, tested and documented Nextflow pipelines for agri-ecology res
   {%- endif -%}
 {%- endfor -%}
 
+{%- if site.data.external_projects and site.data.external_projects.size > 0 -%}
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Collaborations</span>
+      <h2>Projects we support</h2>
+      <p>External projects we advise on or help develop. These are <strong>not Eco-Flow pipelines</strong> — they're built and maintained by their own teams, and we provide Nextflow and nf-core guidance.</p>
+    </div>
+    <div class="grid grid--3">
+      {%- for proj in site.data.external_projects -%}
+      <a class="card pipeline-card" href="{{ proj.url }}" target="_blank" rel="noopener">
+        <div class="pipeline-card__top">
+          <span class="pipeline-card__name">{{ proj.name }} ↗</span>
+        </div>
+        {%- if proj.org -%}<div class="pipeline-card__src">{{ proj.org }}</div>{%- endif -%}
+        {%- if proj.summary -%}<p>{{ proj.summary }}</p>{%- endif -%}
+        <span class="chip chip--external">External · we advise</span>
+      </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
 <section class="section">
   <div class="wrap">
     <div class="grid grid--2">

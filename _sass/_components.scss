@@ -136,6 +136,7 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 .chip--status { background: $green; color: $white; }
 .chip--dev { background: #fff3da; color: #8a6300; }
 .chip--early { background: #eef0f3; color: #57606a; }
+.chip--external { background: #ede9fe; color: #5b3fa6; }
 
 // --- Pipeline cards --------------------------------------------------------
 

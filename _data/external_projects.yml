@@ -1,0 +1,10 @@
+# External projects we advise on / help develop, but which are NOT Eco-Flow
+# pipelines (they're maintained by their own teams). Rendered in a separate,
+# clearly-marked section on the Pipelines page; each card links out to its repo.
+- name: FSP Assembly Pipeline
+  org: Royal Botanic Gardens, Kew
+  url: https://github.com/RBGKew/fspassemblypipeline
+  summary: >
+    A Nextflow/nf-core workflow for genome assembly from short-read sequencing
+    data — covering pre-processing, assembly and quality control. Developed by
+    the Fungarium team at Kew, with our Nextflow/nf-core guidance.
