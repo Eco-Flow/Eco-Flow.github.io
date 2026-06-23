@@ -7,7 +7,7 @@ redirect_from:
   - /pipelines/about.html
 ---
 
-Our pipelines are generally written in **Nextflow**, and we try to follow **nf-core standards** as closely as possible. Pipelines hosted at https://github.com/Eco-Flow were developed using a basic **Nextflow/nf-core framework** for specific research projects, whereas those hosted at https://github.com/nf-core are part of the wider **nf-core community**. These follow stricter nf-core guidelines and are designed for broader use across the scientific community.
+Our pipelines are always written in **Nextflow**, and we follow the **nf-core standards** as closely as possible. Pipelines hosted at https://github.com/Eco-Flow were developed using a basic **Nextflow/nf-core framework** for specific research projects, whereas those hosted at https://github.com/nf-core are part of the wider **nf-core community**. These follow stricter nf-core guidelines and are designed for broader use across the scientific community.
 
 Not all our current pipelines are mentioned here, as some end-users prefer to keep them in private repositories until the paper is published. We encourage our users to publish as quick as possible, and be open with their code, although this is not always achievable.
 
