@@ -1,74 +1,41 @@
-<br>
-<img align="right" width="130" src="./img/nextflowlogoTopmargin.png" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./img/ecoflow-white.png">
+  <img src="./img/logo.png" width="140" alt="Eco-Flow logo">
+</picture>
 
-# Welcome to Eco-Flow
+# Eco-Flow
 
-> **Maintaining this website?** See **[MAINTAINING.md](MAINTAINING.md)** for how to add posts,
-> events and pipelines, run the site locally, and publish changes.
+**A community of computational agri-ecologists building reproducible Nextflow pipelines for ecology.**
 
-An initiative [funded](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) by the BBSRC to development an agri-**eco**logy specific Next**flow** pipeline community and development program.
+🌐 **[eco-flow.github.io](https://eco-flow.github.io)** &nbsp;·&nbsp;
+[Pipelines](https://eco-flow.github.io/pipelines/) ·
+[Training](https://eco-flow.github.io/training/) ·
+[Blog](https://eco-flow.github.io/blog/) ·
+[About](https://eco-flow.github.io/about/)
 
-Our goal is to help researchers develop Nextflow pipelines under the nf-core framework, teach basic/advanced topics around the UK and build functional pipelines to super charge UK research.
-<br><br>
+---
 
-# Why
+This repository is the source code for the **[Eco-Flow website](https://eco-flow.github.io)** — a [Jekyll](https://jekyllrb.com/) site hosted on GitHub Pages.
 
-<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="130" src="./img/logo_fit.png"/>
+> **🛠 Maintaining the site?** See **[MAINTAINING.md](MAINTAINING.md)** for how to add blog posts, events and pipelines, run the site locally, and publish changes. For the file/folder map, see [website-structure.md](website-structure.md).
 
-Agri-ecology research is critical for our understanding of the natural environment and the security of our food supply. 
+## About Eco-Flow
 
-However, tooling lags behind other research fields such as medicine; this bottleneck is holding back research and the speed at which this critical research gets published.
+Eco-Flow is an initiative [funded by the BBSRC](https://gtr.ukri.org/projects?ref=BB%2FX018768%2F1) to build an agri-**eco**logy–specific Next**flow** pipeline community and development programme.
 
-#### Why Nextflow
+Agri-ecology research is critical to understanding the natural environment and securing our food supply, yet its tooling lags behind fields like medicine. We help researchers build, test and run reproducible pipelines with [Nextflow](https://www.nextflow.io/) and the [nf-core](https://nf-co.re/) framework — keeping research aligned with the **FAIR** (Findable, Accessible, Interoperable, Reusable) data principles.
 
-Research in the field of agri-ecology is often not reproducible, accessible or scalable. Buy building pipelines for processing and analysing for ecology using Nextflow and the nf-core framework we ensure and ecourage research that is in line with the the FAIR (Findable, Accessible, Interoperable, Reusable) Data Principles.
-<br><br>
+## What we do
 
-# Sign Up !
+- **🔧 Building** — reproducible, modular, easy-to-use pipelines for the analyses ecologists actually need.
+- **✅ Testing** — unit tests (nf-test) and end-to-end pipeline tests, maintained with our ambassadors and partner labs.
+- **🎓 Training** — hands-on Nextflow/nf-core training to remove the "black box" of bioinformatics ([our course](https://eco-flow.github.io/training/)).
+- **🤝 Community** — networking events and hackathons to grow a UK community of pipeline developers.
 
-<img style="margin-left: 1.5rem; margin-top: 1rem; vertical-align:middle"  align="right" width="130" src="./img/greentick.png"/>
+## Get involved
 
-We are currently accepting expressions of interest in the program.<br> If you want us to build a pipeline or help you build a pipeline, let us know!<br>
-Follow this [URL](https://forms.gle/zq7iSSRCY5iHM9f89), to fill in a form about the kind of project you want us to build/help with. 
+We're accepting expressions of interest. If you'd like us to build a pipeline — or help you build one — [**fill in this form**](https://forms.gle/zq7iSSRCY5iHM9f89) and we'll get back to you, or just [email us](mailto:ecoflow.ucl@gmail.com).
 
-We will get back to as soon as possible, and let you know how we can help.
+## Funding & partners
 
-# Our plan
-
-<img style="margin-left: 1.5rem" align="right" width="150" src="./img/building_headspace.png" style="border: 30px white;" />
-
- **1. BUILDING**
-
-We will develop (within end-user communities) reproducible, easy-to-use, modular bioinformatics pipelines suitable for the most useful analyses required by ecologists in the application of omics data to address critical ecological questions. Specifically, we will use [Nextflow](https://www.nextflow.io/), a world leading pipeline development structure to create these pipelines, and the [nf-core](https://nf-co.re/) framework, a community effort to build curated Nextflow pipelines.
-<br><br>
-
-<img style="margin-right: 1.5rem ; margin-top: 3rem" align="left" width="150" src="./img/chain_break.png" style="border: 30px white;" />
-
- **2. TESTING**
-
-Once we have developed our pipelines, we will ensure each module has unit testing (using [nf-test](https://shorturl.at/kpQ39)), as well as end to end pipeline tests with example data. Alongside our ambassadors and partner labs we can ensure pipelines are continuously tested and improved, so they remain active and relevant. 
-<br><br>
-
-<img style="margin-left: 1.5rem ; margin-top: 2.5rem" align="right" width="120" src="./img/blackbox.png" style="border: 30px white;" />
-
- **3. TRAINING**
-
-We address this mismatch by building resource bridges between ecologists – especially those working at the interface of ecology and agriculture - and bioinformatics; we will empower them with the autonomy to access and use the most appropriate cutting-edge analyses. Let’s remove the black box of bioinformatics!
-<br>
-
-<img style="margin-left: 1.5rem ; margin-top: 2rem" align="left" width="170" src="./img/handshake.png" style="border: 30px white;" />
-<br>
-
-**4. COMMUNITY**
-
-Finally, while fulfilling the previous steps, we will build a community of pipeline developers in the UK. Pipeline development should be collaborative, interactive and accessible, so we will be hosting additional networking and hackathon events to build a community of developers that will compliment code devlopment.
-
-<br><br>
-
-<!-- # Contents
-
-1. [Who are we ?](about.md)
-2. [What services can we provide ?](services.md)
-3. [Examples of current pipelines](pipelines.md)
-4. [Who are our current research partners ?](partners.md)
-5. [Citations](citations.md) -->
+Funded by the **BBSRC** (Bioinformatics and Biological Resources Fund), hosted at **UCL**, and supported by **[Seqera Labs](https://seqera.io/)**. We build to the standards of **[nf-core](https://nf-co.re/)**.
