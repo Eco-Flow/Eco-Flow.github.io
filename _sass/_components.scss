@@ -93,6 +93,17 @@
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
 .stats__num { font-family: $font-head; font-size: 2.4rem; font-weight: 600; color: $green-dark; }
 .stats__label { color: $muted; font-size: .95rem; }
+a.stat {
+  display: block;
+  text-decoration: none;
+  transition: transform .15s ease;
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-3px);
+    .stats__num { color: $green; }
+    .stats__label { color: $green-dark; }
+  }
+}
 @include sm { .stats { grid-template-columns: repeat(2, 1fr); } }
 
 // --- Card grids ------------------------------------------------------------
