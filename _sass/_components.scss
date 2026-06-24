@@ -19,6 +19,7 @@
   &:hover { text-decoration: none; transform: translateY(-1px); }
 }
 .btn--primary { background: $green; color: $white; &:hover { background: $green-dark; color: $white; } }
+.btn--dark    { background: $green-dark; color: $white; &:hover { background: $green-deep; color: $white; } }
 .btn--ghost  { border-color: $border; color: $ink; background: $white; &:hover { border-color: $green; color: $green-dark; } }
 .btn--light  { background: $white; color: $green-deep; &:hover { background: $green-tint; color: $green-deep; } }
 .btn--outline-light {
