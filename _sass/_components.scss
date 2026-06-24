@@ -21,6 +21,12 @@
 .btn--primary { background: $green; color: $white; &:hover { background: $green-dark; color: $white; } }
 .btn--ghost  { border-color: $border; color: $ink; background: $white; &:hover { border-color: $green; color: $green-dark; } }
 .btn--light  { background: $white; color: $green-deep; &:hover { background: $green-tint; color: $green-deep; } }
+.btn--outline-light {
+  background: transparent;
+  color: $white;
+  border-color: rgba(255, 255, 255, .5);
+  &:hover { background: rgba(255, 255, 255, .12); color: $white; border-color: $white; }
+}
 
 // --- Eyebrow / section headers ---------------------------------------------
 
