@@ -119,19 +119,25 @@
     align-items: flex-start;
     gap: 0;
     background: $white;
-    border-bottom: 1px solid $border;
     box-shadow: $shadow;
-    padding: .5rem 1.5rem 1.2rem;
+    // No vertical padding / border while collapsed — otherwise the padding
+    // keeps the panel ~28px tall and the first item peeks out under the header.
+    padding: 0 1.5rem;
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease;
   }
-  #nav-check:checked ~ .nav__links { max-height: 90vh; padding-top: 1rem; }
+  // Open state (hamburger tapped): reveal and restore padding + border.
+  #nav-check:checked ~ .nav__links {
+    max-height: 90vh;
+    padding: 1rem 1.5rem 1.2rem;
+    border-bottom: 1px solid $border;
+  }
   .nav__link, .nav__dropdown { width: 100%; padding: .55rem 0; border-bottom: 1px solid $border; }
-  // On mobile the Pipelines dropdown collapses: the "Pipelines" item just
-  // links to /pipelines/ (which lists them all), instead of the submenu
-  // being permanently expanded in the menu.
-  .nav__dropdown .nav__menu { display: none; }
+  .nav__menu {
+    position: static; transform: none; opacity: 1; visibility: visible;
+    box-shadow: none; border: 0; padding: .3rem 0 .3rem 1rem; min-width: 0;
+  }
 }
 
 // --- Footer ----------------------------------------------------------------
