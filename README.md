@@ -3,8 +3,6 @@
   <img src="./img/logo.png" width="140" alt="Eco-Flow logo">
 </picture>
 
-# Eco-Flow
-
 **A community of computational agri-ecologists building reproducible Nextflow pipelines for ecology.**
 
 🌐 **[eco-flow.github.io](https://eco-flow.github.io)** &nbsp;·&nbsp;
