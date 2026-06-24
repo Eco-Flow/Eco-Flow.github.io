@@ -87,6 +87,16 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity .15s ease, transform .15s ease;
+  // Invisible bridge over the gap between the tab and the menu, so the
+  // menu doesn't close when the cursor moves down onto a pipeline.
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -.6rem;
+    height: .6rem;
+  }
   li { margin: 0; }
   a {
     display: block;
