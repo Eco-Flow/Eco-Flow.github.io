@@ -123,6 +123,8 @@ These pages are built from YAML data files — edit the data, not the page:
 - **External projects** (Pipelines page "Projects we support"):
   [`_data/external_projects.yml`](_data/external_projects.yml) — projects we advise on
   but don't own. Each entry: `name`, `org`, `url` (links out to the repo), `summary`.
+- **Training course** (the `/training/` page): [`_data/training.yml`](_data/training.yml) —
+  course intro, repo link, and the list of `parts` (each linking to its lesson on GitHub).
 - **Homepage mission pillars**: [`_data/pillars.yml`](_data/pillars.yml).
 - **Top navigation**: [`_data/nav.yml`](_data/nav.yml).
 

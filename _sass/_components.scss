@@ -121,6 +121,20 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 // Pillar card (numbered)
 .pillar .card__icon { font-size: 1.05rem; }
 
+// --- Training steps --------------------------------------------------------
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.step {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.1rem;
+  .card__icon { margin-bottom: 0; flex-shrink: 0; }
+  h3 { margin-bottom: .4rem; font-size: 1.15rem; }
+  p { margin-bottom: .6rem; }
+  .chip { vertical-align: middle; margin-left: .3rem; }
+}
+.step__body { min-width: 0; }
+
 // --- Chips / tags ----------------------------------------------------------
 
 .chip {

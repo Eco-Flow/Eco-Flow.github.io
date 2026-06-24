@@ -1,0 +1,45 @@
+---
+layout: default
+title: Training
+permalink: /training/
+description: Eco-Flow's free, hands-on basic Nextflow training course — from the command line to running nf-core pipelines.
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>{{ site.data.training.title }}</h1>
+    <p>{{ site.data.training.intro }}</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <div class="section__head">
+      <span class="eyebrow">Course outline</span>
+      <h2>Work through it, step by step</h2>
+      <p>Each part opens its material on GitHub. Start at the top — or jump to whatever you need.</p>
+    </div>
+
+    <ol class="steps">
+      {%- for p in site.data.training.parts -%}
+      <li class="card step">
+        <div class="card__icon">{{ p.num }}</div>
+        <div class="step__body">
+          <h3>{{ p.title }} <span class="chip">{{ p.type }}</span></h3>
+          <p>{{ p.body }}</p>
+          <a href="{{ site.data.training.base }}{{ p.file }}">Open lesson →</a>
+        </div>
+      </li>
+      {%- endfor -%}
+    </ol>
+
+    <div class="cta-band" style="margin-top:3rem">
+      <h2>Dive into the material</h2>
+      <p>Grab the full course (data, scripts and Codespaces config) on GitHub, or try the official Nextflow training to go further.</p>
+      <div class="hero__cta" style="justify-content:center">
+        <a class="btn btn--light" href="{{ site.data.training.repo }}">Eco-Flow training repo</a>
+        <a class="btn btn--ghost" href="https://training.nextflow.io/" style="color:#fff;border-color:rgba(255,255,255,.4)">Official Nextflow training</a>
+      </div>
+    </div>
+  </div>
+</section>

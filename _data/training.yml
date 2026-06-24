@@ -1,0 +1,30 @@
+# Eco-Flow Basic Nextflow Training course, surfaced on /training/.
+# Lessons live in the Eco-Flow/training repo; each part links out to its doc.
+title: Eco-Flow Basic Nextflow Training
+intro: >
+  A hands-on course that takes you from limited bioinformatics experience to
+  running your own nf-core pipelines. Everything runs in the browser via GitHub
+  Codespaces — nothing to install.
+repo: https://github.com/Eco-Flow/training
+base: https://github.com/Eco-Flow/training/blob/main/eco-flow-training/docs/
+parts:
+  - num: "0"
+    title: Setup
+    type: Practical
+    body: Get your environment ready with GitHub Codespaces, so you can run everything from your browser.
+    file: setup.md
+  - num: "1"
+    title: Command line basics
+    type: Practical · optional
+    body: A gentle introduction to the command line. Skip this part if you're already comfortable in a terminal.
+    file: commandline.md
+  - num: "2"
+    title: Pipelines with Nextflow
+    type: Lecture
+    body: What Nextflow and nf-core are, and why pipelines matter for reproducible, scalable science.
+    file: pipelines.md
+  - num: "3"
+    title: Run an nf-core RNA-Seq pipeline
+    type: Practical
+    body: Hands-on — run a real nf-core/rnaseq analysis end to end, from raw reads to results.
+    file: nfcore_rnaseq.md
