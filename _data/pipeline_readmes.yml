@@ -290,11 +290,26 @@
   \ module, you would need to cite BUSCO, Quast, AGAT\n\n## Contact Us\n\nIf you need\
   \ any support do not hesitate to contact us at any of:\n\n`c.wyatt [at] ucl.ac.uk`\
   \ \n\n`ecoflow.ucl [at] gmail.com`"
-"Eco-Flow/pollen-metabarcoding": "# nf-pollen-metabarcoding\nA pipeline developed\
-  \ in collaboration with Exeter University\n\n## Installation\n\nNextflow pipelines\
-  \ require a few prerequisites. There is further documentation on the nf-core webpage\
-  \ [here](https://nf-co.re/docs/usage/installation), about how to install Nextflow.\n\
-  \n### Prerequisites\n\n- [Docker](https://docs.docker.com/engine/install/) or [Singularity](https://docs.sylabs.io/guides/3.11/admin-guide/installation.html).\n\
+"Eco-Flow/pollen-metabarcoding": "# nf-pollen-metabarcoding\n\nA reproducible Nextflow\
+  \ workflow for processing pollen metabarcoding sequencing data and generating taxonomic\
+  \ profiles of plant species present in pollen samples. The pipeline was developed\
+  \ in collaboration with Exeter University and published in the [Journal of animal\
+  \ ecology : PMC12586786](https://pubmed.ncbi.nlm.nih.gov/40963187/)\n\n<img width=\"\
+  1251\" height=\"201\" alt=\"image\" src=\"https://github.com/user-attachments/assets/fad7ef75-1f17-460d-853c-fb7c45f8cf5e\"\
+  \ />\n\n\n\n\n## Introduction\n\nPollen metabarcoding enables the identification\
+  \ of plant taxa from mixed pollen samples using high-throughput DNA sequencing.\
+  \ These approaches are increasingly used to study pollinator foraging behaviour,\
+  \ plant\u2013pollinator interactions, agricultural landscapes, and ecosystem biodiversity.\n\
+  \n\nThe pollen-metabarcoding pipeline automates the analysis of raw sequencing data,\
+  \ providing a scalable and reproducible workflow from sequencing reads to taxonomic\
+  \ assignments and ecological summary outputs. Built with Nextflow, the workflow\
+  \ can be executed on local workstations, HPC systems, and cloud environments while\
+  \ maintaining full reproducibility.\n\n\n\n\n## Publication\n\nhttps://pubmed.ncbi.nlm.nih.gov/40963187/\n\
+  \n<img width=\"709\" height=\"563\" alt=\"JANE-94-2267-g003\" src=\"https://github.com/user-attachments/assets/0200b516-f87b-45c2-9275-342b03a07968\"\
+  \ />\n\n\n## Installation\n\nNextflow pipelines require a few prerequisites. There\
+  \ is further documentation on the nf-core webpage [here](https://nf-co.re/docs/usage/installation),\
+  \ about how to install Nextflow.\n\n### Prerequisites\n\n- [Docker](https://docs.docker.com/engine/install/)\
+  \ or [Singularity](https://docs.sylabs.io/guides/3.11/admin-guide/installation.html).\n\
   - [Java](https://www.java.com/en/download/help/download_options.html) and [openJDK](https://openjdk.org/install/)\
   \ >= 8 (**Please Note:** When installing Java versions are `1.VERSION` so `Java\
   \ 8` is `Java 1.8`).\n- [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)\
@@ -466,19 +481,20 @@
   \ large, real-world replication testing.\n\n## Contact Us\n\nIf you need any support\
   \ do not hesitate to contact us at any of:\n\n`c.wyatt [at] ucl.ac.uk`\n\n`ecoflow.ucl\
   \ [at] gmail.com`"
-"Eco-Flow/synteny": "# nf-synteny\n\nA simple pipeline to run a macro synteny analysis.\
-  \ \n\nIt is under development, so if you wish to use the pipeline for your own research,\
-  \ please contact us (ecoflow.ucl [at] gmail.com). \nWe can give you the up to date\
-  \ detail for the methods and the up to date figures. When it is published we will\
-  \ release a final version.\n\nSynteny is the study of chromosome arrangement and\
-  \ gene order. Over evolutionary time, two species diverge from the state of the\
-  \ common ancestor, due to a variety of structural changes. These include indels,\
-  \ inversions, translocations, fusions and fissions. This pipeline aims to produce\
-  \ common synteny plots, as well as tables documenting the types of syntenic changes.\n\
-  \nThe pipeline takes a csv (comma separated value) file as input, which contains\
-  \ the species you wish to compare followed by their RefSeq ID. Genomes must be chromosome\
-  \ level assemblies, with a maximum of 50 chromosomes/scaffolds. \n\nThe main pipeline\
-  \ logic is as follows:\n\n![image info](https://raw.githubusercontent.com/Eco-Flow/synteny/main/docs/img/pipeline.png)\n\
+"Eco-Flow/synteny": "# Eco-Flow/synteny\n\nA simple pipeline to run a macro synteny\
+  \ analysis across more distant phylogenetic distances. \n\nIt is under development,\
+  \ so if you wish to use the pipeline for your own research, please contact us (ecoflow.ucl\
+  \ [at] gmail.com). \nWe can give you the up to date detail for the methods and the\
+  \ up to date figures. When it is published we will release a final version.\n\n\
+  Synteny is the study of chromosome arrangement and gene order. Over evolutionary\
+  \ time, two species diverge from the state of the common ancestor, due to a variety\
+  \ of structural changes. These include indels, inversions, translocations, fusions\
+  \ and fissions. This pipeline aims to produce common synteny plots, as well as tables\
+  \ documenting the types of syntenic changes.\n\nThe pipeline takes a csv (comma\
+  \ separated value) file as input, which contains the species you wish to compare\
+  \ followed by their RefSeq ID. Genomes must be chromosome level assemblies, with\
+  \ a maximum of 50 chromosomes/scaffolds. \n\nThe main pipeline logic is as follows:\n\
+  \n![image info](https://raw.githubusercontent.com/Eco-Flow/synteny/main/docs/img/pipeline.png)\n\
   \n* Downloads the genome and gene annotation files `[DOWNLOAD]`.\n* Extract gene\
   \ fasta sequences `[GFFREAD]`.\n* Finds orthologous genes using last `[JCVI]`.\n\
   * Find syntenic block using MCScanX `[SYNTENY]`.\n* **FUTURE**: Plot figures and\
