@@ -92,20 +92,53 @@ Each pipeline is a file in `_pipelines/`, e.g. `_pipelines/my-pipeline.md`:
 ```yaml
 ---
 title: "Eco-Flow/my-pipeline"
+repo: Eco-Flow/my-pipeline        # owner/name on GitHub — see "Live GitHub stats" below
 nav_order: 8                     # controls order in the nav dropdown & lists
 status: Released                 # Released | In development | Early development
 summary: "One sentence shown on the pipeline cards."
 ---
 ```
 
-Then write the full description in Markdown. A new pipeline automatically appears in:
+A new pipeline automatically appears in:
 - the **Pipelines** dropdown in the top navigation,
 - the **featured pipelines** on the homepage,
 - the **/pipelines/** listing, grouped by its `status`.
 
-Use `/img/...` (a leading slash) for images in pipeline pages so they work on every URL.
-The `status` value must be spelled exactly as one of the three options above, or the
-pipeline won't show up in a group on the listing page.
+The `status` value must be spelled exactly as one of the three options above, or the pipeline
+won't show up in a group on the listing page.
+
+**Don't write a Markdown body for a pipeline with a `repo:` field** — the page content is the
+repo's own `README.md`, synced automatically (see below). Anything you type in the body would
+just be overridden by the README on the next sync, since the layout prefers the synced README
+whenever one exists. The one exception is [`_pipelines/about.md`](_pipelines/about.md), which
+has no `repo:` and keeps its own hand-written body, since it's an explainer page, not a single
+pipeline.
+
+If a repo's README isn't ready to show publicly yet (e.g. still full of `TODO nf-core:`
+boilerplate), set `sync_readme: false` in that pipeline's front matter and write a short
+hand-written body instead — see [`_pipelines/gwas.md`](_pipelines/gwas.md) for an example. The
+stats badges (stars, release, updated) still come from the repo as normal; only the page body
+falls back to your Markdown.
+
+### Live GitHub stats and synced README
+
+Any pipeline with a `repo:` field gets:
+- a stats badge (★ stars, latest release tag, last updated date) on its card and its own page,
+  from [`_data/pipelines_meta.yml`](_data/pipelines_meta.yml);
+- its full page content pulled from the repo's `README.md`, from
+  [`_data/pipeline_readmes.yml`](_data/pipeline_readmes.yml) — unless `sync_readme: false`.
+
+Both files are **auto-generated** — don't edit them by hand. They're refreshed nightly by the
+[`sync-pipeline-meta`](.github/workflows/sync-pipeline-meta.yml) GitHub Action (also runnable
+manually from the Actions tab), which runs
+[`scripts/sync_pipeline_meta.py`](scripts/sync_pipeline_meta.py) against the GitHub API for
+every `repo:` value found in `_pipelines/`. The README sync strips the nf-core logo/badges
+header and rewrites relative links/images to absolute GitHub URLs, so it's not quite a 1:1 raw
+dump — but otherwise whatever's in the repo's README (including unfinished `TODO nf-core:`
+boilerplate on early-stage pipelines) is what shows up on the site. **To change a pipeline
+page's content, edit the README in that pipeline's own repo** — it appears here on the next
+nightly sync. A pipeline with no `repo:` field, or no GitHub release yet, just shows whichever
+badges it has data for.
 
 ---
 

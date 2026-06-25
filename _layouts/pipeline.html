@@ -1,15 +1,29 @@
 ---
 layout: default
 ---
+{%- assign meta = site.data.pipelines_meta[page.repo] -%}
+{%- assign readme = site.data.pipeline_readmes[page.repo] -%}
 <div class="page-head">
   <div class="wrap">
     <a class="back-link" href="{{ '/pipelines/' | relative_url }}">← All pipelines</a>
     <h1>{{ page.title }}</h1>
+    {%- if page.repo -%}
+    <div class="pipeline-meta-row">
+      <a href="https://github.com/{{ page.repo }}" target="_blank" rel="noopener">{{ page.repo }} ↗</a>
+      {%- if meta.stars -%}<span>★ {{ meta.stars }}</span>{%- endif -%}
+      {%- if meta.latest_release -%}<span>{{ meta.latest_release }}</span>{%- endif -%}
+      {%- if meta.updated_at -%}<span>Updated {{ meta.updated_at }}</span>{%- endif -%}
+    </div>
+    {%- endif -%}
   </div>
 </div>
 
 <article class="section">
   <div class="wrap prose">
-    {{ content }}
+    {%- if readme and page.sync_readme != false -%}
+      {{ readme | markdownify }}
+    {%- else -%}
+      {{ content }}
+    {%- endif -%}
   </div>
 </article>

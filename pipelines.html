@@ -38,11 +38,18 @@ description: Open, tested and documented Nextflow pipelines for agri-ecology res
       </div>
       <div class="grid grid--3">
         {%- for p in in_group -%}
+        {%- assign meta = site.data.pipelines_meta[p.repo] -%}
         <a class="card pipeline-card" href="{{ p.url | relative_url }}">
           <div class="pipeline-card__top">
             <span class="pipeline-card__name">{{ p.title }}</span>
           </div>
           {%- if p.summary -%}<p>{{ p.summary }}</p>{%- endif -%}
+          {%- if meta -%}
+          <div class="pipeline-card__stats">
+            {%- if meta.stars -%}<span class="stat">★ {{ meta.stars }}</span>{%- endif -%}
+            {%- if meta.latest_release -%}<span class="stat">{{ meta.latest_release }}</span>{%- endif -%}
+          </div>
+          {%- endif -%}
           <span class="chip{% if group == 'Released' %} chip--status{% elsif group == 'In development' %} chip--dev{% else %} chip--early{% endif %}">{{ group }}</span>
         </a>
         {%- endfor -%}

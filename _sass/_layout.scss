@@ -202,7 +202,11 @@
 }
 .footer__partners img { width: auto; display: block; }
 .footer__partners .logo-nextflow { height: 24px; }
-.footer__partners .logo-nfcore   { height: 22px; }
+// nf-core's wordmark sits in the lower half of its source image (the flask
+// icon's stem extends well above it), so centering the raw image box leaves
+// the visible "nf-core" text looking lower than the nextflow wordmark next
+// to it — nudge it up to optically align.
+.footer__partners .logo-nfcore   { height: 32px; transform: translateY(-3px); }
 
 .footer__bottom {
   margin-top: 2.5rem;

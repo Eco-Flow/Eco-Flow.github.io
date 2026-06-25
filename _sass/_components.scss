@@ -177,6 +177,20 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 .pipeline-card__name { font-family: $font-head; font-weight: 600; font-size: 1.1rem; color: $ink; }
 .pipeline-card__src { font-size: .8rem; color: $faint; font-family: $font-mono; }
 .pipeline-card .chip { margin-top: auto; }
+.pipeline-card__stats { display: flex; gap: .8rem; margin-bottom: .6rem; }
+.pipeline-card__stats .stat { font-size: .8rem; color: $faint; font-family: $font-mono; }
+
+.pipeline-meta-row {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: .6rem;
+  font-size: .85rem;
+  color: $faint;
+  font-family: $font-mono;
+
+  a { color: $faint; }
+}
 
 // --- Team / person cards ---------------------------------------------------
 

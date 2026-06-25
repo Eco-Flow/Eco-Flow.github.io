@@ -1,0 +1,1046 @@
+"Eco-Flow/excon": "# EXCON (v2.3.1)\n\nA Nextflow pipeline for gene family **EX**pansion\
+  \ and **CON**traction analysis \nacross multiple species using CAFE5.\n\nGiven a\
+  \ set of genome assemblies and annotations, EXCON builds orthogroups with \nOrthoFinder,\
+  \ fits and compares multiple CAFE models to identify gene families \nevolving at\
+  \ significantly different rates, and automatically selects the \nbest-fitting model\
+  \ for downstream analysis. Optionally, GO enrichment analysis \ncan be run on expanded\
+  \ and contracted gene families, and on genes grouped by \nchromosome.\n\nIt works\
+  \ with any set of species that have a genome (fasta) and annotation (gff) file.\
+  \ \n(minimum of 5 species ideally up to around 30). Maximum 100 species (normally).\
+  \ \n\n## Overview\n\nThe general pipeline logic is as follows:\n\n<img width=\"\
+  398\" alt=\"image\" src=\"https://raw.githubusercontent.com/Eco-Flow/excon/main/docs/images/excon_pipeline.3b.svg\"\
+  \ align=\"right\" />\n\n* Downloads genome and annotation files from NCBI `[NCBIGENOMEDOWNLOAD]`,\
+  \ or you provide your own.\n* Unzips the files, if necessary `[GUNZIP]`\n* Sanitises\
+  \ GFF annotations and extracts longest isoform `[AGAT_SPKEEPLONGESTISOFORM]`.\n\
+  * Gets the protein sequences `[GFFREAD]`.\n* Renames the genes to gene name (as\
+  \ some will be isoform name) `RENAME_FASTA`.\n* Finds orthologous genes across species\
+  \ `[ORTHOFINDER_CAFE]`, or accepts a pre-computed tree and orthogroups to skip this\
+  \ step (see `--input_tree` / `--input_orthogroups`).\n* Rescales OrthoFinder branch\
+  \ lengths and converts to an ultrametric tree for CAFE `[RESCALE_TREE]`, `[CAFE_PREP]`.\n\
+  * Prepares gene count input, estimates the error model, and builds an ultrametric\
+  \ tree `[CAFE_PREP]`.\n* Runs CAFE5 with k=1 to k=`cafe_max_k` (default 6) rate\
+  \ categories in parallel `[CAFE_RUN_K]`.\n* Compares all k runs by AIC and selects\
+  \ the best k `[CAFE_SELECT_K]`.\n* Re-runs CAFE5 at the best k with Poisson birth-death\
+  \ (`-p`) `[CAFE_RUN_BEST]`.\n* Compares uniform vs Poisson model at the best k by\
+  \ likelihood, selects the winner `[CAFE_MODEL_COMPARE]`.\n* Plots gene family expansions\
+  \ and contractions for the best model `[CAFE_PLOT]`.\n\n### Optional \u2014 GO enrichment\
+  \ (`--run_eggnog` or `--predownloaded_gofiles`)\n\n* GO annotation can be run in\
+  \ two ways:\n- **Run EggNOG-mapper** (`--run_eggnog`): assigns GO terms from scratch\
+  \ using the EggNOG database (~45 GB). \n  Provide `--eggnog_data_dir` to reuse a\
+  \ pre-downloaded copy and avoid re-downloading on every run.\n- **Supply your own\
+  \ GO files** (`--predownloaded_gofiles`): if you already have gene-to-GO mappings,\
+  \ \n  point to a directory of `{species_id}.go.txt` files and skip EggNOG entirely\
+  \ (see [Parameters](#go-annotation-optional) below).\n* Optionally downloads the\
+  \ EggNOG-mapper database `[EGGNOG_DOWNLOAD]`. Default is on, unless you provide\
+  \ it.\n* Optionally assigns GO terms to genes using EggNOG-mapper `[EGGNOGMAPPER]`,\
+  \ or reads GO terms from user-supplied files.\n* Optionally prepares GO gene lists\
+  \ from the best CAFE model results `[CAFE_GO_PREP]`.\n* Optionally runs GO enrichment\
+  \ in parallel, one job per species/node \n  and direction (expansion/contraction)\
+  \ `[CAFE_GO_RUN]`.\n\n### Optional \u2014 chromosome GO enrichment (`--chromo_go`,\
+  \ requires GO annotation)\n\n* Optionally plots GO enrichment of genes by chromosome\
+  \ `[CHROMO_GO]`.\n* Optionally summarizes GO enrichment by chromosome `[SUMMARIZE_CHROMO_GO]`.\n\
+  \n### Optional \u2014 genome quality statistics (`--stats`)\n\n* Optionally describes\
+  \ genome assembly and annotation:\n  - `[BUSCO_BUSCO]`: Completeness of the genome\
+  \ compared to expected gene set.\n  - `[QUAST]`: Assembly contiguity statistics\
+  \ (N50 etc).\n  - `[AGAT_SPSTATISTICS]`: Gene, exon, and intron statistics.\n\n\
+  ## Installation\n\nNextflow pipelines require a few prerequisites. There is further\
+  \ documentation on the nf-core webpage [here](https://nf-co.re/docs/usage/installation),\
+  \ about how to install Nextflow.\n\n### Prerequisites\n\n- [Docker](https://docs.docker.com/engine/install/)\
+  \ or [Singularity](https://docs.sylabs.io/guides/3.11/admin-guide/installation.html).\n\
+  - [Java](https://www.java.com/en/download/help/download_options.html) and [openJDK](https://openjdk.org/install/)\
+  \ >= 8 (**Please Note:** When installing Java versions are `1.VERSION` so `Java\
+  \ 8` is `Java 1.8`).\n- [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)\
+  \ >= `v25.10.0`.\n- When running nextflow with this pipeline, ideally run `NXF_VER=25.10.0`\
+  \ beforehand, to ensure functionality on this version.\n\n### Install\n\nTo install\
+  \ the pipeline please use the following commands but replace VERSION with a [release](https://github.com/Eco-Flow/excon/releases).\n\
+  \n`wget https://github.com/Eco-Flow/excon/archive/refs/tags/VERSION.tar.gz -O -\
+  \ | tar -xvf -`\n\nor\n\n`curl -L https://github.com/Eco-Flow/excon/archive/refs/tags/VERSION.tar.gz\
+  \ --output - | tar -xvf -`\n\nThis will produce a directory in the current directory\
+  \ called `excon-VERSION` which contains the pipeline.\n\n## Inputs\n\n### Required\n\
+  \n* `--input /path/to/csv/file` - A singular csv file as input in one of the two\
+  \ formats stated below.\n\nThis csv can take 2 forms:\n* A 2 field csv where each\
+  \ row is a unique species name followed by a Refseq genome reference ID (**NOT**\
+  \ a Genbank reference ID) i.e. `data/input_small-s3.csv`. The pipeline will download\
+  \ the relevant genome fasta file and annotation gff3 (or gff augustus) file.\n*\
+  \ A 3 field csv where each row is a unique species name, followed by an absolute\
+  \ path to a genome fasta file, followed by an absolute path to an annotation gff3\
+  \ (or gff augustus) file. Input can be gzipped (.gz) or not.\n\n**Please Note:**\
+  \ The genome has to be chromosome level not contig level.\n\n2 fields (Name,Refseq_ID):\n\
+  ```\nDrosophila_yakuba,GCF_016746365.2\nDrosophila_simulans,GCF_016746395.2\nDrosophila_santomea,GCF_016746245.2\n\
+  ```\n\n3 fields (Name,genome.fna,annotation.gff):\n```\nDrosophila_yakuba,data/Drosophila_yakuba/genome.fna.gz,data/Drosophila_yakuba/genomic.gff.gz\n\
+  Drosophila_simulans,data/Drosophila_simulans/genome.fna.gz,data/Drosophila_simulans/genomic.gff.gz\n\
+  Drosophila_santomea,data/Drosophila_santomea/genome.fna.gz,data/Drosophila_santomea/genomic.gff.gz\n\
+  ```\n\n> **Note:** Genomes should be chromosome-level, not contig-level. RefSeq\
+  \ IDs must be used (not GenBank IDs).\n\n## Parameters\n\n### Core options\n\n|\
+  \ Parameter | Description | Default |\n|-----------|-------------|---------|\n|\
+  \ `--input` | Path to input CSV file | Required unless using `--input_tree` + `--input_orthogroups`\
+  \ without `--run_eggnog` or `--stats` |\n| `--outdir` | Output directory | `results`\
+  \ |\n| `--groups` | NCBI taxonomy group for genome download (e.g. `insects`, `bacteria`)\
+  \ | `insects` |\n| `--help` | Display help message | `false` |\n| `--custom_config`\
+  \ | Path to a custom Nextflow config file | `null` |\n\n### Quality statistics (optional)\n\
+  \n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--stats` | Run BUSCO, QUAST and AGAT statistics on genomes | `null` |\n| `--busco_lineage`\
+  \ | BUSCO lineage database (e.g. `insecta_odb10`) | `null` |\n| `--busco_mode` |\
+  \ BUSCO mode (`genome`, `proteins`, `transcriptome`) | `null` |\n| `--busco_lineages_path`\
+  \ | Path to local BUSCO lineage databases | `null` |\n| `--busco_config` | Path\
+  \ to BUSCO config file | `null` |\n\n### OrthoFinder options (optional)\n\n| Parameter\
+  \ | Description | Default |\n|-----------|-------------|---------|\n| `--orthofinder_v2`\
+  \ | Use OrthoFinder v2.5.5 instead of v3.1.4. v2 produces Hierarchical Orthogroups\
+  \ (`N0.tsv`) which have lower copy-number variance and are better suited to CAFE5.\
+  \ v3 produces flat orthogroups (`Orthogroups.tsv`). Recommended for large datasets\
+  \ (>30 species) or when CAFE5 fails to converge. | `false` |\n| `--orthofinder_method`\
+  \ | Gene tree inference method: `msa` or `dendroblast` | `msa` |\n| `--orthofinder_search`\
+  \ | Sequence search program: `diamond`, `blast`, or `mmseqs2` | `diamond` |\n| `--orthofinder_msa_prog`\
+  \ | MSA program (requires `--orthofinder_method msa`): `mafft` or `muscle` | `mafft`\
+  \ |\n| `--orthofinder_tree` | Tree inference method (requires `--orthofinder_method\
+  \ msa`): `fasttree`, `raxml`, `raxml-ng`, or `iqtree` | `fasttree` |\n\n> **Note:**\
+  \ `-A` and `-T` are only valid when `-M msa` is set. If you set `--orthofinder_msa_prog`\
+  \ or `--orthofinder_tree` without `--orthofinder_method msa`, OrthoFinder will error.\n\
+  \n### CAFE gene family evolution\n\n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--skip_cafe` | Skip CAFE analysis | `null` |\n| `--cafe_max_k` | Maximum number\
+  \ of k rate categories to test (runs k=1 through k=N in parallel) | `6` |\n| `--cafe_max_differential`\
+  \ | Maximum gene count differential for CAFE filtering on retry | `50` |\n| `--tree_scale_factor`\
+  \ | Factor to multiply all OrthoFinder branch lengths by before `chronos()` converts\
+  \ the tree to a time tree for CAFE5. Lower values can cause numerical issues. |\
+  \ `1000` |\n| `--input_tree` | Path to a pre-computed rooted species tree (Newick\
+  \ format) \u2014 skips OrthoFinder when used with `--input_orthogroups` | `null`\
+  \ |\n| `--input_orthogroups` | Path to a pre-computed `Orthogroups.tsv` from a previous\
+  \ OrthoFinder run \u2014 skips OrthoFinder when used with `--input_tree` | `null`\
+  \ |\n\n> **Skipping OrthoFinder:** OrthoFinder is the slowest step in the pipeline.\
+  \ If you have already run it\n> (the results are in `results/orthofinder_cafe/ortho_cafe/`),\
+  \ you can reuse the outputs.\n> The orthogroups file to pass depends on which version\
+  \ of OrthoFinder was used:\n>\n> **OrthoFinder v2 (`--orthofinder_v2`)** \u2014\
+  \ use `N0.tsv` (Hierarchical Orthogroups):\n> ```\n> --input_tree results/orthofinder_cafe/ortho_cafe/Species_Tree/SpeciesTree_rooted_node_labels.txt\
+  \ \\\n> --input_orthogroups results/orthofinder_cafe/ortho_cafe/Phylogenetic_Hierarchical_Orthogroups/N0.tsv\n\
+  > ```\n>\n> **OrthoFinder v3 (default)** \u2014 use `Orthogroups.tsv` (flat orthogroups):\n\
+  > ```\n> --input_tree results/orthofinder_cafe/ortho_cafe/Species_Tree/SpeciesTree_rooted_node_labels.txt\
+  \ \\\n> --input_orthogroups results/orthofinder_cafe/ortho_cafe/Orthogroups/Orthogroups.tsv\n\
+  > ```\n> Both `--input_tree` and `--input_orthogroups` must be supplied together.\
+  \ If either is omitted, OrthoFinder runs normally.\n\n> **Note on CAFE model selection:**\
+  \ The pipeline runs CAFE5 with k=1 through k=`cafe_max_k` (default 6) \n> rate categories\
+  \ in parallel, then selects the best k by AIC. It then re-runs the best k with the\
+  \ \n> Poisson birth-death option (`-p`) and picks the final model by likelihood.\
+  \ Model selection results \n> (AIC table across k values) are in `results/cafe/model_comparison/`.\
+  \ If scores cannot be parsed \n> (e.g. on very small datasets), the pipeline defaults\
+  \ to the uniform model.\n\n### GO annotation (optional)\n\nGO enrichment requires\
+  \ gene-to-GO mappings. Choose one of the two approaches below \u2014 they are mutually\
+  \ exclusive, and `--run_eggnog` takes priority if both are set.\n\n#### Option A\
+  \ \u2014 Run EggNOG-mapper\n\n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--run_eggnog` | Run EggNOG-mapper to assign GO terms | `false` |\n| `--eggnog_data_dir`\
+  \ | Path to pre-downloaded EggNOG database directory | `null` (downloads ~45 GB\
+  \ automatically) |\n| `--eggnog_target_taxa` | Restrict annotations to orthologs\
+  \ from this taxon and its descendants (NCBI taxon ID) | `null` |\n| `--eggnog_tax_scope`\
+  \ | Taxonomic scope for orthologous group assignment (e.g. `50557` for Insecta)\
+  \ | `null` |\n| `--eggnog_evalue` | Maximum e-value threshold for sequence matches\
+  \ | `null` |\n| `--eggnog_score` | Minimum bitscore threshold for matches | `null`\
+  \ |\n| `--eggnog_pident` | Minimum percent identity (%) | `null` |\n| `--eggnog_query_cover`\
+  \ | Minimum query coverage (%) | `null` |\n| `--eggnog_subject_cover` | Minimum\
+  \ subject coverage (%) | `null` |\n| `--eggnog_rep_species` | Species to use as\
+  \ the representative for the OG annotation summary (must match a species name in\
+  \ the input CSV). Auto-selects the most-annotated species when unset. | `null` (auto)\
+  \ |\n\n> **Note:** The EggNOG database is ~45 GB. We strongly recommend downloading\
+  \ it once and passing `--eggnog_data_dir /path/to/eggnog_data` to avoid re-downloading\
+  \ on every run.\n\n#### Option B \u2014 Supply your own GO files\n\n| Parameter\
+  \ | Description | Default |\n|-----------|-------------|---------|\n| `--predownloaded_gofiles`\
+  \ | Path to a directory of pre-computed gene-to-GO mapping files | `null` |\n\n\
+  The directory must contain one file per species, named `{species_id}.go.txt` where\
+  \ `species_id` matches the species names in your input CSV. Each file is a two-column,\
+  \ tab-separated file with one gene\u2013GO pair per line:\n\n```\ngeneA    GO:0006412\n\
+  geneA    GO:0008150\ngeneB    GO:0003674\n```\n\nThis lets you skip EggNOG entirely\
+  \ if you already have GO annotations (e.g. from a previous run, a public database,\
+  \ or another annotation tool).\n\n### GO enrichment analysis (optional, requires\
+  \ GO annotation)\n\n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--chromo_go` | Run GO enrichment analysis by chromosome | `null` |\n| `--go_cutoff`\
+  \ | P-value cutoff for GO enrichment | `0.05` |\n| `--go_type` | GO test type (e.g.\
+  \ `none`) | `none` |\n| `--go_max_plot` | Maximum number of GO terms to plot | `10`\
+  \ |\n| `--go_algo` | topGO algorithm and statistic (`classic_fisher`, `weight01_t`,\
+  \ `elim_ks`, `weight_ks`). Results are written to a subfolder named after all three\
+  \ GO settings (e.g. `cafe_go/weight01_t_cutoff0.05_typenone/`), so running with\
+  \ different values preserves all results. | `classic_fisher` |\n\n### Resource limits\n\
+  \n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--max_memory` | Maximum memory per job | `128.GB` |\n| `--max_cpus` | Maximum\
+  \ CPUs per job | `16` |\n| `--max_time` | Maximum runtime per job | `240.h` |\n\n\
+  ## Profiles\n\n| Profile | Description |\n|---------|-------------|\n| `docker`\
+  \ | Run with Docker containers |\n| `singularity` | Run with Singularity containers\
+  \ |\n| `conda` | Run with Conda environments |\n| `test_bacteria` | Test run with\
+  \ small bacterial genomes |\n| `test_small` | Test run with small insect genomes\
+  \ |\n\n\n## Profiles\n\nThis pipeline is designed to run in various modes that can\
+  \ be supplied as a comma separated list i.e. `-profile profile1,profile2`.\n\n###\
+  \ Container Profiles\n\nPlease select one of the following profiles when running\
+  \ the pipeline.\n\n* `docker` - This profile uses the container software Docker\
+  \ when running the pipeline. This container software requires root permissions so\
+  \ is used when running on cloud infrastructure or your local machine (depending\
+  \ on permissions). **Please Note:** You must have Docker installed to use this profile.\n\
+  * `singularity` - This profile uses the container software Singularity when running\
+  \ the pipeline. This container software does not require root permissions so is\
+  \ used when running on on-premise HPCs or you local machine (depending on permissions).\
+  \ **Please Note:** You must have Singularity installed to use this profile.\n* `apptainer`\
+  \ - This profile uses the container software Apptainer when running the pipeline.\
+  \ This container software does not require root permissions so is used when running\
+  \ on on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
+  \ You must have Apptainer installed to use this profile.\n\n### Optional Profiles\n\
+  \n* `local` - This profile is used if you are running the pipeline on your local\
+  \ machine.\n* `aws_batch` - This profile is used if you are running the pipeline\
+  \ on AWS utilising the AWS Batch functionality. **Please Note:** You must use the\
+  \ `Docker` profile with with AWS Batch.\n* `test_small` - This profile is used if\
+  \ you want to test running the pipeline on your infrastructure, running from predownloaded\
+  \ go files. **Please Note:** You do not provide any input parameters if this profile\
+  \ is selected but you still provide a container profile.\n* `test_biomart` - This\
+  \ profile is used if you want to test running the pipeline on your infrastructure,\
+  \ running from the biomart input. **Please Note:** You do not provide any input\
+  \ parameters if this profile is selected but you still provide a container profile.\n\
+  \n## Custom Configuration\n\nIf you want to run this pipeline on your institute's\
+  \ on-premise HPC or specific cloud infrastructure then please contact us and we\
+  \ will help you build and test a custom config file. This config file will be published\
+  \ to our [configs repository](https://github.com/Eco-Flow/configs). \n\n## Running\
+  \ the Pipeline\n\n**Please note:** The `-resume` flag uses previously cached successful\
+  \ runs of the pipeline.\n\n1. Example run the full test example data:\n\n```\nNXF_VER=25.04.8\
+  \ # Is latest it is tested on\nnextflow run main.nf -resume -profile docker,test_small\n\
+  ```\n\n*Settings in test_small:*\ninput = \"input_small-s3.csv\"\n\nFor the fastest\
+  \ run use: `nextflow run main.nf -resume -profile docker,test_bacteria`\n\n2. To\
+  \ run on your own data (minimal run), cafe only. \n\n```\n# NXF_VER=25.04.8  \n\
+  nextflow run main.nf -resume -profile docker --input data/input_small-s3.csv\n```\n\
+  \n3. To run with cafe and GO analysis\n\n```\n# NXF_VER=25.04.8\nnextflow run main.nf\
+  \ -resume -profile docker --input data/input_small-s3.csv --chromo_go --go_type\
+  \ bonferoni --stats --run_eggnog --eggnog_data_dir /path/to/eggnogdb \n```\n\n4.\
+  \ To run with CAFE and GO analysis using your own pre-computed GO files (skips EggNOG):\n\
+  \n```\n# NXF_VER=25.04.8\nnextflow run main.nf -resume -profile docker --input data/input_small-s3.csv\
+  \ --predownloaded_gofiles /path/to/go_files/\n```\n\nThe `go_files/` directory should\
+  \ contain one `{species_id}.go.txt` per species (tab-separated `gene_id<TAB>GO:term`,\
+  \ one pair per line).\n\n5. To reuse a previous OrthoFinder run (skips the slow\
+  \ OrthoFinder step). Or to use tree/table from another source use:\n\nOrthoFinder\
+  \ v3 (default):\n```\n# NXF_VER=25.04.8\nnextflow run main.nf -resume -profile docker\
+  \ \\\n  --input data/input_small-s3.csv \\\n  --input_tree results/orthofinder_cafe/ortho_cafe/Species_Tree/SpeciesTree_rooted_node_labels.txt\
+  \ \\\n  --input_orthogroups results/orthofinder_cafe/ortho_cafe/Orthogroups/Orthogroups.tsv\n\
+  ```\n\nOrthoFinder v2 (`--orthofinder_v2`):\n```\n# NXF_VER=25.04.8\nnextflow run\
+  \ main.nf -resume -profile docker \\\n  --input data/input_small-s3.csv \\\n  --input_tree\
+  \ results/orthofinder_cafe/ortho_cafe/Species_Tree/SpeciesTree_rooted_node_labels.txt\
+  \ \\\n  --input_orthogroups results/orthofinder_cafe/ortho_cafe/Phylogenetic_Hierarchical_Orthogroups/N0.tsv\n\
+  ```\n\n## Output Structure\n\n> For a detailed description of outputs with example\
+  \ figures, see the **[Output Guide](https://github.com/Eco-Flow/excon/blob/main/docs/outputs.md)**.\n\
+  ```\nresults/\n\u251C\u2500\u2500 cafe/\n\u2502   \u251C\u2500\u2500 base/     \
+  \                   # CAFE_PREP outputs\n\u2502   \u2502   \u251C\u2500\u2500 hog_gene_counts.tsv\
+  \      # Filtered gene count input to CAFE\n\u2502   \u2502   \u251C\u2500\u2500\
+  \ hog_filtering_report.tsv # Filtering report (only present if retry triggered)\n\
+  \u2502   \u2502   \u2514\u2500\u2500 SpeciesTree_rooted_ultra.txt  # Ultrametric\
+  \ tree used by CAFE5\n\u2502   \u251C\u2500\u2500 best/                        #\
+  \ Full CAFE5 results for the winning model (uniform or Poisson)\n\u2502   \u251C\
+  \u2500\u2500 large_families/              # CAFE run on high-differential families\
+  \ (retry path only)\n\u2502   \u2514\u2500\u2500 model_comparison/\n\u2502     \
+  \  \u251C\u2500\u2500 cafe_model_comparison.tsv # Uniform vs Poisson comparison\
+  \ at best k\n\u2502       \u2514\u2500\u2500 best_model.txt            # \"uniform\"\
+  \ or \"poisson\"\n\u251C\u2500\u2500 cafe_plot/\n\u2502   \u2514\u2500\u2500 cafe_plotter/\
+  \                # Expansion/contraction plots for best model\n\u251C\u2500\u2500\
+  \ cafe_go/\n\u2502   \u2514\u2500\u2500 <algo>_cutoff<val>_type<val>/  # One subfolder\
+  \ per GO parameter combination\n\u2502       \u251C\u2500\u2500 CAFE_summary.txt\
+  \           # Summary of expansions/contractions per branch\n\u2502       \u251C\
+  \u2500\u2500 *_TopGo_results_ALL.tab    # TopGO results per target\n\u2502     \
+  \  \u251C\u2500\u2500 TopGO_barplot_*.pdf        # Bar chart per target (ggplot2,\
+  \ full GO names)\n\u2502       \u251C\u2500\u2500 TopGO_dotplot_*.pdf        # Dot\
+  \ plot per target (fold enrichment x significance)\n\u2502       \u251C\u2500\u2500\
+  \ TopGO_Pval_barplot_*.pdf   # Legacy barplots (base R)\n\u2502       \u251C\u2500\
+  \u2500 Go_summary_pos.pdf         # Summary plot across all expansions\n\u2502 \
+  \      \u251C\u2500\u2500 Go_summary_neg.pdf         # Summary plot across all contractions\n\
+  \u2502       \u251C\u2500\u2500 Go_summary_pos_noNode.pdf  # As above, terminal\
+  \ branches only\n\u2502       \u2514\u2500\u2500 Go_summary_neg_noNode.pdf\n\u251C\
+  \u2500\u2500 chromo_go/                         # [optional] GO enrichment by chromosome\n\
+  \u2502   \u2514\u2500\u2500 <algo>_cutoff<val>_type<val>/  # One subfolder per GO\
+  \ parameter combination\n\u2502       \u251C\u2500\u2500 *.pdf                 \
+  \     # Per-chromosome GO plots\n\u2502       \u2514\u2500\u2500 summary/      \
+  \             # Summarized results across chromosomes\n\u251C\u2500\u2500 eggnogmapper/\n\
+  \u2502   \u251C\u2500\u2500 *.emapper.annotations        # Raw EggNOG-mapper annotation\
+  \ files (one per species)\n\u2502   \u251C\u2500\u2500 OG_annotation_summary.tsv\
+  \    # Per-orthogroup functional summary (description, COG, KEGG, PFAM)\n\u2502\
+  \   \u2514\u2500\u2500 go_files/                    # Per-species GO annotation\
+  \ files\n\u251C\u2500\u2500 gffread/\n\u2502   \u2514\u2500\u2500 *.fasta      \
+  \                # Protein sequences per species\n\u251C\u2500\u2500 ncbigenomedownload/\n\
+  \u2502   \u251C\u2500\u2500 *.fna.gz                     # Downloaded genome assemblies\n\
+  \u2502   \u2514\u2500\u2500 *.gff.gz                     # Downloaded annotations\n\
+  \u251C\u2500\u2500 orthofinder_cafe/\n\u2502   \u2514\u2500\u2500 ortho_cafe/  \
+  \                # OrthoFinder results including species tree\n\u251C\u2500\u2500\
+  \ busco/                           # [optional, --stats] BUSCO completeness results\n\
+  \u251C\u2500\u2500 agat/                            # [optional, --stats] AGAT annotation\
+  \ statistics\n\u251C\u2500\u2500 quast/                           # [optional, --stats]\
+  \ Assembly contiguity statistics\n\u2514\u2500\u2500 pipeline_info/\n    \u251C\u2500\
+  \u2500 execution_report_*.html      # Nextflow execution report\n    \u251C\u2500\
+  \u2500 execution_timeline_*.html    # Per-process timeline\n    \u251C\u2500\u2500\
+  \ execution_trace_*.txt        # Per-task resource usage\n    \u251C\u2500\u2500\
+  \ pipeline_dag_*.html          # Pipeline DAG diagram\n    \u2514\u2500\u2500 software_versions.yml\
+  \        # Versions of all tools used\n```\n\n\n\n## Citation\n\nThis pipeline is\
+  \ published on Workflowhub using the nf-core template. If you use this pipeline\
+  \ in you work, the following citations are essential:\n\nexcon:\nWyatt, C. (2026).\
+  \ Gene EXpansion and CONtraction analysis pipeline. WorkflowHub. https://doi.org/10.48546/WORKFLOWHUB.WORKFLOW.2141.8\n\
+  \nnf-core:\nPhilip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes\
+  \ Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.\n\
+  Nat Biotechnol. 2020 Feb 13. doi: 10.1038/s41587-020-0439-x.\n\nIf you used any\
+  \ of these tools within the pipeline, you must also cite:\n\nCAFE:\nF\xE1bio K Mendes,\
+  \ Dan Vanderpool, Ben Fulton, Matthew W Hahn, CAFE 5 models variation in evolutionary\
+  \ rates among gene families, \nBioinformatics, 2020; btaa1022, https://doi.org/10.1093/bioinformatics/btaa1022\n\
+  \nOrthofinder:\nEmms, D.M. and Kelly, S. (2019) OrthoFinder: phylogenetic orthology\
+  \ inference for comparative genomics. \nGenome Biology 20:238\n\nAGAT:\nDainat J.\
+  \ 2022. Another Gtf/Gff Analysis Toolkit (AGAT): Resolve interoperability issues\
+  \ and accomplish more with your annotations. Plant and Animal Genome XXIX Conference.\
+  \ https://github.com/NBISweden/AGAT.\n\neggNOG-mapper (if used):\nCarlos P Cantalapiedra,\
+  \ Ana Hern\xE1ndez-Plaza, Ivica Letunic, Peer Bork, Jaime Huerta-Cepas, eggNOG-mapper\
+  \ v2: Functional Annotation, Orthology Assignments, and Domain Prediction at the\
+  \ Metagenomic Scale, Molecular Biology and Evolution, Volume 38, Issue 12, December\
+  \ 2021, Pages 5825\u20135829, https://doi.org/10.1093/molbev/msab293\n\nA full list\
+  \ of tools and their versions are found in the `software_versions.yml` in the `results/pipeline_info`.\
+  \ So ensure to look here for any additional tools you need to cite.\n\nFor the --stats\
+  \ module, you would need to cite BUSCO, Quast, AGAT\n\n## Contact Us\n\nIf you need\
+  \ any support do not hesitate to contact us at any of:\n\n`c.wyatt [at] ucl.ac.uk`\
+  \ \n\n`ecoflow.ucl [at] gmail.com`"
+"Eco-Flow/nanoporemetabarcoding": "## Introduction\n\n**nf-core/nanoporemetabarcoding**\
+  \ is a bioinformatics pipeline for processing nanopore metabarcoding data.\n\nOverview:\n\
+  \n![pipeline_diagram](https://raw.githubusercontent.com/Eco-Flow/nanoporemetabarcoding/dev/docs/images/pipeline_overview.png)\n\
+  \nSteps:\n\n<!-- TODO nf-core:\n   Complete this sentence with a 2-3 sentence summary\
+  \ of what types of data the pipeline ingests, a brief overview of the\n   major\
+  \ pipeline sections and the types of output it produces. You're giving an overview\
+  \ to someone new\n   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction\n\
+  -->\n\n<!-- TODO nf-core: Include a figure that guides the user through the major\
+  \ workflow steps. Many nf-core\n     workflows use the \"tube map\" design for that.\
+  \ See https://nf-co.re/docs/community/brand/workflow-schematics#examples for examples.\
+  \   -->\n<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps\
+  \ in the pipeline -->\n\n1. Filtering and trimming ([`NanoFilt`](https://github.com/wdecoster/nanofilt))\n\
+  2. Read QC ([`NanoPlot`](https://github.com/wdecoster/NanoPlot))\n   - Ran on both\
+  \ raw and filtered and trimmed reads\n3. Tags+primer based demultiplexing and trimming\
+  \ ([`Cutadapt`](https://github.com/marcelm/cutadapt)). Divided in two steps:\n \
+  \  1. First, demultiplexing based on the forward tags-primers\n   2. Then, demultiplexing\
+  \ based on matching reverse tags-primers (combination of forward and reverse tags-primers)\n\
+  4. Group amplicons reads into \"species\" (consensus sequences) ([`amplicon_sorter`](https://github.com/avierstr/amplicon_sorter))\n\
+  5. Consensus sequence correction ([`Medaka`](https://github.com/nanoporetech/medaka))\n\
+  \   - Correction using the consensus sequence from aplicon_sorter as reference and\
+  \ the grouped amplicon reads as the basecalled data\n6. Create custom BLAST database\
+  \ ([`makeblastdb`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n7. Consensus\
+  \ sequence annotation based on database ([`blastn`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n\
+  \   - Annotation is based on the best blast hit per consensus. And best blast hit\
+  \ is based on:\n     1. First on the bit score\n     2. Second on the e-value\n\
+  8. Assign taxonomy to blast hits using taxonomizr ([`taxonomizr`](https://github.com/sherrillmix/taxonomizr)).\
+  \ Only works with NCBI accessions (GenBank and RefSeq). If an ASV has multiple hits\
+  \ with the same top bitscore, e-value, and percent identity, the lowest common taxonomic\
+  \ rank across all hits is assigned.\n\n<!-- 1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))2.\
+  \ Present QC for raw reads ([`MultiQC`](http://multiqc.info/)) -->\n\n## Usage\n\
+  \n> [!NOTE]\n> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/get_started/environment_setup/overview)\
+  \ on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/get_started/run-your-first-pipeline)\
+  \ with `-profile test` before running the workflow on actual data.\n\nTo use nanoporemetabarcoding,\
+  \ first clone this repo:\n\n```bash\ngit clone https://github.com/Eco-Flow/nanoporemetabarcoding.git\n\
+  ```\n\nBefore running nanoporemetabarcoding on your data, you can test if the pipeline\
+  \ is suited to your setup by running:\n\n```bash\nnextflow run main.nf \\\n   -profile\
+  \ test,<docker/singularity/conda/.../institute> \\\n   --outdir <OUTDIR>\n```\n\n\
+  The running time should be around 8 minutes on a machine with 12 cpus/threads.\n\
+  \n<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline,\
+  \ e.g. how to prepare samplesheets.\n     Explain what rows and columns represent.\
+  \ For instance (please edit as appropriate):\n-->\n\nFor running the pipleine on\
+  \ your data, prepare a samplesheet with your input FASTQs that looks as follows:\n\
+  \n```csv\nid,fastq\nfastq_id_1,path/to/reads1.fastq.gz\nfastq_id_2,path/to/reads2.fastq.gz\n\
+  ...\n```\n\nThe first column represents the FASTQ id (e.g. plate number if the FASTQ\
+  \ represents a single plate), and the second the location to the FASTQ file.\n\n\
+  Now, you can run the pipeline using:\n\n<!-- TODO nf-core: update the following\
+  \ command to include all required parameters for a minimal example -->\n\n```bash\n\
+  nextflow run main.nf \\\n   -profile <docker/singularity/.../institute> \\\n   --input\
+  \ samplesheet.csv \\\n   --outdir <OUTDIR>\n```\n\n> [!WARNING]\n> Please provide\
+  \ pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config\
+  \ files including those provided by the `-c` Nextflow option can be used to provide\
+  \ any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/running/run-pipelines#using-parameter-files).\n\
+  \n<!-- For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/nanoporemetabarcoding/usage)\
+  \ and the [parameter documentation](https://nf-co.re/nanoporemetabarcoding/parameters).\
+  \ -->\n\n## Parameters\n\nCheck the config file `nextflow.config` in the params\
+  \ block and fill in the parameters with the proper values:\n\n**Input options:**\n\
+  \nYou can optionally provide a metadata file in CSV format with the primer-tag combination\
+  \ in the first column and the corresponding sample name in the second column:\n\n\
+  ```\n    // Metadata with primer combinations\n    metadata                   =\
+  \ path/to/metadata.csv\n```\n\nThe strucutre of the CSV should be as follows:\n\n\
+  ```\nid,primer_comb,sample\nfastq_id_1,<forward-primer-tag-id>_<forward-primer-tag-id>,sample1\n\
+  fastq_id_2,<forward-primer-tag-id>_<forward-primer-tag-id>,sample2\n...\n```\n\n\
+  > [!NOTE]\n> If <forward-primer-tag-id> and/or <forward-primer-tag-id> in the metadata\
+  \ samplesheet don't match the ids in the primer-tag FASTA files, demultiplexing\
+  \ won't work. Make sure they have the exact same name.\n\nThe id of the metadata\
+  \ should match the id of the samplesheet (see [usage](#usage)), and values for the\
+  \ `primer_comb` and `sample` fields should be unique within id groups. See `./test_data/metadata.csv`\
+  \ for an example. If set to `null` (value by default), the pipeline will use the\
+  \ primer-tag combination as the sample ID in the final ASV table.\n\n**Demultiplex\
+  \ options:**\n\n1. List of forward primer-tag combinations in FASTA format:\n\n\
+  ```\n    // Cutadapt options\n    tags_f                      = 'path/to/forward/primer-tag.fasta'\
+  \ // List of forward primer-tag combinations in fasta format\n```\n\n2. List of\
+  \ reverse primer-tag combinations in FASTA format:\n\n```\n    tags_r          \
+  \            = 'path/to/reverse/primer-tag.fasta' // List of forward primer-tag\
+  \ combinations in fasta format\n```\n\n3. Set the error rate for adapter removal.\
+  \ This can be a value between 0 and 1 (1 not included) if a maximum error rate wants\
+  \ to be applied to all adapters, or it can be equal or greater than 1, in which\
+  \ case it will be converted to a maximum error rate depending on the adapter length.\
+  \ Check [cutadatpt documentation](https://cutadapt.readthedocs.io/en/stable/guide.html)\
+  \ for more information:\n\n```\n    error_rate                  = 2 // Error rate\
+  \ for adapter removal\n```\n\n4. Primer-tag overlap. To calculate mismatches with\
+  \ the `--error-rate` option, cutadapt considers only the aligned region (overlap)\
+  \ between primer and read. The minimum length of this overlap is set by the `--overlap`\
+  \ option. For example, with an error rate of 0.2 (20%) and a 20 bp primer, if the\
+  \ required overlap is 10 bp and there are 3 mismatches in that region, the match\
+  \ is rejected because the mismatch rate is 3/10 = 30%, which is above the 20% threshold.\
+  \ But if the overlap is 20 bp and there are 3 mismatches, the match is accepted\
+  \ because the mismatch rate is 3/20 = 15%, which is below the 20% threshold. If\
+  \ your primers are very similar, it is often best to set `--overlap` to at least\
+  \ the length of the longest primer to avoid spurious matches.\n\n**Nanofilt options:**\n\
+  \nNanofilt is run before demultiplexing and tag+primer trimming:\n\n```\n    //\
+  \ Nanofilt options\n    nano_quality                = null // Minimun read quality\
+  \ (phred score)\n    nano_read_length            = 250 // Minimum reads length\n\
+  ```\n\n4. Filter FASTQs with a mumber of reads equal or lower than (changing this\
+  \ value is not recommended):\n\n```\n    filt_fastq                  = 0\n```\n\n\
+  Check `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta` for examples\
+  \ of `tags_f` and `tags_r` files, respectively.\n\n**Blast options:**\n\n1. Path\
+  \ to an already built blast database:\n\n```\n    blast_db                   = 'path/to/blast.db'\
+  \ // Path to already built database\n```\n\n2. Or build a local BLAST database from\
+  \ a collection of sequences:\n\n```\n    custom_db                  = 'path/to/local/database.fasta'\
+  \ // Path to database to be built\n```\n\n3. The E value describes the number of\
+  \ one can \u201Cexpect\u201D to see by chance when searching a database of a particular\
+  \ size. The lower the value, the more significant a match is:\n\n```\n    evalue\
+  \                     = 0.001 // evalue cutoff\n```\n\n4. Maximum number of hits\
+  \ per query (consensus sequence):\n\n```\n    max_target_seqs            = 5 //\
+  \ Maximum number of hits per query\n```\n\n5. Maximum number of high-scoring segment\
+  \ pairs (HSPs) per subject (sequence in the database):\n\n```\n    max_hsps    \
+  \               = null // Maximum number of HSPs per subject (subjects in the database)\n\
+  ```\n\n6. Minimum query (consensus sequence) coverage per HSP:\n\n```\n    qcov_hsp_perc\
+  \              = 90 // Minimum query coverage per HSP\n```\n\nFor more details,\
+  \ check the appendix section of the [blast documentation](https://www.ncbi.nlm.nih.gov/books/NBK279690/).\n\
+  \n<!-- You should supply **either** the path to an already built database or a custom\
+  \ FASTA collection with sequences to built a custom one. If both are supplied the\
+  \ pipeline will fail. -->\n\n**Assign taxonomy options:**\n\n1. Assign taxonomy\
+  \ at different levels based on an identity threshold:\n\n```\n    // Assign taxonomy\
+  \ options\n    spident                     = null // Identity threshold (in %) for\
+  \ taxonomy assignment at species level. If not set, the value by default will be\
+  \ 99. Set to > 100 if not wanting to assign species\n    gpident               \
+  \      = null // Identity threshold (in %) for taxonomy assignment at genus level.\
+  \ If not set, the value by default will be 90\n    fpident                     =\
+  \ null // Identity threshold (in %) for taxonomy assignment at family level. If\
+  \ not set, the value by default will be 80\n    opident                     = null\
+  \ // Identity threshold (in %) for taxonomy assignment at order level. If not set,\
+  \ the value by default will be 70\n```\n\n2. Path to `taxonomizr` SQL database:\n\
+  \n```\n    sql_db                      = 'path/to/taxonomizr/database.sqlite' //\
+  \ Path to the taxonomizr SQLite database\n```\n\n**Command line arguments:**\n\n\
+  Alternatively, instead of modifying the `nextflow.config` file, you can provide/modify\
+  \ pipeline options by specifying them as command line arguments. For example:\n\n\
+  ```bash\nnextflow run main.nf \\\n   -profile <docker/singularity/.../institute>\
+  \ \\\n   --input samplesheet.csv \\\n   --outdir <OUTDIR>\n   --nano_quality 10\n\
+  \   --evalue 1e-10\n   --tags_f path/to/forward/tags+primers.fasta\n   --tags_r\
+  \ path/to/reverse/tags+primers.fasta\n   ...\n```\n\n## Pipeline output\n\n<!--\
+  \ To see the results of an example test run with a full size dataset refer to the\
+  \ [results](https://nf-co.re/nanoporemetabarcoding/results) tab on the nf-core website\
+  \ pipeline page.\nFor more details about the output files and reports, please refer\
+  \ to the\n[output documentation](https://nf-co.re/nanoporemetabarcoding/output).\
+  \ -->\n\n<!-- For an example of some of the relevant results check the `./results`\
+  \ folder in this repo. -->\n\nThe files listed below will be created in the results\
+  \ directory (set by `--outdir`) after the pipeline has finished. All paths are relative\
+  \ to the top-level results directory.\n\n### Quality reports\n\n#### Nanoplot\n\n\
+  [`NanoPlot`](https://github.com/wdecoster/NanoPlot) is a tool that outputs QC reports\
+  \ for raw, filtered -after nanofilt-, and demultiplexed reads. Nanoplot reports\
+  \ are store inside the nanoplot folder, and come in different formats.\n\n<details\
+  \ markdown=\"1\">\n<summary>Output files</summary>\n\n- `nanoplot/`\n  - `raw/<fastq_id>`:\
+  \ Folder that contains the raw reads quality report.\n  - `filtered/<fastq_id>`:\
+  \ Folder contains the filtered -after nanofilt- reads quality report.\n  - `demultiplexed/<fastq_id>/<sample_id>`:\
+  \ Contains the duemultiplexed reads quality report.\n\n</details>\n\n#### Multiqc\n\
+  \n[MultiQC](http://multiqc.info) is a visualization tool that generates a single\
+  \ HTML report summarising all of the NanoPlot QC results for raw, filtered, demultiplexed\
+  \ reads. Most of the pipeline QC results are visualised in the report and further\
+  \ statistics are available in the report data directory.\n\n<details markdown=\"\
+  1\">\n<summary>Output files</summary>\n\n- `multiqc/`\n  - `multiqc_report.html`:\
+  \ a standalone HTML file that can be viewed in your web browser.\n  - `multiqc_data/`:\
+  \ directory containing parsed statistics from the different tools used in the pipeline.\n\
+  \  - `multiqc_plots/`: directory containing static images from the report in various\
+  \ formats.\n\n</details>\n\n### Taxonomy assignment\n\nEach consensus sequence (ASV)\
+  \ is assigned a taxon using a two-step approach:\n\n1. **Rank assignment by percent\
+  \ identity**: each BLAST hit is assigned to a taxonomic rank based on percent identity\
+  \ thresholds (species, genus, family, order) (see options **Assign taxonomy options:**\
+  \ in the [Parameters](#parameters) section).\n2. **Last Common Rank (LCR) consensus**:\
+  \ because each ASV can have multiple BLAST hits, the final taxon is resolved by\
+  \ finding the most specific rank at which all hits agree. If hits disagree at the\
+  \ assigned rank, the pipeline falls back to progressively coarser ranks (genus \u2192\
+  \ family \u2192 order \u2192 class \u2192 phylum) until a consensus is reached.\
+  \ If no consensus can be found, the ASV is labelled `Unassigned`.\n\nThe final output\
+  \ is `ASV_taxa_final.csv`, one row per ASV, with the following columns:\n\n- `ASV`:\
+  \ ASV identifier.\n- `sample_name`: Sample name, derived from the combination of\
+  \ FASTQ id and sample id.\n- `read_count`: Number of reads assigned to the ASV.\n\
+  - `pident`: Mean percent identity of the best BLAST alignment.\n- `length`: Mean\
+  \ alignment length.\n- `mismatch`: Mean number of mismatched positions in the alignment\
+  \ (excluding gaps).\n- `evalue`: Expect value \u2014 the lower, the more significant\
+  \ the match. Depends on database size.\n- `bitscore`: Bit score \u2014 the higher,\
+  \ the better the alignment. Independent of database size.\n- `taxaId`: NCBI taxonomy\
+  \ ID of the matched sequence.\n- `phylum`, `class`, `order`, `family`, `genus`,\
+  \ `species`: Full taxonomic lineage of the matched sequence.\n- `Resolved.taxon`:\
+  \ Final consensus taxon assigned to the ASV. A trailing `*` indicates that one or\
+  \ more BLAST hits for the same ASV had no taxonomy in the database and were excluded\
+  \ from the LCR resolution. This ASV can be classified as `Unasigned` instead for\
+  \ a more conservative approach.\n\n`ASV_table_pre-assigned.csv` contains the per-hit\
+  \ taxonomy assignments before LCR consensus resolution \u2014 one row per BLAST\
+  \ hit rather than one row per ASV.\n\n<details markdown=\"1\">\n<summary>Output\
+  \ files</summary>\n\n- `assign_taxa/`\n  - `<fastq_id>/ASV_taxa_final.csv`: Taxonomy\
+  \ resolved ASV table with reads counts.\n  - `<fastq_id>/ASV_taxa_final.csv`: Per-hit\
+  \ ASV table pre-taxonomy assignment.\n  <!--  - `<fastq_id>/ASV_taxa.csv`: ASV table.\n\
+  \  - `<fastq_id>/ASV_filtered.csv`: ASV table with the assigned taxonomic rank according\
+  \ to the percetage identity parameters (see [Parameters](#parameters) section).\
+  \ -->\n\n</details>\n\n## Credits\n\nnf-core/nanoporemetabarcoding was originally\
+  \ written by Fernando Duarte, Chris Wyatt.\n\nWe thank the following people for\
+  \ their extensive assistance in the development of this pipeline:\n\n<!-- TODO nf-core:\
+  \ If applicable, make list of people who have also contributed -->\n\n## Contributions\
+  \ and Support\n\nIf you would like to contribute to this pipeline, please see the\
+  \ [contributing guidelines](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/dev/docs/CONTRIBUTING.md).\n\
+  \nFor further information or help, don't hesitate to get in touch on the [Slack\
+  \ `#nanoporemetabarcoding` channel](https://nfcore.slack.com/channels/nanoporemetabarcoding)\
+  \ (you can join with [this invite](https://nf-co.re/join/slack)).\n\n## Citations\n\
+  \n<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines\
+  \ below and update Zenodo doi and badge at the top of this file. -->\n<!-- If you\
+  \ use nf-core/nanoporemetabarcoding for your analysis, please cite it using the\
+  \ following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX)\
+  \ -->\n\n<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline\
+  \ -->\n\nAn extensive list of references for the tools used by the pipeline can\
+  \ be found in the [`CITATIONS.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/dev/CITATIONS.md)\
+  \ file.\n\nYou can cite the `nf-core` publication as follows:\n\n> **The nf-core\
+  \ framework for community-curated bioinformatics pipelines.**\n>\n> Philip Ewels,\
+  \ Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm,\
+  \ Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.\n>\n> _Nat Biotechnol._\
+  \ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x)."
+"Eco-Flow/pollen-metabarcoding": "# nf-pollen-metabarcoding\nA pipeline developed\
+  \ in collaboration with Exeter University\n\n## Installation\n\nNextflow pipelines\
+  \ require a few prerequisites. There is further documentation on the nf-core webpage\
+  \ [here](https://nf-co.re/docs/usage/installation), about how to install Nextflow.\n\
+  \n### Prerequisites\n\n- [Docker](https://docs.docker.com/engine/install/) or [Singularity](https://docs.sylabs.io/guides/3.11/admin-guide/installation.html).\n\
+  - [Java](https://www.java.com/en/download/help/download_options.html) and [openJDK](https://openjdk.org/install/)\
+  \ >= 8 (**Please Note:** When installing Java versions are `1.VERSION` so `Java\
+  \ 8` is `Java 1.8`).\n- [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)\
+  \ >= `v24.04.1`.\n\n### Install\n\nTo install the pipeline please use the following\
+  \ commands but replace VERSION with a [release](https://github.com/Eco-Flow/pollen-metabarcoding/releases).\n\
+  \n`wget https://github.com/Eco-Flow/pollen-metabarcoding/archive/refs/tags/VERSION.tar.gz\
+  \ -O - | tar -xvf -`\n\nor\n\n`curl -L https://github.com/Eco-Flow/pollen-metabarcoding/archive/refs/tags/VERSION.tar.gz\
+  \ --output - | tar -xvf -`\n\nThis will produce a directory in the current directory\
+  \ called `pollen-metabarcoding-VERSION` which contains the pipeline.\n\n## Inputs\n\
+  \n### Required\n\n* `--input` - Path to a comma-separated file containing sample\
+  \ id and either path to the fastq(s) or an SRA ID. Each row contains information\
+  \ on a singular sample.\n* `--database` - Path to database fasta file to be used\
+  \ in vsearch sintax module.\n* `--outdir` - Path to the output directory where the\
+  \ results will be saved (you have to use absolute paths to storage on cloud infrastructure)\
+  \ **[default: results]**.  \n* `--FW_primer` - Sequence of the forward primer.\n\
+  * `--RV_primer` - Sequence of the reverse primer.\n\n### Optional\n* `--single_end`\
+  \ - Tells pipeline whether to expect single end or paired-end sra data **[default:\
+  \ false]**.\n* `--custom_config` - A path/url to a custom configuration file.\n\
+  * `--publish_dir_mode` - Method used to save pipeline results to output directory.\
+  \ (accepted: symlink, rellink, link, copy, copyNoFollow, move) **[default: copy]**.\
+  \ \n* `--clean` - Enable cleanup function **[default: false]**.\n* `--forks` - Maximum\
+  \ number of each process that will be run in parallel.\n* `--max_cpus` - Maximum\
+  \ number of CPUs that can be requested for any single job **[default: 16]**.\n*\
+  \ `--max_memory` - Maximum amount of memory that can be requested for any single\
+  \ job **[default: 128.GB]**.\n* `--max_time` - Maximum amount of time that can be\
+  \ requested for any single job **[default: 48.h]**.\n* `--help` - Display help text.\n\
+  \n#### Module parameters (check software docs for more details)\n* `--cutadapt_min_overlap`\
+  \ - Cutadapt minimum overlap parameter **[default: 3]**.\n* `--cutadapt_max_error_rate`\
+  \ - Cutadapt max error rate parameter **[default: 0.1]**.\n* `--pacbio` - Cutadapt\
+  \ pacbio parameter.\n* `--iontorrent` - Cutadapt iontorrent parameter.\n* `--pear_p_value`\
+  \ - Pear p-value parameter.\n* `--pear_min_overlap` - Pear min overlap parameter.\n\
+  * `--pear_max_len` - Pear max length parameter.\n* `--pear_min_len` - Pear min length\
+  \ parameter.\n* `--pear_trimmed_min_len` - Pear trimmed min length parameter.\n\
+  * `--pear_quality` - Pear quality score threshold parameter.\n* `--pear_max_uncalled`\
+  \ - Pear percentage max uncalled parameter.\n* `--pear_stat_test` - Pear statistical\
+  \ test parameter.\n* `--pear_scoring_method` - Pear scoring method parameter.\n\
+  * `--pear_phred` - Pear phred score threshold parameter.\n* `--fastq_maxee` - vsearch\
+  \ fastq max expected errors parameter.\n* `--fastq_minlen` - vsearch fastq min length\
+  \ parameter.\n* `--fastq_maxns` - vsearch max Ns parameter.\n* `--fasta_width` -\
+  \ vsearch fasta width parameter.\n* `--minuniquesize` - vsearch min unique size\
+  \ parameter **[default: 2]**.\n* `--derep_strand` - vsearch fastq dereplicate strand\
+  \ parameter.\n* `--sintax_cutoff` - vsearch sintax cutoff parameter.\n* `--sintax_strand`\
+  \ - vsearch sintax strand parameter.\n* `--seed` - vsearch sinxtax random seed parameter\
+  \ **[default: 1312]**.\n* `--ncbi_settings` - Path to NCBI settings folder.\n* `--certificate`\
+  \ - Path to certificate file.\n\n#### AWS parameters (ensure these match the infrastructure\
+  \ you have access to if using AWS)\n* `--awsqueue` - aws queue to use with aws batch.\n\
+  * `--awsregion` - aws region to use with aws batch.\n* `--awscli` - path to aws\
+  \ cli installation on host instance.\n* `--s3bucket` - s3 bucket path to use as\
+  \ work directory.\n\n\n#### Creating a input sample sheet\n\nIn order to create\
+  \ an input sample sheet in the correct format, you can use the python script ->\
+  \ [here](https://github.com/Eco-Flow/pollen-metabarcoding/blob/main/bin/fastq_dir_to_samplesheet.py).\n\
+  \nThis has been edited from an [nf-core rnaseq](https://github.com/nf-core/rnaseq/blob/master/bin/fastq_dir_to_samplesheet.py)\
+  \ script.\n\nYou can use it when all your fastq files are in a single folder and\
+  \ end with `_R1_001.fastq.gz` and/or `_R2_001.fastq.gz`.\n\n**Usage:**\n\n`python3\
+  \ fastq_dir_to_samplesheet.py /path/to/fastq/files Input.csv`\n\n* Where `Input.csv`\
+  \ is the name of the file I want to name the samplesheet.\n\n* And `/path/to/fastq/files`\
+  \ is the full path to the folder with your fastq data.\n\n* If you have a variant\
+  \ ending to read 1 and read 2, you can specify endings with the `--read1_extension`\
+  \ and `--read2_extension` flags. Default is \"_R1_001.fastq.gz\".\n\n## Results\n\
+  \nOnce completed, your output directory should be called results (unless you specified\
+  \ another name) and should contain the following directory structure:\n\n```\nresults\n\
+  \u251C\u2500\u2500 cut_tsvs\n\u251C\u2500\u2500 cutadapt\n\u2502\_\_ \u251C\u2500\
+  \u2500 fastqs\n\u2502\_\_ \u2514\u2500\u2500 logs\n\u251C\u2500\u2500 pear\n\u2502\
+  \_\_ \u251C\u2500\u2500 assembled\n\u2502\_\_ \u251C\u2500\u2500 discarded\n\u2502\
+  \_\_ \u2514\u2500\u2500 unassembled\n\u251C\u2500\u2500 pipeline_info\n\u2502\_\_\
+  \ \u251C\u2500\u2500 co2_emissions\n\u2502\_\_ \u2502\_\_ \u251C\u2500\u2500 co2footprint_report.html\n\
+  \u2502\_\_ \u2502\_\_ \u251C\u2500\u2500 co2footprint_summary.html\n\u2502\_\_ \u2502\
+  \_\_ \u2514\u2500\u2500 co2footprint_trace.txt\n\u2502\_\_ \u251C\u2500\u2500 execution_report.html\n\
+  \u2502\_\_ \u251C\u2500\u2500 execution_timeline.html\n\u2502\_\_ \u251C\u2500\u2500\
+  \ execution_trace.txt\n\u2502\_\_ \u251C\u2500\u2500 pipeline_dag.html\n\u2502\_\
+  \_ \u2514\u2500\u2500 software_versions.yml\n\u251C\u2500\u2500 r-processing\n\u2502\
+  \_\_ \u2514\u2500\u2500 sample\n\u2502\_\_     \u251C\u2500\u2500 classified.tsv\n\
+  \u2502\_\_     \u251C\u2500\u2500 pie_charts\n\u2502\_\_     \u2502\_\_ \u251C\u2500\
+  \u2500 family.pdf\n\u2502\_\_     \u2502\_\_ \u251C\u2500\u2500 genus.pdf\n\u2502\
+  \_\_     \u2502\_\_ \u2514\u2500\u2500 order.pdf\n\u2502\_\_     \u2514\u2500\u2500\
+  \ summary.tsv\n\u251C\u2500\u2500 sratools_fasterq-dump\n\u2502\_\_ \u2514\u2500\
+  \u2500 sample\n\u251C\u2500\u2500 usearch\n\u2502\_\_ \u2514\u2500\u2500 sintax_summary\n\
+  \u2502\_\_     \u251C\u2500\u2500 sample\n\u2502\_\_      \_\_ \u251C\u2500\u2500\
+  \ class_summary.txt\n\u2502\_\_      \_\_ \u251C\u2500\u2500 domain_summary.txt\n\
+  \u2502\_\_      \_\_ \u251C\u2500\u2500 family_summary.txt\n\u2502\_\_      \_\_\
+  \ \u251C\u2500\u2500 genus_summary.txt\n\u2502\_\_      \_\_ \u251C\u2500\u2500\
+  \ kingdom_summary.txt\n\u2502\_\_      \_\_ \u251C\u2500\u2500 order_summary.txt\n\
+  \u2502\_\_      \_\_ \u251C\u2500\u2500 phylum_summary.txt\n\u2502\_\_      \_\_\
+  \ \u2514\u2500\u2500 species_summary.txt\n\u2514\u2500\u2500 vsearch\n    \u251C\
+  \u2500\u2500 derep\n    \u2502\_\_ \u251C\u2500\u2500 clusterings\n    \u2502\_\_\
+  \ \u251C\u2500\u2500 fastas\n    \u2502\_\_ \u2514\u2500\u2500 logs\n    \u251C\u2500\
+  \u2500 fastq_filter\n    \u2502\_\_ \u251C\u2500\u2500 fastas\n    \u2502\_\_ \u2514\
+  \u2500\u2500 logs\n    \u2514\u2500\u2500 sintax\n```\n\n`cut_tsvs` - directory\
+  \ containing tsvs of first 2 columns of sintax data\n\n`cutadapt`\n1. `fastqs` -\
+  \ directory containing adapter trimmed fastqs files for each sample.\n2. `logs`\
+  \ - directory containing cutadapt trimming statistics for each sample.\n\n`pear`\n\
+  1. `assembled` - directory containing fastqs of successfully merged reads for each\
+  \ sample.\n2. `discarded` - directory containing fastqs of reads disacrded due to\
+  \ quality for each sample.\n3. `unassembled` - directory containing fastqs of reads\
+  \ unable to be merged for each sample.\n\n`pipeline_info` - directory containing\
+  \ pipeline statistics including co2 emissions.\n\n`r-processing`\n1. `classfied.tsv`\
+  \ - tsv containing taxonomy prediction information.\n2. `pie_charts` - pdfs of top\
+  \ predicted species for different taxonomic level\n3. `summary.tsv` - tsv containing\
+  \ summary statistics.\n\n`sratools_fasterq-dump` - fastqs obtained from SRA ID.\n\
+  \n`usearch` - text files containing the name, number of reads, percentage of reads\
+  \ and cumulative percentage of reads for each taxonomic level.\n\n`vsearch`\n1.\
+  \ `derep`\n  - `clusterings` - directory containing dereplicated clusterings for\
+  \ each sample.\n  - `fastas` - directory containing dereplicated fastas for each\
+  \ sample.\n  - `logs` - directory containing vsearch dereplicate statistics for\
+  \ each sample.\n2. `fastq_filter`\n  - `fastas` - directory containing filtered\
+  \ fastas for each sample.\n  - `logs` - directory containing vsearch fastq_filter\
+  \ statistics for each sample.\n3. `sintax` - directory containing vsearch sintax\
+  \ taxonomy prediction output files.\n\n## Configuration\n\n### Basics\n\nThe basic\
+  \ configuration of processes using labels can be found in `conf/base.config`.\n\n\
+  Module specific configuration using process names can be found in `conf/modules.config`.\n\
+  \n**Please note:** The nf-core `CUTADAPT` module is labelled as `process_medium`\
+  \ in the module `main.nf`. However for pollen metabarcoding data the fastqs are\
+  \ significantly smaller, so this resource requirement has been overwritten inside\
+  \ `conf/modules.config` to match the `process_single` resource requirments.\n\n\
+  ### Profiles\n\nThis pipeline is designed to run in various modes that can be supplied\
+  \ as a comma separated list i.e. `-profile profile1,profile2`.\n\n#### Container\
+  \ Profiles\n\nPlease select one of the following profiles when running the pipeline.\n\
+  \n* `docker` - This profile uses the container software Docker when running the\
+  \ pipeline. This container software requires root permissions so is used when running\
+  \ on cloud infrastructure or your local machine (depending on permissions). **Please\
+  \ Note:** You must have Docker installed to use this profile.\n* `singularity` -\
+  \ This profile uses the container software Singularity when running the pipeline.\
+  \ This container software does not require root permissions so is used when running\
+  \ on on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
+  \ You must have Singularity installed to use this profile.\n* `apptainer` - This\
+  \ profile uses the container software Apptainer when running the pipeline. This\
+  \ container software does not require root permissions so is used when running on\
+  \ on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
+  \ You must have Apptainer installed to use this profile.\n\n#### Optional Profiles\n\
+  \n* `aws_batch` - This profile is used if you are running the pipeline on AWS utilising\
+  \ the AWS Batch functionality. **Please Note:** You must use the `Docker` profile\
+  \ with with AWS Batch.\n* `test` - This profile is used if you want to test running\
+  \ the pipeline on your infrastructure. **Please Note:** You do not provide any input\
+  \ parameters if this profile is selected but you still provide a container profile.\n\
+  \n### Custom Configuration\n\nIf you want to run this pipeline on your institute's\
+  \ on-premise HPC or specific cloud infrastructure then please contact us and we\
+  \ will help you build and test a custom config file. This config file will be published\
+  \ to our [configs repository](https://github.com/Eco-Flow/configs).\n\n## Running\
+  \ the Pipeline\n\n**Please note:** The `-resume` flag uses previously cached successful\
+  \ runs of the pipeline.\n\n* Running the pipeline with Docker profiles:\n```\nnextflow\
+  \ run main.nf -profile docker -resume --input data/input_full-s3.csv --database\
+  \ \"s3://pollen-metabarcoding-test-data/data/viridiplantae_all_2014.sintax.fa\"\
+  \ --FW_primer \"ATGCGATACTTGGTGTGAAT\" --RV_primer \"GCATATCAATAAGCGGAGGA\"\n```\n\
+  \n(The example database was obtained from [molbiodiv/meta-barcoding-dual-indexing](https://github.com/molbiodiv/meta-barcoding-dual-indexing/blob/master/precomputed/viridiplantae_all_2014.sintax.fa)).\n\
+  \nThe database should be a list of fasta sequences, where the header name contains\
+  \ kingdom (k),  phylum (p), c (class), o (order), f (family), g (genus) and s (species)\
+  \ identifiers (separated by comma). If your database does not contain all these\
+  \ definitions the pipeline will fail. If you do not have this structure, you can\
+  \ run the script `bin/sanitise_database.pl` on your database, and it will infill\
+  \ any missing classification data with `null`.\n \n* Running the pipeline with Singularity\
+  \ and test profiles:\n```\nnextflow run main.nf -profile singularity,test_small\
+  \ -resume\n```\n\n* Running the pipeline with additional parameters:\n```\nnextflow\
+  \ run main.nf -profile docker -resume \\\n   --input data/input_small-s3.csv \\\n\
+  \   --database \"s3://pollen-metabarcoding-test-data/data/viridiplantae_all_2014.sintax.fa\"\
+  \ \\\n   --FW_primer \"ATGCGATACTTGGTGTGAAT\" --RV_primer \"GCATATCAATAAGCGGAGGA\"\
+  \ \\\n   --fastq_maxee 0.5 --fastq_minlen 250 --fastq_maxns 0 --fasta_width 0 \\\
+  \n   --derep_strand \"plus\" \\\n   --sintax_strand \"both\" --sintax_cutoff 0.95\n\
+  ```\n\n* Running the pipeline with a custom config file:\n```\nnextflow run main.nf\
+  \ -profile docker,aws_batch -resume --input data/input_manual.csv --database \"\
+  s3://pollen-metabarcoding-test-data/data/viridiplantae_all_2014.sintax.fa\" --FW_primer\
+  \ \"ATGCGATACTTGGTGTGAAT\" --RV_primer \"GCATATCAATAAGCGGAGGA\" --custom_config\
+  \ /path/to/custom/config\n```\n\n* Running on Gitpod:\nIf you wish to run on Gitpod,\
+  \ please be aware that the usearch (sintax_summary) module will fail, as Gitpod\
+  \ doesn't allow 32bit programs.\n```\nnextflow run main.nf -profile docker,test_small\
+  \ -resume --gitpod\n```\n\n## Test Data \nThe data used to test this pipeline via\
+  \ the [ENA ID: PRJEB26439](http://www.ebi.ac.uk/ena/data/view/PRJEB26439).\nThere\
+  \ are two test profiles using this data:\n`test_small` - contains 3 samples for\
+  \ small, fast testing.\n`test_full` - contains 47 samples (the entire dataset) for\
+  \ large, real-world replication testing.\n\n## Contact Us\n\nIf you need any support\
+  \ do not hesitate to contact us at any of:\n\n`c.wyatt [at] ucl.ac.uk`\n\n`ecoflow.ucl\
+  \ [at] gmail.com`"
+"Eco-Flow/synteny": "# nf-synteny\n\nA simple pipeline to run a macro synteny analysis.\
+  \ \n\nIt is under development, so if you wish to use the pipeline for your own research,\
+  \ please contact us (ecoflow.ucl [at] gmail.com). \nWe can give you the up to date\
+  \ detail for the methods and the up to date figures. When it is published we will\
+  \ release a final version.\n\nSynteny is the study of chromosome arrangement and\
+  \ gene order. Over evolutionary time, two species diverge from the state of the\
+  \ common ancestor, due to a variety of structural changes. These include indels,\
+  \ inversions, translocations, fusions and fissions. This pipeline aims to produce\
+  \ common synteny plots, as well as tables documenting the types of syntenic changes.\n\
+  \nThe pipeline takes a csv (comma separated value) file as input, which contains\
+  \ the species you wish to compare followed by their RefSeq ID. Genomes must be chromosome\
+  \ level assemblies, with a maximum of 50 chromosomes/scaffolds. \n\nThe main pipeline\
+  \ logic is as follows:\n\n![image info](https://raw.githubusercontent.com/Eco-Flow/synteny/main/docs/img/pipeline.png)\n\
+  \n* Downloads the genome and gene annotation files `[DOWNLOAD]`.\n* Extract gene\
+  \ fasta sequences `[GFFREAD]`.\n* Finds orthologous genes using last `[JCVI]`.\n\
+  * Find syntenic block using MCScanX `[SYNTENY]`.\n* **FUTURE**: Plot figures and\
+  \ create summary output tables `[PLOT_SCORE]`, `[PLOT_TREE]` and `[SUMMARISE_PLOTS]`.\n\
+  \n## Tutorial\n\nWe have a short [tutorial](https://github.com/Eco-Flow/synteny/blob/main/docs/Gitpod_tutorial.md)\
+  \ to help you test and explore the pipeline.\n\n## Installation\n\nNextflow pipelines\
+  \ require a few prerequisites. There is further documentation on the nf-core webpage\
+  \ [here](https://nf-co.re/docs/usage/installation), about how to install Nextflow.\n\
+  \n### Prerequisites\n\n- [Docker](https://docs.docker.com/engine/install/) or [Singularity](https://docs.sylabs.io/guides/3.11/admin-guide/installation.html).\n\
+  - [Java](https://www.java.com/en/download/help/download_options.html) and [openJDK](https://openjdk.org/install/)\
+  \ >= 8 (**Please Note:** When installing Java versions are `1.VERSION` so `Java\
+  \ 8` is `Java 1.8`).\n- [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)\
+  \ >= `v25`.\n\n### Install\n\nTo install the pipeline please use the following commands\
+  \ but replace VERSION with a [release](https://github.com/Eco-Flow/synteny/releases).\n\
+  \n`wget https://github.com/Eco-Flow/synteny/archive/refs/tags/VERSION.tar.gz -O\
+  \ - | tar -xvf -`\n\nor\n\n`curl -L https://github.com/Eco-Flow/synteny/archive/refs/tags/VERSION.tar.gz\
+  \ --output - | tar -xvf -`\n\nThis will produce a directory in the current directory\
+  \ called `synteny-VERSION` which contains the pipeline.\n\n## Inputs\n\n### Required\n\
+  \n* `--input /path/to/csv/file` - A singular csv file as input in one of the two\
+  \ formats stated below.\n\nThis csv can take 2 forms:\n* A 2 field csv where each\
+  \ row is a unique species name followed by a Refseq genome reference ID (**NOT**\
+  \ a Genbank reference ID) i.e. `data/Example-accession.csv`. The pipeline will download\
+  \ the relevant genome fasta file and annotation gff3 (or gff augustus) file.\n*\
+  \ A 3 field csv where each row is a unique species name, followed by an absolute\
+  \ path to a genome fasta file, followed by an absolute path to an annotation gff3\
+  \ (or gff augustus) file i.e. `data/Example-local.csv`. Input can be gzipped (.gz)\
+  \ or not.\n\n**Please Note:** The genome has to be chromosome level not contig level.\n\
+  \n2 fields (Name,Refseq_ID):\n```\nDrosophila_yakuba,GCF_016746365.2\nDrosophila_simulans,GCF_016746395.2\n\
+  Drosophila_santomea,GCF_016746245.2\n```\n\n3 fields (Name,genome.fna,annotation.gff):\n\
+  ```\nDrosophila_yakuba,data/Drosophila_yakuba/genome.fna.gz,data/Drosophila_yakuba/genomic.gff.gz\n\
+  Drosophila_simulans,data/Drosophila_simulans/genome.fna.gz,data/Drosophila_simulans/genomic.gff.gz\n\
+  Drosophila_santomea,data/Drosophila_santomea/genome.fna.gz,data/Drosophila_santomea/genomic.gff.gz\n\
+  ```\n\n### Optional\n\n* `--outdir /path/to/output/directory` - A path to the output\
+  \ directory where the results will be written to (**Default:** `Results`).\n* `--hex\
+  \ /path/to/hex/file` - A path to a file containing a singular, unique hex code on\
+  \ each line to be used when painting chromosomes (**Default:** `data/unique_hex`).\n\
+  * `--go /path/to/directory/containing/species/hash/files` - A path to a directory\
+  \ containing a hash file for each species in the analysis i.e. `data/go_input/hash_files`.\
+  \ These hash files can be generated by running the [Goatee](https://github.com/chriswyatt1/Goatee)\
+  \ pipeline.\n* `--tree /path/to/tree/file` - A path to a file containing a phylogenetic\
+  \ tree for all species in Newick format i.e. `data/score_tree_input/tree.txt`.\n\
+  * `--clean` - A true or false value assigned to this parameter will determine whether\
+  \ the work directory is automatically deleted or not if the pipeline is successful.\
+  \ Deleting the work directory saves space however it will not be possible to use\
+  \ this work directory in future for caching (**Default:** `false`).\n* `--architecture`\
+  \ - An `amd` or `arm` value assigned to this parameter determines whether containers\
+  \ built for the amd or arm CPU architecture are used (**Default:** `amd`).\n* `--help`\
+  \ - A true value assigned to this parameter will cause the help message to be displayed\
+  \ instead of pipeline running (**Default:** `false`).\n* `--custom_config` - A path\
+  \ or URL to a custom configuration file.\n* `--jcvi_ortholog_arguments` - Add additional\
+  \ flags for the jcvi ortholog (last step). If you wish to change:\n1. the score\
+  \ cutoff [default: 0.7] --cscore=CSCORE\n2. Extent of flanking regions to search\
+  \ [default: 20]   --dist=DIST\n3. Minimum number of anchors in a cluster [default:\
+  \ 4] -n N, --min_size=N\n4. Quota align parameter [default: none]  --quota=QUOTA\
+  \ (e.g.: 1:1 to remove duplications)\n\n(**Default:** `--no_strip_names`).\n\n##\
+  \ Profiles\n\nThis pipeline is designed to run in various modes that can be supplied\
+  \ as a comma separated list i.e. `-profile profile1,profile2`.\n\n### Container\
+  \ Profiles\n\nPlease select one of the following profiles when running the pipeline.\n\
+  \n* `docker` - This profile uses the container software Docker when running the\
+  \ pipeline. This container software requires root permissions so is used when running\
+  \ on cloud infrastructure or your local machine (depending on permissions). **Please\
+  \ Note:** You must have Docker installed to use this profile.\n* `singularity` -\
+  \ This profile uses the container software Singularity when running the pipeline.\
+  \ This container software does not require root permissions so is used when running\
+  \ on on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
+  \ You must have Singularity installed to use this profile.\n* `apptainer` - This\
+  \ profile uses the container software Apptainer when running the pipeline. This\
+  \ container software does not require root permissions so is used when running on\
+  \ on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
+  \ You must have Apptainer installed to use this profile.\n\n### Optional Profiles\n\
+  \n* `local` - This profile is used if you are running the pipeline on your local\
+  \ machine.\n* `aws_batch` - This profile is used if you are running the pipeline\
+  \ on AWS utilising the AWS Batch functionality. **Please Note:** You must use the\
+  \ `Docker` profile with with AWS Batch.\n* `test` - This profile is used if you\
+  \ want to test running the pipeline on your infrastructure. **Please Note:** You\
+  \ do not provide any input parameters if this profile is selected but you still\
+  \ provide a container profile.\n\n## Custom Configuration\n\nIf you want to run\
+  \ this pipeline on your institute's on-premise HPC or specific cloud infrastructure\
+  \ then please contact us and we will help you build and test a custom config file.\
+  \ This config file will be published to our [configs repository](https://github.com/Eco-Flow/configs).\
+  \ \n\n## Running the Pipeline\n\n**Please note:** The `-resume` flag uses previously\
+  \ cached successful runs of the pipeline.\n\n* Running the pipeline with Singularity\
+  \ profiles and a chosen input csv file:\n`nextflow run main.nf -profile singularity\
+  \ -resume --input data/Example-accession.csv`\n\n* Running the pipeline with Docker\
+  \ and test profiles:\n`nextflow run main.nf -resume -profile docker,test`\n\n* Running\
+  \ the pipeline with all parameters:\n`nextflow run main.nf -profile docker,local\
+  \ -resume --input data/Example-local.csv --go data/go_input/hash_files --tree data/score_tree_input/tree.txt\
+  \ --ribbon Drosophila_yakuba,Drosophila_simulans,Drosophila_santomea --score`\n\n\
+  * Running the pipeline with a custom config file:\n`nextflow run main.nf -profile\
+  \ docker,aws_batch -resume --input data/Example-accession.csv --custom_config /path/to/custom/config`\n\
+  \n## Results\n\nOnce completed, your output directory should be called `Results`,\
+  \ unless you specified another name:\n\nSubdirectories:\n\n`Figures`\n1. `Karyotype_plots`\
+  \ - Karyotype plots of each pairwise comparison.(<Species1><Species2>.karyotype.pdf).\
+  \ Showing a 1 to 1 chromosome mapping with lines drawn between syntenic chromosomes.\n\
+  2. `Dotplot` - (<Species1><Species2>.pdf). Showing the chromosome synteny as a dot\
+  \ plot.\n3. `Depth_plot` - (<Species1><Species2>.depth.pdf). Percentage of genome\
+  \ that correspond to non-orthlogous (0), 1to1 or 1toMany orthologs detected.\n4.\
+  \ `Painted_chromosomes` - (<Species1><Species2>.chromo.pdf).Showing on graphic chromosomes,\
+  \ which sections are syntenic between two species in colours.\n\n`Data`\n1. `Gffread`\
+  \ -  Species gene fasta files (<Species>.nucl.fa), plus reformatted gff files (<Species>.gff_for_jvci.gff3).\n\
+  2. `Anchors` - (<Species1><Species2>.anchors). Anchor files documenting the MSCanX\
+  \ genes in syntenic blocks. Using the lifted function from JCVI.\n3. `Last` - Filtered\
+  \ last results for each pairwise run. Filtered using default settings from JCVI.\n\
+  \n`Tables`\n1. `Trans_Inversion_junction_merged.txt` - A summary of the types of\
+  \ syntenic break between sets of anchors.\n2. `Paired_anchor_change_junction_prediction`\
+  \ - A folder with each pairwise analysis of junction changes between syntenic blocks.\n\
+  3. `My_scores.tsv` - A table (pairwise) of number of syntenic gene pairs, as well\
+  \ as the max and average syntenic block length (in numbers of genes)\n4. `Synteny_matrix.tsv`\
+  \ - A Matrix of syntenic gene pair totals (pairwise).\n5. `Trans_location_version.out.txt`\
+  \ - A Table of scores (pairwise), documenting numbers of scaffolds, syntenic block,\
+  \ genes, as well as a variety of scores.\n6. `Synt_gene_scores` -  A folder with\
+  \ pairwise gene scores. Scores are based on the distance to nearest syntenic break.\
+  \ Where '1' means a gene in on the edge of a syntenic block. \n7. `My_sim_cores.tsv`\
+  \ -  A Matrix containing nucleotide percentage similarities.\n8. `My_comp_synteny_similarity.tsv`\
+  \ - A Matrix containing pairwise nucleotide percentages and total number of syntenic\
+  \ genes.\n\nAll of the pipeline run information can be found inside `pipeline_info`.\n\
+  \n\n## Citation\n\nThis pipeline is not yet published. If you use this pipeline\
+  \ for your research please cite the main tool set we use (JCVI):\n\n\"Tang et al.\
+  \ (2008) Synteny and Collinearity in Plant Genomes. Science\".\n\nEnsure you record\
+  \ the *release* of the pipeline that you ran, as versions will change over time,\
+  \ so it is important to record exact releases. \n\n## Contact Us\n\nIf you need\
+  \ any support do not hesitate to contact us at any of:\n\n`ecoflow.ucl [at] gmail.com`\n\
+  \n`c.wyatt [at] ucl.ac.uk`"
+"nf-core/genomeqc": |-
+  ## Introduction
+
+  **nf-core/genomeqc** is a bioinformatics pipeline that compares the quality of multiple genomes, along with their annotations.
+
+  The pipeline takes a list of genomes and annotations (from local files or ncbi accessions), and runs commonly used tools to assess their quality.
+
+  <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nf-core/genomeqc/dev/docs/images/nf-core-genomeqc_metro_map_v3_logo_dark.png">
+     <img alt="nf-core/genomeqc" src="https://raw.githubusercontent.com/nf-core/genomeqc/dev/docs/images/nf-core-genomeqc_metro_map_v3.png">
+  </picture>
+
+  1. Downloads the genome and gene annotation files from NCBI: [NCBI genome download](https://github.com/kblin/ncbi-genome-download) - Or **provide your own genomes and annotations**.
+  2. Describes genome assembly:
+     1. [BUSCO](https://busco.ezlab.org/): Evaluates genome/proteome completeness based on **single copy markers**.
+     2. **BUSCO Ideogram**: Plots the location of BUSCO markers on the assembly.
+     3. [Merqury](https://github.com/marbl/merqury) (optional): Evaluates genome completeness based on sequencing reads.
+     4. [tidk](https://github.com/tolkit/telomeric-identifier) (optional): Identifies and visualises telomeric repeats.
+     5. [QUAST](https://github.com/ablab/quast): Computes contiguity and integrity statistics: N50, N90, GC%, number of sequences.
+     6. Contamination screening:
+        - [FCS-GX](https://github.com/ncbi/fcs/wiki/FCS-GX-quickstart): Detection and removal of foreign organisms contamination.
+        - [FCS-adaptor](https://github.com/ncbi/fcs/wiki/FCS-adaptor-quickstart): Detection and removal of adaptor and vector contamination.
+        - [Tiara](https://ibe-uw.github.io/tiara/): DNA sequence classification.
+     7. More options...
+  3. Describes annotation :
+     1. [AGAT](https://agat.readthedocs.io/en/latest/): Number of genes, features, length...
+     2. **Gene Overlaps**: Finds the number of overlapping genes.
+  4. Extracts longest protein isoform: [GffRead](https://github.com/gpertea/gffread).
+  5. Finds orthologous genes: [Orthofinder](https://github.com/davidemms/OrthoFinder).
+  6. Plots an orthology-based - if annotation is given - or BUSCO marker-based - if no annotation is given - phylogenetic tree with summary statistics: **Tree Summary**
+  7. Summary with **HTML and excel** custom reports.
+  7. Summary with [MultiQC](http://multiqc.info).
+
+  The pipeline outputs an executable that launches a shiny app with the tree plot and the summary statistics. The parameters of the plot can be modified, and summary statistics can be added or removed in real time. Once the plot has been adjusted, it can be saved as png/svg. The tree plot needs **at least three assemblies to be plotted**, and it servers as a quick overview of the quality of all assemblies.
+
+  If **no annotation** is given as input, the pipeline will ignore the steps **involving gene statistics**.
+
+  > [!WARNING]
+  > We strongly suggest users to specify the lineage using the `--busco_lineage` parameter, as setting the lineage to `auto` (default value) might cause problems with `BUSCO` during the lineage determination step.
+
+  > [!NOTE]
+  > `BUSCO Ideogram` will only plot those chromosomes -or scaffolds- that contain at least one single copy marker.
+
+  ## Usage
+
+  > [!NOTE]
+  > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/get_started/environment_setup/overview) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/get_started/run-your-first-pipeline) with `-profile test` before running the workflow on actual data.
+
+  First, prepare an input **samplesheet** in **csv format** (e.g. `samplesheet.csv`). You can prepare your sampplesheet using:
+
+  ### 1. Local files
+
+  Simply point out to your local genome assembly and annotation (in FASTA and GFF format, respectively) using the `fasta` and `gff` fields:
+
+  ```csv
+  species,fasta,gff
+  species_1,/path/to/genome1.fasta,/path/to/annotation1.gff3
+  species_2,/path/to/genome2.fasta,/path/to/annotation2.gff3
+  species_3,/path/to/genome3.fasta,/path/to/annotation3.gff3
+  ```
+
+  ### 2. ncbi accessions
+
+  Additionally, you can run the pipeline providing ncbi accessions (RefSeq or GenBank, depeding on the mode you wish to run) in the `ncbi` field:
+
+  ```csv
+  species,ncbi
+  species_1,GCF_000000001.1
+  species_2,GCF_000000002.1
+  species_3,GCF_000000003.1
+  ```
+
+  ### 3. Both
+
+  You can combine both input types in the same samplesheet:
+
+  ```csv
+  species,ncbi,fasta,gff
+  species_1,GCF_000000001.1
+  species_2,,/path/to/genome2.fasta,/path/to/annotation2.gff3
+  species_3,GCF_000000003.1
+  species_4,,/path/to/genome4.fasta,/path/to/annotation4.gff3
+  ```
+
+  ### Run the pipeline
+
+  Run the pipeline using:
+
+  ```bash
+  nextflow run nf-core/genomeqc \
+     -profile <docker/singularity/.../institute> \
+     --input samplesheet.csv \
+     --outdir <OUTDIR>
+  ```
+
+  You can run the pipeline using a test profile and docker:
+
+  ```bash
+  nextflow run nf-core/genomeqc -profile test,docker --outdir ./results
+  ```
+
+  > [!WARNING]
+  > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/running/run-pipelines#using-parameter-files).
+
+  For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/genomeqc/usage) and the [parameter documentation](https://nf-co.re/genomeqc/parameters).
+
+  ## Pipeline output
+
+  To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/genomeqc/results) tab on the nf-core website pipeline page.
+  For more details about the output files and reports, please refer to the
+  [output documentation](https://nf-co.re/genomeqc/output).
+
+  ## Credits
+
+  nf-core/genomeqc was originally written by [Chris Wyatt](https://github.com/chriswyatt1) and [Fernando Duarte](https://github.com/FernandoDuarteF) at the University College London.
+
+  We thank the following people for their extensive assistance in the development of this pipeline:
+
+  - [Mahesh Binzer-Panchal](https://github.com/mahesh-panchal) ([National Bioinformatics Infrastructure Sweden](https://nbis.se/))
+  - [Usman Rashid](https://github.com/GallVp) ([The New Zealand Institute for Plant and Food Research](https://www.plantandfood.com/en-nz/))
+  - [Lauren Huet](https://github.com/LaurenHuet) ([Schmidt Ocean Institute](https://schmidtocean.org/))
+  - [Stephen Turner](https://github.com/stephenturner/) ([Colossal Biosciences](https://colossal.com/))
+  - [Felipe Perez Cobos](https://github.com/fperezcobos) ([Institute of Agrifood Research and Technology](https://www.irta.cat/en/))
+  - [Simon Murray](https://github.com/SimonDMurray) ([Nextflow Ambassador](https://www.nextflow.io/our_ambassadors.html))
+
+  ## Contributions and Support
+
+  If you would like to contribute to this pipeline, please see the [contributing guidelines](https://github.com/nf-core/genomeqc/blob/dev/docs/CONTRIBUTING.md).
+
+  For further information or help, don't hesitate to get in touch on the [Slack `#genomeqc` channel](https://nfcore.slack.com/channels/genomeqc) (you can join with [this invite](https://nf-co.re/join/slack)).
+
+  ## Citations
+
+  <!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
+  <!-- If you use nf-core/genomeqc for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+
+  <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+
+  An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](https://github.com/nf-core/genomeqc/blob/dev/CITATIONS.md) file.
+
+  You can cite the `nf-core` publication as follows:
+
+  > **The nf-core framework for community-curated bioinformatics pipelines.**
+  >
+  > Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
+  >
+  > _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
+"nf-core/gwas": |-
+  ## Introduction
+
+  **nf-core/gwas** is a bioinformatics pipeline that ...
+
+  <!-- TODO nf-core:
+     Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
+     major pipeline sections and the types of output it produces. You're giving an overview to someone new
+     to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
+  -->
+
+  <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
+       workflows use the "tube map" design for that. See https://nf-co.re/docs/guidelines/graphic_design/workflow_diagrams#examples for examples.   -->
+  <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+
+  ## Usage
+
+  > [!NOTE]
+  > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+
+  <!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
+       Explain what rows and columns represent. For instance (please edit as appropriate):
+
+  First, prepare a samplesheet with your input data that looks as follows:
+
+  `samplesheet.csv`:
+
+  ```csv
+  sample,fastq_1,fastq_2
+  CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+  ```
+
+  Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+
+  -->
+
+  Now, you can run the pipeline using:
+
+  <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
+
+  ```bash
+  nextflow run nf-core/gwas \
+     -profile <docker/singularity/.../institute> \
+     --input samplesheet.csv \
+     --outdir <OUTDIR>
+  ```
+
+  > [!WARNING]
+  > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/usage/getting_started/configuration#custom-configuration-files).
+
+  For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/gwas/usage) and the [parameter documentation](https://nf-co.re/gwas/parameters).
+
+  ## Pipeline output
+
+  To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/gwas/results) tab on the nf-core website pipeline page.
+  For more details about the output files and reports, please refer to the
+  [output documentation](https://nf-co.re/gwas/output).
+
+  ## Credits
+
+  nf-core/gwas was originally written by Chris Wyatt.
+
+  We thank the following people for their extensive assistance in the development of this pipeline:
+
+  <!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+
+  ## Contributions and Support
+
+  If you would like to contribute to this pipeline, please see the [contributing guidelines](https://github.com/nf-core/gwas/blob/dev/github/CONTRIBUTING.md).
+
+  For further information or help, don't hesitate to get in touch on the [Slack `#gwas` channel](https://nfcore.slack.com/channels/gwas) (you can join with [this invite](https://nf-co.re/join/slack)).
+
+  ## Citations
+
+  <!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
+  <!-- If you use nf-core/gwas for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+
+  <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+
+  An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](https://github.com/nf-core/gwas/blob/dev/CITATIONS.md) file.
+
+  You can cite the `nf-core` publication as follows:
+
+  > **The nf-core framework for community-curated bioinformatics pipelines.**
+  >
+  > Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
+  >
+  > _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
