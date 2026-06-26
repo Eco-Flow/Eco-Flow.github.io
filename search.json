@@ -1,0 +1,30 @@
+---
+layout: null
+sitemap: false
+---
+{%- comment -%}
+  Client-side search index. Generated at build time from pipelines, blog posts,
+  events and regular pages. Consumed by /assets/search.js. Each entry has a
+  title, url, type label and a plain-text content blob (HTML stripped).
+
+  Commas: every entry is prefixed with a comma, and the leading comma is stripped
+  off the captured string at the end — this keeps the JSON valid even when some
+  pages are skipped (e.g. pages without a title).
+{%- endcomment -%}
+{%- capture entries -%}
+  {%- for doc in site.pipelines -%}
+    ,{"title": {{ doc.title | jsonify }}, "url": {{ doc.url | relative_url | jsonify }}, "type": "Pipeline", "content": {{ doc.content | strip_html | normalize_whitespace | truncatewords: 120 | jsonify }}}
+  {%- endfor -%}
+  {%- for doc in site.posts -%}
+    ,{"title": {{ doc.title | jsonify }}, "url": {{ doc.url | relative_url | jsonify }}, "type": "Blog", "content": {{ doc.content | strip_html | normalize_whitespace | truncatewords: 120 | jsonify }}}
+  {%- endfor -%}
+  {%- for doc in site.events -%}
+    ,{"title": {{ doc.title | jsonify }}, "url": {{ doc.url | relative_url | jsonify }}, "type": "Event", "content": {{ doc.content | strip_html | normalize_whitespace | truncatewords: 120 | jsonify }}}
+  {%- endfor -%}
+  {%- for doc in site.html_pages -%}
+    {%- if doc.title and doc.url != "/404.html" -%}
+    ,{"title": {{ doc.title | jsonify }}, "url": {{ doc.url | relative_url | jsonify }}, "type": "Page", "content": {{ doc.content | strip_html | normalize_whitespace | truncatewords: 120 | jsonify }}}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+[{{ entries | replace_first: "," , "" }}]

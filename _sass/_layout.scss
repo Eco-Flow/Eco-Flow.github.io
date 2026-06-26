@@ -150,6 +150,123 @@
   }
 }
 
+// --- Search ----------------------------------------------------------------
+
+.nav__search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: $ink;
+  font: inherit;
+  font-size: .96rem;
+  font-weight: 500;
+  padding: 0;
+  transition: color .15s;
+  &:hover { color: $green; }
+  svg { display: block; }
+}
+// Icon-only on desktop (matches the GitHub mark); label shows in mobile menu.
+.nav__search-label { display: none; }
+
+.search-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: $white;
+  border-bottom: 1px solid $border;
+  box-shadow: $shadow;
+}
+.search-panel__inner { padding: 1.1rem 0 1.4rem; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: .7rem .9rem;
+  background: $bg-soft;
+  color: $muted;
+  &:focus-within { border-color: $green; background: $white; }
+  input {
+    flex: 1;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 1rem;
+    color: $ink;
+    outline: none;
+    &::placeholder { color: $faint; }
+  }
+}
+.search-box__close {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: $faint;
+  padding: 0 .2rem;
+  &:hover { color: $ink; }
+}
+
+.search-results {
+  list-style: none;
+  margin: .8rem 0 0;
+  padding: 0;
+  li { margin: 0; }
+  a {
+    display: block;
+    padding: .7rem .8rem;
+    border-radius: $radius-sm;
+    color: $ink;
+    &:hover, &:focus { background: $green-tint; text-decoration: none; }
+  }
+}
+.search-results__type {
+  display: inline-block;
+  font-family: $font-head;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: $green-dark;
+  background: $green-tint;
+  border-radius: 999px;
+  padding: .12rem .5rem;
+  margin-bottom: .3rem;
+}
+.search-results__title {
+  display: block;
+  font-family: $font-head;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.search-results__snip {
+  display: block;
+  font-size: .86rem;
+  color: $muted;
+  margin-top: .15rem;
+}
+.search-empty {
+  margin: 1rem .2rem 0;
+  color: $muted;
+  font-size: .92rem;
+}
+
+@include md {
+  // In the collapsed mobile menu the search button becomes a full-width row
+  // with a visible label, matching the other nav items.
+  .nav__search-item { width: 100%; padding: .55rem 0; border-bottom: 1px solid $border; }
+  .nav__search-label { display: inline; }
+  .search-panel { position: fixed; left: 0; right: 0; top: 68px; }
+  .search-panel__inner { padding: 1rem 1.5rem 1.3rem; }
+}
+
 // --- Footer ----------------------------------------------------------------
 
 .site-footer {
