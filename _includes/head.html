@@ -4,7 +4,7 @@
 
   {%- comment -%} Title + description {%- endcomment -%}
   {%- if page.url == "/" -%}
-    {%- assign page_title = site.title | append: " — A community of computational agri-ecologists" -%}
+    {%- assign page_title = site.title | append: " — A UCL community for agri-ecology Nextflow pipelines" -%}
   {%- elsif page.title -%}
     {%- assign page_title = page.title | append: " · " | append: site.title -%}
   {%- else -%}
@@ -38,4 +38,45 @@
 
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}">
   {%- feed_meta -%}
+
+  {%- comment -%} Structured data: helps search engines connect "UCL Eco-Flow" to the home page {%- endcomment -%}
+  {%- if page.url == "/" -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "{{ '/#organization' | absolute_url }}",
+        "name": "Eco-Flow",
+        "alternateName": ["UCL Eco-Flow", "Eco-Flow UCL"],
+        "url": "{{ '/' | absolute_url }}",
+        "logo": "{{ '/img/logo.png' | absolute_url }}",
+        "description": {{ site.description | jsonify }},
+        "sameAs": [
+          "https://github.com/Eco-Flow"
+        ],
+        "parentOrganization": {
+          "@type": "CollegeOrUniversity",
+          "name": "University College London",
+          "url": "https://www.ucl.ac.uk/"
+        },
+        "funder": {
+          "@type": "Organization",
+          "name": "Biotechnology and Biological Sciences Research Council (BBSRC)",
+          "url": "https://www.ukri.org/councils/bbsrc/"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ '/#website' | absolute_url }}",
+        "url": "{{ '/' | absolute_url }}",
+        "name": "Eco-Flow",
+        "alternateName": "UCL Eco-Flow",
+        "publisher": { "@id": "{{ '/#organization' | absolute_url }}" }
+      }
+    ]
+  }
+  </script>
+  {%- endif -%}
 </head>
