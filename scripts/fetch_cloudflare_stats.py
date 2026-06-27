@@ -160,7 +160,9 @@ def main():
     d = lambda days: (today - datetime.timedelta(days=days)).isoformat()
     end = today.isoformat()
 
-    pv_all, v_all = totals(LAUNCH_DATE, end)
+    # "Total" spans Cloudflare's full retention window (~6 months) so it is
+    # always a superset of the 30- and 7-day figures.
+    pv_all, v_all = totals(d(180), end)
     pv_30, v_30 = totals(d(30), end)
     pv_7, v_7 = totals(d(7), end)
 
@@ -192,7 +194,6 @@ def main():
 
     out = {
         "updated": end,
-        "since": LAUNCH_DATE,
         "pageviews_all": pv_all,
         "visits_all": v_all,
         "pageviews_30d": pv_30,

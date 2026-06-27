@@ -32,11 +32,11 @@ sitemap: false
     <div class="section__head">
       <span class="eyebrow">Reach</span>
       <h2>Who's visiting</h2>
-      <p>Since {{ s.since | date: "%-d %B %Y" }} · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
+      <p>Measured with Cloudflare Web Analytics · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
     </div>
     <div class="stats">
-      <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (all-time)</div></div>
-      <div class="stat"><div class="stats__num">{{ s.visits_all }}</div><div class="stats__label">Visits (all-time)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.visits_all }}</div><div class="stats__label">Visits (total)</div></div>
       <div class="stat"><div class="stats__num">{{ s.pageviews_30d }}</div><div class="stats__label">Page views (30 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.countries_30d }}</div><div class="stats__label">Countries (30 days)</div></div>
     </div>
