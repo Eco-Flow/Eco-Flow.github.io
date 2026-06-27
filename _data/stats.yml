@@ -2,47 +2,47 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-06-27'
 since: '2026-06-27'
-pageviews_all: 100
+pageviews_all: 130
 visits_all: 0
-pageviews_30d: 100
+pageviews_30d: 130
 visits_30d: 0
-pageviews_7d: 114
+pageviews_7d: 130
 visits_7d: 6
 countries_7d: 5
 top_pages:
 - path: /numbers/
-  views: 50
+  views: 60
 - path: /about/
   views: 20
 - path: /
   views: 10
 - path: /events/
   views: 7
+- path: /pipelines/excon/
+  views: 5
 - path: /pipelines/
   views: 5
-- path: /pipelines/excon/
-  views: 4
 - path: /pipelines/about/
   views: 4
 - path: /pipelines/gwas/
+  views: 4
+- path: /services/
   views: 4
 - path: /partners/
   views: 2
 - path: /pipelines/genomeqc/
   views: 2
+- path: /pipelines/pollen-metabarcoding/
+  views: 2
 - path: /training/
+  views: 2
+- path: /pipelines/nanoporemetabarcoding/
   views: 2
 - path: /pipelines/synteny/
   views: 1
-- path: /pipelines/pollen-metabarcoding/
-  views: 1
-- path: /services/
-  views: 1
-- path: /pipelines/nanoporemetabarcoding/
-  views: 1
 top_countries:
 - name: GB
-  views: 88
+  views: 104
 - name: BR
   views: 15
 - name: ZA
