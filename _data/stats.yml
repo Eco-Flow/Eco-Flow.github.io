@@ -8,14 +8,30 @@ pageviews_30d: 80
 visits_30d: 0
 pageviews_7d: 51
 visits_7d: 4
-countries_30d: 1
+countries_7d: 2
 top_pages:
-- path: /about/
-  views: 50
-- path: /partners/
-  views: 20
 - path: /numbers/
-  views: 10
+  views: 25
+- path: /about/
+  views: 15
+- path: /
+  views: 6
+- path: /events/
+  views: 6
+- path: /pipelines/about/
+  views: 3
+- path: /pipelines/
+  views: 3
+- path: /partners/
+  views: 2
+- path: /pipelines/excon/
+  views: 1
+- path: /pipelines/gwas/
+  views: 1
+- path: /pipelines/nanoporemetabarcoding/
+  views: 1
 top_countries:
 - name: GB
-  views: 80
+  views: 62
+- name: US
+  views: 1
