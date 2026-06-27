@@ -160,9 +160,9 @@ def main():
     d = lambda days: (today - datetime.timedelta(days=days)).isoformat()
     end = today.isoformat()
 
-    # "Total" spans Cloudflare's full retention window (~6 months) so it is
-    # always a superset of the 30- and 7-day figures.
-    pv_all, v_all = totals(d(180), end)
+    # "Total" spans 90 days (Cloudflare caps a single query at ~93 days) so it
+    # is always a superset of the 30- and 7-day figures.
+    pv_all, v_all = totals(d(90), end)
     pv_30, v_30 = totals(d(30), end)
     pv_7, v_7 = totals(d(7), end)
 
