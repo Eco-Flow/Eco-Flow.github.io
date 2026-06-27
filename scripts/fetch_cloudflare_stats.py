@@ -63,7 +63,7 @@ def graphql(query, variables):
     return accounts[0]
 
 
-ACCOUNTS_QUERY = "query { viewer { accounts(limit: 1) { accountTag name } } }"
+ACCOUNTS_QUERY = "query { viewer { accounts { accountTag name } } }"
 
 
 def discover_account_tag():
