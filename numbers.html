@@ -75,7 +75,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="card">
         <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· last 7 days</span></h3>
         <ol class="numbered">
-          {%- for p in s.top_pages -%}
+          {%- for p in s.top_pages limit: 8 -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
           {%- endfor -%}
         </ol>
