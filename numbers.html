@@ -1,0 +1,90 @@
+---
+layout: default
+title: Eco-Flow in numbers
+permalink: /numbers/
+description: A snapshot of Eco-Flow's reach, pipelines and community.
+# Unlisted for now: not linked in the nav, kept out of search engines and the
+# sitemap. Remove `noindex` and `sitemap: false`, and add a nav entry, when
+# you're ready to make this public.
+noindex: true
+sitemap: false
+---
+
+{%- comment -%} Sum GitHub stars across all tracked pipelines {%- endcomment -%}
+{%- assign stars = 0 -%}
+{%- for kv in site.data.pipelines_meta -%}
+  {%- assign stars = stars | plus: kv[1].stars -%}
+{%- endfor -%}
+{%- assign s = site.data.stats -%}
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>Eco-Flow in numbers</h1>
+    <p>
+      A living snapshot of our reach, pipelines and community. Traffic figures are
+      measured privately (no cookies) with Cloudflare Web Analytics and refresh daily.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Reach</span>
+      <h2>Who's visiting</h2>
+      <p>Since {{ s.since | date: "%-d %B %Y" }} · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (all-time)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.visits_all }}</div><div class="stats__label">Visits (all-time)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.pageviews_30d }}</div><div class="stats__label">Page views (30 days)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.countries_30d }}</div><div class="stats__label">Countries (30 days)</div></div>
+    </div>
+
+    {%- if s.top_pages and s.top_pages.size > 0 -%}
+    <div class="grid grid--2" style="margin-top:3rem">
+      <div class="card">
+        <h3 style="margin-top:0">Top pages <span style="color:var(--faint,#8a9890);font-weight:400">· last 30 days</span></h3>
+        <ol class="numbered">
+          {%- for p in s.top_pages -%}
+          <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
+          {%- endfor -%}
+        </ol>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Top countries <span style="color:var(--faint,#8a9890);font-weight:400">· last 30 days</span></h3>
+        <ol class="numbered">
+          {%- for c in s.top_countries -%}
+          <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+    {%- else -%}
+    <p style="margin-top:1.5rem;color:#5b6b63">
+      Live traffic data will appear here after the first nightly sync runs.
+    </p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">The project</span>
+      <h2>What we've built</h2>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stats__num">{{ site.pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
+      <div class="stat"><div class="stats__num">{{ stars }}</div><div class="stats__label">GitHub stars</div></div>
+      <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
+      <div class="stat"><div class="stats__num">{{ site.events | size }}</div><div class="stats__label">Events</div></div>
+    </div>
+    <div class="stats" style="margin-top:2rem">
+      <div class="stat"><div class="stats__num">{{ site.data.ambassadors | size }}</div><div class="stats__label">Academic ambassadors</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.team.current | size }}</div><div class="stats__label">Core team</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.external_projects | size }}</div><div class="stats__label">Projects we support</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.training.parts | size }}</div><div class="stats__label">Training modules</div></div>
+    </div>
+  </div>
+</section>

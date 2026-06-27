@@ -235,6 +235,15 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 
 // --- Logo wall -------------------------------------------------------------
 
+// Ranked list (top pages / countries on the stats page)
+.numbered {
+  margin: .4rem 0 0;
+  padding-left: 1.2rem;
+  li { margin: .35rem 0; display: flex; justify-content: space-between; gap: 1rem; }
+  a { word-break: break-all; }
+}
+.numbered__val { color: $green-dark; font-family: $font-mono; font-weight: 500; white-space: nowrap; }
+
 .logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2.5rem; }
 .logos img { height: 54px; width: auto; filter: grayscale(1); opacity: .65; transition: all .2s; }
 .logos a:hover img { filter: none; opacity: 1; }
