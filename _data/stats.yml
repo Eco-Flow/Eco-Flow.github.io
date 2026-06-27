@@ -2,16 +2,18 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-06-27'
 since: '2026-06-27'
-pageviews_all: 10
+pageviews_all: 50
 visits_all: 0
-pageviews_30d: 10
+pageviews_30d: 50
 visits_30d: 0
-pageviews_7d: 7
-visits_7d: 1
+pageviews_7d: 33
+visits_7d: 3
 countries_30d: 1
 top_pages:
+- path: /about/
+  views: 40
 - path: /partners/
   views: 10
 top_countries:
 - name: GB
-  views: 10
+  views: 50
