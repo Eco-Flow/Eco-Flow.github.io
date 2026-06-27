@@ -114,7 +114,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
         <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· total</span></h3>
         <ol class="numbered">
           {%- for c in tot_countries limit: 10 -%}
-          <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
+          <li>{{ site.data.country_names[c.name] | default: c.name }} <span class="numbered__val">{{ c.views }}</span></li>
           {%- endfor -%}
         </ol>
       </div>
