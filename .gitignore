@@ -3,6 +3,10 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 
+# Python bytecode cache (from running scripts/ locally)
+__pycache__/
+*.pyc
+
 # Bundler / local gems
 .bundle/
 /vendor/
