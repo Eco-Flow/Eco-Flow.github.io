@@ -11,7 +11,7 @@ visits_7d: 6
 countries_7d: 5
 top_pages:
 - path: /numbers/
-  views: 60
+  views: 69
 - path: /about/
   views: 20
 - path: /
@@ -42,7 +42,7 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 104
+  views: 113
 - name: BR
   views: 15
 - name: ZA
