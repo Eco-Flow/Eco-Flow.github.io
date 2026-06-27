@@ -34,8 +34,9 @@ LAUNCH_DATE = "2026-06-27"  # first day the beacon was live
 
 API_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN")
 ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
-# The site tag is not secret (it's in the public beacon), so we can default it.
-SITE_TAG = os.environ.get("CLOUDFLARE_SITE_TAG", "0879107a995747d88de287f1770eacb5")
+# The Web Analytics GraphQL site tag (NOT the public beacon token — they differ).
+# Discovered via the SITES_QUERY diagnostic. Override with CLOUDFLARE_SITE_TAG.
+SITE_TAG = os.environ.get("CLOUDFLARE_SITE_TAG", "4d8094a5292c4a7db2bc1a1a0f73e78d")
 
 
 def graphql_raw(query, variables):
