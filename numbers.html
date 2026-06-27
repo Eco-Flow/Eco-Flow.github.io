@@ -13,10 +13,28 @@ description: A snapshot of Eco-Flow's work, reach and community.
 {%- assign s = site.data.stats -%}
 
 {%- comment -%}
-  `t` holds the accurate cumulative totals, accumulated weekly from the unsampled
-  7-day figures (see scripts/snapshot_stats.py). `s` holds the live 7-day figures.
+  `t` = accurate cumulative totals, accumulated weekly from the unsampled 7-day
+  figures (scripts/snapshot_stats.py). `s` = the live 7-day figures.
+
+  The cumulative totals only refresh weekly, so while the site is young the live
+  7-day count can exceed the last snapshot. Whenever that happens we fall back to
+  the 7-day figures for the "total" too — so "total" is never shown as less than
+  "7 days". Once enough weeks have accumulated, the cumulative figures take over.
 {%- endcomment -%}
 {%- assign t = site.data.stats_totals -%}
+{%- if t and t.pageviews and t.pageviews >= s.pageviews_7d -%}
+  {%- assign tot_pv = t.pageviews -%}
+  {%- assign tot_v = t.visits -%}
+  {%- assign tot_c = t.countries_count -%}
+  {%- assign tot_pages = t.top_pages -%}
+  {%- assign tot_countries = t.top_countries -%}
+{%- else -%}
+  {%- assign tot_pv = s.pageviews_7d -%}
+  {%- assign tot_v = s.visits_7d -%}
+  {%- assign tot_c = s.countries_7d -%}
+  {%- assign tot_pages = s.top_pages -%}
+  {%- assign tot_countries = s.top_countries -%}
+{%- endif -%}
 
 <div class="page-head">
   <div class="wrap">
@@ -65,9 +83,9 @@ description: A snapshot of Eco-Flow's work, reach and community.
       </p>
     </div>
     <div class="stats stats--3">
-      <div class="stat"><div class="stats__num">{{ t.pageviews | default: s.pageviews_7d }}</div><div class="stats__label">Page views (total)</div></div>
-      <div class="stat"><div class="stats__num">{{ t.visits | default: s.visits_7d }}</div><div class="stats__label">Visits (total)</div></div>
-      <div class="stat"><div class="stats__num">{{ t.countries_count | default: s.countries_7d }}</div><div class="stats__label">Countries (total)</div></div>
+      <div class="stat"><div class="stats__num">{{ tot_pv }}</div><div class="stats__label">Page views (total)</div></div>
+      <div class="stat"><div class="stats__num">{{ tot_v }}</div><div class="stats__label">Visits (total)</div></div>
+      <div class="stat"><div class="stats__num">{{ tot_c }}</div><div class="stats__label">Countries (total)</div></div>
     </div>
     <div class="stats stats--3" style="margin-top:2rem">
       <div class="stat"><div class="stats__num">{{ s.pageviews_7d }}</div><div class="stats__label">Page views (7 days)</div></div>
@@ -82,12 +100,12 @@ description: A snapshot of Eco-Flow's work, reach and community.
       out in its data feed.
     </p>
 
-    {%- if t and t.top_pages and t.top_pages.size > 0 -%}
+    {%- if tot_pages and tot_pages.size > 0 -%}
     <div class="grid grid--2" style="margin-top:3rem">
       <div class="card">
         <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· total</span></h3>
         <ol class="numbered">
-          {%- for p in t.top_pages limit: 10 -%}
+          {%- for p in tot_pages limit: 10 -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
           {%- endfor -%}
         </ol>
@@ -95,7 +113,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="card">
         <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· total</span></h3>
         <ol class="numbered">
-          {%- for c in t.top_countries limit: 10 -%}
+          {%- for c in tot_countries limit: 10 -%}
           <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
           {%- endfor -%}
         </ol>
@@ -147,13 +165,13 @@ description: A snapshot of Eco-Flow's work, reach and community.
   </div>
 </section>
 
-{%- if t and t.top_countries and t.top_countries.size > 0 -%}
+{%- if tot_countries and tot_countries.size > 0 -%}
 <link rel="stylesheet" href="{{ '/assets/vendor/jsvectormap/jsvectormap.min.css' | relative_url }}">
 <script src="{{ '/assets/vendor/jsvectormap/jsvectormap.min.js' | relative_url }}"></script>
 <script src="{{ '/assets/vendor/jsvectormap/world.js' | relative_url }}"></script>
 <script>
   (function () {
-    var values = { {% for c in t.top_countries %}"{{ c.name }}": {{ c.views }}{% unless forloop.last %}, {% endunless %}{% endfor %} };
+    var values = { {% for c in tot_countries %}"{{ c.name }}": {{ c.views }}{% unless forloop.last %}, {% endunless %}{% endfor %} };
 
     function hexToRgb(h) { h = h.replace('#', ''); return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)]; }
     function mix(a, b, t) {
