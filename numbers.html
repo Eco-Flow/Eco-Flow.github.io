@@ -2,7 +2,7 @@
 layout: default
 title: Eco-Flow in numbers
 permalink: /numbers/
-description: A snapshot of Eco-Flow's reach, pipelines and community.
+description: A snapshot of Eco-Flow's work, reach and community.
 ---
 
 {%- comment -%} Sum GitHub stars across all tracked pipelines {%- endcomment -%}
@@ -15,19 +15,43 @@ description: A snapshot of Eco-Flow's reach, pipelines and community.
 <div class="page-head">
   <div class="wrap">
     <h1>Eco-Flow in numbers</h1>
-    <p>
-      A living snapshot of our reach, pipelines and community. Traffic figures are
-      measured privately (no cookies) with Cloudflare Web Analytics and refresh daily.
+    <p>A living snapshot of our work, reach and community.</p>
+    <p class="auto-note">
+      <span class="auto-star">★</span> Figures marked with a star update automatically from
+      live sources (Cloudflare, GitHub). The rest reflect our published content.
     </p>
   </div>
 </div>
 
+{%- comment -%} 1. Curated / project stats {%- endcomment -%}
 <section class="section">
   <div class="wrap">
     <div class="section__head">
-      <span class="eyebrow">Reach</span>
-      <h2>Who's visiting</h2>
-      <p>Measured with Cloudflare Web Analytics · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
+      <span class="eyebrow">Overview</span>
+      <h2>Eco-Flow general stats</h2>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stats__num">{{ site.data.training.parts | size }}</div><div class="stats__label">Training modules</div></div>
+      <div class="stat"><div class="stats__num">{{ site.pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
+      <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
+      <div class="stat"><div class="stats__num">{{ site.events | size }}</div><div class="stats__label">Events</div></div>
+    </div>
+    <div class="stats" style="margin-top:2rem">
+      <div class="stat"><div class="stats__num">{{ site.data.ambassadors | size }}</div><div class="stats__label">Academic ambassadors</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.team.current | size }}</div><div class="stats__label">Core team</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.external_projects | size }}</div><div class="stats__label">Projects we support</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.funders.funding | size }}</div><div class="stats__label">Funders &amp; sponsors</div></div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} 2. Web stats (auto, from Cloudflare) {%- endcomment -%}
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Cloudflare Web Analytics</span>
+      <h2>Web stats <span class="auto-star" title="Updated automatically from live data">★</span></h2>
+      <p>Measured privately, with no cookies · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
     </div>
     <div class="stats">
       <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>
@@ -39,7 +63,7 @@ description: A snapshot of Eco-Flow's reach, pipelines and community.
     {%- if s.top_pages and s.top_pages.size > 0 -%}
     <div class="grid grid--2" style="margin-top:3rem">
       <div class="card">
-        <h3 style="margin-top:0">Top pages <span style="color:var(--faint,#8a9890);font-weight:400">· last 30 days</span></h3>
+        <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· last 30 days</span></h3>
         <ol class="numbered">
           {%- for p in s.top_pages -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
@@ -47,7 +71,7 @@ description: A snapshot of Eco-Flow's reach, pipelines and community.
         </ol>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Top countries <span style="color:var(--faint,#8a9890);font-weight:400">· last 30 days</span></h3>
+        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· last 30 days</span></h3>
         <ol class="numbered">
           {%- for c in s.top_countries limit: 8 -%}
           <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
@@ -72,23 +96,31 @@ description: A snapshot of Eco-Flow's reach, pipelines and community.
   </div>
 </section>
 
-<section class="section section--soft">
+{%- comment -%} 3. GitHub stats (auto, from the GitHub API) {%- endcomment -%}
+<section class="section">
   <div class="wrap">
     <div class="section__head">
-      <span class="eyebrow">The project</span>
-      <h2>What we've built</h2>
+      <span class="eyebrow">GitHub</span>
+      <h2>GitHub stats <span class="auto-star" title="Updated automatically from live data">★</span></h2>
     </div>
     <div class="stats">
-      <div class="stat"><div class="stats__num">{{ site.pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
       <div class="stat"><div class="stats__num">{{ stars }}</div><div class="stats__label">GitHub stars</div></div>
-      <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
-      <div class="stat"><div class="stats__num">{{ site.events | size }}</div><div class="stats__label">Events</div></div>
+      <div class="stat"><div class="stats__num">{{ site.data.pipelines_meta | size }}</div><div class="stats__label">Tracked repositories</div></div>
     </div>
-    <div class="stats" style="margin-top:2rem">
-      <div class="stat"><div class="stats__num">{{ site.data.ambassadors | size }}</div><div class="stats__label">Academic ambassadors</div></div>
-      <div class="stat"><div class="stats__num">{{ site.data.team.current | size }}</div><div class="stats__label">Core team</div></div>
-      <div class="stat"><div class="stats__num">{{ site.data.external_projects | size }}</div><div class="stats__label">Projects we support</div></div>
-      <div class="stat"><div class="stats__num">{{ site.data.training.parts | size }}</div><div class="stats__label">Training modules</div></div>
+
+    <div class="grid grid--2" style="margin-top:3rem">
+      <div class="card">
+        <h3 style="margin-top:0">Stars by pipeline</h3>
+        <ol class="numbered">
+          {%- assign pipes = site.pipelines | sort: "nav_order" -%}
+          {%- for p in pipes -%}
+            {%- assign meta = site.data.pipelines_meta[p.title] -%}
+            {%- if meta and meta.stars -%}
+            <li>{{ p.title }} <span class="numbered__val">★ {{ meta.stars }}</span></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      </div>
     </div>
   </div>
 </section>

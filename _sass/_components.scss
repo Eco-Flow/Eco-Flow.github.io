@@ -235,6 +235,16 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 
 // --- Logo wall -------------------------------------------------------------
 
+// "Auto-updated" star marker on the stats page
+.auto-star { color: $teal; cursor: help; }
+h2 .auto-star { font-size: .7em; vertical-align: super; }
+.auto-note {
+  margin-top: .9rem;
+  font-size: .9rem;
+  color: $muted;
+  .auto-star { vertical-align: baseline; }
+}
+
 // World map on the stats page (jsVectorMap)
 .worldmap {
   width: 100%;
