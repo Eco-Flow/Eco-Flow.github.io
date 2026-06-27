@@ -226,11 +226,15 @@ Because the weekly `pageviews_7d` figures tile the timeline, a running sum gives
 traffic; `github_stars` is already cumulative. The CSV is in `_data/`, so the page reads it via
 `site.data.stats_history`. **Don't edit the CSV by hand** — it's appended automatically.
 
-The **"Page views (total)"** tile on `/numbers/` is this running sum (not Cloudflare's own
-"total"). Why: at low traffic Cloudflare *samples* wide-window queries, returning lumpy ×10
-estimates and dropping rare events — so anything beyond the **7-day** window (which is unsampled)
-isn't trustworthy. The breakdowns (top pages/countries, map) are queried over 7 days for the same
-reason. A future chart could plot the history CSV directly.
+**Why the page mixes "total" and "7-day" figures:** at low traffic Cloudflare *samples*
+wide-window queries (returning lumpy ×10 estimates and dropping rare events), so only the
+**7-day** window is trustworthy. The live 7-day figures come straight from
+[`_data/stats.yml`](_data/stats.yml). The **totals** (the "(total)" tiles, plus *Top pages*,
+*Top countries* and the map) are accumulated from those weekly 7-day figures into
+[`_data/stats_totals.yml`](_data/stats_totals.yml) by the same `snapshot-stats` Action — so they're
+accurate and grow over time. Because the site is young, totals currently equal the 7-day figures;
+they diverge as weeks pass. Both `stats_totals.yml` and `stats_history.csv` are auto-generated —
+**don't edit them by hand**.
 
 ## Changing the look (colours, fonts, spacing)
 

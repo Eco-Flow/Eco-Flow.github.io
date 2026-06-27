@@ -116,7 +116,8 @@ a.stat {
     .stats__label { color: $green-dark; }
   }
 }
-@include sm { .stats { grid-template-columns: repeat(2, 1fr); } }
+.stats--3 { grid-template-columns: repeat(3, 1fr); }
+@include sm { .stats { grid-template-columns: repeat(2, 1fr); } .stats--3 { grid-template-columns: 1fr; } }
 
 // --- Card grids ------------------------------------------------------------
 

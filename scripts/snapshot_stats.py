@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Append a weekly snapshot of key stats to _data/stats_history.csv.
+"""Weekly stats snapshot.
 
-Reads the already-synced data files — _data/stats.yml (Cloudflare web stats)
-and _data/pipelines_meta.yml (GitHub stars) — and records one row per run so
-we can chart traffic and GitHub stars over time later. Run weekly by the
-`snapshot-stats` GitHub Action.
+Cloudflare only returns *accurate* data over a short (7-day) window — wider
+windows are sampled. So to build accurate **totals** we accumulate the weekly
+7-day figures over time. This script, run weekly, reads the already-synced
+data files and maintains two outputs:
 
-Notes:
-- `pageviews_7d` / `visits_7d` are that week's figures; taken weekly they tile
-  the timeline, so a running sum gives cumulative totals.
-- `github_stars` is already a cumulative count.
-- Re-running on the same day updates that day's row rather than duplicating it.
+- _data/stats_totals.yml : running cumulative totals (page views, visits,
+  per-page and per-country counts) used for the "total" figures on /numbers/.
+- _data/stats_history.csv : one flat row per week, for charting trends later.
+
+Idempotent: each date is only added once (tracked in `counted_dates`), so
+re-running on the same day won't double-count.
 """
 
 import csv
@@ -22,10 +23,11 @@ import yaml
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATS_PATH = os.path.join(REPO_ROOT, "_data", "stats.yml")
 META_PATH = os.path.join(REPO_ROOT, "_data", "pipelines_meta.yml")
+TOTALS_PATH = os.path.join(REPO_ROOT, "_data", "stats_totals.yml")
 HISTORY_PATH = os.path.join(REPO_ROOT, "_data", "stats_history.csv")
 
-FIELDS = ["date", "pageviews_7d", "pageviews_30d", "visits_7d",
-          "countries_7d", "github_stars", "pipelines"]
+CSV_FIELDS = ["date", "pageviews_7d", "pageviews_30d", "visits_7d",
+              "countries_7d", "github_stars", "pipelines"]
 
 
 def load_yaml(path):
@@ -36,13 +38,47 @@ def load_yaml(path):
         return {}
 
 
-def main():
-    stats = load_yaml(STATS_PATH)
-    meta = load_yaml(META_PATH)
-    stars = sum(int((v or {}).get("stars") or 0) for v in meta.values())
+def update_totals(stats, today):
+    """Accumulate this week's accurate 7-day figures into the running totals."""
+    totals = load_yaml(TOTALS_PATH)
+    counted = totals.get("counted_dates") or []
+    if counted:
+        last = max(counted)
+        days_since = (datetime.date.fromisoformat(today)
+                      - datetime.date.fromisoformat(last)).days
+        # Only accumulate once per ~week: the figures we add are 7-day counts,
+        # so snapshots closer than this would overlap and double-count.
+        if days_since < 6:
+            return totals
 
+    pages = {p["path"]: p["views"] for p in (totals.get("top_pages") or [])}
+    countries = {c["name"]: c["views"] for c in (totals.get("top_countries") or [])}
+
+    pages_sum = totals.get("pageviews", 0) + int(stats.get("pageviews_7d") or 0)
+    visits_sum = totals.get("visits", 0) + int(stats.get("visits_7d") or 0)
+
+    for p in (stats.get("top_pages") or []):
+        pages[p["path"]] = pages.get(p["path"], 0) + int(p["views"])
+    for c in (stats.get("top_countries") or []):
+        countries[c["name"]] = countries.get(c["name"], 0) + int(c["views"])
+
+    counted.append(today)
+    return {
+        "updated": today,
+        "counted_dates": counted,
+        "pageviews": pages_sum,
+        "visits": visits_sum,
+        "countries_count": len(countries),
+        "top_pages": [{"path": k, "views": v}
+                      for k, v in sorted(pages.items(), key=lambda kv: -kv[1])],
+        "top_countries": [{"name": k, "views": v}
+                          for k, v in sorted(countries.items(), key=lambda kv: -kv[1])],
+    }
+
+
+def write_history_row(stats, stars, meta, today):
     row = {
-        "date": datetime.date.today().isoformat(),
+        "date": today,
         "pageviews_7d": int(stats.get("pageviews_7d") or 0),
         "pageviews_30d": int(stats.get("pageviews_30d") or 0),
         "visits_7d": int(stats.get("visits_7d") or 0),
@@ -50,25 +86,38 @@ def main():
         "github_stars": stars,
         "pipelines": len(meta),
     }
-
     rows = []
     if os.path.exists(HISTORY_PATH):
         with open(HISTORY_PATH, newline="") as f:
             rows = list(csv.DictReader(f))
-
-    # Replace today's row if it already exists, then keep sorted by date.
-    rows = [r for r in rows if r.get("date") != row["date"]]
+    rows = [r for r in rows if r.get("date") != today]
     rows.append(row)
     rows.sort(key=lambda r: r["date"])
-
     with open(HISTORY_PATH, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
         writer.writeheader()
         for r in rows:
-            writer.writerow({k: r.get(k, "") for k in FIELDS})
+            writer.writerow({k: r.get(k, "") for k in CSV_FIELDS})
 
-    print(f"Snapshot {row['date']}: {row['pageviews_7d']} views/7d, "
-          f"{row['visits_7d']} visits/7d, {stars} GitHub stars.")
+
+def main():
+    today = datetime.date.today().isoformat()
+    stats = load_yaml(STATS_PATH)
+    meta = load_yaml(META_PATH)
+    stars = sum(int((v or {}).get("stars") or 0) for v in meta.values())
+
+    totals = update_totals(stats, today)
+    header = ("# Auto-generated by scripts/snapshot_stats.py - cumulative totals\n"
+              "# accumulated from the accurate weekly 7-day figures. DO NOT edit.\n")
+    with open(TOTALS_PATH, "w") as f:
+        f.write(header)
+        yaml.safe_dump(totals, f, sort_keys=False, allow_unicode=True)
+
+    write_history_row(stats, stars, meta, today)
+
+    print(f"Snapshot {today}: total {totals['pageviews']} views / "
+          f"{totals['visits']} visits across {totals['countries_count']} countries; "
+          f"{stars} GitHub stars.")
 
 
 if __name__ == "__main__":

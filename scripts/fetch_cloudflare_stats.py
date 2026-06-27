@@ -97,7 +97,7 @@ query Breakdown($account: String!, $site: String!, $start: Date!, $end: Date!) {
     accounts(filter: { accountTag: $account }) {
       pages: rumPageloadEventsAdaptiveGroups(
         filter: { siteTag: $site, date_geq: $start, date_leq: $end }
-        limit: 10
+        limit: 50
         orderBy: [count_DESC]
       ) {
         count
