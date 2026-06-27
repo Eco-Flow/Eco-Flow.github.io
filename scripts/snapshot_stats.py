@@ -25,7 +25,7 @@ META_PATH = os.path.join(REPO_ROOT, "_data", "pipelines_meta.yml")
 HISTORY_PATH = os.path.join(REPO_ROOT, "_data", "stats_history.csv")
 
 FIELDS = ["date", "pageviews_7d", "pageviews_30d", "visits_7d",
-          "countries_30d", "github_stars", "pipelines"]
+          "countries_7d", "github_stars", "pipelines"]
 
 
 def load_yaml(path):
@@ -46,7 +46,7 @@ def main():
         "pageviews_7d": int(stats.get("pageviews_7d") or 0),
         "pageviews_30d": int(stats.get("pageviews_30d") or 0),
         "visits_7d": int(stats.get("visits_7d") or 0),
-        "countries_30d": int(stats.get("countries_30d") or 0),
+        "countries_7d": int(stats.get("countries_7d") or 0),
         "github_stars": stars,
         "pipelines": len(meta),
     }

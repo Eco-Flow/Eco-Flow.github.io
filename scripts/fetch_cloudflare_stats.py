@@ -179,8 +179,12 @@ def main():
             print(f"No RUM data in this account yet for the last 30 days "
                   f"(queried siteTag={SITE_TAG}). Likely too soon after setup.")
 
+    # Breakdowns use the 7-day window: at low traffic Cloudflare samples wider
+    # queries (counts come back as lumpy multiples of the sample rate and rare
+    # events — e.g. a single visit from another country — get dropped). The
+    # 7-day window is unsampled, so top pages/countries are accurate.
     bd = graphql(BREAKDOWN_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
-                                   "start": d(30), "end": end})
+                                   "start": d(7), "end": end})
 
     top_pages = [
         {"path": (p["dimensions"]["requestPath"] or "/"), "views": int(p["count"])}
@@ -203,7 +207,7 @@ def main():
         "visits_30d": v_30,
         "pageviews_7d": pv_7,
         "visits_7d": v_7,
-        "countries_30d": len(country_groups),
+        "countries_7d": len(country_groups),
         "top_pages": top_pages,
         "top_countries": top_countries,
     }

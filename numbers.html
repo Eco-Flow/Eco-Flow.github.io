@@ -62,7 +62,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>
       <div class="stat"><div class="stats__num">{{ s.pageviews_7d }}</div><div class="stats__label">Page views (7 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.visits_7d }}</div><div class="stats__label">Visits (7 days)</div></div>
-      <div class="stat"><div class="stats__num">{{ s.countries_30d }}</div><div class="stats__label">Countries (30 days)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.countries_7d }}</div><div class="stats__label">Countries (7 days)</div></div>
     </div>
     <p style="color:#8a9890;font-size:.85rem;margin-top:1rem">
       A <strong>visit</strong> is one arrival at the site (directly or from another website) and may
@@ -73,7 +73,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
     {%- if s.top_pages and s.top_pages.size > 0 -%}
     <div class="grid grid--2" style="margin-top:3rem">
       <div class="card">
-        <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· last 30 days</span></h3>
+        <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· last 7 days</span></h3>
         <ol class="numbered">
           {%- for p in s.top_pages -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
@@ -81,7 +81,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
         </ol>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· last 30 days</span></h3>
+        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· last 7 days</span></h3>
         <ol class="numbered">
           {%- for c in s.top_countries limit: 8 -%}
           <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
@@ -91,7 +91,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
     </div>
 
     <div style="margin-top:3rem">
-      <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· last 30 days</span></h3>
+      <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· last 7 days</span></h3>
       <div id="worldmap" class="worldmap"></div>
       <p style="color:#8a9890;font-size:.85rem;margin-top:.8rem">
         Shaded by page views per country. Cloudflare reports location at country level only,
