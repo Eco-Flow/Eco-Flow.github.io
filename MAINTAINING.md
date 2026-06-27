@@ -129,9 +129,10 @@ Any pipeline with a `repo:` field gets:
 - its full page content pulled from the repo's `README.md`, from
   [`_data/pipeline_readmes.yml`](_data/pipeline_readmes.yml) — unless `sync_readme: false`.
 
-Both files are **auto-generated** — don't edit them by hand. They're refreshed nightly by the
+Both files are **auto-generated** — don't edit them by hand. They're refreshed automatically
+**every day at ~04:17 UTC** by the
 [`sync-pipeline-meta`](.github/workflows/sync-pipeline-meta.yml) GitHub Action (also runnable
-manually from the Actions tab), which runs
+on demand from the **Actions** tab → *Run workflow*), which runs
 [`scripts/sync_pipeline_meta.py`](scripts/sync_pipeline_meta.py) against the GitHub API for
 every `repo:` value found in `_pipelines/`. The README sync strips the nf-core logo/badges
 header and rewrites relative links/images to absolute GitHub URLs, so it's not quite a 1:1 raw
@@ -192,8 +193,8 @@ or a post and the count goes up on its own.
 
 - **Web stats** (page views, visits, countries, top pages, world map) come from **Cloudflare
   Web Analytics**, written into [`_data/stats.yml`](_data/stats.yml) by the
-  [`sync-cloudflare-stats`](.github/workflows/sync-cloudflare-stats.yml) GitHub Action (nightly,
-  or run it manually from the Actions tab). It runs
+  [`sync-cloudflare-stats`](.github/workflows/sync-cloudflare-stats.yml) GitHub Action
+  (automatically **every day at ~05:37 UTC**, or on demand from the Actions tab). It runs
   [`scripts/fetch_cloudflare_stats.py`](scripts/fetch_cloudflare_stats.py).
   - It needs one repo secret: **`CLOUDFLARE_API_TOKEN`** (a token with *Account Analytics →
     Read*). Set under **Settings → Secrets and variables → Actions**.
