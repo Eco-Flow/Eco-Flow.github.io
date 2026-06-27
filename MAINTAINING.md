@@ -222,10 +222,15 @@ weekly visits, countries, total GitHub stars, pipeline count). This is done **ev
 [`snapshot-stats`](.github/workflows/snapshot-stats.yml) Action, which runs
 [`scripts/snapshot_stats.py`](scripts/snapshot_stats.py) against the already-synced data files.
 
-It's just collecting the history for now — nothing on the site plots it yet. Because the weekly
-`pageviews_7d` figures tile the timeline, a running sum gives cumulative traffic; `github_stars`
-is already cumulative. The CSV is in `_data/`, so a future chart could read it directly via
+Because the weekly `pageviews_7d` figures tile the timeline, a running sum gives cumulative
+traffic; `github_stars` is already cumulative. The CSV is in `_data/`, so the page reads it via
 `site.data.stats_history`. **Don't edit the CSV by hand** — it's appended automatically.
+
+The **"Page views (total)"** tile on `/numbers/` is this running sum (not Cloudflare's own
+"total"). Why: at low traffic Cloudflare *samples* wide-window queries, returning lumpy ×10
+estimates and dropping rare events — so anything beyond the **7-day** window (which is unsampled)
+isn't trustworthy. The breakdowns (top pages/countries, map) are queried over 7 days for the same
+reason. A future chart could plot the history CSV directly.
 
 ## Changing the look (colours, fonts, spacing)
 

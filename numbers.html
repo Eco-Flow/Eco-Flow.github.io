@@ -12,6 +12,16 @@ description: A snapshot of Eco-Flow's work, reach and community.
 {%- endfor -%}
 {%- assign s = site.data.stats -%}
 
+{%- comment -%}
+  Cumulative page views = sum of the weekly history snapshots (each row's
+  pageviews_7d). This is unsampled and accurate, unlike Cloudflare's wide-window
+  totals which it samples. Grows as new weekly snapshots are appended.
+{%- endcomment -%}
+{%- assign pv_total = 0 -%}
+{%- for row in site.data.stats_history -%}
+  {%- assign pv_total = pv_total | plus: row.pageviews_7d -%}
+{%- endfor -%}
+
 <div class="page-head">
   <div class="wrap">
     <h1>Eco-Flow in numbers</h1>
@@ -59,7 +69,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       </p>
     </div>
     <div class="stats">
-      <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>
+      <div class="stat"><div class="stats__num">{{ pv_total }}</div><div class="stats__label">Page views (total)</div></div>
       <div class="stat"><div class="stats__num">{{ s.pageviews_7d }}</div><div class="stats__label">Page views (7 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.visits_7d }}</div><div class="stats__label">Visits (7 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.countries_7d }}</div><div class="stats__label">Countries (7 days)</div></div>
