@@ -43,6 +43,9 @@
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}">
   {%- feed_meta -%}
 
+  {%- comment -%} Cloudflare Web Analytics (cookieless, no consent banner needed) {%- endcomment -%}
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0879107a995747d88de287f1770eacb5"}'></script>
+
   {%- comment -%} Structured data: helps search engines connect "UCL Eco-Flow" to the home page {%- endcomment -%}
   {%- if page.url == "/" -%}
   <script type="application/ld+json">
