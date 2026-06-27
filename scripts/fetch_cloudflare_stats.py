@@ -116,6 +116,24 @@ query Breakdown($account: String!, $site: String!, $start: Date!, $end: Date!) {
 """
 
 
+SITES_QUERY = """
+query Sites($account: String!, $start: Date!, $end: Date!) {
+  viewer {
+    accounts(filter: { accountTag: $account }) {
+      sites: rumPageloadEventsAdaptiveGroups(
+        filter: { date_geq: $start, date_leq: $end }
+        limit: 20
+        orderBy: [count_DESC]
+      ) {
+        count
+        dimensions { siteTag }
+      }
+    }
+  }
+}
+"""
+
+
 def totals(start, end):
     data = graphql(TOTALS_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
                                   "start": start, "end": end})
@@ -144,6 +162,19 @@ def main():
     pv_all, v_all = totals(LAUNCH_DATE, end)
     pv_30, v_30 = totals(d(30), end)
     pv_7, v_7 = totals(d(7), end)
+
+    if pv_all == 0:
+        # Diagnostic: which site tags actually have data in this account?
+        diag = graphql(SITES_QUERY, {"account": ACCOUNT_ID, "start": d(30), "end": end})
+        sites = diag.get("sites") or []
+        if sites:
+            print("No data for our site tag. Site tags with data (last 30d):")
+            for s in sites:
+                print(f"  {s['dimensions']['siteTag']}: {s['count']} page views")
+            print(f"(We queried siteTag={SITE_TAG})")
+        else:
+            print(f"No RUM data in this account yet for the last 30 days "
+                  f"(queried siteTag={SITE_TAG}). Likely too soon after setup.")
 
     bd = graphql(BREAKDOWN_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
                                    "start": d(30), "end": end})
