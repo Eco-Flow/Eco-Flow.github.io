@@ -8,9 +8,10 @@ secret and never reaches the public site.
 
 Required environment variables (set as GitHub Actions secrets):
   CLOUDFLARE_API_TOKEN   - token with "Account Analytics: Read" permission
-  CLOUDFLARE_ACCOUNT_ID  - your Cloudflare account ID
 
 Optional:
+  CLOUDFLARE_ACCOUNT_ID  - account ID; if omitted, it is auto-discovered from
+                           the token (the token is scoped to one account)
   CLOUDFLARE_SITE_TAG    - the Web Analytics site tag (defaults to the tag
                            already baked into the public beacon, so usually
                            not needed)
@@ -37,7 +38,7 @@ ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
 SITE_TAG = os.environ.get("CLOUDFLARE_SITE_TAG", "0879107a995747d88de287f1770eacb5")
 
 
-def graphql(query, variables):
+def graphql_raw(query, variables):
     body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
     req = urllib.request.Request(
         API_URL,
@@ -52,7 +53,25 @@ def graphql(query, variables):
         payload = json.loads(resp.read().decode("utf-8"))
     if payload.get("errors"):
         raise RuntimeError(f"GraphQL errors: {payload['errors']}")
-    return payload["data"]["viewer"]["accounts"][0]
+    return payload["data"]["viewer"]["accounts"]
+
+
+def graphql(query, variables):
+    accounts = graphql_raw(query, variables)
+    if not accounts:
+        raise RuntimeError("No Cloudflare account accessible with this token.")
+    return accounts[0]
+
+
+ACCOUNTS_QUERY = "query { viewer { accounts(limit: 1) { accountTag name } } }"
+
+
+def discover_account_tag():
+    """Find the account the token is scoped to, so a (possibly wrong) account
+    ID secret isn't needed."""
+    acct = graphql(ACCOUNTS_QUERY, {})
+    print(f"Using Cloudflare account: {acct.get('name')} ({acct['accountTag']})")
+    return acct["accountTag"]
 
 
 TOTALS_QUERY = """
@@ -108,8 +127,12 @@ def totals(start, end):
 
 
 def main():
-    if not API_TOKEN or not ACCOUNT_ID:
-        sys.exit("CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set.")
+    global ACCOUNT_ID
+    if not API_TOKEN:
+        sys.exit("CLOUDFLARE_API_TOKEN must be set.")
+    # Prefer the account the token is actually scoped to (avoids "not authorized
+    # for that account" when the supplied ID is wrong or is a zone/site tag).
+    ACCOUNT_ID = discover_account_tag()
 
     today = datetime.date.today()
     d = lambda days: (today - datetime.timedelta(days=days)).isoformat()
