@@ -213,6 +213,20 @@ Shaded by page views per country, using a **vendored** copy of jsVectorMap in
 [`assets/vendor/jsvectormap/`](assets/vendor/jsvectormap) (no third-party CDN). Cloudflare only
 reports location at country level, so there's no within-country (e.g. UK regional) breakdown.
 
+### Historical snapshots (for trends over time)
+
+The live Cloudflare/GitHub figures are *current* only — to keep a history we append a weekly
+row to [`_data/stats_history.csv`](_data/stats_history.csv) (date, weekly/30-day page views,
+weekly visits, countries, total GitHub stars, pipeline count). This is done **every Monday at
+~06:00 UTC** (or on demand from the Actions tab) by the
+[`snapshot-stats`](.github/workflows/snapshot-stats.yml) Action, which runs
+[`scripts/snapshot_stats.py`](scripts/snapshot_stats.py) against the already-synced data files.
+
+It's just collecting the history for now — nothing on the site plots it yet. Because the weekly
+`pageviews_7d` figures tile the timeline, a running sum gives cumulative traffic; `github_stars`
+is already cumulative. The CSV is in `_data/`, so a future chart could read it directly via
+`site.data.stats_history`. **Don't edit the CSV by hand** — it's appended automatically.
+
 ## Changing the look (colours, fonts, spacing)
 
 All design tokens are in [`_sass/_variables.scss`](_sass/_variables.scss) — change a value
