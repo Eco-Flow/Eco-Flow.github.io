@@ -15,21 +15,21 @@ top_pages:
 - path: /about/
   views: 16
 - path: /
-  views: 7
+  views: 8
 - path: /events/
-  views: 6
-- path: /pipelines/about/
-  views: 3
+  views: 7
 - path: /pipelines/
+  views: 4
+- path: /pipelines/excon/
+  views: 4
+- path: /pipelines/gwas/
+  views: 3
+- path: /pipelines/about/
   views: 3
 - path: /partners/
   views: 2
-- path: /pipelines/excon/
-  views: 1
-- path: /pipelines/gwas/
-  views: 1
-- path: /pipelines/nanoporemetabarcoding/
-  views: 1
+- path: /pipelines/genomeqc/
+  views: 2
 top_countries:
 - name: GB
   views: 62
