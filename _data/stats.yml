@@ -11,11 +11,11 @@ visits_7d: 4
 countries_7d: 2
 top_pages:
 - path: /numbers/
-  views: 25
+  views: 30
 - path: /about/
-  views: 15
+  views: 16
 - path: /
-  views: 6
+  views: 7
 - path: /events/
   views: 6
 - path: /pipelines/about/
