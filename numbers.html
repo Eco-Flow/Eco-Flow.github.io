@@ -78,6 +78,8 @@ description: A snapshot of Eco-Flow's work, reach and community.
       A <strong>visit</strong> is one arrival at the site (directly or from another website) and may
       span several page views — the closest figure to &ldquo;how many people came&rdquo;. Because
       tracking is cookieless, returning people aren't recognised, so this isn't a unique-visitor count.
+      Figures also include some automated (bot) traffic: Cloudflare's free tier doesn't separate bots
+      out in its data feed.
     </p>
 
     {%- if s.top_pages and s.top_pages.size > 0 -%}
@@ -85,7 +87,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="card">
         <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· last 7 days</span></h3>
         <ol class="numbered">
-          {%- for p in s.top_pages limit: 8 -%}
+          {%- for p in s.top_pages limit: 10 -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
           {%- endfor -%}
         </ol>
@@ -93,7 +95,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="card">
         <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· last 7 days</span></h3>
         <ol class="numbered">
-          {%- for c in s.top_countries limit: 8 -%}
+          {%- for c in s.top_countries limit: 10 -%}
           <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
           {%- endfor -%}
         </ol>
