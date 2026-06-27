@@ -130,9 +130,12 @@ def main():
     global ACCOUNT_ID
     if not API_TOKEN:
         sys.exit("CLOUDFLARE_API_TOKEN must be set.")
-    # Prefer the account the token is actually scoped to (avoids "not authorized
-    # for that account" when the supplied ID is wrong or is a zone/site tag).
-    ACCOUNT_ID = discover_account_tag()
+    # Use the supplied account ID if present (required for tokens scoped to one
+    # account). If absent, discover it (works for "All accounts" tokens).
+    if ACCOUNT_ID:
+        print(f"Using supplied account ID: {ACCOUNT_ID}")
+    else:
+        ACCOUNT_ID = discover_account_tag()
 
     today = datetime.date.today()
     d = lambda days: (today - datetime.timedelta(days=days)).isoformat()
