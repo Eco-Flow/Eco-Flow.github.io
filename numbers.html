@@ -30,17 +30,18 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <span class="eyebrow">Overview</span>
       <h2>Eco-Flow general stats</h2>
     </div>
+    {%- comment -%} Manually-maintained figures: edit the numbers below. {%- endcomment -%}
     <div class="stats">
       <div class="stat"><div class="stats__num">{{ site.data.training.parts | size }}</div><div class="stats__label">Training modules</div></div>
+      <div class="stat"><div class="stats__num">234</div><div class="stats__label">Trainees taught</div></div>
+      <div class="stat"><div class="stats__num">9</div><div class="stats__label">Events</div></div>
       <div class="stat"><div class="stats__num">{{ site.pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
-      <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
-      <div class="stat"><div class="stats__num">{{ site.events | size }}</div><div class="stats__label">Events</div></div>
     </div>
     <div class="stats" style="margin-top:2rem">
+      <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
       <div class="stat"><div class="stats__num">{{ site.data.ambassadors | size }}</div><div class="stats__label">Academic ambassadors</div></div>
       <div class="stat"><div class="stats__num">{{ site.data.team.current | size }}</div><div class="stats__label">Core team</div></div>
       <div class="stat"><div class="stats__num">{{ site.data.external_projects | size }}</div><div class="stats__label">Projects we support</div></div>
-      <div class="stat"><div class="stats__num">{{ site.data.funders.funding | size }}</div><div class="stats__label">Funders &amp; sponsors</div></div>
     </div>
   </div>
 </section>
