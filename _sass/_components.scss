@@ -248,11 +248,14 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 // World map on the stats page (jsVectorMap)
 .worldmap {
   width: 100%;
-  height: 460px;
+  // Match the world map's own proportions (900 x 440.7) so it fills the box
+  // edge to edge instead of sitting small in a short, wide frame.
+  aspect-ratio: 900 / 441;
   border: 1px solid $border;
   border-radius: $radius;
   background: $bg-soft;
-  @include sm { height: 320px; }
+  // Mobile already looked right with a fixed height — keep that.
+  @include sm { aspect-ratio: auto; height: 320px; }
 }
 
 // Ranked list (top pages / countries on the stats page)
