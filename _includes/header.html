@@ -22,6 +22,15 @@
               {%- endfor -%}
             </ul>
           </li>
+        {%- elsif item.children -%}
+          <li class="nav__dropdown">
+            <a href="{{ item.url | relative_url }}" class="nav__link nav__dropdown-toggle">{{ item.title }} ▾</a>
+            <ul class="nav__menu">
+              {%- for child in item.children -%}
+                <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </li>
         {%- else -%}
           {%- assign current = page.url | downcase -%}
           {%- assign target = item.url | downcase -%}

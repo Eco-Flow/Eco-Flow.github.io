@@ -3,11 +3,6 @@ layout: default
 title: Eco-Flow in numbers
 permalink: /numbers/
 description: A snapshot of Eco-Flow's reach, pipelines and community.
-# Unlisted for now: not linked in the nav, kept out of search engines and the
-# sitemap. Remove `noindex` and `sitemap: false`, and add a nav entry, when
-# you're ready to make this public.
-noindex: true
-sitemap: false
 ---
 
 {%- comment -%} Sum GitHub stars across all tracked pipelines {%- endcomment -%}
@@ -54,11 +49,20 @@ sitemap: false
       <div class="card">
         <h3 style="margin-top:0">Top countries <span style="color:var(--faint,#8a9890);font-weight:400">· last 30 days</span></h3>
         <ol class="numbered">
-          {%- for c in s.top_countries -%}
+          {%- for c in s.top_countries limit: 8 -%}
           <li>{{ c.name }} <span class="numbered__val">{{ c.views }}</span></li>
           {%- endfor -%}
         </ol>
       </div>
+    </div>
+
+    <div style="margin-top:3rem">
+      <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· last 30 days</span></h3>
+      <div id="worldmap" class="worldmap"></div>
+      <p style="color:#8a9890;font-size:.85rem;margin-top:.8rem">
+        Shaded by page views per country. Cloudflare reports location at country level only,
+        so we can't break this down within a country.
+      </p>
     </div>
     {%- else -%}
     <p style="margin-top:1.5rem;color:#5b6b63">
@@ -88,3 +92,44 @@ sitemap: false
     </div>
   </div>
 </section>
+
+{%- if s.top_countries and s.top_countries.size > 0 -%}
+<link rel="stylesheet" href="{{ '/assets/vendor/jsvectormap/jsvectormap.min.css' | relative_url }}">
+<script src="{{ '/assets/vendor/jsvectormap/jsvectormap.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/vendor/jsvectormap/world.js' | relative_url }}"></script>
+<script>
+  (function () {
+    var values = { {% for c in s.top_countries %}"{{ c.name }}": {{ c.views }}{% unless forloop.last %}, {% endunless %}{% endfor %} };
+
+    function hexToRgb(h) { h = h.replace('#', ''); return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)]; }
+    function mix(a, b, t) {
+      var x = hexToRgb(a), y = hexToRgb(b);
+      return 'rgb(' + Math.round(x[0]+(y[0]-x[0])*t) + ',' + Math.round(x[1]+(y[1]-x[1])*t) + ',' + Math.round(x[2]+(y[2]-x[2])*t) + ')';
+    }
+
+    function init() {
+      if (!window.jsVectorMap || !document.getElementById('worldmap')) return;
+      var codes = Object.keys(values);
+      if (!codes.length) return;
+      var max = Math.max.apply(null, codes.map(function (k) { return values[k]; }));
+      var map = new jsVectorMap({
+        selector: '#worldmap',
+        map: 'world',
+        zoomButtons: true,
+        zoomOnScroll: false,
+        backgroundColor: 'transparent',
+        regionStyle: { initial: { fill: '#e7ece9', stroke: '#ffffff', strokeWidth: 0.4 } }
+      });
+      // Shade each country with data from light to dark green by its view count.
+      codes.forEach(function (code) {
+        var region = map.regions[code];
+        if (!region || !region.element) return;
+        var t = max > 0 ? Math.sqrt(values[code] / max) : 0;
+        region.element.setStyle('fill', mix('#cdeadb', '#1c6b43', 0.25 + 0.75 * t));
+      });
+    }
+    if (document.readyState !== 'loading') init();
+    else document.addEventListener('DOMContentLoaded', init);
+  })();
+</script>
+{%- endif -%}

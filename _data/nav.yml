@@ -1,7 +1,12 @@
-# Main navigation. "pipelines" item renders as a dropdown built from the
-# _pipelines collection (sorted by nav_order).
+# Main navigation. "pipelines" renders as a dropdown built from the _pipelines
+# collection; any item with `children:` renders as a generic dropdown.
 - title: About
   url: /about/
+  children:
+    - title: Who we are
+      url: /about/
+    - title: Eco-Flow in numbers
+      url: /numbers/
 - title: Services
   url: /services/
 - title: Pipelines

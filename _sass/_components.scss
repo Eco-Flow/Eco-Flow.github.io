@@ -235,6 +235,16 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 
 // --- Logo wall -------------------------------------------------------------
 
+// World map on the stats page (jsVectorMap)
+.worldmap {
+  width: 100%;
+  height: 460px;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $bg-soft;
+  @include sm { height: 320px; }
+}
+
 // Ranked list (top pages / countries on the stats page)
 .numbered {
   margin: .4rem 0 0;

@@ -5,4 +5,7 @@ _site/
 
 # Bundler / local gems
 .bundle/
-vendor/
+/vendor/
+
+# but DO track vendored front-end libraries
+!assets/vendor/

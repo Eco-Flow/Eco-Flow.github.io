@@ -187,9 +187,11 @@ def main():
         for p in (bd.get("pages") or [])
     ]
     country_groups = bd.get("countries") or []
+    # Keep up to 100 countries: the page lists the top few and uses the full
+    # set to shade the world map. "countryName" is actually an ISO-2 code (GB).
     top_countries = [
         {"name": (c["dimensions"]["countryName"] or "Unknown"), "views": int(c["count"])}
-        for c in country_groups[:10]
+        for c in country_groups[:100]
     ]
 
     out = {
