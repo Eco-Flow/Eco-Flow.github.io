@@ -63,14 +63,14 @@ def graphql(query, variables):
     return accounts[0]
 
 
-ACCOUNTS_QUERY = "query { viewer { accounts { accountTag name } } }"
+ACCOUNTS_QUERY = "query { viewer { accounts { accountTag } } }"
 
 
 def discover_account_tag():
     """Find the account the token is scoped to, so a (possibly wrong) account
     ID secret isn't needed."""
     acct = graphql(ACCOUNTS_QUERY, {})
-    print(f"Using Cloudflare account: {acct.get('name')} ({acct['accountTag']})")
+    print(f"Using Cloudflare account: {acct['accountTag']}")
     return acct["accountTag"]
 
 
