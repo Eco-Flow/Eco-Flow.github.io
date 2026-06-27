@@ -60,10 +60,15 @@ description: A snapshot of Eco-Flow's work, reach and community.
     </div>
     <div class="stats">
       <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>
-      <div class="stat"><div class="stats__num">{{ s.pageviews_30d }}</div><div class="stats__label">Page views (30 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.pageviews_7d }}</div><div class="stats__label">Page views (7 days)</div></div>
+      <div class="stat"><div class="stats__num">{{ s.visits_7d }}</div><div class="stats__label">Visits (7 days)</div></div>
       <div class="stat"><div class="stats__num">{{ s.countries_30d }}</div><div class="stats__label">Countries (30 days)</div></div>
     </div>
+    <p style="color:#8a9890;font-size:.85rem;margin-top:1rem">
+      A <strong>visit</strong> is one arrival at the site (directly or from another website) and may
+      span several page views — the closest figure to &ldquo;how many people came&rdquo;. Because
+      tracking is cookieless, returning people aren't recognised, so this isn't a unique-visitor count.
+    </p>
 
     {%- if s.top_pages and s.top_pages.size > 0 -%}
     <div class="grid grid--2" style="margin-top:3rem">
