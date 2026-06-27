@@ -130,7 +130,7 @@ Any pipeline with a `repo:` field gets:
   [`_data/pipeline_readmes.yml`](_data/pipeline_readmes.yml) — unless `sync_readme: false`.
 
 Both files are **auto-generated** — don't edit them by hand. They're refreshed automatically
-**every day at ~04:17 UTC** by the
+**every day at ~04:17 UTC, and on every push/merge to `publish`**, by the
 [`sync-pipeline-meta`](.github/workflows/sync-pipeline-meta.yml) GitHub Action (also runnable
 on demand from the **Actions** tab → *Run workflow*), which runs
 [`scripts/sync_pipeline_meta.py`](scripts/sync_pipeline_meta.py) against the GitHub API for
@@ -194,7 +194,8 @@ or a post and the count goes up on its own.
 - **Web stats** (page views, visits, countries, top pages, world map) come from **Cloudflare
   Web Analytics**, written into [`_data/stats.yml`](_data/stats.yml) by the
   [`sync-cloudflare-stats`](.github/workflows/sync-cloudflare-stats.yml) GitHub Action
-  (automatically **every day at ~05:37 UTC**, or on demand from the Actions tab). It runs
+  (automatically **every day at ~05:37 UTC, and on every push/merge to `publish`**, or on
+  demand from the Actions tab). It runs
   [`scripts/fetch_cloudflare_stats.py`](scripts/fetch_cloudflare_stats.py).
   - It needs one repo secret: **`CLOUDFLARE_API_TOKEN`** (a token with *Account Analytics →
     Read*). Set under **Settings → Secrets and variables → Actions**.
