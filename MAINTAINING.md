@@ -203,6 +203,11 @@ or a post and the count goes up on its own.
     `SITE_TAG`. If analytics ever read zero, the script logs which site tags actually have data.
   - The tracking beacon itself lives in [`_includes/head.html`](_includes/head.html) and loads on
     every page — it's cookieless, so no consent banner is needed.
+  - **Excluding your own visits:** open the site with **`?notrack=1`** once in each browser/device
+    you use (e.g. <https://eco-flow.github.io/?notrack=1>). That browser then stops loading the
+    beacon, so your testing no longer inflates the figures. Use `?notrack=0` to re-enable. It's
+    stored per-browser in `localStorage`, so it sticks until you clear site data; only affects
+    *future* visits, not ones already counted.
 - **GitHub stats** (total stars, tracked repos, stars-by-pipeline) come from the same
   [`_data/pipelines_meta.yml`](_data/pipelines_meta.yml) used by the pipeline pages — refreshed by
   the `sync-pipeline-meta` Action described above.

@@ -44,8 +44,29 @@
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}">
   {%- feed_meta -%}
 
-  {%- comment -%} Cloudflare Web Analytics (cookieless, no consent banner needed) {%- endcomment -%}
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0879107a995747d88de287f1770eacb5"}'></script>
+  {%- comment -%}
+    Cloudflare Web Analytics (cookieless, no consent banner needed).
+    Self-exclusion: visiting any page with ?notrack=1 stops this browser being
+    counted (stored in localStorage); ?notrack=0 re-enables it. Used so the team's
+    own visits don't inflate the figures.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search);
+        if (q.has('notrack')) {
+          if (q.get('notrack') === '0') localStorage.removeItem('ef_notrack');
+          else localStorage.setItem('ef_notrack', '1');
+        }
+        if (localStorage.getItem('ef_notrack') === '1') return;
+      } catch (e) { /* localStorage blocked — just track as normal */ }
+      var s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.setAttribute('data-cf-beacon', '{"token": "0879107a995747d88de287f1770eacb5"}');
+      document.head.appendChild(s);
+    })();
+  </script>
 
   {%- comment -%} Structured data: helps search engines connect "UCL Eco-Flow" to the home page {%- endcomment -%}
   {%- if page.url == "/" -%}
