@@ -20,6 +20,7 @@ For first-time local setup, see [test_locally.md](test_locally.md).
 | Change funders / partners | Edit [`_data/funders.yml`](_data/funders.yml) |
 | Change ambassadors        | Edit [`_data/ambassadors.yml`](_data/ambassadors.yml) |
 | Change the nav menu       | Edit [`_data/nav.yml`](_data/nav.yml) |
+| Update the stats page numbers | Edit the manual figures in [`numbers.html`](numbers.html) — see ["Eco-Flow in numbers"](#the-eco-flow-in-numbers-page-numbers) |
 | Change colours / fonts    | Edit [`_sass/_variables.scss`](_sass/_variables.scss) |
 | Publish changes           | Commit and push to the `publish` branch |
 
@@ -162,6 +163,53 @@ These pages are built from YAML data files — edit the data, not the page:
 - **Top navigation**: [`_data/nav.yml`](_data/nav.yml).
 
 Photos/logos referenced in these files live in `img/` and use the `/img/...` path.
+
+---
+
+## The "Eco-Flow in numbers" page (`/numbers/`)
+
+The stats page at [`numbers.html`](numbers.html) (linked under the **About ▾** dropdown) mixes
+two kinds of figure. A **★ next to a section heading means that section updates itself
+automatically** from a live source; everything else is either counted from the site's own
+content or typed in by hand. The legend at the top of the page explains this to visitors.
+
+### Manually-maintained figures — edit these by hand
+
+A couple of numbers have no source to count from, so they're written directly into
+[`numbers.html`](numbers.html), in the **"Eco-Flow general stats"** section under the comment
+`Manually-maintained figures: edit the numbers below`:
+
+- **Trainees taught** — currently `234`
+- **Events** — currently `9` (this is the *claimed* total; the Events page itself only lists
+  the events that have their own file in [`_events/`](_events))
+
+To change them, just edit the number inside the relevant `<div class="stats__num">…</div>` and
+publish. The other tiles in that section (training modules, pipelines, blog posts, ambassadors,
+core team, projects we support) are **counted automatically** from your content — add a pipeline
+or a post and the count goes up on its own.
+
+### Auto figures (★) — don't edit by hand
+
+- **Web stats** (page views, visits, countries, top pages, world map) come from **Cloudflare
+  Web Analytics**, written into [`_data/stats.yml`](_data/stats.yml) by the
+  [`sync-cloudflare-stats`](.github/workflows/sync-cloudflare-stats.yml) GitHub Action (nightly,
+  or run it manually from the Actions tab). It runs
+  [`scripts/fetch_cloudflare_stats.py`](scripts/fetch_cloudflare_stats.py).
+  - It needs one repo secret: **`CLOUDFLARE_API_TOKEN`** (a token with *Account Analytics →
+    Read*). Set under **Settings → Secrets and variables → Actions**.
+  - The Cloudflare **site tag** (different from the public beacon token!) is set in the script as
+    `SITE_TAG`. If analytics ever read zero, the script logs which site tags actually have data.
+  - The tracking beacon itself lives in [`_includes/head.html`](_includes/head.html) and loads on
+    every page — it's cookieless, so no consent banner is needed.
+- **GitHub stats** (total stars, tracked repos, stars-by-pipeline) come from the same
+  [`_data/pipelines_meta.yml`](_data/pipelines_meta.yml) used by the pipeline pages — refreshed by
+  the `sync-pipeline-meta` Action described above.
+
+### The world map
+
+Shaded by page views per country, using a **vendored** copy of jsVectorMap in
+[`assets/vendor/jsvectormap/`](assets/vendor/jsvectormap) (no third-party CDN). Cloudflare only
+reports location at country level, so there's no within-country (e.g. UK regional) breakdown.
 
 ## Changing the look (colours, fonts, spacing)
 
