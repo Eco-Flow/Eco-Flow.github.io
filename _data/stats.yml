@@ -6,16 +6,16 @@ pageviews_all: 100
 visits_all: 0
 pageviews_30d: 100
 visits_30d: 0
-pageviews_7d: 89
-visits_7d: 5
-countries_7d: 2
+pageviews_7d: 114
+visits_7d: 6
+countries_7d: 5
 top_pages:
 - path: /numbers/
-  views: 34
+  views: 50
 - path: /about/
-  views: 17
+  views: 20
 - path: /
-  views: 9
+  views: 10
 - path: /events/
   views: 7
 - path: /pipelines/
@@ -23,13 +23,17 @@ top_pages:
 - path: /pipelines/excon/
   views: 4
 - path: /pipelines/about/
-  views: 3
+  views: 4
 - path: /pipelines/gwas/
-  views: 3
+  views: 4
 - path: /partners/
   views: 2
 - path: /pipelines/genomeqc/
   views: 2
+- path: /training/
+  views: 2
+- path: /pipelines/synteny/
+  views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
 - path: /services/
@@ -38,6 +42,12 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 62
+  views: 88
+- name: BR
+  views: 15
+- name: ZA
+  views: 7
+- name: AT
+  views: 3
 - name: US
   views: 1
