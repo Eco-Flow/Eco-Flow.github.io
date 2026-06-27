@@ -52,7 +52,11 @@ description: A snapshot of Eco-Flow's work, reach and community.
     <div class="section__head">
       <span class="eyebrow">Cloudflare Web Analytics</span>
       <h2>Web stats <span class="auto-star" title="Updated automatically from live data">★</span></h2>
-      <p>Measured privately, with no cookies · last updated {{ s.updated | date: "%-d %B %Y" }}.</p>
+      <p>
+        Measured privately, with no cookies{% if s.since %}, since {{ s.since | date: "%-d %B %Y" }}{% endif %} ·
+        last updated {{ s.updated | date: "%-d %B %Y" }}.
+        {% if s.since %}<br><span style="color:#8a9890;font-size:.92rem">Counting only began recently, so these figures are still small and growing.</span>{% endif %}
+      </p>
     </div>
     <div class="stats">
       <div class="stat"><div class="stats__num">{{ s.pageviews_all }}</div><div class="stats__label">Page views (total)</div></div>

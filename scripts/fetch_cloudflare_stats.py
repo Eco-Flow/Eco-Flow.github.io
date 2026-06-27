@@ -196,6 +196,7 @@ def main():
 
     out = {
         "updated": end,
+        "since": LAUNCH_DATE,
         "pageviews_all": pv_all,
         "visits_all": v_all,
         "pageviews_30d": pv_30,
