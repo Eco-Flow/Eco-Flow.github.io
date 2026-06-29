@@ -5,14 +5,16 @@
   children:
     - title: Who we are
       url: /about/
+    - title: Ambassadors &amp; partners
+      url: /partners/
+    - title: Funding
+      url: /funding/
     - title: Eco-Flow in numbers
       url: /numbers/
 - title: Services
   url: /services/
 - title: Pipelines
   dropdown: pipelines
-- title: Partners
-  url: /partners/
 - title: Blog
   url: /blog/
 - title: Events
