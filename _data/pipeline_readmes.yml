@@ -1,4 +1,4 @@
-"Eco-Flow/excon": "# EXCON (v2.3.1)\n\nA Nextflow pipeline for gene family **EX**pansion\
+"Eco-Flow/excon": "# EXCON (v2.3.2)\n\nA Nextflow pipeline for gene family **EX**pansion\
   \ and **CON**traction analysis \nacross multiple species using CAFE5.\n\nGiven a\
   \ set of genome assemblies and annotations, EXCON builds orthogroups with \nOrthoFinder,\
   \ fits and compares multiple CAFE models to identify gene families \nevolving at\
