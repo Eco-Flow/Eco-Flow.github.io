@@ -1,7 +1,7 @@
 ---
 title: 'nf-core Hackathon — Barcelona, October 2026'
 date: 2026-10-15
-description: 'The October 2026 nf-core hackathon, held alongside the Nextflow Summit in Barcelona.'
+description: 'The October 2026 in-person nf-core hackathon in Barcelona, part of Nextflow Summit 2026 week.'
 author: 'Christopher Wyatt'
 organiser: nf-core
 tags: ["nextflow", "nf-core", "hackathon", "barcelona"]
@@ -9,7 +9,7 @@ tags: ["nextflow", "nf-core", "hackathon", "barcelona"]
 
 <br>
 
-The **[nf-core Hackathon](https://nf-co.re/events/2026/hackathon-barcelona)** returns to **Barcelona on 15–16 October 2026**, held in person at SB Glow and run alongside the **Nextflow Summit 2026**.
+The **[nf-core Hackathon](https://nf-co.re/events/2026/hackathon-barcelona)** comes to **Barcelona on 15–16 October 2026**, held in person at SB Glow. It's part of **Nextflow Summit 2026** week — which also includes a free [virtual summit](https://summit.nextflow.io/) on 13–14 October — and in Barcelona runs alongside in-person **Nextflow Training**.
 
 ### What it is
 
@@ -21,7 +21,7 @@ Everyone is welcome, from complete beginners to seasoned developers. If you'd li
 
 ### Register
 
-Registration is open via the [Nextflow Summit 2026 site](https://summit.nextflow.io/2026/barcelona/register/form). Full event details are on the [nf-core event page](https://nf-co.re/events/2026/hackathon-barcelona).
+It's a **paid, in-person** event — register on the [Barcelona event page](https://summit.nextflow.io/2026/barcelona/), where academic pricing and a 25% early-bird discount are available (early-bird until 31 July 2026). Full programme details are on the [nf-core event page](https://nf-co.re/events/2026/hackathon-barcelona).
 
 ---
 
