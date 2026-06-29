@@ -86,6 +86,12 @@ tags: ["workshop", "metabarcoding"]
 The Events page automatically lists it under **Upcoming** until its date passes, then moves
 it to **Past events**.
 
+You can also list **events run by others** (e.g. an nf-core hackathon) — just paraphrase the
+details and link to the original. Add an **`organiser:`** field to control the logo sticker shown
+in the card's corner; valid keys are in [`_data/organisers.yml`](_data/organisers.yml)
+(`eco-flow` or `nf-core` — defaults to `eco-flow` if omitted). To add a new organiser, drop a
+square logo in `img/` and add an entry to that file.
+
 ## Adding or editing a pipeline
 
 Each pipeline is a file in `_pipelines/`, e.g. `_pipelines/my-pipeline.md`:

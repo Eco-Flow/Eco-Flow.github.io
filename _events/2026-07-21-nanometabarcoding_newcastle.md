@@ -3,6 +3,7 @@ title: 'Eco-flow nanometabarcoding workshop'
 date: 2026-07-21
 description: 'A workshop of part of the Dietary Interactions in Ecology Through Sequencing (DIETS) Symposium : https://foragingecology.com/diets/'
 author: 'Christopher Wyatt'
+organiser: eco-flow
 tags: ["nextflow", "nfcore", "nanopore", "metabarcoding"]
 redirect_from:
   - /events/2026-07-21-nanometabarcoding_newcastle.html

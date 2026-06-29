@@ -276,11 +276,21 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 
 .post-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.2rem; }
 .post-item {
+  position: relative;
   display: flex; flex-direction: column;
   border: 1px solid $border; border-radius: $radius; padding: 1.4rem 1.6rem;
   background: $white; box-shadow: $shadow; transition: all .18s ease;
 }
 .post-item:hover { transform: translateY(-2px); box-shadow: $shadow-hover; border-color: rgba(47,158,100,.35); }
+// Organiser logo sticker (Events page)
+.post-item__org {
+  position: absolute;
+  top: 1.2rem; right: 1.2rem;
+  width: 40px; height: 40px;
+  object-fit: contain;
+}
+.post-item:has(.post-item__org) { padding-right: 4rem; }
+@include sm { .post-item__org { width: 32px; height: 32px; top: 1rem; right: 1rem; } }
 .post-item__meta { font-size: .82rem; color: $faint; font-family: $font-mono; margin-bottom: .35rem; }
 .post-item__title { font-family: $font-head; font-size: 1.2rem; font-weight: 600; margin: 0 0 .4rem; }
 .post-item__title a { color: $ink; &:hover { color: $green-dark; text-decoration: none; } }

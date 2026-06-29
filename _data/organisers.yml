@@ -1,0 +1,9 @@
+# Event organisers -> corner-sticker logo shown on the Events page.
+# Set `organiser:` in an event's front matter to one of these keys
+# (defaults to eco-flow if omitted).
+eco-flow:
+  name: Eco-Flow
+  logo: /img/favicon-256.png
+nf-core:
+  name: nf-core
+  logo: /img/nfcore-apple.png
