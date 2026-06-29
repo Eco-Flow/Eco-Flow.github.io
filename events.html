@@ -9,6 +9,11 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
   <div class="wrap">
     <h1>Events</h1>
     <p>Training, workshops, hackathons and other events — upcoming and past.</p>
+    <p style="color:#5b6b63;font-size:.95rem;margin-top:.6rem">
+      The logo in each card's corner shows who runs the event: those marked with the
+      <strong>Eco-Flow</strong> tree are organised by us; the rest (such as the
+      <strong>nf-core</strong> apple) are community events we take part in or recommend.
+    </p>
   </div>
 </div>
 
@@ -19,7 +24,8 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
     <div class="section__head"><span class="eyebrow">Coming up</span><h2>Upcoming events</h2></div>
     <ul class="post-list">
       {%- assign upcoming = 0 -%}
-      {%- for event in site.events reversed -%}
+      {%- assign events_asc = site.events | sort: 'date' -%}
+      {%- for event in events_asc -%}
         {%- assign event_date = event.date | date: '%Y%m%d' -%}
         {%- if event_date >= today -%}
           {%- assign upcoming = upcoming | plus: 1 -%}
@@ -39,7 +45,8 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
 
     <div class="section__head" style="margin-top:3rem"><span class="eyebrow">Archive</span><h2>Past events</h2></div>
     <ul class="post-list">
-      {%- for event in site.events -%}
+      {%- assign events_desc = site.events | sort: 'date' | reverse -%}
+      {%- for event in events_desc -%}
         {%- assign event_date = event.date | date: '%Y%m%d' -%}
         {%- if event_date < today -%}
           <li class="post-item">
