@@ -7,3 +7,6 @@ eco-flow:
 nf-core:
   name: nf-core
   logo: /img/nfcore-apple.png
+ucl:
+  name: UCL
+  logo: /img/ucl-mark.png
