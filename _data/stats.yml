@@ -6,8 +6,8 @@ pageviews_all: 200
 visits_all: 10
 pageviews_30d: 200
 visits_30d: 10
-pageviews_7d: 177
-visits_7d: 17
+pageviews_7d: 178
+visits_7d: 18
 countries_7d: 7
 top_pages:
 - path: /numbers/
@@ -16,9 +16,9 @@ top_pages:
   views: 23
 - path: /
   views: 22
-- path: /events/
-  views: 7
 - path: /pipelines/gwas/
+  views: 8
+- path: /events/
   views: 7
 - path: /pipelines/
   views: 7
@@ -51,9 +51,9 @@ top_countries:
   views: 7
 - name: AU
   views: 5
-- name: AT
-  views: 3
 - name: US
+  views: 4
+- name: AT
   views: 3
 - name: PS
   views: 1
