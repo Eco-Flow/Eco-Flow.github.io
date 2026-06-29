@@ -3,6 +3,7 @@ title: 'nf-core hackathon London'
 date: 2026-03-19
 description: 'Blog post related to the nf-core hackathon we hosted in London in 2026.'
 author: 'Fernando Duarte'
+event: /events/2026-03-11-nf-core-hackathon-london-26/
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
 ---
 

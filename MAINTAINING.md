@@ -89,8 +89,27 @@ it to **Past events**.
 You can also list **events run by others** (e.g. an nf-core hackathon) — just paraphrase the
 details and link to the original. Add an **`organiser:`** field to control the logo sticker shown
 in the card's corner; valid keys are in [`_data/organisers.yml`](_data/organisers.yml)
-(`eco-flow` or `nf-core` — defaults to `eco-flow` if omitted). To add a new organiser, drop a
+(`eco-flow`, `nf-core`, `ucl` — defaults to `eco-flow` if omitted). To add a new organiser, drop a
 square logo in `img/` and add an entry to that file.
+
+### Events vs blog posts — the workflow
+
+Keep the two jobs separate so you never duplicate or agonise over which to use:
+
+- **Event** = the *calendar fact*. Create one for anything dated, ideally **before** it happens
+  (it shows under *Upcoming*, then moves to *Past events*).
+- **Blog post** = the *story*. Only write one when there's something to say afterwards — a recap,
+  photos, results, reflections. If it just happened with nothing to add, simply append a short
+  "how it went" paragraph to the event instead.
+
+When both exist, **cross-link them** (don't repeat the content):
+
+- On the **event**, add `writeup: /2026/03/19/your-post.html` → shows a "Read our write-up" link.
+- On the **blog post**, add `event: /events/2026-03-11-your-event/` → shows a "See the event" link.
+
+Use the built URLs for those paths (posts are `/YYYY/MM/DD/title.html`; events are
+`/events/<filename-slug>/`, where underscores in the filename become hyphens). See the March 2026
+London hackathon event/post pair for a working example.
 
 ## Adding or editing a pipeline
 

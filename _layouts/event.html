@@ -14,6 +14,9 @@ layout: default
           {%- for tag in page.tags -%}<span class="chip">{{ tag }}</span>{%- endfor -%}
         </div>
       {%- endif -%}
+      {%- if page.writeup -%}
+        <p class="article-xref"><a href="{{ page.writeup | relative_url }}">Read our write-up of this event →</a></p>
+      {%- endif -%}
     </div>
 
     <div class="prose">
