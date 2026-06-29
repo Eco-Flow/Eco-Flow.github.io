@@ -6,8 +6,8 @@ pageviews_all: 200
 visits_all: 10
 pageviews_30d: 200
 visits_30d: 10
-pageviews_7d: 178
-visits_7d: 18
+pageviews_7d: 190
+visits_7d: 19
 countries_7d: 7
 top_pages:
 - path: /numbers/
@@ -15,7 +15,9 @@ top_pages:
 - path: /about/
   views: 23
 - path: /
-  views: 22
+  views: 23
+- path: /funding/
+  views: 10
 - path: /pipelines/gwas/
   views: 8
 - path: /events/
@@ -34,17 +36,17 @@ top_pages:
   views: 4
 - path: /pipelines/synteny/
   views: 3
+- path: /partners/
+  views: 3
 - path: /pipelines/genomeqc/
   views: 3
-- path: /partners/
-  views: 2
 - path: /training/
   views: 2
 - path: /2025/04/01/hackathon-london.html
   views: 1
 top_countries:
 - name: GB
-  views: 142
+  views: 154
 - name: BR
   views: 16
 - name: ZA
