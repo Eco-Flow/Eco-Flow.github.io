@@ -10,3 +10,6 @@ nf-core:
 ucl:
   name: UCL
   logo: /img/ucl-mark.png
+workflowhub:
+  name: WorkflowHub
+  logo: /img/workflowhub-logo.svg
