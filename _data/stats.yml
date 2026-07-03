@@ -6,16 +6,16 @@ pageviews_all: 250
 visits_all: 60
 pageviews_30d: 250
 visits_30d: 60
-pageviews_7d: 268
-visits_7d: 64
+pageviews_7d: 271
+visits_7d: 65
 countries_7d: 10
 top_pages:
 - path: /numbers/
   views: 83
 - path: /
-  views: 36
+  views: 37
 - path: /about/
-  views: 26
+  views: 27
 - path: /events/
   views: 25
 - path: /pipelines/
@@ -31,7 +31,7 @@ top_pages:
 - path: /pipelines/excon/
   views: 7
 - path: /pipelines/nanoporemetabarcoding/
-  views: 6
+  views: 7
 - path: /pipelines/pollen-metabarcoding/
   views: 5
 - path: /pipelines/genomeqc/
@@ -66,13 +66,13 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 187
+  views: 189
 - name: SG
   views: 29
 - name: BR
   views: 17
 - name: US
-  views: 9
+  views: 10
 - name: FR
   views: 8
 - name: ZA
