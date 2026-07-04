@@ -296,6 +296,18 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 .post-item__title a { color: $ink; &:hover { color: $green-dark; text-decoration: none; } }
 .post-item__excerpt { color: $muted; font-size: .95rem; margin: 0; }
 .post-item__tags { margin-top: .8rem; }
+// Event-type pills (Events list + article head)
+.etypes { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .55rem; }
+.etype {
+  display: inline-flex; align-items: center; gap: .35em;
+  font-family: $font-mono; font-size: .72rem; font-weight: 600; line-height: 1;
+  padding: .28rem .6rem; border-radius: 999px;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.etype--talk       { background: #e7f3ec; color: #1c6b43; border-color: #cbe6d6; }
+.etype--training   { background: #e7eefb; color: #274b8a; border-color: #cfdcf4; }
+.etype--hackathon  { background: #fbf1dd; color: #8a5a12; border-color: #f0ddb6; }
+.etype--networking { background: #efeafa; color: #4b3b8f; border-color: #ded4f2; }
 .post-item__xref { margin: .6rem 0 0; font-size: .9rem; font-weight: 500; a { color: $green-dark; &:hover { color: $green; } } }
 // Cross-reference link between an event page and its blog write-up
 .article-xref { margin: 1rem 0 0; font-weight: 500; a { color: $green-dark; &:hover { color: $green; } } }

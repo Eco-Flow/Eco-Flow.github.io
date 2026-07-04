@@ -5,6 +5,7 @@ description: 'The March 2026 nf-core hackathon in London.'
 author: 'Christopher Wyatt'
 organiser: nf-core
 writeup: /2026/03/19/hackathon-london.html
+type: [hackathon]
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]
 redirect_from:
   - /events/2026-03-11-nf-core_hackathon_london_26.html

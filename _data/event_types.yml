@@ -1,0 +1,14 @@
+# Event types -> pill shown on each event card (front matter `type:` is a list).
+# An event can have several, e.g. `type: [training, talk]`.
+talk:
+  label: Talk
+  icon: "🎤"
+training:
+  label: Training
+  icon: "🎓"
+hackathon:
+  label: Hackathon
+  icon: "🛠️"
+networking:
+  label: Networking
+  icon: "🤝"

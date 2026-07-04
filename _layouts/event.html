@@ -8,6 +8,7 @@ layout: default
       <div class="post-item__meta">
         {{ page.date | date: "%B %-d, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}
       </div>
+      {%- include event-types.html types=page.type -%}
       <h1>{{ page.title }}</h1>
       {%- if page.tags and page.tags.size > 0 -%}
         <div class="post-item__tags">

@@ -1,0 +1,9 @@
+{%- comment -%}Event-type pills. Pass a list via `types` (e.g. include.types = event.type).{%- endcomment -%}
+{%- if include.types and include.types.size > 0 -%}
+  <div class="etypes">
+    {%- for t in include.types -%}
+      {%- assign et = site.data.event_types[t] -%}
+      {%- if et -%}<span class="etype etype--{{ t }}">{{ et.icon }} {{ et.label }}</span>{%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

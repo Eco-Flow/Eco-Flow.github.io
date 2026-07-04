@@ -4,6 +4,7 @@ date: 2026-07-08
 description: 'A short talk on the Eco-Flow project — how we bring nf-core, bioFAIR and WorkflowHub best practices in pipeline development to the ecology and evolutionary biology community.'
 author: 'Christopher Wyatt'
 organiser: workflowhub
+type: [talk]
 tags: ["talk", "workflowhub", "biofair", "nf-core", "community"]
 ---
 
