@@ -13,3 +13,6 @@ ucl:
 workflowhub:
   name: WorkflowHub
   logo: /img/workflowhub-logo.svg
+seqera:
+  name: Seqera
+  logo: /img/seqera-logo.svg
