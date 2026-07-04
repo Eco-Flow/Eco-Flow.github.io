@@ -2,11 +2,11 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-04'
 since: '2026-06-27'
-pageviews_all: 250
+pageviews_all: 260
 visits_all: 60
-pageviews_30d: 250
+pageviews_30d: 260
 visits_30d: 60
-pageviews_7d: 271
+pageviews_7d: 272
 visits_7d: 65
 countries_7d: 10
 top_pages:
@@ -33,7 +33,7 @@ top_pages:
 - path: /pipelines/nanoporemetabarcoding/
   views: 7
 - path: /pipelines/pollen-metabarcoding/
-  views: 5
+  views: 6
 - path: /pipelines/genomeqc/
   views: 5
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
@@ -72,7 +72,7 @@ top_countries:
 - name: BR
   views: 17
 - name: US
-  views: 10
+  views: 11
 - name: FR
   views: 8
 - name: ZA
