@@ -6,8 +6,8 @@ pageviews_all: 260
 visits_all: 60
 pageviews_30d: 260
 visits_30d: 60
-pageviews_7d: 272
-visits_7d: 65
+pageviews_7d: 276
+visits_7d: 69
 countries_7d: 10
 top_pages:
 - path: /numbers/
@@ -17,52 +17,54 @@ top_pages:
 - path: /about/
   views: 27
 - path: /events/
-  views: 25
+  views: 26
 - path: /pipelines/
   views: 11
 - path: /funding/
   views: 11
 - path: /pipelines/gwas/
   views: 9
-- path: /pipelines/synteny/
-  views: 7
-- path: /pipelines/about/
-  views: 7
 - path: /pipelines/excon/
   views: 7
 - path: /pipelines/nanoporemetabarcoding/
   views: 7
+- path: /pipelines/about/
+  views: 7
+- path: /pipelines/synteny/
+  views: 7
+- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
+  views: 6
 - path: /pipelines/pollen-metabarcoding/
   views: 6
-- path: /pipelines/genomeqc/
-  views: 5
-- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
-  views: 5
 - path: /partners/
+  views: 5
+- path: /pipelines/genomeqc/
   views: 5
 - path: /services/
   views: 5
-- path: /events/2026-10-15-nf-core-hackathon-barcelona/
-  views: 3
 - path: /training/
   views: 3
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
+  views: 3
+- path: /events/2026-07-21-nanometabarcoding-newcastle/
+  views: 2
+- path: /events/2026-02-26-nf-core-hackathon-training/
+  views: 1
+- path: /2025/09/01/biofair-fellowship.html
+  views: 1
+- path: /2025/04/01/hackathon-london.html
+  views: 1
+- path: /events/2026-03-11-nf-core-hackathon-london-26/
+  views: 1
+- path: /events/2026-07-08-workflowhub-community-meeting/
+  views: 1
 - path: /citations/
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
-- path: /2025/04/01/hackathon-london.html
-  views: 1
-- path: /2025/09/01/biofair-fellowship.html
-  views: 1
-- path: /events/2026-02-26-nf-core-hackathon-training/
-  views: 1
-- path: /events/2026-03-11-nf-core-hackathon-london-26/
-  views: 1
 - path: /jobs/
   views: 1
 - path: /2026/06/23/new-website-design.html
-  views: 1
-- path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 1
 top_countries:
 - name: GB
@@ -72,7 +74,7 @@ top_countries:
 - name: BR
   views: 17
 - name: US
-  views: 11
+  views: 15
 - name: FR
   views: 8
 - name: ZA
