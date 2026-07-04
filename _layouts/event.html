@@ -6,7 +6,7 @@ layout: default
     <div class="article-head">
       <a class="back-link" href="{{ '/events/' | relative_url }}">← Back to events</a>
       <div class="post-item__meta">
-        {{ page.date | date: "%B %-d, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}
+        {{ page.date | date: "%B %-d, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}{% if page.location %} · {% include event-location.html location=page.location %}{% endif %}
       </div>
       {%- include event-types.html types=page.type -%}
       <h1>{{ page.title }}</h1>

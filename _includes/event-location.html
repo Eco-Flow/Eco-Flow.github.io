@@ -1,0 +1,6 @@
+{%- comment -%}Event location, shown on the meta line. Pass `location` (a string).
+Renders a 💻 for online events (location contains "online"), else a 📍 pin.{%- endcomment -%}
+{%- if include.location -%}
+  {%- assign loc_l = include.location | downcase -%}
+  <span class="post-item__loc">{% if loc_l contains 'online' %}💻{% else %}📍{% endif %} {{ include.location }}</span>
+{%- endif -%}

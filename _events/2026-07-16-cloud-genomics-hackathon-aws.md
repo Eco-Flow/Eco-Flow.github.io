@@ -4,6 +4,7 @@ date: 2026-07-16
 description: 'A one-day hackathon building reproducible Nextflow genomics pipelines on AWS, run by the UCL Centre for Digital Innovation.'
 author: 'Christopher Wyatt'
 organiser: ucl
+location: London, UK
 type: [hackathon]
 tags: ["nextflow", "cloud", "aws", "hackathon", "genomics"]
 ---

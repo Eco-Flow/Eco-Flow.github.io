@@ -4,6 +4,7 @@ date: 2026-09-10
 description: 'A full day of hands-on Nextflow training, talks and networking hosted by Seqera in Cambridge, spanning R&D, bioinformatics and agentic science.'
 author: 'Christopher Wyatt'
 organiser: seqera
+location: Cambridge, UK
 type: [training, talk, networking]
 tags: ["nextflow", "seqera", "training", "networking", "talks"]
 ---

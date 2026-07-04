@@ -32,7 +32,7 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
           <li class="post-item">
             {%- assign org = site.data.organisers[event.organiser] | default: site.data.organisers['eco-flow'] -%}
             {%- if org -%}<img class="post-item__org" src="{{ org.logo | relative_url }}" alt="{{ org.name }}" title="Organised by {{ org.name }}">{%- endif -%}
-            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}</div>
+            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}{% if event.location %} · {% include event-location.html location=event.location %}{% endif %}</div>
             {%- include event-types.html types=event.type -%}
             <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
             {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}
@@ -54,7 +54,7 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
           <li class="post-item">
             {%- assign org = site.data.organisers[event.organiser] | default: site.data.organisers['eco-flow'] -%}
             {%- if org -%}<img class="post-item__org" src="{{ org.logo | relative_url }}" alt="{{ org.name }}" title="Organised by {{ org.name }}">{%- endif -%}
-            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}</div>
+            <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}{% if event.location %} · {% include event-location.html location=event.location %}{% endif %}</div>
             {%- include event-types.html types=event.type -%}
             <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
             {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}

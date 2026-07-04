@@ -4,6 +4,7 @@ date: 2026-07-21
 description: 'A workshop of part of the Dietary Interactions in Ecology Through Sequencing (DIETS) Symposium : https://foragingecology.com/diets/'
 author: 'Christopher Wyatt'
 organiser: eco-flow
+location: Durham, UK
 type: [training]
 tags: ["nextflow", "nfcore", "nanopore", "metabarcoding"]
 redirect_from:
