@@ -6,12 +6,12 @@ pageviews_all: 270
 visits_all: 70
 pageviews_30d: 270
 visits_30d: 70
-pageviews_7d: 128
-visits_7d: 62
+pageviews_7d: 132
+visits_7d: 63
 countries_7d: 7
 top_pages:
 - path: /
-  views: 22
+  views: 23
 - path: /events/
   views: 21
 - path: /funding/
@@ -32,9 +32,9 @@ top_pages:
   views: 4
 - path: /about/
   views: 4
-- path: /pipelines/about/
-  views: 4
 - path: /pipelines/gwas/
+  views: 4
+- path: /pipelines/about/
   views: 4
 - path: /partners/
   views: 3
@@ -42,19 +42,23 @@ top_pages:
   views: 3
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 3
-- path: /events/2026-07-21-nanometabarcoding-newcastle/
+- path: /training/
+  views: 2
+- path: /services/
   views: 2
 - path: /citations/
+  views: 2
+- path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 2
 - path: /events/2026-02-26-nf-core-hackathon-training/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
+- path: /training/setup/
+  views: 1
 - path: /events/2026-03-11-nf-core-hackathon-london-26/
   views: 1
 - path: /events/2026-07-08-workflowhub-community-meeting/
-  views: 1
-- path: /services/
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
@@ -62,11 +66,9 @@ top_pages:
   views: 1
 - path: /2026/06/23/new-website-design.html
   views: 1
-- path: /training/
-  views: 1
 top_countries:
 - name: GB
-  views: 62
+  views: 66
 - name: SG
   views: 33
 - name: US
