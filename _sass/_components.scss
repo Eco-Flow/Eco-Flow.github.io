@@ -348,3 +348,29 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 .spec-list dt { font-family: $font-head; font-weight: 600; color: $green-deep; padding: .55rem 0; border-bottom: 1px solid $border; }
 .spec-list dd { margin: 0; padding: .55rem 0; border-bottom: 1px solid $border; color: $muted; }
 @include sm { .spec-list { grid-template-columns: 1fr; gap: 0; } .spec-list dt { border-bottom: 0; padding-bottom: 0; } }
+
+// --- Training lesson prev / next -------------------------------------------
+
+.lesson-nav {
+  max-width: $wrap-narrow;
+  margin: 3rem auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.lesson-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: 1rem 1.25rem;
+  max-width: 48%;
+  &:hover { border-color: rgba(47,158,100,.35); box-shadow: $shadow-hover; text-decoration: none; }
+}
+.lesson-nav__link--next { text-align: right; margin-left: auto; }
+.lesson-nav__dir { font-family: $font-head; font-size: .8rem; color: $green-dark; }
+.lesson-nav__title { color: $ink; font-weight: 600; }
+@include sm { .lesson-nav { flex-direction: column; } .lesson-nav__link { max-width: 100%; } }

@@ -17,7 +17,7 @@ description: Eco-Flow's free, hands-on basic Nextflow training course — from t
     <div class="section__head">
       <span class="eyebrow">Course outline</span>
       <h2>Work through it, step by step</h2>
-      <p>Each part opens its material on GitHub. Start at the top — or jump to whatever you need.</p>
+      <p>Each part opens right here on the site. Start at the top — or jump to whatever you need.</p>
     </div>
 
     <ol class="steps">
@@ -27,7 +27,7 @@ description: Eco-Flow's free, hands-on basic Nextflow training course — from t
         <div class="step__body">
           <h3>{{ p.title }} <span class="chip">{{ p.type }}</span></h3>
           <p>{{ p.body }}</p>
-          <a href="{{ site.data.training.base }}{{ p.file }}">Open lesson →</a>
+          <a href="{{ '/training/' | append: p.file | remove: '.md' | append: '/' | relative_url }}">Open lesson →</a>
         </div>
       </li>
       {%- endfor -%}

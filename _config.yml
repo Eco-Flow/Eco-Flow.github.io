@@ -28,6 +28,9 @@ collections:
   events:
     output: true
     permalink: /events/:name/
+  training:
+    output: true
+    permalink: /training/:name/
 
 # Default layouts per content type so individual files don't need to set them.
 defaults:
@@ -37,6 +40,8 @@ defaults:
     values: { layout: "event" }
   - scope: { path: "", type: "pipelines" }
     values: { layout: "pipeline" }
+  - scope: { path: "", type: "training" }
+    values: { layout: "training" }
 
 authors: Chris Wyatt, Fernando Duarte
 

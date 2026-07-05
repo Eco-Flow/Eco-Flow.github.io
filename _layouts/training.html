@@ -1,0 +1,45 @@
+---
+layout: default
+---
+{%- assign parts = site.data.training.parts -%}
+{%- assign idx = -1 -%}
+{%- for p in parts -%}
+  {%- if p.file == page.name -%}{%- assign idx = forloop.index0 -%}{%- endif -%}
+{%- endfor -%}
+
+<article class="section">
+  <div class="wrap wrap--narrow">
+    <div class="article-head">
+      <a class="back-link" href="{{ '/training/' | relative_url }}">← Back to training</a>
+      <span class="eyebrow">Part {{ page.num }} · {{ page.type }}</span>
+      <h1>{{ page.title }}</h1>
+    </div>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    {%- if idx >= 0 -%}
+    <nav class="lesson-nav">
+      {%- assign prev_i = idx | minus: 1 -%}
+      {%- assign next_i = idx | plus: 1 -%}
+      {%- if idx > 0 -%}
+        {%- assign prev = parts[prev_i] -%}
+        <a class="lesson-nav__link lesson-nav__link--prev" href="{{ '/training/' | append: prev.file | remove: '.md' | append: '/' | relative_url }}">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">{{ prev.title }}</span>
+        </a>
+      {%- else -%}
+        <span></span>
+      {%- endif -%}
+      {%- if next_i < parts.size -%}
+        {%- assign next = parts[next_i] -%}
+        <a class="lesson-nav__link lesson-nav__link--next" href="{{ '/training/' | append: next.file | remove: '.md' | append: '/' | relative_url }}">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">{{ next.title }}</span>
+        </a>
+      {%- endif -%}
+    </nav>
+    {%- endif -%}
+  </div>
+</article>
