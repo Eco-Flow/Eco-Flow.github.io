@@ -6,6 +6,10 @@ type: "Practical"
 order: 3
 ---
 
+🧭 [◀️ Part 2 · Pipelines](/training/pipelines/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 4 · Differential expression ▶️](./differential.md)
+
+---
+
 In this final practical, we will show you how to run a nf-core RNA-Seq pipeline (https://nf-co.re/rnaseq/3.14.0). 
 
 **nf-core** are a community who build gold standard, reproducible data pipelines, that have become the industry standard.
@@ -314,3 +318,7 @@ You have finished the course. We hope you have learnt some of the basics of pipe
 The next steps are learning to write in Nextflow yourself. There are awesome training materials at https://training.nextflow.io/
 
 Further, Eco-Flow will be providing more foundational Nextflow courses soon, so feel free to email us, and we can add you to our mailing list (ecoflow . ucl @ gmail . com)
+
+---
+
+🧭 [◀️ Part 2 · Pipelines](/training/pipelines/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 4 · Differential expression ▶️](./differential.md)
