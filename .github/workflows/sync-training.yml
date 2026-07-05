@@ -5,6 +5,8 @@ on:
     - cron: "37 4 * * *" # daily at 04:37 UTC
   push:
     branches: [publish] # also refresh on every merge/push to the live site
+  repository_dispatch:
+    types: [training-updated] # fired by Eco-Flow/training on push (instant sync)
   workflow_dispatch: {}
 
 permissions:
