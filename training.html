@@ -27,7 +27,8 @@ description: Eco-Flow's free, hands-on basic Nextflow training course — from t
         <div class="step__body">
           <h3>{{ p.title }} <span class="chip">{{ p.type }}</span></h3>
           <p>{{ p.body }}</p>
-          <a href="{{ '/training/' | append: p.file | remove: '.md' | append: '/' | relative_url }}">Open lesson →</a>
+          {%- assign lesson_slug = p.file | remove: '.md' | slugify -%}
+          <a href="{{ '/training/' | append: lesson_slug | append: '/' | relative_url }}">Open lesson →</a>
         </div>
       </li>
       {%- endfor -%}

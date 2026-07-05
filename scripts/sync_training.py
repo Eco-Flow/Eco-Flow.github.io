@@ -51,8 +51,10 @@ def fetch(url):
 
 
 def slug(filename):
-    """setup.md -> setup"""
-    return re.sub(r"\.md$", "", filename)
+    """nfcore_rnaseq.md -> nfcore-rnaseq (matches Jekyll's :name permalink,
+    which replaces non-alphanumerics — including underscores — with hyphens)."""
+    base = re.sub(r"\.md$", "", filename)
+    return re.sub(r"[^A-Za-z0-9]+", "-", base).strip("-").lower()
 
 
 def rewrite_link_target(url, known_slugs):
@@ -63,8 +65,9 @@ def rewrite_link_target(url, known_slugs):
     base, anchor = m.group(1), m.group(2) or ""
     if base.lower() == "readme":
         return "/training/" + anchor
-    if base in known_slugs:
-        return "/training/{}/{}".format(base, anchor)
+    base_slug = re.sub(r"[^A-Za-z0-9]+", "-", base).strip("-").lower()
+    if base_slug in known_slugs:
+        return "/training/{}/{}".format(base_slug, anchor)
     return url
 
 
