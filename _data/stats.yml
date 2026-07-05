@@ -6,14 +6,14 @@ pageviews_all: 270
 visits_all: 70
 pageviews_30d: 270
 visits_30d: 70
-pageviews_7d: 126
-visits_7d: 61
+pageviews_7d: 128
+visits_7d: 62
 countries_7d: 7
 top_pages:
 - path: /
   views: 22
 - path: /events/
-  views: 20
+  views: 21
 - path: /funding/
   views: 11
 - path: /numbers/
@@ -32,6 +32,8 @@ top_pages:
   views: 4
 - path: /about/
   views: 4
+- path: /pipelines/about/
+  views: 4
 - path: /pipelines/gwas/
   views: 4
 - path: /partners/
@@ -39,8 +41,6 @@ top_pages:
 - path: /pipelines/genomeqc/
   views: 3
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
-  views: 3
-- path: /pipelines/about/
   views: 3
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 2
@@ -66,9 +66,9 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 61
+  views: 62
 - name: SG
-  views: 32
+  views: 33
 - name: US
   views: 17
 - name: FR
