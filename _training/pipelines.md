@@ -6,7 +6,7 @@ type: "Lecture"
 order: 2
 ---
 
-🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore_rnaseq/)
+🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore-rnaseq/)
 
 ---
 
@@ -234,7 +234,7 @@ If you'd like to go deeper (highly recommended if you want to write your own pip
 
 When you are ready:
 
-Head to part 3 -> [click here](/training/nfcore_rnaseq/)
+Head to part 3 -> [click here](/training/nfcore-rnaseq/)
 
 or
 
@@ -243,4 +243,4 @@ Head back to menu   -> [click here](/training/)
 
 ---
 
-🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore_rnaseq/)
+🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore-rnaseq/)
