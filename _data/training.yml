@@ -28,3 +28,14 @@ parts:
     type: Practical
     body: Hands-on — run a real nf-core/rnaseq analysis end to end, from raw reads to results.
     file: nfcore_rnaseq.md
+  - num: "4"
+    title: Differential gene expression
+    type: Practical
+    body: Take the counts from the RNA-Seq pipeline and find what changed — normalise with DESeq2, run differential expression, and interpret the results in R.
+    file: differential.md
+  - num: "★"
+    title: Running a pipeline on an HPC
+    type: Reference
+    bonus: true
+    body: A conceptual guide to moving a pipeline onto a High-Performance Computing cluster — what to ask your HPC team, where to find configs, and how to test one. Reading, not a hands-on run.
+    file: hpc.md

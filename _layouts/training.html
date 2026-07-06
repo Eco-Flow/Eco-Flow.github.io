@@ -11,7 +11,7 @@ layout: default
   <div class="wrap wrap--narrow">
     <div class="article-head">
       <a class="back-link" href="{{ '/training/' | relative_url }}">← Back to training</a>
-      <span class="eyebrow">Part {{ page.num }} · {{ page.type }}</span>
+      <span class="eyebrow">{% if page.bonus %}Bonus{% else %}Part {{ page.num }}{% endif %} · {{ page.type }}</span>
       <h1>{{ page.title }}</h1>
     </div>
 
@@ -25,7 +25,8 @@ layout: default
       {%- assign next_i = idx | plus: 1 -%}
       {%- if idx > 0 -%}
         {%- assign prev = parts[prev_i] -%}
-        <a class="lesson-nav__link lesson-nav__link--prev" href="{{ '/training/' | append: prev.file | remove: '.md' | append: '/' | relative_url }}">
+        {%- assign prev_slug = prev.file | remove: '.md' | slugify -%}
+        <a class="lesson-nav__link lesson-nav__link--prev" href="{{ '/training/' | append: prev_slug | append: '/' | relative_url }}">
           <span class="lesson-nav__dir">← Previous</span>
           <span class="lesson-nav__title">{{ prev.title }}</span>
         </a>
@@ -34,7 +35,8 @@ layout: default
       {%- endif -%}
       {%- if next_i < parts.size -%}
         {%- assign next = parts[next_i] -%}
-        <a class="lesson-nav__link lesson-nav__link--next" href="{{ '/training/' | append: next.file | remove: '.md' | append: '/' | relative_url }}">
+        {%- assign next_slug = next.file | remove: '.md' | slugify -%}
+        <a class="lesson-nav__link lesson-nav__link--next" href="{{ '/training/' | append: next_slug | append: '/' | relative_url }}">
           <span class="lesson-nav__dir">Next →</span>
           <span class="lesson-nav__title">{{ next.title }}</span>
         </a>

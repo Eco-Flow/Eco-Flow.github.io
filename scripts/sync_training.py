@@ -107,6 +107,8 @@ def front_matter(part, order):
         "type": part.get("type", ""),
         "order": order,
     }
+    if part.get("bonus"):
+        fields["bonus"] = True
     lines = ["---"]
     for key, value in fields.items():
         lines.append("{}: {}".format(key, json.dumps(value)))
