@@ -140,7 +140,12 @@ a.stat {
 }
 a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shadow-hover; border-color: rgba(47,158,100,.35); text-decoration: none; }
 .card h3 { margin-bottom: .5rem; }
+.card h3 a { color: inherit; }
+.card h3 a:hover { color: $green; text-decoration: none; }
 .card p { color: $muted; font-size: .98rem; }
+.card__cta { font-family: $font-head; font-weight: 600; color: $green-dark; }
+.card__cta:hover { color: $green; }
+.card p:has(> .card__cta) { margin-top: auto; margin-bottom: 0; padding-top: .4rem; }
 .card__icon {
   width: 46px; height: 46px; border-radius: 12px;
   background: $green-tint; color: $green-dark;

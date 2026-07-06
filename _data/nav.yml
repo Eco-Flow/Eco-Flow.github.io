@@ -15,6 +15,8 @@
   url: /services/
 - title: Pipelines
   dropdown: pipelines
+- title: Training
+  url: /training/
 - title: Blog
   url: /blog/
 - title: Events
