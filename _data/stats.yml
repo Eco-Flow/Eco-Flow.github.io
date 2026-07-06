@@ -2,59 +2,65 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-06'
 since: '2026-06-27'
-pageviews_all: 290
-visits_all: 70
-pageviews_30d: 290
-visits_30d: 70
-pageviews_7d: 129
-visits_7d: 58
-countries_7d: 6
+pageviews_all: 310
+visits_all: 80
+pageviews_30d: 310
+visits_30d: 80
+pageviews_7d: 136
+visits_7d: 63
+countries_7d: 7
 top_pages:
 - path: /events/
   views: 21
 - path: /
-  views: 18
+  views: 21
 - path: /funding/
   views: 11
-- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
-  views: 6
-- path: /numbers/
-  views: 6
 - path: /about/
+  views: 8
+- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
   views: 6
 - path: /pipelines/synteny/
   views: 6
+- path: /numbers/
+  views: 6
 - path: /pipelines/nanoporemetabarcoding/
   views: 5
-- path: /pipelines/
-  views: 4
-- path: /services/
+- path: /pipelines/about/
   views: 4
 - path: /pipelines/pollen-metabarcoding/
   views: 4
-- path: /pipelines/about/
-  views: 4
 - path: /training/
   views: 4
-- path: /pipelines/excon/
-  views: 3
-- path: /partners/
+- path: /services/
+  views: 4
+- path: /pipelines/
+  views: 4
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 3
 - path: /pipelines/genomeqc/
   views: 3
-- path: /events/2026-10-15-nf-core-hackathon-barcelona/
+- path: /partners/
   views: 3
-- path: /events/2026-07-21-nanometabarcoding-newcastle/
+- path: /pipelines/gwas/
+  views: 3
+- path: /pipelines/excon/
+  views: 3
+- path: /citations/
   views: 2
 - path: /training/setup/
   views: 2
-- path: /pipelines/gwas/
-  views: 2
-- path: /citations/
-  views: 2
 - path: /2025/09/01/biofair-fellowship.html
+  views: 2
+- path: /events/2026-07-21-nanometabarcoding-newcastle/
+  views: 2
+- path: /2026/05/27/leuven-evolutionary-genomics.html
+  views: 1
+- path: /training/pipelines/
   views: 1
 - path: /events/2026-02-26-nf-core-hackathon-training/
+  views: 1
+- path: /training/commandline/
   views: 1
 - path: /events/2026-03-11-nf-core-hackathon-london-26/
   views: 1
@@ -62,25 +68,21 @@ top_pages:
   views: 1
 - path: /training/nfcore-rnaseq/
   views: 1
-- path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
-- path: /training/commandline/
-  views: 1
 - path: /jobs/
   views: 1
 - path: /2026/06/23/new-website-design.html
   views: 1
-- path: /training/pipelines/
-  views: 1
 top_countries:
 - name: GB
-  views: 70
+  views: 73
 - name: SG
   views: 33
 - name: US
-  views: 15
+  views: 16
 - name: FR
   views: 8
+- name: NL
+  views: 3
 - name: AR
   views: 2
 - name: BR
