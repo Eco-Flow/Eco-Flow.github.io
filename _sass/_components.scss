@@ -99,6 +99,15 @@
 }
 .page-head h1 { margin-bottom: .4rem; }
 .page-head p { color: $muted; max-width: 60ch; margin-bottom: 0; }
+.page-head__credit { font-size: .9rem; margin-top: 1.4rem; display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+.page-head__sponsor {
+  display: inline-flex; align-items: center;
+  background: $white; border: 1px solid $border; border-radius: 8px;
+  padding: .4rem .7rem; box-shadow: $shadow;
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.page-head__sponsor:hover { box-shadow: $shadow-hover; transform: translateY(-1px); }
+.page-head__sponsor img { height: 32px; width: auto; display: block; box-shadow: none; }
 
 // --- Stat strip ------------------------------------------------------------
 

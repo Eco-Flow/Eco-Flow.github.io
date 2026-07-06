@@ -3,8 +3,17 @@
 title: Eco-Flow Basic Nextflow Training
 intro: >
   A hands-on course that takes you from limited bioinformatics experience to
-  running your own nf-core pipelines. Everything runs in the browser via GitHub
-  Codespaces — nothing to install.
+  running your own nf-core pipelines. It's pitched at beginners — no prior
+  Nextflow experience is needed, and only basic command-line familiarity is
+  assumed (Part 1 covers the terminal from scratch if you're new to it; the
+  later differential-expression part assumes a little R). Everything runs in
+  the browser via GitHub Codespaces, so there's nothing to install.
+# Funder credit shown under the intro on /training/.
+sponsor:
+  text: This course was developed with the support of
+  name: BioFAIR
+  url: https://biofair.uk/
+  logo: /img/biofair-logo.png
 repo: https://github.com/Eco-Flow/training
 base: https://github.com/Eco-Flow/training/blob/main/eco-flow-training/docs/
 parts:

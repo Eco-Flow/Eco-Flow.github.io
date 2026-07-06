@@ -9,6 +9,15 @@ description: Eco-Flow's free, hands-on basic Nextflow training course — from t
   <div class="wrap">
     <h1>{{ site.data.training.title }}</h1>
     <p>{{ site.data.training.intro }}</p>
+    {%- if site.data.training.sponsor -%}
+    {%- assign sp = site.data.training.sponsor -%}
+    <p class="page-head__credit">
+      <span>{{ sp.text }}</span>
+      <a class="page-head__sponsor" href="{{ sp.url }}" aria-label="{{ sp.name }}">
+        {%- if sp.logo -%}<img src="{{ sp.logo | relative_url }}" alt="{{ sp.name }}">{%- else -%}{{ sp.name }}{%- endif -%}
+      </a>
+    </p>
+    {%- endif -%}
   </div>
 </div>
 
