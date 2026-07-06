@@ -355,6 +355,7 @@ Add **`-resume`** and Nextflow will reuse the **cached** results of any steps th
 **Next steps:**
 
 - Continue to **[Part 4 · Differential expression ▶️](./differential.md)** to analyse the gene counts you just produced.
+- Running on a cluster? See the bonus **[Running a pipeline on an HPC](./hpc.md)**.
 - Learn to **write** your own Nextflow: the excellent [Seqera training](https://training.nextflow.io/).
 - Eco-Flow will be providing more foundational Nextflow courses soon — email us to join the mailing list: **ecoflow . ucl @ gmail . com**
 
