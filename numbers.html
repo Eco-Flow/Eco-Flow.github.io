@@ -29,13 +29,18 @@ description: A snapshot of Eco-Flow's work, reach and community.
 {%- if s.pageviews_7d > tot_pv -%}{%- assign tot_pv = s.pageviews_7d -%}{%- endif -%}
 {%- if s.visits_7d > tot_v -%}{%- assign tot_v = s.visits_7d -%}{%- endif -%}
 {%- if s.countries_7d > tot_c -%}{%- assign tot_c = s.countries_7d -%}{%- endif -%}
+{%- comment -%}
+  Top pages "· total" = cumulative accumulator ranking (falls back to 7-day).
+  Countries list + world map = the sticky all-time set (s.all_countries): every
+  country that has ever visited stays, shaded by its busiest week. Falls back to
+  the live 7-day breakdown until the first fetch with all_countries has run.
+{%- endcomment -%}
 {%- if t and t.top_pages and t.top_pages.size > 0 -%}
   {%- assign tot_pages = t.top_pages -%}
-  {%- assign tot_countries = t.top_countries -%}
 {%- else -%}
   {%- assign tot_pages = s.top_pages -%}
-  {%- assign tot_countries = s.top_countries -%}
 {%- endif -%}
+{%- assign tot_countries = s.all_countries | default: s.top_countries -%}
 
 <div class="page-head">
   <div class="wrap">
@@ -101,8 +106,9 @@ description: A snapshot of Eco-Flow's work, reach and community.
       out in its data feed.
     </p>
 
-    {%- if tot_pages and tot_pages.size > 0 -%}
+    {%- if tot_pages.size > 0 or tot_countries.size > 0 -%}
     <div class="grid grid--2" style="margin-top:3rem">
+      {%- if tot_pages.size > 0 -%}
       <div class="card">
         <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· total</span></h3>
         <ol class="numbered">
@@ -111,27 +117,32 @@ description: A snapshot of Eco-Flow's work, reach and community.
           {%- endfor -%}
         </ol>
       </div>
+      {%- endif -%}
+      {%- if tot_countries.size > 0 -%}
       <div class="card">
-        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· total</span></h3>
+        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· all-time</span></h3>
         <ol class="numbered">
           {%- for c in tot_countries limit: 10 -%}
           <li>{{ site.data.country_names[c.name] | default: c.name }} <span class="numbered__val">{{ c.views }}</span></li>
           {%- endfor -%}
         </ol>
       </div>
+      {%- endif -%}
     </div>
 
+    {%- if tot_countries.size > 0 -%}
     <div style="margin-top:3rem">
-      <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· total</span></h3>
+      <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· all-time</span></h3>
       <div id="worldmap" class="worldmap"></div>
       <p style="color:#8a9890;font-size:.85rem;margin-top:.8rem">
-        Shaded by page views per country. Cloudflare reports location at country level only,
-        so we can't break this down within a country.
+        Every country that has ever visited stays shaded, by its busiest week's page views.
+        Cloudflare reports location at country level only, so we can't break this down within a country.
       </p>
     </div>
+    {%- endif -%}
     {%- else -%}
     <p style="margin-top:1.5rem;color:#5b6b63">
-      Cumulative figures will appear here after the first weekly snapshot runs.
+      Figures will appear here after the first sync.
     </p>
     {%- endif -%}
   </div>

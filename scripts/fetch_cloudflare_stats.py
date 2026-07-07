@@ -206,16 +206,26 @@ def main():
         for c in country_groups[:100]
     ]
 
-    # All-time distinct countries. A single wide (e.g. 90-day) query is sampled,
-    # so it drops rare countries and could dip *below* the 7-day figure. Instead
-    # keep a monotonic union of every nightly (unsampled) 7-day country set: the
+    # Sticky all-time countries. A single wide (e.g. 90-day) query is sampled,
+    # so it drops rare countries and could even dip below the 7-day figure.
+    # Instead we keep a persistent per-country record, updated nightly from the
+    # unsampled 7-day breakdown: presence is permanent (a country that ever
+    # visits stays on the map for good), and each country's shade intensity is
+    # the peak it has reached in any single 7-day window. Taking max() keeps it
+    # monotonic and avoids double-counting the overlapping nightly windows. The
     # sliding 7-day window covers every day over time, so any country that ever
     # appears is captured, and the all-time count can never fall below 7-day.
-    current_codes = {
-        (c["dimensions"]["countryName"] or "Unknown") for c in country_groups
+    all_countries_map = {
+        c["name"]: int(c.get("views") or 0)
+        for c in (load_yaml(OUTPUT_PATH).get("all_countries") or [])
     }
-    prev_codes = set(load_yaml(OUTPUT_PATH).get("countries_all_list") or [])
-    countries_all_list = sorted(prev_codes | current_codes)
+    for c in country_groups:
+        name = c["dimensions"]["countryName"] or "Unknown"
+        all_countries_map[name] = max(all_countries_map.get(name, 0), int(c["count"]))
+    all_countries = [
+        {"name": n, "views": v}
+        for n, v in sorted(all_countries_map.items(), key=lambda kv: (-kv[1], kv[0]))
+    ]
 
     out = {
         "updated": end,
@@ -227,11 +237,12 @@ def main():
         "pageviews_7d": pv_7,
         "visits_7d": v_7,
         "countries_7d": len(country_groups),
-        "countries_all": len(countries_all_list),
+        "countries_all": len(all_countries),
         "top_pages": top_pages,
         "top_countries": top_countries,
-        # Persisted so the next run can union onto it; drives countries_all.
-        "countries_all_list": countries_all_list,
+        # Persisted sticky all-time set (peak-week views per country); drives the
+        # "all-time" country list, the world map, and countries_all (its size).
+        "all_countries": all_countries,
     }
 
     header = (

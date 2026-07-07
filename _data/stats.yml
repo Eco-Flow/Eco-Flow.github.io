@@ -90,12 +90,20 @@ top_countries:
   views: 1
 - name: BR
   views: 1
-countries_all_list:
-- AR
-- BR
-- FI
-- FR
-- GB
-- NL
-- SG
-- US
+all_countries:
+- name: GB
+  views: 38
+- name: SG
+  views: 33
+- name: US
+  views: 13
+- name: FR
+  views: 8
+- name: NL
+  views: 6
+- name: AR
+  views: 2
+- name: FI
+  views: 1
+- name: BR
+  views: 1
