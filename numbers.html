@@ -13,25 +13,26 @@ description: A snapshot of Eco-Flow's work, reach and community.
 {%- assign s = site.data.stats -%}
 
 {%- comment -%}
-  `t` = accurate cumulative totals, accumulated weekly from the unsampled 7-day
-  figures (scripts/snapshot_stats.py). `s` = the live 7-day figures.
-
-  The cumulative totals only refresh weekly, so while the site is young the live
-  7-day count can exceed the last snapshot. Whenever that happens we fall back to
-  the 7-day figures for the "total" too — so "total" is never shown as less than
-  "7 days". Once enough weeks have accumulated, the cumulative figures take over.
+  "Total" headline figures come straight from Cloudflare's since-launch window
+  (pageviews_all / visits_all) plus a monotonic all-time country union
+  (countries_all) — all guaranteed supersets of the live 7-day figures, so a
+  "total" can never read lower than "7 days". As belt-and-braces (in case a wide
+  Cloudflare query is sampled low), we still clamp each total up to the 7-day
+  value. The all-time top-N lists come from the weekly accumulator
+  (stats_totals); they're an approximate cumulative ranking, falling back to the
+  live 7-day lists if the accumulator is empty.
 {%- endcomment -%}
 {%- assign t = site.data.stats_totals -%}
-{%- if t and t.pageviews and t.pageviews >= s.pageviews_7d -%}
-  {%- assign tot_pv = t.pageviews -%}
-  {%- assign tot_v = t.visits -%}
-  {%- assign tot_c = t.countries_count -%}
+{%- assign tot_pv = s.pageviews_all | default: s.pageviews_7d -%}
+{%- assign tot_v = s.visits_all | default: s.visits_7d -%}
+{%- assign tot_c = s.countries_all | default: s.countries_7d -%}
+{%- if s.pageviews_7d > tot_pv -%}{%- assign tot_pv = s.pageviews_7d -%}{%- endif -%}
+{%- if s.visits_7d > tot_v -%}{%- assign tot_v = s.visits_7d -%}{%- endif -%}
+{%- if s.countries_7d > tot_c -%}{%- assign tot_c = s.countries_7d -%}{%- endif -%}
+{%- if t and t.top_pages and t.top_pages.size > 0 -%}
   {%- assign tot_pages = t.top_pages -%}
   {%- assign tot_countries = t.top_countries -%}
 {%- else -%}
-  {%- assign tot_pv = s.pageviews_7d -%}
-  {%- assign tot_v = s.visits_7d -%}
-  {%- assign tot_c = s.countries_7d -%}
   {%- assign tot_pages = s.top_pages -%}
   {%- assign tot_countries = s.top_countries -%}
 {%- endif -%}

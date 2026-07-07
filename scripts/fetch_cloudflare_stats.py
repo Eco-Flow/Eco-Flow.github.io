@@ -39,6 +39,14 @@ ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
 SITE_TAG = os.environ.get("CLOUDFLARE_SITE_TAG", "4d8094a5292c4a7db2bc1a1a0f73e78d")
 
 
+def load_yaml(path):
+    try:
+        with open(path) as f:
+            return yaml.safe_load(f) or {}
+    except FileNotFoundError:
+        return {}
+
+
 def graphql_raw(query, variables):
     body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
     req = urllib.request.Request(
@@ -198,6 +206,17 @@ def main():
         for c in country_groups[:100]
     ]
 
+    # All-time distinct countries. A single wide (e.g. 90-day) query is sampled,
+    # so it drops rare countries and could dip *below* the 7-day figure. Instead
+    # keep a monotonic union of every nightly (unsampled) 7-day country set: the
+    # sliding 7-day window covers every day over time, so any country that ever
+    # appears is captured, and the all-time count can never fall below 7-day.
+    current_codes = {
+        (c["dimensions"]["countryName"] or "Unknown") for c in country_groups
+    }
+    prev_codes = set(load_yaml(OUTPUT_PATH).get("countries_all_list") or [])
+    countries_all_list = sorted(prev_codes | current_codes)
+
     out = {
         "updated": end,
         "since": LAUNCH_DATE,
@@ -208,8 +227,11 @@ def main():
         "pageviews_7d": pv_7,
         "visits_7d": v_7,
         "countries_7d": len(country_groups),
+        "countries_all": len(countries_all_list),
         "top_pages": top_pages,
         "top_countries": top_countries,
+        # Persisted so the next run can union onto it; drives countries_all.
+        "countries_all_list": countries_all_list,
     }
 
     header = (

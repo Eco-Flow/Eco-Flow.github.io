@@ -9,6 +9,7 @@ visits_30d: 80
 pageviews_7d: 102
 visits_7d: 61
 countries_7d: 8
+countries_all: 8
 top_pages:
 - path: /
   views: 20
@@ -89,3 +90,12 @@ top_countries:
   views: 1
 - name: BR
   views: 1
+countries_all_list:
+- AR
+- BR
+- FI
+- FR
+- GB
+- NL
+- SG
+- US
