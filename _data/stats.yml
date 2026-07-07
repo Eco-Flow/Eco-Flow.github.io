@@ -92,7 +92,7 @@ top_countries:
   views: 1
 all_countries:
 - name: GB
-  views: 38
+  views: 39
 - name: SG
   views: 33
 - name: US
@@ -103,7 +103,7 @@ all_countries:
   views: 6
 - name: AR
   views: 2
-- name: FI
-  views: 1
 - name: BR
+  views: 1
+- name: FI
   views: 1
