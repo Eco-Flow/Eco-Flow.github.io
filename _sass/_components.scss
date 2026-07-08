@@ -388,3 +388,17 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 .lesson-nav__dir { font-family: $font-head; font-size: .8rem; color: $green-dark; }
 .lesson-nav__title { color: $ink; font-weight: 600; }
 @include sm { .lesson-nav { flex-direction: column; } .lesson-nav__link { max-width: 100%; } }
+
+// --- Slide deck (event slides, embedded PDF) -------------------------------
+
+.slide-deck { max-width: $wrap-narrow; margin: 3rem auto 0; }
+.slide-deck h2 { margin-bottom: 1rem; }
+.slide-deck__frame {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border: 1px solid $border; border-radius: $radius; overflow: hidden;
+  background: $green-tint; box-shadow: $shadow;
+}
+.slide-deck__frame object,
+.slide-deck__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.slide-deck__frame object p { padding: 2rem; text-align: center; color: $muted; }
+.slide-deck .btn { margin-top: 1.2rem; }

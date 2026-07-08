@@ -18,10 +18,25 @@ layout: default
       {%- if page.writeup -%}
         <p class="article-xref"><a href="{{ page.writeup | relative_url }}">Read our write-up of this event →</a></p>
       {%- endif -%}
+      {%- if page.slides -%}
+        <p class="article-xref"><a href="#slides">Jump to the slides ↓</a></p>
+      {%- endif -%}
     </div>
 
     <div class="prose">
       {{ content }}
     </div>
+
+    {%- if page.slides -%}
+    <div class="slide-deck" id="slides">
+      <h2>Slides</h2>
+      <div class="slide-deck__frame">
+        <object data="{{ page.slides | relative_url }}#view=FitH" type="application/pdf" aria-label="{{ page.title }} — slides">
+          <p>Your browser can't display the slides inline. You can <a href="{{ page.slides | relative_url }}">open the PDF directly</a>.</p>
+        </object>
+      </div>
+      <p><a class="btn btn--ghost" href="{{ page.slides | relative_url }}" download>Download the slides (PDF)</a></p>
+    </div>
+    {%- endif -%}
   </div>
 </article>

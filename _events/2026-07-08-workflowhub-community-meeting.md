@@ -7,6 +7,7 @@ organiser: workflowhub
 location: Online
 type: [talk]
 tags: ["talk", "workflowhub", "biofair", "nf-core", "community"]
+slides: /assets/slides/workflowhub-community-meeting-2026-07-08.pdf
 ---
 
 <img src="{{ '/img/eco-flow-merge-hero.svg' | relative_url }}" alt="Nextflow, nf-core, bioFAIR and WorkflowHub converging into Eco-Flow" style="width:100%;max-width:720px;display:block;margin:1rem auto 2.4rem;box-shadow:none;">
