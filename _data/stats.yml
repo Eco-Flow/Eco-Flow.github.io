@@ -6,21 +6,21 @@ pageviews_all: 310
 visits_all: 80
 pageviews_30d: 310
 visits_30d: 80
-pageviews_7d: 106
-visits_7d: 61
+pageviews_7d: 114
+visits_7d: 67
 countries_7d: 7
 countries_all: 8
 top_pages:
 - path: /
-  views: 21
+  views: 27
 - path: /numbers/
-  views: 11
+  views: 12
 - path: /events/
+  views: 7
+- path: /about/
   views: 7
 - path: /training/
   views: 7
-- path: /about/
-  views: 6
 - path: /pipelines/excon/
   views: 5
 - path: /pipelines/about/
@@ -75,11 +75,11 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 43
+  views: 48
 - name: SG
   views: 32
 - name: US
-  views: 15
+  views: 18
 - name: FR
   views: 8
 - name: NL
@@ -90,11 +90,11 @@ top_countries:
   views: 1
 all_countries:
 - name: GB
-  views: 43
+  views: 48
 - name: SG
   views: 33
 - name: US
-  views: 15
+  views: 18
 - name: FR
   views: 8
 - name: NL
