@@ -37,11 +37,9 @@ top_pages:
   views: 3
 - path: /pipelines/pollen-metabarcoding/
   views: 3
-- path: /events/2026-07-21-nanometabarcoding-newcastle/
+- path: /pipelines/synteny/
   views: 2
 - path: /training/setup/
-  views: 2
-- path: /pipelines/synteny/
   views: 2
 - path: /citations/
   views: 2
@@ -51,6 +49,10 @@ top_pages:
   views: 2
 - path: /training/commandline/
   views: 2
+- path: /events/2026-07-21-nanometabarcoding-newcastle/
+  views: 2
+- path: /training/pipelines/
+  views: 1
 - path: /funding/
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
@@ -70,8 +72,6 @@ top_pages:
 - path: /jobs/
   views: 1
 - path: /2026/06/23/new-website-design.html
-  views: 1
-- path: /training/pipelines/
   views: 1
 top_countries:
 - name: GB
