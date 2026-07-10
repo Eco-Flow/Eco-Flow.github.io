@@ -2,7 +2,10 @@ name: Sync Cloudflare stats
 
 on:
   schedule:
-    - cron: "37 5 * * *" # daily at 05:37 UTC
+    - cron: "37 5 * * *"  # daily at 05:37 UTC
+    - cron: "37 17 * * *" # backup run 12h later, in case the morning schedule
+                          # is dropped/delayed by GitHub (also re-triggers the
+                          # Pages deploy). Only refreshes _data/stats.yml.
   push:
     branches: [publish] # also refresh on every merge/push to the live site
   workflow_dispatch: {}
