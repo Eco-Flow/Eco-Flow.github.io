@@ -45,9 +45,9 @@ top_pages:
   views: 2
 - path: /pipelines/synteny/
   views: 1
-- path: /training/pipelines/
-  views: 1
 - path: /pipelines/about/
+  views: 1
+- path: /training/pipelines/
   views: 1
 - path: /citations/
   views: 1
