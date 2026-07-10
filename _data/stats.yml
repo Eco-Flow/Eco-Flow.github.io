@@ -6,13 +6,13 @@ pageviews_all: 380
 visits_all: 140
 pageviews_30d: 380
 visits_30d: 140
-pageviews_7d: 110
-visits_7d: 50
+pageviews_7d: 112
+visits_7d: 51
 countries_7d: 7
 countries_all: 10
 top_pages:
 - path: /
-  views: 33
+  views: 34
 - path: /numbers/
   views: 15
 - path: /events/
@@ -27,6 +27,8 @@ top_pages:
   views: 4
 - path: /services/
   views: 3
+- path: /pipelines/gwas/
+  views: 2
 - path: /training/commandline/
   views: 2
 - path: /pipelines/nanoporemetabarcoding/
@@ -39,13 +41,11 @@ top_pages:
   views: 2
 - path: /training/setup/
   views: 2
-- path: /pipelines/gwas/
+- path: /pipelines/about/
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
 - path: /pipelines/synteny/
-  views: 1
-- path: /pipelines/about/
   views: 1
 - path: /training/pipelines/
   views: 1
@@ -64,12 +64,12 @@ top_countries:
   views: 71
 - name: US
   views: 20
+- name: ES
+  views: 7
 - name: NL
   views: 6
 - name: SG
   views: 6
-- name: ES
-  views: 5
 - name: BE
   views: 1
 - name: FI
@@ -83,10 +83,10 @@ all_countries:
   views: 21
 - name: FR
   views: 8
+- name: ES
+  views: 7
 - name: NL
   views: 6
-- name: ES
-  views: 5
 - name: AR
   views: 2
 - name: BE
