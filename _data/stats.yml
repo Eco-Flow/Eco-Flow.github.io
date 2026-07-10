@@ -2,44 +2,46 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-10'
 since: '2026-06-27'
-pageviews_all: 360
-visits_all: 120
-pageviews_30d: 360
-visits_30d: 120
-pageviews_7d: 105
-visits_7d: 48
+pageviews_all: 380
+visits_all: 140
+pageviews_30d: 380
+visits_30d: 140
+pageviews_7d: 110
+visits_7d: 50
 countries_7d: 7
 countries_all: 10
 top_pages:
 - path: /
-  views: 31
+  views: 33
 - path: /numbers/
   views: 15
 - path: /events/
   views: 9
+- path: /training/
+  views: 8
 - path: /pipelines/excon/
   views: 7
 - path: /about/
   views: 7
-- path: /training/
-  views: 6
 - path: /events/2026-07-08-workflowhub-community-meeting/
   views: 4
 - path: /services/
   views: 3
-- path: /2025/09/01/biofair-fellowship.html
-  views: 2
 - path: /training/commandline/
   views: 2
 - path: /pipelines/nanoporemetabarcoding/
   views: 2
 - path: /pipelines/genomeqc/
   views: 2
+- path: /training/nfcore-rnaseq/
+  views: 2
 - path: /pipelines/pollen-metabarcoding/
   views: 2
 - path: /training/setup/
   views: 2
 - path: /pipelines/gwas/
+  views: 2
+- path: /2025/09/01/biofair-fellowship.html
   views: 2
 - path: /pipelines/synteny/
   views: 1
@@ -48,8 +50,6 @@ top_pages:
 - path: /pipelines/about/
   views: 1
 - path: /citations/
-  views: 1
-- path: /training/nfcore-rnaseq/
   views: 1
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
   views: 1
@@ -61,7 +61,7 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 66
+  views: 71
 - name: US
   views: 20
 - name: NL
@@ -76,7 +76,7 @@ top_countries:
   views: 1
 all_countries:
 - name: GB
-  views: 66
+  views: 71
 - name: SG
   views: 33
 - name: US
