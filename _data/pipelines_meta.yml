@@ -1,8 +1,13 @@
+Eco-Flow/comparete:
+  latest_release: v1.0.1
+  released_at: Jul 10, 2026
+  stars: 2
+  updated_at: Jul 10, 2026
 Eco-Flow/excon:
   latest_release: v2.3.2
   released_at: Jun 29, 2026
   stars: 9
-  updated_at: Jul 9, 2026
+  updated_at: Jul 10, 2026
 Eco-Flow/nanoporemetabarcoding:
   stars: 2
   updated_at: Jun 22, 2026
@@ -18,7 +23,7 @@ Eco-Flow/synteny:
   updated_at: Jun 25, 2026
 nf-core/genomeqc:
   stars: 23
-  updated_at: Jul 9, 2026
+  updated_at: Jul 10, 2026
 nf-core/gwas:
   stars: 28
-  updated_at: Jul 9, 2026
+  updated_at: Jul 10, 2026

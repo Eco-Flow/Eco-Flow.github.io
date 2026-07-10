@@ -1,3 +1,38 @@
+"Eco-Flow/comparete": "# CompareTE\nA pipeline to compare TE content across genomes\
+  \ using various platforms.\n\n# Requirements\n\nRequires Nextflow >=26.04.\n\n#\
+  \ Input\n\nInput should be a csv file (ending in `.csv`). \n\nIt should contain\
+  \ either:\n\n```\nname,refseqID\nname,/full/path/to/genome.fa \nname,/full/path/to/genome.fa,/full/path/to/annotation.gff\n\
+  ```\n\n**!! Do not use relative paths !!**\n\nThe genome must end with:\n\n`'.fa',\
+  \ '.fasta', '.fna', '.fa.gz', '.fasta.gz', '.fna.gz'`\n\nThe annotation must end\
+  \ with:\n\n`'.gff', '.gff3', '.gff.gz', '.gff3.gz'`\n\nSee examples in `conf/test`\
+  \ (various example in config files)\n\n# Running the pipeline\n\nTo run the pipeline\
+  \ you need to make a csv input file as described above with either Refseq IDs (these\
+  \ always begin GCF_...), or with genomes, or genomes and annotation files.\n\nTo\
+  \ run with all the different TE programs on a input csv file called `input.csv`:\n\
+  \n`nextflow run main.nf --orthofinder --hite --earlgrey --input input.csv`\n\n**Though,**\
+  \ the above would require you to manually download all the prerequisites and programs,\
+  \ so the easier way is to set a container engine to pull all the programs you need:\n\
+  \n`nextflow run main.nf --orthofinder --hite --earlgrey --input input.csv -profile\
+  \ docker/singularity/apptainer`\n\n## HPC cluster profiles\n\nBundled institutional\
+  \ profiles configure the scheduler, container engine, and resource limits for a\
+  \ specific cluster. They already enable the right container engine, so you do **not**\
+  \ need to add `-profile singularity` or an external `-c` config.\n\n| Profile |\
+  \ Cluster | Scheduler | Container |\n| --- | --- | --- | --- |\n| `ucl_myriad` |\
+  \ UCL Myriad | SGE | Singularity/Apptainer |\n| `cambridge` | University of Cambridge\
+  \ CSD3 | SLURM | Singularity |\n\nCombine an HPC profile with a test or input profile,\
+  \ e.g. on UCL Myriad:\n\n`nextflow run main.nf -profile ucl_myriad,test_bacteria\
+  \ -resume --hite`\n\nOn Cambridge CSD3, export your SLURM project/account first\
+  \ (defaults to the `icelake` partition):\n\n```\nexport NXF_CAMBRIDGE_PROJECT=MYPROJECT-SL2-CPU\n\
+  nextflow run main.nf -profile cambridge,test_bacteria -resume --hite\n```\n\n##\
+  \ Useful additional flags:\n\n`-resume` : This allows the pipeline to resume from\
+  \ the last failed process (using the nextflow cache-ing mechanism)\n`-bg`     :\
+  \ This allows nextflow to run in the background, so you can continue to use your\
+  \ terminal.\n\n# Current test commands:\n`nextflow run main.nf -profile docker,test_bacteria\
+  \ -resume`\n\nTo run with HITE:\n\n`nextflow run main.nf -profile docker,test_bacteria\
+  \ -resume --hite`\n\nTo run with EARL GREY:\n\n`nextflow run main.nf -profile docker,test_bacteria\
+  \ -resume --earlgrey`\n\nTo run orthofinder on your input species:\n\n`nextflow\
+  \ run main.nf -profile docker,test_bacteria -resume --orthofinder`\n\n# Test a docker\
+  \ container:\n`docker run -it --volume $PWD:$PWD <container> bash`"
 "Eco-Flow/excon": "# EXCON (v2.3.2)\n\nA Nextflow pipeline for gene family **EX**pansion\
   \ and **CON**traction analysis \nacross multiple species using CAFE5.\n\nGiven a\
   \ set of genome assemblies and annotations, EXCON builds orthogroups with \nOrthoFinder,\
