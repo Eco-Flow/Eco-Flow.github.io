@@ -23,14 +23,26 @@
   \n`--famdb` is bind-mounted into the container at `/opt/conda/share/RepeatMasker/Libraries/famdb`,\
   \ overriding the bundled Dfam. Note this replaces only the famdb, not the container's\
   \ prebuilt RepeatMasker library, so a mismatched Dfam version may cause issues \u2014\
-  \ the bundled Dfam 3.7 is the safest default.\n\n## Comparing Earl Grey and HiTE\
-  \ (`COMPARE_TE`)\n\nWhen both `--earlgrey` and `--hite` are supplied, the pipeline\
-  \ runs a `COMPARE_TE` step per species that combines the two tools' transposable-element\
-  \ annotations. It parses Earl Grey's `filteredRepeats.gff` and HiTE's RepeatMasker\
-  \ `.out`, maps both tools' classifications to common high-level TE classes (DNA,\
-  \ LTR, LINE, SINE, Penelope, RC/Helitron, Other/Simple, Unclassified), and writes\
-  \ to `results/compare_te/`:\n\n- `<species>_te_comparison.tsv` \u2014 total TE bp,\
-  \ copy number, and % genome per tool.\n- `<species>_te_comparison_by_class.tsv`\
+  \ the bundled Dfam 3.7 is the safest default.\n\n## RepeatMasker / RepeatModeler\
+  \ (`--repeatmasker`)\n\nAn optional subworkflow annotates TEs with RepeatMasker,\
+  \ using a repeat library built from your `--famdb` Dfam database (via `famdb.py`).\
+  \ Optionally, `--run_repeatmodeler` first builds a de novo library per genome (slow)\
+  \ and merges it with the Dfam library. The library is de-duplicated with a clustering\
+  \ tool before masking.\n\n`nextflow run main.nf --repeatmasker --famdb /path/to/dfam39\
+  \ --input input.csv -profile singularity`\n\nOptions:\n\n- `--run_repeatmodeler`\
+  \ \u2014 also build a de novo library with RepeatModeler (adds substantial runtime\
+  \ per genome).\n- `--te_clusterer` \u2014 `linclust` (default), `mmseqs`, or `cdhit`.\n\
+  - `--repeatmasker_speed` \u2014 `qq` (fastest, default), `q`, or `default` (most\
+  \ sensitive).\n- `--famdb_lineage` \u2014 lineage to extract from the famdb (e.g.\
+  \ `hymenoptera`); defaults to `root`.\n\nOutputs (masked genome, `.out`, `.tbl`,\
+  \ `.gff`, the repeat library, and a combined `.tsv`) are written to `results/repeatmasker/`.\n\
+  \n## Comparing Earl Grey and HiTE (`COMPARE_TE`)\n\nWhen both `--earlgrey` and `--hite`\
+  \ are supplied, the pipeline runs a `COMPARE_TE` step per species that combines\
+  \ the two tools' transposable-element annotations. It parses Earl Grey's `filteredRepeats.gff`\
+  \ and HiTE's RepeatMasker `.out`, maps both tools' classifications to common high-level\
+  \ TE classes (DNA, LTR, LINE, SINE, Penelope, RC/Helitron, Other/Simple, Unclassified),\
+  \ and writes to `results/compare_te/`:\n\n- `<species>_te_comparison.tsv` \u2014\
+  \ total TE bp, copy number, and % genome per tool.\n- `<species>_te_comparison_by_class.tsv`\
   \ \u2014 per-class breakdown side by side.\n- `<species>_te_comparison.pdf` \u2014\
   \ a totals bar chart and a per-class grouped bar chart.\n\nA final `COMBINE_TE`\
   \ step then merges all species into combined outputs (also in `results/compare_te/`):\n\
