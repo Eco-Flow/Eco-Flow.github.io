@@ -1,0 +1,28 @@
+<svg viewBox="0 0 480 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interconnected pipes">
+  <rect width="480" height="180" fill="#e9f5ee"/>
+  <!-- faint background pipes for depth -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" opacity="0.35">
+    <path d="M-10 30 H150 Q176 30 176 56 V200" stroke="#9ecdb4"/>
+    <path d="M500 60 H360 Q334 60 334 86 V-10" stroke="#9ecdb4"/>
+  </g>
+  <!-- foreground pipes, modern colours, flowing left to right -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="18">
+    <path d="M20 55 H205 Q235 55 235 85 V150" stroke="#2f9e64"/>
+    <path d="M20 100 H330 Q360 100 360 130 V200" stroke="#1c6b43"/>
+    <path d="M110 -10 V78 Q110 108 140 108 H470" stroke="#e8646e"/>
+    <path d="M270 200 V96 Q270 66 300 66 H470" stroke="#e0a63a"/>
+  </g>
+  <!-- flange / junction dots -->
+  <g fill="#123b29">
+    <circle cx="20" cy="55" r="10"/>
+    <circle cx="20" cy="100" r="10"/>
+    <circle cx="470" cy="108" r="10"/>
+    <circle cx="470" cy="66" r="10"/>
+  </g>
+  <g fill="#e9f5ee">
+    <circle cx="20" cy="55" r="4"/>
+    <circle cx="20" cy="100" r="4"/>
+    <circle cx="470" cy="108" r="4"/>
+    <circle cx="470" cy="66" r="4"/>
+  </g>
+</svg>

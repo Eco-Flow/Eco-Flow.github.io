@@ -1,0 +1,26 @@
+<svg viewBox="0 0 480 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Engineering gears">
+  <rect width="480" height="180" fill="#e9f5ee"/>
+  <!-- faint circuit lines for a technical feel -->
+  <g fill="none" stroke="#9ecdb4" stroke-width="4" opacity="0.5" stroke-linecap="round">
+    <path d="M0 150 H70 V120 H120"/>
+    <path d="M480 40 H410 V70 H360"/>
+    <circle cx="70" cy="150" r="5" fill="#9ecdb4" stroke="none"/>
+    <circle cx="410" cy="40" r="5" fill="#9ecdb4" stroke="none"/>
+  </g>
+  <!-- gears (teeth via a thick dashed ring, hub via inner filled circle) -->
+  <g transform="translate(185,92)">
+    <circle r="54" fill="none" stroke="#1c6b43" stroke-width="22" stroke-dasharray="13 12.6"/>
+    <circle r="41" fill="#1c6b43"/>
+    <circle r="17" fill="#e9f5ee"/>
+  </g>
+  <g transform="translate(292,120)">
+    <circle r="40" fill="none" stroke="#2f9e64" stroke-width="17" stroke-dasharray="11 10.4"/>
+    <circle r="30" fill="#2f9e64"/>
+    <circle r="12" fill="#e9f5ee"/>
+  </g>
+  <g transform="translate(305,52)">
+    <circle r="27" fill="none" stroke="#e0a63a" stroke-width="13" stroke-dasharray="9 8.1"/>
+    <circle r="20" fill="#e0a63a"/>
+    <circle r="8" fill="#e9f5ee"/>
+  </g>
+</svg>
