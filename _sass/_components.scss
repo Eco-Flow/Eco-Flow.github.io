@@ -155,6 +155,14 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 .card__cta { font-family: $font-head; font-weight: 600; color: $green-dark; }
 .card__cta:hover { color: $green; }
 .card p:has(> .card__cta) { margin-top: auto; margin-bottom: 0; padding-top: .4rem; }
+
+// Two-course chooser on the Services training card.
+.course-option { display: flex; gap: .7rem; align-items: flex-start; margin-top: .8rem; }
+.course-option__logo { flex: 0 0 34px; width: 34px; height: 34px; object-fit: contain; margin-top: .15rem; }
+.course-option__body { display: flex; flex-direction: column; gap: .1rem; }
+.course-option__title { font-family: $font-head; font-weight: 600; color: $ink; }
+.course-option__title:hover { color: $green-dark; }
+.course-option__body span { color: $muted; font-size: .92rem; line-height: 1.45; }
 .card__icon {
   width: 46px; height: 46px; border-radius: 12px;
   background: $green-tint; color: $green-dark;
