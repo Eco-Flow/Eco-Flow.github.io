@@ -13,16 +13,40 @@
   \ the above would require you to manually download all the prerequisites and programs,\
   \ so the easier way is to set a container engine to pull all the programs you need:\n\
   \n`nextflow run main.nf --orthofinder --hite --earlgrey --input input.csv -profile\
-  \ docker/singularity/apptainer`\n\n## HPC cluster profiles\n\nBundled institutional\
-  \ profiles configure the scheduler, container engine, and resource limits for a\
-  \ specific cluster. They already enable the right container engine, so you do **not**\
-  \ need to add `-profile singularity` or an external `-c` config.\n\n| Profile |\
-  \ Cluster | Scheduler | Container |\n| --- | --- | --- | --- |\n| `ucl_myriad` |\
-  \ UCL Myriad | SGE | Singularity/Apptainer |\n| `cambridge` | University of Cambridge\
-  \ CSD3 | SLURM | Singularity |\n\nCombine an HPC profile with a test or input profile,\
-  \ e.g. on UCL Myriad:\n\n`nextflow run main.nf -profile ucl_myriad,test_bacteria\
-  \ -resume --hite`\n\nOn Cambridge CSD3, export your SLURM project/account first\
-  \ (defaults to the `icelake` partition):\n\n```\nexport NXF_CAMBRIDGE_PROJECT=MYPROJECT-SL2-CPU\n\
+  \ docker/singularity/apptainer`\n\n## Earl Grey and the Dfam database (`--famdb`)\n\
+  \nEarl Grey runs from the `tobybaril/earlgrey_dfam3.7` container, which already\
+  \ ships a fully-configured RepeatMasker with Dfam 3.7. So in most cases you just\
+  \ run:\n\n`nextflow run main.nf --earlgrey --input input.csv -profile singularity`\n\
+  \nIf you want to use a **newer Dfam release**, pass `--famdb` pointing at a directory\
+  \ containing the famdb partitions (e.g. `dfam39_full.N.h5` files):\n\n`nextflow\
+  \ run main.nf --earlgrey --famdb /path/to/dfam39 --input input.csv -profile singularity`\n\
+  \n`--famdb` is bind-mounted into the container at `/opt/conda/share/RepeatMasker/Libraries/famdb`,\
+  \ overriding the bundled Dfam. Note this replaces only the famdb, not the container's\
+  \ prebuilt RepeatMasker library, so a mismatched Dfam version may cause issues \u2014\
+  \ the bundled Dfam 3.7 is the safest default.\n\n## Comparing Earl Grey and HiTE\
+  \ (`COMPARE_TE`)\n\nWhen both `--earlgrey` and `--hite` are supplied, the pipeline\
+  \ runs a `COMPARE_TE` step per species that combines the two tools' transposable-element\
+  \ annotations. It parses Earl Grey's `filteredRepeats.gff` and HiTE's RepeatMasker\
+  \ `.out`, maps both tools' classifications to common high-level TE classes (DNA,\
+  \ LTR, LINE, SINE, Penelope, RC/Helitron, Other/Simple, Unclassified), and writes\
+  \ to `results/compare_te/`:\n\n- `<species>_te_comparison.tsv` \u2014 total TE bp,\
+  \ copy number, and % genome per tool.\n- `<species>_te_comparison_by_class.tsv`\
+  \ \u2014 per-class breakdown side by side.\n- `<species>_te_comparison.pdf` \u2014\
+  \ a totals bar chart and a per-class grouped bar chart.\n\nA final `COMBINE_TE`\
+  \ step then merges all species into combined outputs (also in `results/compare_te/`):\n\
+  \n- `combined_te_totals.tsv` / `combined_te_by_class.tsv` \u2014 all species and\
+  \ both tools in one table.\n- `combined_te_comparison.pdf` \u2014 a cross-species\
+  \ totals bar chart and a per-class figure faceted by species.\n\n`nextflow run main.nf\
+  \ --earlgrey --hite --famdb ... --input input.csv -profile singularity`\n\n## HPC\
+  \ cluster profiles\n\nBundled institutional profiles configure the scheduler, container\
+  \ engine, and resource limits for a specific cluster. They already enable the right\
+  \ container engine, so you do **not** need to add `-profile singularity` or an external\
+  \ `-c` config.\n\n| Profile | Cluster | Scheduler | Container |\n| --- | --- | ---\
+  \ | --- |\n| `ucl_myriad` | UCL Myriad | SGE | Singularity/Apptainer |\n| `cambridge`\
+  \ | University of Cambridge CSD3 | SLURM | Singularity |\n\nCombine an HPC profile\
+  \ with a test or input profile, e.g. on UCL Myriad:\n\n`nextflow run main.nf -profile\
+  \ ucl_myriad,test_bacteria -resume --hite`\n\nOn Cambridge CSD3, export your SLURM\
+  \ project/account first (defaults to the `icelake` partition):\n\n```\nexport NXF_CAMBRIDGE_PROJECT=MYPROJECT-SL2-CPU\n\
   nextflow run main.nf -profile cambridge,test_bacteria -resume --hite\n```\n\n##\
   \ Useful additional flags:\n\n`-resume` : This allows the pipeline to resume from\
   \ the last failed process (using the nextflow cache-ing mechanism)\n`-bg`     :\
