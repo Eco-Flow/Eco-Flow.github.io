@@ -1,6 +1,6 @@
 "Eco-Flow/comparete": "# CompareTE\nA pipeline to compare TE content across genomes\
   \ using various platforms.\n\n<img src=\"https://raw.githubusercontent.com/Eco-Flow/comparete/main/assets/image.png\"\
-  \ alt=\"CompareTE pipeline\" width=\"50%\">\n\n# Requirements\n\n- **Nextflow**\
+  \ alt=\"CompareTE pipeline\" width=\"100%\">\n\n# Requirements\n\n- **Nextflow**\
   \ >=26.04 ([install](https://www.nextflow.io/docs/latest/getstarted.html#installation))\n\
   - **Java** 11+ (required by Nextflow)\n- **Container engine** \u2014 one of:\n \
   \ - Docker\n  - Singularity / Apptainer\n  - (or install all tools manually if not\
