@@ -8,7 +8,7 @@ order: 4
 
 🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)
 
-🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training)
+🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
 
