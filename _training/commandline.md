@@ -8,6 +8,8 @@ order: 1
 
 🧭 [◀️ Part 0 · Setup](/training/setup/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 2 · Pipelines ▶️](/training/pipelines/)
 
+🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training)
+
 ---
 
 ⏱ **Estimated time:** ~45 minutes &nbsp;•&nbsp; 🟢 Beginner &nbsp;•&nbsp; No prior experience needed

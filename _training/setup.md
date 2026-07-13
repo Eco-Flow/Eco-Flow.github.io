@@ -8,6 +8,8 @@ order: 0
 
 🧭 [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 1 · Command line ▶️](/training/commandline/)
 
+🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training)
+
 ---
 
 ⏱ **Estimated time:** ~20 minutes &nbsp;•&nbsp; 🟢 No coding required yet

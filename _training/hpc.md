@@ -9,6 +9,8 @@ bonus: true
 
 🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)
 
+🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training)
+
 ---
 
 ⏱ **Estimated time:** ~20 minutes reading &nbsp;•&nbsp; 🟣 Bonus / optional &nbsp;•&nbsp; Reference, not a hands-on run
