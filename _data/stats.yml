@@ -6,7 +6,7 @@ pageviews_all: 400
 visits_all: 140
 pageviews_30d: 400
 visits_30d: 140
-pageviews_7d: 81
+pageviews_7d: 82
 visits_7d: 37
 countries_7d: 6
 countries_all: 10
@@ -25,11 +25,11 @@ top_pages:
   views: 3
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
   views: 3
+- path: /pipelines/genomeqc/
+  views: 3
 - path: /events/2026-07-08-workflowhub-community-meeting/
   views: 3
 - path: /pipelines/synteny/
-  views: 2
-- path: /pipelines/genomeqc/
   views: 2
 - path: /about/
   views: 2
@@ -59,7 +59,7 @@ top_countries:
 - name: ES
   views: 16
 - name: US
-  views: 12
+  views: 13
 - name: NL
   views: 2
 - name: BE
