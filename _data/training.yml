@@ -42,6 +42,11 @@ parts:
     type: Practical
     body: Take the counts from the RNA-Seq pipeline and find what changed — normalise with DESeq2, run differential expression, and interpret the results in R.
     file: differential.md
+  - num: "5"
+    title: Run the nanopore metabarcoding pipeline
+    type: Practical
+    body: Hands-on — run Eco-Flow's nanoporemetabarcoding pipeline end to end, from raw Nanopore reads to a taxonomically-annotated community table.
+    file: nanopore_metabarcoding.md
   - num: "★"
     title: Running a pipeline on an HPC
     type: Reference
