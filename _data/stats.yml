@@ -2,25 +2,27 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-15'
 since: '2026-06-27'
-pageviews_all: 400
+pageviews_all: 420
 visits_all: 140
-pageviews_30d: 400
+pageviews_30d: 420
 visits_30d: 140
-pageviews_7d: 76
-visits_7d: 36
-countries_7d: 6
-countries_all: 10
+pageviews_7d: 85
+visits_7d: 38
+countries_7d: 7
+countries_all: 11
 top_pages:
 - path: /
-  views: 27
+  views: 28
+- path: /training/
+  views: 9
 - path: /numbers/
   views: 7
-- path: /training/
-  views: 5
+- path: /pipelines/
+  views: 6
 - path: /events/
   views: 5
-- path: /pipelines/
-  views: 5
+- path: /about/
+  views: 4
 - path: /pipelines/excon/
   views: 3
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
@@ -30,8 +32,6 @@ top_pages:
 - path: /pipelines/synteny/
   views: 2
 - path: /pipelines/genomeqc/
-  views: 2
-- path: /about/
   views: 2
 - path: /pipelines/gwas/
   views: 2
@@ -49,6 +49,8 @@ top_pages:
   views: 1
 - path: /partners
   views: 1
+- path: /training/nanopore-metabarcoding/
+  views: 1
 - path: /training/nfcore-rnaseq/
   views: 1
 - path: /pipelines/nanoporemetabarcoding/
@@ -57,7 +59,7 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 42
+  views: 49
 - name: ES
   views: 16
 - name: US
@@ -67,6 +69,8 @@ top_countries:
 - name: BE
   views: 2
 - name: SG
+  views: 2
+- name: IT
   views: 2
 all_countries:
 - name: GB
@@ -84,6 +88,8 @@ all_countries:
 - name: AR
   views: 2
 - name: BE
+  views: 2
+- name: IT
   views: 2
 - name: BR
   views: 1
