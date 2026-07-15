@@ -6,21 +6,21 @@ pageviews_all: 400
 visits_all: 140
 pageviews_30d: 400
 visits_30d: 140
-pageviews_7d: 72
-visits_7d: 33
+pageviews_7d: 76
+visits_7d: 36
 countries_7d: 6
 countries_all: 10
 top_pages:
 - path: /
-  views: 25
+  views: 27
 - path: /numbers/
   views: 7
+- path: /training/
+  views: 5
 - path: /events/
   views: 5
 - path: /pipelines/
   views: 5
-- path: /training/
-  views: 4
 - path: /pipelines/excon/
   views: 3
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
@@ -32,6 +32,8 @@ top_pages:
 - path: /pipelines/genomeqc/
   views: 2
 - path: /about/
+  views: 2
+- path: /pipelines/gwas/
   views: 2
 - path: /training/commandline/
   views: 1
@@ -47,8 +49,6 @@ top_pages:
   views: 1
 - path: /partners
   views: 1
-- path: /pipelines/gwas/
-  views: 1
 - path: /training/nfcore-rnaseq/
   views: 1
 - path: /pipelines/nanoporemetabarcoding/
@@ -57,11 +57,11 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 39
+  views: 42
 - name: ES
   views: 16
 - name: US
-  views: 11
+  views: 12
 - name: NL
   views: 2
 - name: BE
