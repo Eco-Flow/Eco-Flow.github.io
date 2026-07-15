@@ -16,6 +16,7 @@ For first-time local setup, see [test_locally.md](test_locally.md).
 | Write a blog post         | Add a file to [`_posts/`](_posts) |
 | Announce an event         | Add a file to [`_events/`](_events) |
 | Add / edit a pipeline     | Add or edit a file in [`_pipelines/`](_pipelines) |
+| Add a training lesson     | Add the lesson to the training repo, then an entry in [`_data/training.yml`](_data/training.yml) — see ["Adding a training lesson"](#adding-a-training-lesson-the-training-course) |
 | Change the team list      | Edit [`_data/team.yml`](_data/team.yml) |
 | Change funders / partners | Edit [`_data/funders.yml`](_data/funders.yml) |
 | Change ambassadors        | Edit [`_data/ambassadors.yml`](_data/ambassadors.yml) |
@@ -169,6 +170,52 @@ badges it has data for.
 
 ---
 
+## Adding a training lesson (the `/training/` course)
+
+The `/training/` page is a course whose lessons are **authored in a separate repo** —
+[`Eco-Flow/training`](https://github.com/Eco-Flow/training), under `eco-flow-training/docs/` —
+and pulled into this site automatically, so they render natively at `/training/<lesson>/`
+instead of linking out to GitHub.
+
+Adding a lesson is two steps:
+
+1. **Author the lesson** as a Markdown file in the training repo's `eco-flow-training/docs/`
+   folder (e.g. `nanopore_metabarcoding.md`). Write it as a normal README-style doc — a leading
+   `# H1`, relative `img/…` images, and links to sibling lessons like `./setup.md` all work; the
+   sync tidies them up (see below).
+2. **List it** in [`_data/training.yml`](_data/training.yml) under `parts:`, in the order you
+   want it to appear:
+
+   ```yaml
+   - num: "5"                # badge shown on the card / lesson header
+     title: Run the nanopore metabarcoding pipeline
+     type: Practical         # free text — e.g. Practical, Lecture, Reference
+     body: One sentence shown on the course-outline card.
+     file: nanopore_metabarcoding.md   # must match the doc's filename in the training repo
+   ```
+
+   For an **optional bonus** lesson (like the HPC one), use `num: "★"` and add `bonus: true` — it
+   then reads "Bonus" instead of "Part ★" in the lesson header.
+
+That's it. The [`sync-training`](.github/workflows/sync-training.yml) GitHub Action — which runs
+[`scripts/sync_training.py`](scripts/sync_training.py) **every day, on every push to `publish`,
+and on demand from the Actions tab** (a push to the training repo can also trigger it instantly
+via the `repository_dispatch` hook) — fetches each listed lesson and generates its page under
+[`_training/`](_training): it strips the leading H1 (the layout renders the title), rewrites
+cross-lesson `.md` links to `/training/<lesson>/`, rewrites relative `img/…` paths and downloads
+those images into `assets/training/img/`, and builds prev/next navigation from the `parts` order.
+
+The generated `_training/*.md` files are **auto-generated — don't edit them by hand**; edit the
+source doc in the training repo instead, and it appears here on the next sync (same idea as the
+pipeline READMEs). Only lessons listed in `_data/training.yml` are pulled, so a doc can sit in the
+training repo unpublished until you add its entry here.
+
+> Note: filenames with underscores become hyphens in the URL (Jekyll's `:name`), so
+> `nanopore_metabarcoding.md` is served at `/training/nanopore-metabarcoding/`. The sync and
+> layout handle this for you.
+
+---
+
 ## Editing the data-driven pages (no HTML needed)
 
 These pages are built from YAML data files — edit the data, not the page:
@@ -184,7 +231,8 @@ These pages are built from YAML data files — edit the data, not the page:
   [`_data/external_projects.yml`](_data/external_projects.yml) — projects we advise on
   but don't own. Each entry: `name`, `org`, `url` (links out to the repo), `summary`.
 - **Training course** (the `/training/` page): [`_data/training.yml`](_data/training.yml) —
-  course intro, repo link, and the list of `parts` (each linking to its lesson on GitHub).
+  course intro, funder credit, and the list of `parts`. Lessons are pulled from the training repo
+  and rendered on-site — see ["Adding a training lesson"](#adding-a-training-lesson-the-training-course).
 - **Homepage mission pillars**: [`_data/pillars.yml`](_data/pillars.yml).
 - **Top navigation**: [`_data/nav.yml`](_data/nav.yml).
 
