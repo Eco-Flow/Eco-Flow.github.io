@@ -6,8 +6,6 @@ type: "Practical"
 order: 0
 ---
 
-🧭 [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 1 · Command line ▶️](/training/commandline/)
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
@@ -163,7 +161,3 @@ You're set up! On to the command line.
 Head back to the menu → [click here](/training/)
 
 Head to Part 1 → [click here](/training/commandline/)
-
----
-
-🧭 [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 1 · Command line ▶️](/training/commandline/)

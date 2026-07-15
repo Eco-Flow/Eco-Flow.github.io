@@ -6,10 +6,6 @@ type: "Practical"
 order: 5
 ---
 
-🧭 [◀️ Part 2 · Pipelines](/training/pipelines/) &nbsp;|&nbsp; [🏠 Course menu](/training/)
-
----
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ⏱ **Estimated time:** ~60–90 minutes (including pipeline run time) &nbsp;•&nbsp; 🟡 Practical
@@ -471,7 +467,3 @@ Add **`-resume`** and Nextflow reuses cached results for any step whose inputs h
 - Adapt what you designed in Steps 3–4 to your **own** primer-tag scheme and run it on your own data.
 - Explore the full parameter list in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/nextflow.config) — worth tuning per-rank identity thresholds (`--spident`/`--gpident`/`--fpident`/`--opident`) and `--tax_list` for your own taxonomic group.
 - Running on a cluster other than Myriad? Step 7 above covers the concrete example; the bonus **[Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including a Slurm walkthrough).
-
----
-
-🧭 [◀️ Part 2 · Pipelines](/training/pipelines/) &nbsp;|&nbsp; [🏠 Course menu](/training/)

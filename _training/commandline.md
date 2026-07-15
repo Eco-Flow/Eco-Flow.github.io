@@ -6,8 +6,6 @@ type: "Practical \u00b7 optional"
 order: 1
 ---
 
-🧭 [◀️ Part 0 · Setup](/training/setup/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 2 · Pipelines ▶️](/training/pipelines/)
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
@@ -714,7 +712,3 @@ Tick these off — if you can do them all, you're ready for the pipeline lecture
 Head back to the menu → [click here](/training/)
 
 Head to Part 2 → [click here](/training/pipelines/)
-
----
-
-🧭 [◀️ Part 0 · Setup](/training/setup/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 2 · Pipelines ▶️](/training/pipelines/)

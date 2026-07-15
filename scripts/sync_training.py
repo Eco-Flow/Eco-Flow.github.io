@@ -84,6 +84,16 @@ def transform(content, known_slugs, referenced):
     # Drop the first H1 — the layout renders the title from front matter.
     content = H1_RE.sub("", content, count=1).lstrip("\n")
 
+    # Drop the source's hand-maintained breadcrumb lines (a line starting with
+    # 🧭 that links to the previous/next lesson + course menu). The layout
+    # already renders the authoritative "Part N" eyebrow and prev/next nav from
+    # _data/training.yml, so these are redundant — and their hard-coded part
+    # numbers can disagree with the site's ordering. Also strip the horizontal
+    # rule the source pairs with the breadcrumb at the very top and bottom.
+    content = re.sub(r"(?m)^[ \t]*🧭.*$", "", content).strip("\n")
+    content = re.sub(r"^-{3,}[ \t]*\n+", "", content)
+    content = re.sub(r"\n+[ \t]*-{3,}[ \t]*$", "", content).strip("\n")
+
     content = IMG_MD_RE.sub(
         lambda m: m.group(1) + rewrite_image_target(m.group(2), referenced) + m.group(3),
         content,

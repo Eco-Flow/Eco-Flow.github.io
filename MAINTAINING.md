@@ -201,9 +201,12 @@ That's it. The [`sync-training`](.github/workflows/sync-training.yml) GitHub Act
 [`scripts/sync_training.py`](scripts/sync_training.py) **every day, on every push to `publish`,
 and on demand from the Actions tab** (a push to the training repo can also trigger it instantly
 via the `repository_dispatch` hook) — fetches each listed lesson and generates its page under
-[`_training/`](_training): it strips the leading H1 (the layout renders the title), rewrites
-cross-lesson `.md` links to `/training/<lesson>/`, rewrites relative `img/…` paths and downloads
-those images into `assets/training/img/`, and builds prev/next navigation from the `parts` order.
+[`_training/`](_training): it strips the leading H1 (the layout renders the title), removes the
+source doc's own 🧭 breadcrumb lines (the layout's "Part N" header and prev/next are
+authoritative, so the hand-written ones would only duplicate — and can disagree with — the site
+ordering), rewrites cross-lesson `.md` links to `/training/<lesson>/`, rewrites relative `img/…`
+paths and downloads those images into `assets/training/img/`, and builds prev/next navigation
+from the `parts` order.
 
 The generated `_training/*.md` files are **auto-generated — don't edit them by hand**; edit the
 source doc in the training repo instead, and it appears here on the next sync (same idea as the

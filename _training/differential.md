@@ -6,8 +6,6 @@ type: "Practical"
 order: 4
 ---
 
-🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
@@ -108,7 +106,3 @@ write.table(res, "Deseq_results_table.csv", sep="\t", quote=F)
 ```
 
 Now in the R variable `res`, we should have our results, which we save to a file called "Deseq_results_table.csv".
-
----
-
-🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)

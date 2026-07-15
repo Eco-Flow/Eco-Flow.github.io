@@ -7,8 +7,6 @@ order: 6
 bonus: true
 ---
 
-🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
@@ -347,7 +345,3 @@ nextflow run nf-core/rnaseq -r 3.14.0 \
 - **Reuse** an nf-core/configs profile if one exists, or **adapt** a similar one.
 - **Test** it first with `-profile test,singularity` on a tiny pipeline and confirm the `executor > slurm/sge` line.
 - Run with **`-profile singularity -c mycluster.config`**, keeping the Nextflow driver alive in `tmux`, as a submitted job, or with `-bg`.
-
----
-
-🧭 [◀️ Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/) &nbsp;|&nbsp; [🏠 Course menu](/training/)

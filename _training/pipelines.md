@@ -6,8 +6,6 @@ type: "Lecture"
 order: 2
 ---
 
-🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore-rnaseq/)
-
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
 
 ---
@@ -242,7 +240,3 @@ or
 
 Head back to menu   -> [click here](/training/)
 <br/>
-
----
-
-🧭 [◀️ Part 1 · Command line](/training/commandline/) &nbsp;|&nbsp; [🏠 Course menu](/training/) &nbsp;|&nbsp; **Next:** [Part 3 · nf-core RNA-Seq ▶️](/training/nfcore-rnaseq/)
