@@ -2,17 +2,17 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-16'
 since: '2026-06-27'
-pageviews_all: 420
-visits_all: 140
-pageviews_30d: 420
-visits_30d: 140
-pageviews_7d: 52
-visits_7d: 22
+pageviews_all: 430
+visits_all: 150
+pageviews_30d: 430
+visits_30d: 150
+pageviews_7d: 56
+visits_7d: 26
 countries_7d: 7
 countries_all: 11
 top_pages:
 - path: /
-  views: 14
+  views: 15
 - path: /training/
   views: 9
 - path: /pipelines/
@@ -31,7 +31,13 @@ top_pages:
   views: 1
 - path: /training/commandline/
   views: 1
+- path: /pipelines/excon
+  views: 1
 - path: /partners/
+  views: 1
+- path: /2026/05/27/leuven-evolutionary-genomics.html
+  views: 1
+- path: /pipelines/about
   views: 1
 - path: /training/setup/
   views: 1
@@ -53,11 +59,11 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 23
+  views: 24
 - name: ES
   views: 16
 - name: US
-  views: 6
+  views: 9
 - name: NL
   views: 2
 - name: BE
