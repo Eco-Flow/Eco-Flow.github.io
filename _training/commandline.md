@@ -525,61 +525,7 @@ ls                                          # you should now see rnaseq_experime
 ```
 </details>
 
-### Step 2 — Write and run your own script
-
-Create a file `list.sh` containing the single line `ls -la`, using `nano`.
-
-<details>
-<summary>Cheat sheet — creating the file</summary>
-
-```bash
-nano list.sh
-# type:  ls -la
-# then Ctrl+X, y, Enter
-```
-</details>
-
-Now try to run it just by typing its name:
-
-```bash
-list.sh
-```
-
-> ❌ You'll see `bash: list.sh: command not found`. The shell only auto-finds programs on the `$PATH` (Block 7) — and your current folder isn't on it.
-
-So point at the file directly with `bash`:
-
-```bash
-bash ./list.sh
-```
-
-> ❌ Now you'll see `bash: ./list.sh: Permission denied`. The file isn't marked executable yet.
-
-Fix that with `chmod` (Block 6), then run it:
-
-```bash
-chmod u+x ./list.sh
-bash ./list.sh
-```
-
-<details>
-<summary>✅ Expected output</summary>
-
-The script runs `ls -la` and lists everything in the folder, including your new `list.sh` and `rnaseq_experiment`:
-
-```
-total 24
-drwxr-xr-x  ... .
-drwxr-xr-x  ... ..
--rwxr--r--  ... list.sh
-drwxr-xr-x  ... rnaseq_experiment
-...
-```
-
-Notice the `x` in `-rwxr--r--` — that's the execute permission you just added.
-</details>
-
-### Step 3 — Download and install Nextflow
+### Step 2 — Download and install Nextflow
 
 Nextflow is already installed in this environment, but we'll download our own copy for practice. First check the Java prerequisite (already installed here as v17):
 
@@ -641,7 +587,7 @@ Runtime: ...
 ```
 </details>
 
-### Step 4 — Make an alias (optional 🟡)
+### Step 3 — Make an alias (optional 🟡)
 
 When you type the same command a lot, an **alias** turns it into a short word. Aliases live in `~/.bash_profile` (in your home directory). A couple already exist there:
 
