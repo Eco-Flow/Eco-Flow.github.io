@@ -2,24 +2,28 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-17'
 since: '2026-06-27'
-pageviews_all: 430
+pageviews_all: 440
 visits_all: 150
-pageviews_30d: 430
+pageviews_30d: 440
 visits_30d: 150
-pageviews_7d: 48
-visits_7d: 23
-countries_7d: 6
-countries_all: 11
+pageviews_7d: 62
+visits_7d: 29
+countries_7d: 7
+countries_all: 12
 top_pages:
 - path: /
-  views: 12
+  views: 18
 - path: /training/
-  views: 9
+  views: 12
 - path: /pipelines/
   views: 5
+- path: /about/
+  views: 4
 - path: /events/2026-07-16-cloud-genomics-hackathon-aws/
   views: 3
-- path: /about/
+- path: /training/setup/
+  views: 3
+- path: /pipelines/about/
   views: 2
 - path: /events/
   views: 2
@@ -35,11 +39,7 @@ top_pages:
   views: 1
 - path: /pipelines/about
   views: 1
-- path: /training/setup/
-  views: 1
 - path: /blog/
-  views: 1
-- path: /pipelines/about/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
@@ -55,11 +55,13 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 23
+  views: 34
 - name: ES
   views: 11
 - name: US
   views: 9
+- name: DE
+  views: 3
 - name: NL
   views: 2
 - name: IT
@@ -79,6 +81,8 @@ all_countries:
   views: 8
 - name: NL
   views: 8
+- name: DE
+  views: 3
 - name: AR
   views: 2
 - name: BE
