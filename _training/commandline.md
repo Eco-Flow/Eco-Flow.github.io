@@ -68,6 +68,8 @@ Your first job is always to answer two questions: *where am I?* and *what's here
 - `cd ..` — go **up** one directory
 - `cd -` — jump **back** to the previous directory
 - `cd` (on its own) — go to your **home** directory
+- `cd /home/user/directory` - move *into* full path
+- `cd directory/up_directory` - move *into* folder called `directory` using relative path
 
 > 📍 **Where should I be?** For every exercise you should be inside the **`eco-flow-training`** folder. In the Codespaces environment your terminal opens there automatically and the full path is `/workspaces/training/eco-flow-training`. If you're running the course from a local clone the path will look different (e.g. `/Users/you/training/eco-flow-training`) — what matters is that it **ends in `eco-flow-training`**. If it doesn't, run `cd` into it before continuing.
 
@@ -128,6 +130,44 @@ Your first job is always to answer two questions: *where am I?* and *what's here
 
 > 🤔 **Predict, then check:** before you run it, what do you think `cd data` followed by `pwd` will print? Try it, then use `cd -` to jump straight back.
 
+> ▶️ **Try it — relative vs absolute paths**
+>
+> A **relative path** depends on where you currently are; an **absolute path** (starting with `/`) always points to the same place, no matter where you run it from. See the difference for yourself:
+>
+> ```bash
+> cd data              # relative — works because you're inside eco-flow-training
+> pwd
+> cd ..
+> cd docs
+> cd data              # the *same* relative command, from a different starting point
+> ```
+>
+> <details>
+> <summary>✅ Expected output</summary>
+>
+> The first `cd data` works fine — you land in `.../eco-flow-training/data`. The second one, run from inside `docs`, fails instead:
+>
+> ```
+> -bash: cd: data: No such file or directory
+> ```
+>
+> There's no `data` folder *inside* `docs` — a relative path only ever means "a folder called `data` inside wherever I currently am," so the exact same command means something different (or nothing at all) depending on where you run it.
+> </details>
+>
+> Now, from wherever that left you, try the **absolute** path instead:
+>
+> ```bash
+> cd /workspaces/training/eco-flow-training/data
+> pwd
+> cd ../..                # back to eco-flow-training
+> ```
+>
+> <details>
+> <summary>✅ Expected output</summary>
+>
+> This works from anywhere — `pwd` prints `/workspaces/training/eco-flow-training/data` regardless of where you ran it from. (Locally, substitute your own absolute path — see the "Where should I be?" note above.) That's the whole difference: **absolute paths are location-independent, relative paths aren't.**
+> </details>
+
 ---
 
 ## Block 2 — Creating, moving and removing
@@ -137,6 +177,7 @@ Now that you can move around, let's make and manage files and folders.
 | Command | What it does |
 | --- | --- |
 | `mkdir` | **M**a**k**e a new **dir**ectory |
+| `touch` | Create a new empty file |
 | `cp` | **C**o**p**y a file/folder (keeps the original; add `-r` for a directory) |
 | `mv` | **M**o**v**e or rename a file/folder (the original name is gone) |
 | `rm` | **R**e**m**ove/delete a file (add `-r` for a directory — ⚠️ no undo!) |
@@ -197,12 +238,12 @@ You'll often want to peek inside a file without opening an editor. These command
 | Command | What it does |
 | --- | --- |
 | `cat` | Print **all** lines of a file (also joins/**cat**enates files together) |
-| `zcat` | Same as `cat`, but for gzipped (`.gz`) files |
 | `head` | Print the **top** lines of a file (`-n` sets how many) |
 | `tail` | Print the **bottom** lines of a file (`-n` sets how many) |
 | `wc` | **W**ord **c**ount — lines, words and characters (`-l` for lines only) |
 | `sort` | Sort lines |
 | `uniq` | Collapse **adjacent** duplicate lines into one |
+| `grep` | Print every line that contains a word/pattern |
 
 > 💡 `uniq` only removes duplicates that are **next to each other**, so you almost always `sort` first (you'll do exactly this in Block 5).
 
@@ -228,42 +269,6 @@ You'll often want to peek inside a file without opening an editor. These command
 >
 > (The three numbers are lines, words and characters, followed by the filename.)
 > </details>
-
-> ▶️ **Try it — peek inside a compressed FASTQ file**
->
-> Your sequencing data is gzipped, so plain `cat` would print garbage. Use `zcat` instead:
->
-> ```bash
-> cd ../data
-> zcat SRR6357070_1.fastq.gz | head -n 4
-> ```
->
-> <details>
-> <summary>✅ Expected output</summary>
->
-> The first **read** in a FASTQ file — four lines: an ID, the DNA sequence, a `+`, and quality scores:
->
-> ```
-> @SRR6357070.1 1/1
-> GATCGGAAGAGCACACGTCTGAACTCCAGTCAC...
-> +
-> AAAAAEEEEEEEEEEEEEEEEEEEEEEEEEEEE...
-> ```
-> </details>
-
-> 🤔 **Predict, then check:** a FASTQ file uses 4 lines per read. If `zcat file | wc -l` prints `4000`, how many reads is that? (Scroll to Block 5 to actually count them with a pipe.)
-
----
-
-## Block 4 — Searching inside files
-
-Reading a whole file is fine when it's short. When it's long, you want to **search**.
-
-| Command | What it does |
-| --- | --- |
-| `grep` | Print every line that contains a word/pattern |
-| `echo` | Print text (or the contents of a variable) to the terminal |
-| `history` | Show the commands you've already run |
 
 Useful `grep` flags:
 
@@ -292,7 +297,57 @@ Useful `grep` flags:
 > ```
 > </details>
 
-> 🤔 **Predict, then check:** what does `history | grep grep` do? Run it and see — it searches your own command history for every time you used `grep`.
+---
+
+## Block 4 — Other handy commands
+
+You won't need all of these today, but they're worth knowing.
+
+| Command | What it does |
+| --- | --- |
+| `zcat` | Same as `cat`, but for gzipped (`.gz`) files |
+| `echo` | Print text (or the contents of a variable) to the terminal |
+| `history` | Show the commands you've already run |
+
+> ▶️ **Try it — peek inside a compressed FASTQ file**
+>
+> Your sequencing data is gzipped, so plain `cat` would print garbage. Use `zcat` instead:
+>
+> ```bash
+> cd ../data
+> zcat SRR6357070_1.fastq.gz | head -n 4
+> ```
+>
+> <details>
+> <summary>✅ Expected output</summary>
+>
+> The first **read** in a FASTQ file — four lines: an ID, the DNA sequence, a `+`, and quality scores:
+>
+> ```
+> @SRR6357070.1 1/1
+> GATCGGAAGAGCACACGTCTGAACTCCAGTCAC...
+> +
+> AAAAAEEEEEEEEEEEEEEEEEEEEEEEEEEEE...
+> ```
+> </details>
+
+> 🤔 **Predict, then check:** a FASTQ file uses 4 lines per read. If `zcat file | wc -l` prints `4000`, how many reads is that? (Scroll to Block 5 to actually count them with a pipe.)
+
+<details>
+<summary>Extra commands (not needed for this course)</summary>
+
+| Command | What it does |
+| --- | --- |
+| `wget` | Download the contents of a URL (`-O` sets the output name) |
+| `curl` | Download the contents of a URL (`-o` sets the output name) |
+| `which` | Show the path to a program (e.g. `which perl`) |
+| `ssh` | Access a remote server/cluster |
+| `export` | Set an environment variable |
+| `open` | Open a file the "expected" way (e.g. a PDF) |
+| `cut` | Cut out selected columns/sections of a file |
+| `gzip` | Compress or decompress files to save space |
+
+</details>
 
 ---
 
@@ -316,6 +371,26 @@ The classic example reads a file, sorts it, keeps unique lines, and saves the re
 ```bash
 cat file | sort | uniq > sorted_uniq_file
 ```
+
+> ▶️ **Try it — keep a record of what you did**
+>
+> You can save your session `history` to a file:
+>
+> ```bash
+> history > my_history.txt
+> ```
+>
+> <details>
+> <summary>✅ Expected output</summary>
+>
+> Nothing prints to the terminal — the output went into the file instead. Check it worked:
+>
+> ```bash
+> cat my_history.txt
+> ```
+>
+> You should see a numbered list of every command you've run this session.
+> </details>
 
 > ▶️ **Try it — count the reads in a FASTQ file with a pipe**
 >
@@ -357,6 +432,7 @@ cat file | sort | uniq > sorted_uniq_file
 > SRR6357072_1.fastq.gz
 > ...
 > ```
+
 > </details>
 
 > 🤔 **Predict, then check:** what's the difference between running the `ls ... > read1_files.txt` line twice with `>` versus `>>`? Try both and `cat` the file each time.
@@ -451,28 +527,7 @@ This puts our course folder on the `$PATH`, so any executable script there becom
 
 ---
 
-## Reference — other handy commands
-
-You won't need all of these today, but they're worth knowing.
-
-| Command | What it does |
-| --- | --- |
-| `wget` | Download the contents of a URL (`-O` sets the output name) |
-| `curl` | Download the contents of a URL (`-o` sets the output name) |
-| `which` | Show the path to a program (e.g. `which perl`) |
-
-<details>
-<summary>Extra commands (not needed for this course)</summary>
-
-| Command | What it does |
-| --- | --- |
-| `ssh` | Access a remote server/cluster |
-| `export` | Set an environment variable |
-| `open` | Open a file the "expected" way (e.g. a PDF) |
-| `cut` | Cut out selected columns/sections of a file |
-| `gzip` | Compress or decompress files to save space |
-
-</details>
+## Reference
 
 ### A note on programming languages
 
@@ -616,16 +671,6 @@ hist5        # try it — and try lss and h1 too
 
 You can name the alias anything, as long as it isn't already a command.
 </details>
-
-### Step 5 — Save your history (optional 🟡)
-
-It's good practice to keep a record of what you did. Save your session `history` to a file:
-
-```bash
-history > my_history.txt
-```
-
-Then, in the VS Code file panel on the left, right-click `my_history.txt` and choose **Download** to save it to your own machine.
 
 ---
 
