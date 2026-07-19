@@ -71,44 +71,52 @@ Before running an RNA-Seq analysis, it helps to understand what it *is*. In shor
 
 It's always worth looking at your data by eye before running anything. The reads live in the `data` folder.
 
-The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't directly human-readable — plain `cat`/`head` would print gibberish (don't panic if you see `<��xT�r-�B7�...`, that's expected!). Instead, use **`zcat`** (from Part 1), which reads gzipped files, and pipe it to `head`:
+The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't directly human-readable — plain `cat`/`head` would print gibberish (don't panic if you see `<��xT�r-�B7�...`, that's expected!). Instead, use **`zcat`** (from Part 1), which reads gzipped files.
 
-> ▶️ **Try it — peek at a compressed FASTQ file**
+> ▶️ **Challenge — inspect a FASTQ file**
 >
-> ```bash
-> zcat data/SRR6357070_1.fastq.gz | head
-> ```
+> Try to answer these two questions from the data:
 >
-> <details>
-> <summary>✅ Expected output</summary>
+> 1. How many lines are in the FASTQ file?
+> 2. What is the length of the reads?
 >
-> Groups of four lines per read — an ID, the sequence, a `+`, and quality scores:
->
-> ```
-> @SRR6357070.1 1/1
-> GATCGGAAGAGCACACGTCTGAACTCCAGTCAC...
-> +
-> AAAAAEEEEEEEEEEEEEEEEEEEEEEEEEEEE...
-> ```
-> </details>
-
-There's no `zhead`, so we pipe `zcat` into `head`. The same trick lets you **count** the reads:
-
-> ▶️ **Try it — count the lines (and work out the reads)**
+> Use these commands:
 >
 > ```bash
 > zcat data/SRR6357070_1.fastq.gz | wc -l
+> zcat data/SRR6357070_1.fastq.gz | head -n 2 | tail -n 1 | wc -c
 > ```
 >
 > <details>
-> <summary>✅ Expected output</summary>
+> <summary>✅ Answer</summary>
 >
 > ```
 > 200000
+> 101
 > ```
 >
-> FASTQ uses **4 lines per read**, so that's `200000 / 4 = 50000` reads in this file.
+> The first command shows there are `200000` lines in the file. A FASTQ record uses **4 lines per read**, so that corresponds to `50000` reads. The second command uses `head` and `tail` to grab the second line of the file, which is the first read sequence, and `wc -c` counts the number of characters in that line. There are many ways to do this, and even copying the file into an editor and looking at it manually is fine.
 > </details>
+
+### Structure of a typical FASTQ file
+
+Each read in a FASTQ file is stored as four lines:
+
+1. **Header line** — starts with `@` and contains the read identifier.
+2. **Sequence line** — the DNA or RNA bases for that read.
+3. **Separator line** — a single `+`, often followed by the same read identifier.
+4. **Quality line** — one character of quality score per base, usually in ASCII.
+
+For example:
+
+```text
+@SRR6357070.1 1/1
+GATCGGAAGAGCACACGTCTGAACTCCAGTCAC...
++
+AAAAEEEEEEEEEEEEEEEEEEEEEEEEEEEE...
+```
+
+This layout is important because it lets the pipeline keep the sequence and its quality information together for every read.
 
 ---
 
