@@ -6,15 +6,15 @@ pageviews_all: 440
 visits_all: 150
 pageviews_30d: 440
 visits_30d: 150
-pageviews_7d: 54
-visits_7d: 25
+pageviews_7d: 58
+visits_7d: 27
 countries_7d: 7
 countries_all: 12
 top_pages:
 - path: /
-  views: 14
+  views: 15
 - path: /training/
-  views: 10
+  views: 11
 - path: /about/
   views: 5
 - path: /pipelines/
@@ -24,6 +24,10 @@ top_pages:
 - path: /training/setup/
   views: 3
 - path: /events/
+  views: 2
+- path: /pipelines/gwas/
+  views: 2
+- path: /training/nanopore-metabarcoding/
   views: 2
 - path: /pipelines/synteny/
   views: 1
@@ -43,18 +47,14 @@ top_pages:
   views: 1
 - path: /partners
   views: 1
-- path: /pipelines/gwas/
-  views: 1
-- path: /training/nanopore-metabarcoding/
-  views: 1
 - path: /jobs/
   views: 1
 top_countries:
 - name: GB
-  views: 28
-- name: ES
-  views: 9
+  views: 31
 - name: US
+  views: 10
+- name: ES
   views: 9
 - name: DE
   views: 3
