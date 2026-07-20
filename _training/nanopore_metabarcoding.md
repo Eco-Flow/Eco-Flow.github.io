@@ -37,7 +37,7 @@ We'll use a case study to motivate the design steps: **DNA barcoding of adult wa
 
 Barcoded DNA from all wasps and both sites were pooled together onto a **single, shared sequencing run**. Each site is given its own **Nanopore barcode** (a run-level ID), so the sequencer's own software can split the one run's reads back into "Woodland" and "Meadow". Within each site, individual wasps are then told apart by **tags** — a second, finer-grained ID that the pipeline (not the sequencer) resolves.
 
-How do we tell samples apart if we pool them together? Imagine the tables above represent plates. The first plate (Woodland) was labelled with the `barcode01` sequence to identify it, while the second (Meadow) was labelled with `barcode02`. That's enough to tell the two plates apart once the run is sequenced — but within each plate, we still need to tell individual wasps and controls apart. That's what the forward (`F1`–`F3`) and reverse (`R1`–`R2`) tags below do, combined pairwise to label each well:
+How do we tell samples apart if we pool them together? Imagine the tables above represent plates. The first plate (Woodland) was labelled with the `barcode01` sequence to identify it, while the second (Meadow) was labelled with `barcode02`. That's enough to tell the two plates apart once the run is sequenced — but within each plate, we still need to tell individual wasps and controls apart. That's what the forward (`F1`–`F3`) and reverse (`R1`–`R2`) tags below do, combined pairwise to label each sample:
 
 ![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
 
