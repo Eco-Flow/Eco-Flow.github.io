@@ -2,30 +2,32 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-20'
 since: '2026-06-27'
-pageviews_all: 450
+pageviews_all: 460
 visits_all: 150
-pageviews_30d: 450
+pageviews_30d: 460
 visits_30d: 150
-pageviews_7d: 60
-visits_7d: 30
+pageviews_7d: 78
+visits_7d: 36
 countries_7d: 8
 countries_all: 12
 top_pages:
 - path: /training/
-  views: 16
+  views: 21
 - path: /
-  views: 16
+  views: 20
 - path: /about/
-  views: 5
+  views: 7
+- path: /training/nanopore-metabarcoding/
+  views: 7
 - path: /training/setup/
   views: 4
 - path: /pipelines/excon/
   views: 2
 - path: /training/commandline/
   views: 2
-- path: /pipelines/gwas/
+- path: /pipelines/about/
   views: 2
-- path: /training/nanopore-metabarcoding/
+- path: /pipelines/gwas/
   views: 2
 - path: /jobs/
   views: 2
@@ -39,7 +41,7 @@ top_pages:
   views: 1
 - path: /pipelines/about
   views: 1
-- path: /pipelines/about/
+- path: /training/github-basics/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
@@ -49,9 +51,9 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 32
+  views: 49
 - name: US
-  views: 11
+  views: 12
 - name: NL
   views: 5
 - name: ES
