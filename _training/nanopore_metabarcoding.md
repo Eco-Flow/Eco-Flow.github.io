@@ -28,16 +28,18 @@ In this practical you'll run **nanoporemetabarcoding**, a pipeline built by Eco-
 
 We'll use a case study to motivate the design steps: **DNA barcoding of adult wasps to identify their prey.**
 
-6 wasps were collected at two sites: oak woodland and meadow. Each wasp was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature, and given a forward+reverse tag combination that identifies its individual *well*.
-
-Both sites' plates were then pooled together onto a **single, shared sequencing run** — each plate given its own **Nanopore barcode** (a run-level ID) so the sequencer's own software can split the one run's reads back into "Woodland" and "Meadow". That gives two levels of ID, resolved in two different steps: the **barcode** tells *plates* apart (handled automatically by the sequencer), and the **tags** tell *wells* apart within a plate (handled by the pipeline).
+6 wasps in toal were collected at two sites: 3 wasps in oak woodland and 3 in meadow. Each wasp's gut was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature.
 
 | Site | Description | Plate / ONT barcode |
 | --- | --- | --- |
 | Site A ("Woodland") | Adult wasps collected in oak/hazel woodland | plate01 / barcode01 |
 | Site B ("Meadow") | Adult wasps collected in meadow | plate02 / barcode02 |
 
-Within each plate, three forward tags (`F1`–`F3`) and two reverse tags (`R1`–`R2`) are combined pairwise to label individual wells — giving each wasp (and each control) a unique forward+reverse tag combination:
+Barcoded DNA from all wasps and both sites were pooled together onto a **single, shared sequencing run**. Each site is given its own **Nanopore barcode** (a run-level ID), so the sequencer's own software can split the one run's reads back into "Woodland" and "Meadow". Within each site, individual wasps are then told apart by **tags** — a second, finer-grained ID that the pipeline (not the sequencer) resolves.
+
+How do we tell samples apart if we pool them together? Imagine the tables above represent plates. The first plate (Woodland) was labelled with the `barcode01` sequence to identify it, while the second (Meadow) was labelled with `barcode02`. That's enough to tell the two plates apart once the run is sequenced — but within each plate, we still need to tell individual wasps and controls apart. That's what the forward (`F1`–`F3`) and reverse (`R1`–`R2`) tags below do, combined pairwise to label each well:
+
+![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
 
 **plate01 — Woodland (`barcode01`)**
 
@@ -55,13 +57,13 @@ Within each plate, three forward tags (`F1`–`F3`) and two reverse tags (`R1`�
 | **F2** `WaspExF_Tab2` | `MW_wasp01` | `POS_CON_F2_R2` *(positive control)* |
 | **F3** `WaspExF_Tab3` | `MW_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
 
-We'll **design** the samplesheet/metadata for this scenario ourselves in Steps 3–4, then **run** the pipeline for real in Step 5 using the small dummy dataset.
+We'll **design** the samplesheet/metadata for this scenario ourselves in Steps 2–3, then **run** the pipeline for real in Step 4 using the small dummy dataset.
 
 ---
 
 ## Step 0 — Pipeline overview
 
-Before diving in, here's the whole journey from raw reads to results in one picture — every stage you'll actually see running in Step 5:
+Before diving in, here's the whole journey from raw reads to results in one picture — every stage you'll actually see running in Step 4:
 
 - Raw Nanopore reads (one FASTQ per plate, already split by barcode)
 - **NanoFilt** → filter reads by length/quality
@@ -81,7 +83,7 @@ Before diving in, here's the whole journey from raw reads to results in one pict
 
 ---
 
-## Step 1 — Inspect the raw data
+## Step 1 — Inspect the raw data and pipeline requirements
 
 The pipeline ships with a small built-in test dataset, but we will use a custom one made for this training, following the case study above. Clone the pipeline repository first:
 
@@ -90,7 +92,7 @@ git clone https://github.com/Eco-Flow/nanoporemetabarcoding.git
 cd nanoporemetabarcoding
 ```
 
-What is `git clone`? `git clone` allow us to download (or clone in git slang) a whold repository from GitHub and other code repositories. Except for nf-core pipelines, you'd usually do this to run pipeline from remote repositories.
+What is `git clone`? `git clone` downloads a full copy of a repository from GitHub (or another code host) onto your machine. You'll usually need this step to run a pipeline that isn't on nf-core — nf-core pipelines can be run directly by name (`nextflow run nf-core/...`), since Nextflow fetches them for you automatically.
 
 The raw reads live in `wasp_test_data/`. Nanopore FASTQs are gzipped, so peek at them with `zcat`:
 
@@ -129,23 +131,19 @@ cat wasp_test_data/tag-primer_r.fasta      # reverse tag-primer sequences
 cat wasp_test_data/metadata.csv         # which tag combination = which sample
 ```
 
----
-
-## Step 2 — Explore the pipeline's requirements
-
-Read the pipeline's own usage in the pipeline's github page: [`README.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/README.md).
+Now that you've seen the files, check the pipeline's own usage on its GitHub page — [`README.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/README.md) — to see how they map to actual inputs.
 
 To run nanoporemetabarcoding you need:
 
 * a **samplesheet** (`--input`) — one row per FASTQ. For this experiment, every FASTQ represents one Nanopore barcode/plate
-* a **metadata** sheet (`--metadata`) — one row per well, mapping a forward+reverse tag-primer combination to a sample name
+* *(optional)* a **metadata** sheet (`--metadata`) — one row per well, mapping a forward+reverse tag-primer combination to a sample name. Without it, wells are reported under their raw tag-primer combination instead of a human-readable sample name — worth having for any experiment with more than a couple of wells per plate
 * a **forward tag-primer FASTA** (`--tags_f`) and a **reverse tag-primer FASTA** (`--tags_r`). This are needed for demultiplexing
 * a **reference database** for taxonomy — either `--blast_db` (pre-built) or `--custom_db` (a FASTA the pipeline will build a BLAST DB from). For this workshop we are going to use a custom one, as a BLAST database can be hundreads of gigabytes in size
 * a **taxonomy ID database** (`--sql_db`) — a separate `taxonomizr` SQLite file that maps each BLAST hit's accession to its full taxonomic lineage (domain → species). `--custom_db`/`--blast_db` only supply the sequences to search *against*; this is what turns the winning accession into an actual species name afterward
 
 ---
 
-## Step 3 — Design a samplesheet
+## Step 2 — Design a samplesheet
 
 The **samplesheet** links each FASTQ to an ID. It has just two columns:
 
@@ -171,11 +169,13 @@ One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.
 
 ---
 
-## Step 4 — tag-primer FASTAs and metadata
+## Step 3 — tag-primer FASTAs and metadata
 
 First, what a **tag-primer FASTA** actually is: an ordinary FASTA file where each entry's header is a short label for one well's tag (e.g. `F1_WaspExF_Tab1`), and its sequence is the real DNA that label stands for — the synthetic index tag fused to the primer that binds the target region. That's the exact sequence Cutadapt searches for and trims off each read during demultiplexing (Step 0). You need two: one for the forward tags (`--tags_f`) and one for the reverse tags (`--tags_r`) — a read matching one entry from each file, forward and reverse, is what identifies which well it came from.
 
 Here's that whole chain, end to end, for one real read from plate01 (`WD_wasp01`, well F2×R1):
+
+![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
 
 - A raw read looks like: `[forward tag+primer]` — biological insert — `[revcomp of reverse tag+primer]`
 - Cutadapt strips the forward end using `tag-primer_f.fasta`, and records which header matched → `F2_WaspExF_Tab2`
@@ -185,7 +185,7 @@ Here's that whole chain, end to end, for one real read from plate01 (`WD_wasp01`
 
 That's also exactly why the ⚠️ key rule below matters — every link in that chain is a plain string match, so one typo anywhere breaks it.
 
-The **metadata** sheet is what actually resolves each demultiplexed well down to a sample name. It has three columns:
+The **metadata** sheet is optional — but it's what resolves each demultiplexed well down to a sample name; skip it and the pipeline reports each well under its raw tag-primer combination instead. You build it by mapping every tag-primer combination (using the same FASTA headers from above) to the sample it belongs to. It has three columns:
 
 | Column | Meaning |
 | --- | --- |
@@ -239,7 +239,7 @@ plate01,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
 
 ---
 
-## Step 5 — Run the pipeline
+## Step 4 — Run the pipeline
 
 Now put the theory aside and actually run the pipeline — on its small **built-in** test dataset (`test_data/`), so it finishes in minutes regardless of whether your wasp FASTQs exist yet.
 
@@ -264,7 +264,7 @@ nextflow run main.nf \
 
 > ✅ **What success looks like:** Nextflow prints a banner, then a live list of processes as they run (`NANOFILT`, `NANOPLOT`, `CUTADAPT` ×2, `AMPLICON_SORTER`, `MEDAKA`, `BLAST_BLASTN`, `ASSIGN_TAXA`, ...). On the tiny test data this should complete in a few minutes, plus a bit longer the first time while Docker pulls the containers.
 
-### Troubleshooting Step 5
+### Troubleshooting Step 4
 
 <details>
 <summary>❌ <code>Missing required parameter: --input</code> / <code>--outdir</code></summary>
@@ -286,7 +286,7 @@ You forgot **`-profile docker`**. Without it, Nextflow expects every tool (Cutad
 
 ---
 
-## Step 6 — Explore the results
+## Step 5 — Explore the results
 
 Once you see `Pipeline completed successfully`, look inside `results/`:
 
@@ -312,11 +312,11 @@ nanoplot/  blast/  assign_taxa/  community_matrix/  plots/  multiqc/  pipeline_i
 <!--6. **`community_matrix/<plate>/<plate>_abundance.csv`** and **`..._presence_absence.csv`** — the ASV table pivoted into a classic samples × taxa community matrix, ready for ecological analysis (diversity indices, ordination, etc.).-->
 6. **`plots/proportion/*.png`** — stacked bar plots of taxonomic composition per barcode, at each rank listed in `--tax_list`.
 
-> 🧬 **If you completed Step 4:** open `assign_taxa/.../ASV_table_final.csv` and check whether `EXT_NEG` and `BLANK` picked up any real hits — if they did, that's contamination worth flagging, exactly as it would be in a real run.
+> 🧬 **If you completed Step 3:** open `assign_taxa/.../ASV_table_final.csv` and check whether `EXT_NEG` and `BLANK` picked up any real hits — if they did, that's contamination worth flagging, exactly as it would be in a real run.
 
 ---
 
-## Step 7 — Running on an HPC (Myriad example)
+## Step 6 — Running on an HPC (Myriad example)
 
 > 🎯 For the general concepts (talking to your HPC admin, writing a config from scratch, testing it) see the bonus **[Running a pipeline on an HPC](/training/hpc/)** — this step is a concrete worked example on top of that, using UCL's **Myriad** cluster.
 
@@ -330,7 +330,7 @@ nextflow run main.nf -profile test_synth,ucl_myriad --outdir results -resume -bg
 
 Myriad's cluster uses singulairty to manage dependecines. You can use conda instead if singulairty is not installed in your HPC.
 
-> 👉 **`-w`** sets Nextflow's **work directory** (defaults to `./work`) — where every task's intermediate files are staged, and what both Nextflow's caching and `-resume` (Step 8) rely on: delete or move it, and there's nothing left to resume from. On an HPC it's worth choosing this deliberately before a real run, since these files can get large fast — point it at your cluster's **scratch** space rather than your home directory, to avoid filling shared storage.
+> 👉 **`-w`** sets Nextflow's **work directory** (defaults to `./work`) — where every task's intermediate files are staged, and what both Nextflow's caching and `-resume` (Step 7) rely on: delete or move it, and there's nothing left to resume from. On an HPC it's worth choosing this deliberately before a real run, since these files can get large fast — point it at your cluster's **scratch** space rather than your home directory, to avoid filling shared storage.
 
 > 💡 **What is Singularity?** Docker needs a background daemon running with root privileges — not something shared HPC systems can safely allow every user to have. **Singularity** (**Apptainer** is another equivalent option) is a container engine built for exactly this situation: it runs the same kind of containers as Docker, but as your own user account, with no daemon and no elevated privileges required. That's why HPC configs use `-profile singularity` instead of `-profile docker` — it's not a style choice, it's usually the only container engine installed in most cluster.
 
@@ -426,7 +426,7 @@ The `-l mem=4G` / `-l h_rt=4:00:0` here are for the **driver job only** (Nextflo
 
 ---
 
-## Step 8 — Resuming a run and changing options
+## Step 7 — Resuming a run and changing options
 
 ### Changing an option
 
@@ -457,6 +457,6 @@ Add **`-resume`** and Nextflow reuses cached results for any step whose inputs h
 
 **Next steps:**
 
-- Adapt what you designed in Steps 3–4 to your **own** primer-tag scheme and run it on your own data.
+- Adapt what you designed in Steps 2–3 to your **own** primer-tag scheme and run it on your own data.
 - Explore the full parameter list in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/nextflow.config) — worth tuning per-rank identity thresholds (`--spident`/`--gpident`/`--fpident`/`--opident`) and `--tax_list` for your own taxonomic group.
-- Running on a cluster other than Myriad? Step 7 above covers the concrete example; the bonus **[Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including a Slurm walkthrough).
+- Running on a cluster other than Myriad? Step 6 above covers the concrete example; the bonus **[Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including a Slurm walkthrough).
