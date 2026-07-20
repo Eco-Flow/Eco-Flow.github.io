@@ -155,7 +155,9 @@ It has four columns:
 
 > ⚠️ **Paired vs single-end:** samples SRR6357070–072 are paired-end (fill both `fastq_1` and `fastq_2`); SRR6357073–075 are single-end (fill `fastq_1`, leave `fastq_2` blank — note the trailing comma).
 
-Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.14.0/docs/usage#samplesheet-input), then compare with the cheat sheet.
+> 💡 **For larger projects:** if you had hundreds of samples, creating a samplesheet by hand would be tedious. nf-core/rnaseq includes a helper script, [fastq_dir_to_samplesheet.py](https://github.com/nf-core/rnaseq/blob/master/bin/fastq_dir_to_samplesheet.py), that can scan a folder of FASTQ files and generate a samplesheet automatically. In this example, you would point it at the folder containing the FASTQ files (for example the `data` directory), and it would infer sample names and pair files such as `_1` and `_2` together. You would still want to inspect the generated CSV to make sure the sample names and single-end/paired-end rows look correct before using it.
+
+Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.14.0/docs/usage#samplesheet-input) as a guide to build the 3 wild type and 3 knock down samples, then compare with the cheat sheet.
 
 <details>
 <summary>Cheat sheet — full samplesheet.csv</summary>
