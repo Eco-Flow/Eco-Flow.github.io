@@ -72,11 +72,6 @@ Before diving in, here's the whole journey from raw reads to results in one pict
 - **BLAST** → search each consensus against your reference database
 - **taxonomizr** → assign taxonomy from the best BLAST hit
 
-Two things worth knowing before you start:
-
-- The forward+reverse **tag** demultiplexing (Cutadapt, run twice) is what tells individual **wells** apart — the pipeline's own job, separate from the barcode-level split the sequencer already did (see [The experiment](#the-experiment) above).
-- Every stage above runs inside a container (`-profile docker`/`-profile singularity`) — you don't install any of these tools yourself.
-
 <details>
 <summary>📚 Good background resources</summary>
 
@@ -138,7 +133,7 @@ cat wasp_test_data/metadata.csv         # which tag combination = which sample
 
 ## Step 2 — Explore the pipeline's requirements
 
-Read the pipeline's own usage docs: [`docs/usage.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/docs/usage.md).
+Read the pipeline's own usage in the pipeline's github page: [`README.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/README.md).
 
 To run nanoporemetabarcoding you need:
 
@@ -161,17 +156,18 @@ The **samplesheet** links each FASTQ to an ID. It has just two columns:
 
 > ▶️ **Try it — design `samplesheet.csv` for the wasp experiment**
 > Using the table in [The experiment](#the-experiment) (2 sites → 2 plates → 2 barcodes), write out what the samplesheet should look like.
-<details>
-<summary>Cheat sheet — samplesheet.csv for the wasp scenario</summary>
-
-```csv
-id,fastq
-plate01,wasp_test_data/barcode01/plate1_combined.fastq.gz
-plate02,wasp_test_data/barcode02/plate2_combined.fastq.gz
-```
-
-One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
-</details>
+>
+> <details>
+> <summary>Cheat sheet — samplesheet.csv for the wasp scenario</summary>
+>
+> ```csv
+> id,fastq
+> plate01,wasp_test_data/barcode01/plate1_combined.fastq.gz
+> plate02,wasp_test_data/barcode02/plate2_combined.fastq.gz
+> ```
+>
+> One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
+> </details>
 
 ---
 
@@ -203,25 +199,25 @@ The **metadata** sheet is what actually resolves each demultiplexed well down to
 >
 > Plate01 has 3 forward tags (`F1_WaspExF_Tab1`, `F2_WaspExF_Tab2`, `F3_WaspExF_Tab3`) and 2 reverse tags (`R1_LuthienR_Tab29`, `R2_LuthienR_Tab54`), giving 6 wells: one extraction blank, one positive control, one PCR blank, and 3 adult wasps netted in the Woodland site. Write out the FASTAs and the metadata rows.
 
-<details>
-<summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
-
-```fasta
->F1_WaspExF_Tab1
-AACAAGCCCCTTTATCWTSWRRWWTTGS
->F2_WaspExF_Tab2
-GGAATGAGTCCTTTATCWTSWRRWWTTGS
->F3_WaspExF_Tab3
-AATTGCCGGTCCTTTATCWTSWRRWWTTGS
-```
-
-```fasta
->R1_LuthienR_Tab29
-GAGTAACCACTTCWGGRTGWCCAAARAAYCA
->R2_LuthienR_Tab54
-CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
-```
-</details>
+> <details>
+> <summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
+>
+> ```fasta
+> >F1_WaspExF_Tab1
+> AACAAGCCCCTTTATCWTSWRRWWTTGS
+> >F2_WaspExF_Tab2
+> GGAATGAGTCCTTTATCWTSWRRWWTTGS
+> >F3_WaspExF_Tab3
+> AATTGCCGGTCCTTTATCWTSWRRWWTTGS
+> ```
+>
+> ```fasta
+> >R1_LuthienR_Tab29
+> GAGTAACCACTTCWGGRTGWCCAAARAAYCA
+> >R2_LuthienR_Tab54
+> CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
+> ```
+> </details>
 
 <details>
 <summary>Cheat sheet — metadata.csv for plate01</summary>
