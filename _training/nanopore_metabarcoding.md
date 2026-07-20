@@ -28,7 +28,7 @@ In this practical you'll run **nanoporemetabarcoding**, a pipeline built by Eco-
 
 We'll use a case study to motivate the design steps: **DNA barcoding of adult wasps to identify their prey.**
 
-Adult wasps were collected at two sites: oak woodland and meadow. Each wasp was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature, and given a forward+reverse tag combination that identifies its individual *well*.
+6 wasps were collected at two sites: oak woodland and meadow. Each wasp was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature, and given a forward+reverse tag combination that identifies its individual *well*.
 
 Both sites' plates were then pooled together onto a **single, shared sequencing run** — each plate given its own **Nanopore barcode** (a run-level ID) so the sequencer's own software can split the one run's reads back into "Woodland" and "Meadow". That gives two levels of ID, resolved in two different steps: the **barcode** tells *plates* apart (handled automatically by the sequencer), and the **tags** tell *wells* apart within a plate (handled by the pipeline).
 
@@ -156,18 +156,18 @@ The **samplesheet** links each FASTQ to an ID. It has just two columns:
 
 > ▶️ **Try it — design `samplesheet.csv` for the wasp experiment**
 > Using the table in [The experiment](#the-experiment) (2 sites → 2 plates → 2 barcodes), write out what the samplesheet should look like.
->
-> <details>
-> <summary>Cheat sheet — samplesheet.csv for the wasp scenario</summary>
->
-> ```csv
-> id,fastq
-> plate01,wasp_test_data/barcode01/plate1_combined.fastq.gz
-> plate02,wasp_test_data/barcode02/plate2_combined.fastq.gz
-> ```
->
-> One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
-> </details>
+
+<details>
+<summary>Cheat sheet — samplesheet.csv for the wasp scenario</summary>
+
+```csv
+id,fastq
+plate01,wasp_test_data/barcode01/plate1_combined.fastq.gz
+plate02,wasp_test_data/barcode02/plate2_combined.fastq.gz
+```
+
+One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
+</details>
 
 ---
 
@@ -199,25 +199,25 @@ The **metadata** sheet is what actually resolves each demultiplexed well down to
 >
 > Plate01 has 3 forward tags (`F1_WaspExF_Tab1`, `F2_WaspExF_Tab2`, `F3_WaspExF_Tab3`) and 2 reverse tags (`R1_LuthienR_Tab29`, `R2_LuthienR_Tab54`), giving 6 wells: one extraction blank, one positive control, one PCR blank, and 3 adult wasps netted in the Woodland site. Write out the FASTAs and the metadata rows.
 
-> <details>
-> <summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
->
-> ```fasta
-> >F1_WaspExF_Tab1
-> AACAAGCCCCTTTATCWTSWRRWWTTGS
-> >F2_WaspExF_Tab2
-> GGAATGAGTCCTTTATCWTSWRRWWTTGS
-> >F3_WaspExF_Tab3
-> AATTGCCGGTCCTTTATCWTSWRRWWTTGS
-> ```
->
-> ```fasta
-> >R1_LuthienR_Tab29
-> GAGTAACCACTTCWGGRTGWCCAAARAAYCA
-> >R2_LuthienR_Tab54
-> CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
-> ```
-> </details>
+<details>
+<summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
+
+```fasta
+>F1_WaspExF_Tab1
+AACAAGCCCCTTTATCWTSWRRWWTTGS
+>F2_WaspExF_Tab2
+GGAATGAGTCCTTTATCWTSWRRWWTTGS
+>F3_WaspExF_Tab3
+AATTGCCGGTCCTTTATCWTSWRRWWTTGS
+```
+
+```fasta
+>R1_LuthienR_Tab29
+GAGTAACCACTTCWGGRTGWCCAAARAAYCA
+>R2_LuthienR_Tab54
+CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
+```
+</details>
 
 <details>
 <summary>Cheat sheet — metadata.csv for plate01</summary>
@@ -309,8 +309,8 @@ nanoplot/  blast/  assign_taxa/  community_matrix/  plots/  multiqc/  pipeline_i
 3. **`reads_per_step/reads_per_step.csv`** — a read-count funnel: how many reads survived filtering, then each demultiplexing step. This is the fastest way to spot a well that dropped to zero reads (usually a `primer_comb` typo).
 4. **`blast/<plate>.txt`** — raw BLAST hits for every consensus sequence.
 5. **`assign_taxa/<plate>/ASV_table_final.csv`** — the key output: one row per ASV (consensus sequence) per well, with its assigned taxonomy from the best BLAST hit.
-6. **`community_matrix/<plate>/<plate>_abundance.csv`** and **`..._presence_absence.csv`** — the ASV table pivoted into a classic samples × taxa community matrix, ready for ecological analysis (diversity indices, ordination, etc.).
-7. **`plots/proportion/*.png`** — stacked bar plots of taxonomic composition per barcode, at each rank listed in `--tax_list`.
+<!--6. **`community_matrix/<plate>/<plate>_abundance.csv`** and **`..._presence_absence.csv`** — the ASV table pivoted into a classic samples × taxa community matrix, ready for ecological analysis (diversity indices, ordination, etc.).-->
+6. **`plots/proportion/*.png`** — stacked bar plots of taxonomic composition per barcode, at each rank listed in `--tax_list`.
 
 > 🧬 **If you completed Step 4:** open `assign_taxa/.../ASV_table_final.csv` and check whether `EXT_NEG` and `BLANK` picked up any real hits — if they did, that's contamination worth flagging, exactly as it would be in a real run.
 
