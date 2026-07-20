@@ -156,6 +156,19 @@ It has four columns:
 > ⚠️ **Paired vs single-end:** samples SRR6357070–072 are paired-end (fill both `fastq_1` and `fastq_2`); SRR6357073–075 are single-end (fill `fastq_1`, leave `fastq_2` blank — note the trailing comma).
 
 > 💡 **For larger projects:** if you had hundreds of samples, creating a samplesheet by hand would be tedious. nf-core/rnaseq includes a helper script, [fastq_dir_to_samplesheet.py](https://github.com/nf-core/rnaseq/blob/master/bin/fastq_dir_to_samplesheet.py), that can scan a folder of FASTQ files and generate a samplesheet automatically. In this example, you would point it at the folder containing the FASTQ files (for example the `data` directory), and it would infer sample names and pair files such as `_1` and `_2` together. You would still want to inspect the generated CSV to make sure the sample names and single-end/paired-end rows look correct before using it.
+>
+> If you wanted to try it yourself, you could download the script and run it like this:
+>
+> ```bash
+> curl -L https://raw.githubusercontent.com/nf-core/rnaseq/master/bin/fastq_dir_to_samplesheet.py -o fastq_dir_to_samplesheet.py
+> python3 fastq_dir_to_samplesheet.py \
+>   /workspaces/training/eco-flow-training/data \
+>   /workspaces/training/eco-flow-training/samplesheet.csv \
+>   -r1 _1.fastq.gz \
+>   -r2 _2.fastq.gz
+> ```
+>
+> This scans the `data` directory, infers sample names from the FASTQ filenames, and writes a CSV that you can inspect and adjust before using it. Because this example dataset mixes paired-end and single-end reads, it is worth checking the generated file carefully and renaming samples if you want to match the `CONTROL_REP*` / `MANIPULATED_REP*` names used later in the course.
 
 Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.14.0/docs/usage#samplesheet-input) as a guide to build the 3 wild type and 3 knock down samples, then compare with the cheat sheet.
 
