@@ -140,9 +140,6 @@ cat wasp_test_data/metadata.csv         # which tag combination = which sample
 
 Read the pipeline's own usage docs: [`docs/usage.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/docs/usage.md).
 
-<details>
-<summary>Cheat sheet — what the pipeline needs</summary>
-
 To run nanoporemetabarcoding you need:
 
 * a **samplesheet** (`--input`) — one row per FASTQ. For this experiment, every FASTQ represents one Nanopore barcode/plate
@@ -150,7 +147,6 @@ To run nanoporemetabarcoding you need:
 * a **forward tag-primer FASTA** (`--tags_f`) and a **reverse tag-primer FASTA** (`--tags_r`). This are needed for demultiplexing
 * a **reference database** for taxonomy — either `--blast_db` (pre-built) or `--custom_db` (a FASTA the pipeline will build a BLAST DB from). For this workshop we are going to use a custom one, as a BLAST database can be hundreads of gigabytes in size
 * a **taxonomy ID database** (`--sql_db`) — a separate `taxonomizr` SQLite file that maps each BLAST hit's accession to its full taxonomic lineage (domain → species). `--custom_db`/`--blast_db` only supply the sequences to search *against*; this is what turns the winning accession into an actual species name afterward
-</details>
 
 ---
 
