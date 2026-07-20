@@ -3,7 +3,7 @@ layout: "training"
 title: "Running a pipeline on an HPC"
 num: "\u2605"
 type: "Reference"
-order: 6
+order: 7
 bonus: true
 ---
 

@@ -47,6 +47,11 @@ parts:
     type: Practical
     body: Hands-on — run Eco-Flow's nanoporemetabarcoding pipeline end to end, from raw Nanopore reads to a taxonomically-annotated community table.
     file: nanopore_metabarcoding.md
+  - num: "6"
+    title: Interacting with code on GitHub
+    type: Practical
+    body: Issues, pull requests, READMEs and Claude Code — how to report, fix and contribute changes to a pipeline, using nanoporemetabarcoding as the worked example.
+    file: github_basics.md
   - num: "★"
     title: Running a pipeline on an HPC
     type: Reference
