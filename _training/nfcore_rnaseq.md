@@ -73,6 +73,8 @@ It's always worth looking at your data by eye before running anything. The reads
 
 The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't directly human-readable — plain `cat`/`head` would print gibberish (don't panic if you see `<��xT�r-�B7�...`, that's expected!). Instead, use **`zcat`** (from Part 1), which reads gzipped files.
 
+> 🍎 **On a Mac?** In Codespaces (Linux) `zcat` reads `.gz` files directly. macOS's `zcat` is different — it expects a `.Z` file and will error on `.gz`. If you're following along locally on a Mac, use **`gzcat`** (or `gunzip -c`) everywhere this page says `zcat`.
+
 > ▶️ **Challenge — inspect a FASTQ file**
 >
 > Try to answer these two questions from the data:
@@ -84,7 +86,7 @@ The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't d
 >
 > ```bash
 > zcat data/SRR6357070_1.fastq.gz | wc -l
-> zcat data/SRR6357070_1.fastq.gz | head -n 2 | tail -n 1 | wc -c
+> zcat data/SRR6357070_1.fastq.gz | head -n 2 | tail -n 1 | tr -d '\n' | wc -c
 > ```
 >
 > <details>
@@ -95,7 +97,7 @@ The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't d
 > 101
 > ```
 >
-> The first command shows there are `200000` lines in the file. A FASTQ record uses **4 lines per read**, so that corresponds to `50000` reads. The second command uses `head` and `tail` to grab the second line of the file, which is the first read sequence, and `wc -c` counts the number of characters in that line. There are many ways to do this, and even copying the file into an editor and looking at it manually is fine.
+> The first command shows there are `200000` lines in the file. A FASTQ record uses **4 lines per read**, so that corresponds to `50000` reads. The second command uses `head` and `tail` to grab the second line of the file, which is the first read sequence, and `wc -c` counts the number of characters in it. We add `tr -d '\n'` to strip the trailing newline first — without it, `wc -c` would also count the line break and report `102`. So the reads are `101` bases long. There are many ways to do this, and even copying the file into an editor and looking at it manually is fine.
 > </details>
 
 ### Structure of a typical FASTQ file
@@ -233,9 +235,34 @@ Read the official run instructions here: https://nf-co.re/rnaseq/3.14.0/docs/usa
 Two extra flags you **must** include in this environment:
 
 - **`-profile docker`** — runs every step inside its Docker container, so you don't have to install any of the underlying tools. (On an HPC you'd use `-profile singularity` or `apptainer` instead — ask your HPC team.)
-- **`-c .../codespaces.config`** — Codespaces has limited memory, so this config caps it appropriately. Without it the run may fail on larger steps.
+- **`-c .../codespaces.config`** — a small custom config that adapts the pipeline to the tiny Codespaces machine. Without it the run is likely to fail. See below for exactly what it does.
 
 We also pin the pipeline version with **`-r 3.14.0`** so you get exactly the version this course was written for.
+
+> 💡 **Why pin the version?** Without `-r`, Nextflow runs the *latest* revision of the pipeline. Pipeline parameters change between releases (options get renamed or removed), so an un-pinned command can silently break over time. Pinning to `3.14.0` guarantees this exact command keeps working — pinning is the safe choice, not a risky one.
+
+#### What is the `codespaces.config` and why do we need it?
+
+nf-core pipelines ship with sensible **default** resource requests — but those defaults assume a beefy server. A GitHub Codespace is a small machine (about **2 CPUs and 8 GB RAM**), so several steps would ask for more memory or CPUs than exist and the run would crash. The config file solves this. Open it (`cat codespaces.config`) and you'll see:
+
+```groovy
+process {
+    resourceLimits {
+        memory = '6.GB'   // never request more than 6 GB for any step
+        cpus   = 2        // never request more than 2 CPUs
+        time   = '1.h'    // cap each step at 1 hour
+    }
+}
+
+params {
+    skip_markduplicates = true   // skip a memory-heavy step we don't need here
+}
+```
+
+- **`resourceLimits`** is a Nextflow feature that *caps* each step's request. If the pipeline asks a step for 12 GB, Nextflow quietly clamps it down to our 6 GB limit so it still fits on the machine.
+- **`skip_markduplicates = true`** turns off the duplicate-marking step. It's memory-hungry and not needed for this teaching example, so skipping it keeps the run fast and stable on the small machine.
+
+> 📝 On your own laptop or an HPC you generally **wouldn't** need this file — you'd let the pipeline use its defaults, or write a config tuned to *your* machine. It exists purely to make the pipeline fit inside Codespaces.
 
 <details>
 <summary>Cheat sheet — the full command</summary>
