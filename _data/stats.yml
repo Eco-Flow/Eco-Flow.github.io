@@ -6,20 +6,22 @@ pageviews_all: 450
 visits_all: 150
 pageviews_30d: 450
 visits_30d: 150
-pageviews_7d: 50
-visits_7d: 25
-countries_7d: 6
+pageviews_7d: 60
+visits_7d: 30
+countries_7d: 8
 countries_all: 12
 top_pages:
-- path: /
-  views: 14
 - path: /training/
-  views: 11
+  views: 16
+- path: /
+  views: 16
 - path: /about/
   views: 5
 - path: /training/setup/
-  views: 3
+  views: 4
 - path: /pipelines/excon/
+  views: 2
+- path: /training/commandline/
   views: 2
 - path: /pipelines/gwas/
   views: 2
@@ -28,8 +30,6 @@ top_pages:
 - path: /jobs/
   views: 2
 - path: /pipelines/synteny/
-  views: 1
-- path: /training/commandline/
   views: 1
 - path: /pipelines/excon
   views: 1
@@ -45,14 +45,20 @@ top_pages:
   views: 1
 - path: /pipelines/
   views: 1
+- path: /pipelines/comparete/
+  views: 1
 top_countries:
 - name: GB
-  views: 31
+  views: 32
 - name: US
   views: 11
+- name: NL
+  views: 5
+- name: ES
+  views: 4
 - name: DE
   views: 3
-- name: NL
+- name: BE
   views: 2
 - name: IT
   views: 2
