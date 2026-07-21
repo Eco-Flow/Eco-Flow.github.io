@@ -28,36 +28,20 @@ In this practical you'll run **nanoporemetabarcoding**, a pipeline built by Eco-
 
 We'll use a case study to motivate the design steps: **DNA barcoding of adult wasps to identify their prey.**
 
-6 wasps in toal were collected at two sites: 3 wasps in oak woodland and 3 in meadow. Each wasp's gut was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature.
+6 wasps in total were collected at two sites: 3 wasps in oak woodland and 3 in grassland. Each wasp's gut was individually DNA-barcoded (COI) using primers that target that region and prevent host DNA amplification (`WaspExF_*` forward / `LuthienR_*` reverse) to profile its host's diet signature.
 
-| Site | Description | Plate / ONT barcode |
-| --- | --- | --- |
-| Site A ("Woodland") | Adult wasps collected in oak/hazel woodland | plate01 / barcode01 |
-| Site B ("Meadow") | Adult wasps collected in meadow | plate02 / barcode02 |
+For each site, we also included a few **controls**: an **extraction blank** (no tissue — just reagents, to catch contamination introduced during DNA extraction), a **PCR blank** (water instead of DNA, to catch contamination introduced during PCR/tagging), and a **positive control** (DNA from a known reference species, to confirm the assay actually works).
 
-Barcoded DNA from all wasps and both sites were pooled together onto a **single, shared sequencing run**. Each site is given its own **Nanopore barcode** (a run-level ID), so the sequencer's own software can split the one run's reads back into "Woodland" and "Meadow". Within each site, individual wasps are then told apart by **tags** — a second, finer-grained ID that the pipeline (not the sequencer) resolves.
+| Site | Description |
+| --- | --- |
+| Site A ("Woodland") | Adult wasps collected in oak/hazel woodland |
+| Site B ("Grassland") | Adult wasps collected in grassland |
 
-How do we tell samples apart if we pool them together? Imagine the tables above represent plates. The first plate (Woodland) was labelled with the `barcode01` sequence to identify it, while the second (Meadow) was labelled with `barcode02`. That's enough to tell the two plates apart once the run is sequenced — but within each plate, we still need to tell individual wasps and controls apart. That's what the forward (`F1`–`F3`) and reverse (`R1`–`R2`) tags below do, combined pairwise to label each sample:
+Each site's wasps and controls were laid out on a physical multi-well plate — one **well** per wasp or control — and it's the well's tag combination that a read gets traced back to. Here's the whole journey from collection to the raw FASTQs you'll actually work with, including both demultiplexing steps:
 
-![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
+![Experiment design: wasps and controls laid out on woodland/grassland plates, tagged by well during PCR, pooled and barcoded per plate, sequenced together on one shared Nanopore run, then demultiplexed first by barcode (sequencer) and then by tag (Cutadapt) back into one FASTQ per well](/assets/training/img/experiment_collection_to_fastq.png)
 
-**plate01 — Woodland (`barcode01`)**
-
-|  | **R1** `LuthienR_Tab29` | **R2** `LuthienR_Tab54` |
-| --- | --- | --- |
-| **F1** `WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `WD_wasp03` |
-| **F2** `WaspExF_Tab2` | `WD_wasp01` | `POS_CON_F2_R2` *(positive control)* |
-| **F3** `WaspExF_Tab3` | `WD_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
-
-**plate02 — Meadow (`barcode02`)**
-
-|  | **R1** `LuthienR_Tab29` | **R2** `LuthienR_Tab54` |
-| --- | --- | --- |
-| **F1** `WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `MW_wasp03` |
-| **F2** `WaspExF_Tab2` | `MW_wasp01` | `POS_CON_F2_R2` *(positive control)* |
-| **F3** `WaspExF_Tab3` | `MW_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
-
-We'll **design** the samplesheet/metadata for this scenario ourselves in Steps 2–3, then **run** the pipeline for real in Step 4 using the small dummy dataset.
+Barcoded DNA from all wasps and both sites were pooled together onto a **single, shared sequencing run**. Each site gets its own **Nanopore barcode** (a run-level ID, resolved automatically by the sequencer) — and within each site, individual wasps and controls are told apart by **tags** (a finer-grained ID, resolved by the pipeline itself). You'll build the exact plate layout, samplesheet, and metadata for this scenario yourself in Steps 2–3, then **run** the pipeline for real in Step 4 using the small dummy dataset.
 
 ---
 
@@ -65,9 +49,11 @@ We'll **design** the samplesheet/metadata for this scenario ourselves in Steps 2
 
 Before diving in, here's the whole journey from raw reads to results in one picture — every stage you'll actually see running in Step 4:
 
+![nanoporemetabarcoding pipeline overview: Nanofilt, Cutadapt, Amplicon sorter, Medaka, BLASTn, best-hit script, taxonomizr, with Nanoplot/MultiQC QC on the side](/assets/training/img/pipeline_overview.png)
+
 - Raw Nanopore reads (one FASTQ per plate, already split by barcode)
 - **NanoFilt** → filter reads by length/quality
-- **NanoPlot** → QC report, before and after filtering
+- **NanoPlot** → QC report, before and after filtering, and after demultiplexing
 - **Cutadapt** (×2) → demultiplex by forward tag, then reverse tag → one file per well
 - **amplicon_sorter** → cluster each well's reads into consensus sequence(s)
 - **Medaka** → polish each consensus
@@ -160,8 +146,8 @@ The **samplesheet** links each FASTQ to an ID. It has just two columns:
 
 ```csv
 id,fastq
-plate01,wasp_test_data/barcode01/plate1_combined.fastq.gz
-plate02,wasp_test_data/barcode02/plate2_combined.fastq.gz
+woodland,wasp_test_data/barcode01/woodland_combined.fastq.gz
+grassland,wasp_test_data/barcode02/grassland_combined.fastq.gz
 ```
 
 One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
@@ -171,9 +157,14 @@ One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.
 
 ## Step 3 — tag-primer FASTAs and metadata
 
-First, what a **tag-primer FASTA** actually is: an ordinary FASTA file where each entry's header is a short label for one well's tag (e.g. `F1_WaspExF_Tab1`), and its sequence is the real DNA that label stands for — the synthetic index tag fused to the primer that binds the target region. That's the exact sequence Cutadapt searches for and trims off each read during demultiplexing (Step 0). You need two: one for the forward tags (`--tags_f`) and one for the reverse tags (`--tags_r`) — a read matching one entry from each file, forward and reverse, is what identifies which well it came from.
+First, what a **tag-primer FASTA** actually is: a regular FASTA file where:
 
-Here's that whole chain, end to end, for one real read from plate01 (`WD_wasp01`, well F2×R1):
+- the **header** is a short label for that **sequence** (in the case of this study, it's a combination of the tag and the primer's original tables, but it can be anything).
+- the **sequence** is the tag fused to the primer — the exact DNA Cutadapt searches for and trims off each read during demultiplexing (Step 0)
+
+You need two: one for the forward tags (`--tags_f`) and one for the reverse tags (`--tags_r`). A read matching one entry from each file, forward and reverse, is what identifies which well it came from.
+
+Here's that whole chain, end to end, for one real read from the woodland plate (`WD_wasp01`, well F2×R1):
 
 ![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
 
@@ -195,9 +186,9 @@ The **metadata** sheet is optional — but it's what resolves each demultiplexed
 
 > ⚠️ **Key rule:** `tag-primer_comb` is a straight string match against your FASTA headers. If the tag names don't match exactly (typos, case, extra characters), that well's reads won't be assigned to a sample.
 
-> ▶️ **Try it — design the metadata for plate01**
+> ▶️ **Try it — design the metadata for the woodland plate**
 >
-> Plate01 has 3 forward tags (`F1_WaspExF_Tab1`, `F2_WaspExF_Tab2`, `F3_WaspExF_Tab3`) and 2 reverse tags (`R1_LuthienR_Tab29`, `R2_LuthienR_Tab54`), giving 6 wells: one extraction blank, one positive control, one PCR blank, and 3 adult wasps netted in the Woodland site. Write out the FASTAs and the metadata rows.
+> The woodland plate has 3 forward tags (`F1_WaspExF_Tab1`, `F2_WaspExF_Tab2`, `F3_WaspExF_Tab3`) and 2 reverse tags (`R1_LuthienR_Tab29`, `R2_LuthienR_Tab54`), giving 6 wells: one extraction blank, one positive control, one PCR blank, and 3 adult wasps netted in the Woodland site. Write out the FASTAs and the metadata rows.
 
 <details>
 <summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
@@ -220,19 +211,53 @@ CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
 </details>
 
 <details>
-<summary>Cheat sheet — metadata.csv for plate01</summary>
+<summary>Cheat sheet — metadata.csv for the woodland plate</summary>
 
 ```csv
 id,primer_comb,sample
-plate01,F1_WaspExF_Tab1_R1_LuthienR_Tab29,EXT_NEG_F1_R1
-plate01,F2_WaspExF_Tab2_R1_LuthienR_Tab29,WD_wasp01
-plate01,F3_WaspExF_Tab3_R1_LuthienR_Tab29,WD_wasp02
-plate01,F1_WaspExF_Tab1_R2_LuthienR_Tab54,WD_wasp03
-plate01,F2_WaspExF_Tab2_R2_LuthienR_Tab54,POS_CON_F2_R2
-plate01,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
+woodland,F1_WaspExF_Tab1_R1_LuthienR_Tab29,EXT_NEG_F1_R1
+woodland,F2_WaspExF_Tab2_R1_LuthienR_Tab29,WD_wasp01
+woodland,F3_WaspExF_Tab3_R1_LuthienR_Tab29,WD_wasp02
+woodland,F1_WaspExF_Tab1_R2_LuthienR_Tab54,WD_wasp03
+woodland,F2_WaspExF_Tab2_R2_LuthienR_Tab54,POS_CON_F2_R2
+woodland,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
 ```
 
-`plate02` reuses the same 6 tag combinations (the same primer plate design was run at both sites) — only the `id` and the wasp `sample` names change; controls can share the same short name pattern (`EXT_NEG_F1_R1`, `POS_CON_F2_R2`, `BLANK_F3_R2`) since `id` already keeps plate01 and plate02 apart.
+Same mapping, laid out as a plate layout:
+
+**woodland plate (`barcode01`)**
+
+|  | `R1_LuthienR_Tab29` | `R2_LuthienR_Tab54` |
+| --- | --- | --- |
+| `F1_WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `WD_wasp03` |
+| `F2_WaspExF_Tab2` | `WD_wasp01` | `POS_CON_F2_R2` *(positive control)* |
+| `F3_WaspExF_Tab3` | `WD_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
+</details>
+
+> ▶️ **Try it — design the metadata for the grassland plate**
+>
+> The grassland plate reuses the same forward/reverse tag scheme as the woodland plate (the same primer plate design was run at both sites), so you already have every header ID you need — no need to open the FASTA files again. Work straight from the plate layout below: the row/column labels give you the tag headers, and each cell gives you the sample that goes with that combination.
+>
+> **grassland plate (`barcode02`)**
+>
+> |  | `R1_LuthienR_Tab29` | `R2_LuthienR_Tab54` |
+> | --- | --- | --- |
+> | `F1_WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `GL_wasp03` |
+> | `F2_WaspExF_Tab2` | `GL_wasp01` | `POS_CON_F2_R2` *(positive control)* |
+> | `F3_WaspExF_Tab3` | `GL_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
+
+<details>
+<summary>Cheat sheet — metadata.csv for the grassland plate</summary>
+
+```csv
+id,primer_comb,sample
+grassland,F1_WaspExF_Tab1_R1_LuthienR_Tab29,EXT_NEG_F1_R1
+grassland,F2_WaspExF_Tab2_R1_LuthienR_Tab29,GL_wasp01
+grassland,F3_WaspExF_Tab3_R1_LuthienR_Tab29,GL_wasp02
+grassland,F1_WaspExF_Tab1_R2_LuthienR_Tab54,GL_wasp03
+grassland,F2_WaspExF_Tab2_R2_LuthienR_Tab54,POS_CON_F2_R2
+grassland,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
+```
 </details>
 
 > 💡 **Always include controls.** `EXT_NEG` (extraction blank — no tissue), `POS_CON` (mock DNA of a known reference species), and `BLANK` (PCR no-template control) are how you catch contamination and confirm the assay worked — track them through the metadata sheet exactly like a real sample.
@@ -241,7 +266,7 @@ plate01,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
 
 ## Step 4 — Run the pipeline
 
-Now put the theory aside and actually run the pipeline — on its small **built-in** test dataset (`test_data/`), so it finishes in minutes regardless of whether your wasp FASTQs exist yet.
+Now put the theory aside and actually run the pipeline:
 
 Read the parameters block in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/nextflow.config) for the full option list.
 
@@ -447,7 +472,7 @@ nextflow run main.nf \
 
 Add **`-resume`** and Nextflow reuses cached results for any step whose inputs haven't changed — so re-running the command above only re-executes taxonomy assignment (and anything downstream of it), not the demultiplexing or clustering steps.
 
-> ✅ **What you'll see with `-resume`:** unchanged processes marked `cached`, e.g. `[a1/b2c3] ...:CUTADAPT_FORWARD (plate01) [100%] 1 of 1, cached: 1 ✔`.
+> ✅ **What you'll see with `-resume`:** unchanged processes marked `cached`, e.g. `[a1/b2c3] ...:CUTADAPT_FORWARD (woodland) [100%] 1 of 1, cached: 1 ✔`.
 
 ---
 
