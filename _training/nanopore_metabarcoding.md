@@ -80,12 +80,12 @@ cd nanoporemetabarcoding
 
 What is `git clone`? `git clone` downloads a full copy of a repository from GitHub (or another code host) onto your machine. You'll usually need this step to run a pipeline that isn't on nf-core — nf-core pipelines can be run directly by name (`nextflow run nf-core/...`), since Nextflow fetches them for you automatically.
 
-The raw reads live in `wasp_test_data/`. Nanopore FASTQs are gzipped, so peek at them with `zcat`:
+The raw reads live in `wasp_course_data/`. Nanopore FASTQs are gzipped, so peek at them with `zcat`:
 
 > ▶️ **Try it — peek at a raw FASTQ**
 >
 > ```bash
-> zcat wasp_test_data/barcode01.fastq.gz | head -8
+> zcat wasp_course_data/barcode01/plate1_combined.fastq.gz | head -8
 > ```
 >
 > <details>
@@ -104,7 +104,7 @@ The raw reads live in `wasp_test_data/`. Nanopore FASTQs are gzipped, so peek at
 > ▶️ **Try it — count the reads**
 >
 > ```bash
-> zcat wasp_test_data/barcode01.fastq.gz | wc -l
+> zcat wasp_course_data/barcode01/plate1_combined.fastq.gz | wc -l
 > ```
 >
 > FASTQ uses **4 lines per read**, so divide the line count by 4 to get the number of reads. This file is deliberately tiny (a handful of reads per well) so the whole pipeline runs in minutes.
@@ -112,9 +112,9 @@ The raw reads live in `wasp_test_data/`. Nanopore FASTQs are gzipped, so peek at
 Also inspect the other files you'll need:
 
 ```bash
-cat wasp_test_data/tag-primer_f.fasta      # forward tag-primer sequences
-cat wasp_test_data/tag-primer_r.fasta      # reverse tag-primer sequences
-cat wasp_test_data/metadata.csv         # which tag combination = which sample
+cat wasp_course_data/tag-primer_f.fasta      # forward tag-primer sequences
+cat wasp_course_data/tag-primer_r.fasta      # reverse tag-primer sequences
+cat wasp_course_data/metadata.csv         # which tag combination = which sample
 ```
 
 Now that you've seen the files, check the pipeline's own usage on its GitHub page — [`README.md`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/README.md) — to see how they map to actual inputs.
@@ -146,8 +146,8 @@ The **samplesheet** links each FASTQ to an ID. It has just two columns:
 
 ```csv
 id,fastq
-woodland,wasp_test_data/barcode01/woodland_combined.fastq.gz
-grassland,wasp_test_data/barcode02/grassland_combined.fastq.gz
+woodland,wasp_course_data/barcode01/plate1_combined.fastq.gz
+grassland,wasp_course_data/barcode02/plate2_combined.fastq.gz
 ```
 
 One row per ONT barcode/plate. `fastq` must point to a single, existing `.fastq.gz` file — if your sequencer produced several chunk files per barcode, merge them (e.g. `cat`) before writing the samplesheet.
@@ -164,17 +164,7 @@ First, what a **tag-primer FASTA** actually is: a regular FASTA file where:
 
 You need two: one for the forward tags (`--tags_f`) and one for the reverse tags (`--tags_r`). A read matching one entry from each file, forward and reverse, is what identifies which well it came from.
 
-Here's that whole chain, end to end, for one real read from the woodland plate (`WD_wasp01`, well F2×R1):
-
 ![Read structure: ONT barcode, forward tag+primer, amplicon, reverse tag+primer, ONT barcode](/assets/training/img/read_structure.png)
-
-- A raw read looks like: `[forward tag+primer]` — biological insert — `[revcomp of reverse tag+primer]`
-- Cutadapt strips the forward end using `tag-primer_f.fasta`, and records which header matched → `F2_WaspExF_Tab2`
-- Cutadapt strips the reverse end using `tag-primer_r.fasta`, and records which header matched → `R1_LuthienR_Tab29`
-- Those two headers get joined into one string → `F2_WaspExF_Tab2_R1_LuthienR_Tab29` — this is the well's `tag-primer_comb`
-- The pipeline looks that exact string up in `metadata.csv`'s `tag-primer_comb` column → finds the matching sample name → **`WD_wasp01`**
-
-That's also exactly why the ⚠️ key rule below matters — every link in that chain is a plain string match, so one typo anywhere breaks it.
 
 The **metadata** sheet is optional — but it's what resolves each demultiplexed well down to a sample name; skip it and the pipeline reports each well under its raw tag-primer combination instead. You build it by mapping every tag-primer combination (using the same FASTA headers from above) to the sample it belongs to. It has three columns:
 
@@ -242,9 +232,9 @@ Same mapping, laid out as a plate layout:
 >
 > |  | `R1_LuthienR_Tab29` | `R2_LuthienR_Tab54` |
 > | --- | --- | --- |
-> | `F1_WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `GL_wasp03` |
-> | `F2_WaspExF_Tab2` | `GL_wasp01` | `POS_CON_F2_R2` *(positive control)* |
-> | `F3_WaspExF_Tab3` | `GL_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
+> | `F1_WaspExF_Tab1` | `EXT_NEG_F1_R1` *(extraction blank)* | `MW_wasp03` |
+> | `F2_WaspExF_Tab2` | `MW_wasp01` | `POS_CON_F2_R2` *(positive control)* |
+> | `F3_WaspExF_Tab3` | `MW_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
 
 <details>
 <summary>Cheat sheet — metadata.csv for the grassland plate</summary>
@@ -252,9 +242,9 @@ Same mapping, laid out as a plate layout:
 ```csv
 id,primer_comb,sample
 grassland,F1_WaspExF_Tab1_R1_LuthienR_Tab29,EXT_NEG_F1_R1
-grassland,F2_WaspExF_Tab2_R1_LuthienR_Tab29,GL_wasp01
-grassland,F3_WaspExF_Tab3_R1_LuthienR_Tab29,GL_wasp02
-grassland,F1_WaspExF_Tab1_R2_LuthienR_Tab54,GL_wasp03
+grassland,F2_WaspExF_Tab2_R1_LuthienR_Tab29,MW_wasp01
+grassland,F3_WaspExF_Tab3_R1_LuthienR_Tab29,MW_wasp02
+grassland,F1_WaspExF_Tab1_R2_LuthienR_Tab54,MW_wasp03
 grassland,F2_WaspExF_Tab2_R2_LuthienR_Tab54,POS_CON_F2_R2
 grassland,F3_WaspExF_Tab3_R2_LuthienR_Tab54,BLANK_F3_R2
 ```
@@ -276,11 +266,13 @@ Read the parameters block in [`nextflow.config`](https://github.com/Eco-Flow/nan
 ```bash
 nextflow run main.nf \
 -profile docker \
---input conf/samplesheet.csv \
---metadata wasp_test_data/metadata.csv \
---tags_f wasp_test_data/tag-primer_f.fasta \
---tags_r wasp_test_data/tag-primer_r.fasta \
---custom_db wasp_test_data/custom_db.fasta \
+--input wasp_course_data/samplesheet.csv \
+--metadata wasp_course_data/metadata.csv \
+--tags_f wasp_course_data/tag-primer_f.fasta \
+--tags_r wasp_course_data/tag-primer_r.fasta \
+--custom_db wasp_course_data/custom_db.fasta \
+--sql_db wasp_course_data/nameNode.small.sqlite \
+--outdir results
 ```
 
 </details>
@@ -432,11 +424,11 @@ module load java/temurin-17/17.0.2_8
 
 nextflow run main.nf \
   -profile ucl_myriad \
-  --input wasp_test_data/samplesheet.csv \
-  --metadata wasp_test_data/metadata.csv \
-  --tags_f wasp_test_data/tag-primer_f.fasta \
-  --tags_r wasp_test_data/tag-primer_r.fasta \
-  --custom_db wasp_test_data/custom_db.fasta \
+  --input wasp_course_data/samplesheet.csv \
+  --metadata wasp_course_data/metadata.csv \
+  --tags_f wasp_course_data/tag-primer_f.fasta \
+  --tags_r wasp_course_data/tag-primer_r.fasta \
+  --custom_db wasp_course_data/custom_db.fasta \
   --outdir my_results \
   -resume
 ```
