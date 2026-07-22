@@ -2,21 +2,21 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-22'
 since: '2026-06-27'
-pageviews_all: 570
-visits_all: 210
-pageviews_30d: 570
-visits_30d: 210
-pageviews_7d: 179
-visits_7d: 84
+pageviews_all: 580
+visits_all: 220
+pageviews_30d: 580
+visits_30d: 220
+pageviews_7d: 187
+visits_7d: 87
 countries_7d: 9
 countries_all: 13
 top_pages:
 - path: /training/
-  views: 52
+  views: 53
 - path: /
-  views: 42
+  views: 44
 - path: /training/setup/
-  views: 35
+  views: 36
 - path: /about/
   views: 11
 - path: /pipelines/nanoporemetabarcoding/
@@ -24,12 +24,12 @@ top_pages:
 - path: /training/nanopore-metabarcoding/
   views: 8
 - path: /pipelines/
-  views: 5
+  views: 7
 - path: /pipelines/excon/
   views: 4
-- path: /pipelines/about/
-  views: 2
 - path: /pipelines/gwas/
+  views: 4
+- path: /pipelines/about/
   views: 2
 - path: /training/commandline/
   views: 1
@@ -51,11 +51,11 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 139
+  views: 146
 - name: DE
   views: 14
 - name: US
-  views: 11
+  views: 12
 - name: ES
   views: 4
 - name: NL
@@ -70,7 +70,7 @@ top_countries:
   views: 1
 all_countries:
 - name: GB
-  views: 139
+  views: 146
 - name: SG
   views: 33
 - name: US
