@@ -82,7 +82,7 @@ Before diving in, here's the whole journey from raw reads to results in one pict
 - **BLAST** → search each consensus against your reference database
 - **taxonomizr** → assign taxonomy from the best BLAST hit
 
-<details>
+<details markdown="1">
 <summary>📚 Good background resources</summary>
 
 - [Nanopore sequencing — how it works (Oxford Nanopore)](https://nanoporetech.com/how-it-works)
@@ -110,7 +110,7 @@ The raw reads live in `wasp_course_data/`. Nanopore FASTQs are gzipped, so peek 
 > zcat wasp_course_data/barcode01/plate1_combined.fastq.gz | head -8
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 Groups of four lines per read, same FASTQ format as Illumina — but unlike the paired, fixed-length RNA-Seq reads from Part 3, Nanopore reads are **single, variable-length long reads** with no pair:
@@ -163,7 +163,7 @@ The **samplesheet** links each FASTQ to an ID. It has just two columns:
 > ▶️ **Try it — design `samplesheet.csv` for the wasp experiment**
 > Using the table in [The experiment](#the-experiment) (2 sites → 2 plates → 2 barcodes), write out what the samplesheet should look like.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — samplesheet.csv for the wasp scenario</summary>
 
 ```csv
@@ -202,7 +202,7 @@ The **metadata** sheet is optional — but it's what resolves each demultiplexed
 >
 > The woodland plate has 3 forward tags (`F1_WaspExF_Tab1`, `F2_WaspExF_Tab2`, `F3_WaspExF_Tab3`) and 2 reverse tags (`R1_LuthienR_Tab29`, `R2_LuthienR_Tab54`), giving 6 wells: one extraction blank, one positive control, one PCR blank, and 3 adult wasps netted in the Woodland site. Write out the FASTAs and the metadata rows.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — tag-primer_f.fasta / tag-primer_r.fasta</summary>
 
 ```fasta
@@ -222,7 +222,7 @@ CGATGAGTTACTTCWGGRTGWCCAAARAAYCA
 ```
 </details>
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — metadata.csv for the woodland plate</summary>
 
 ```csv
@@ -258,7 +258,7 @@ Same mapping, laid out as a plate layout:
 > | `F2_WaspExF_Tab2` | `MW_wasp01` | `POS_CON_F2_R2` *(positive control)* |
 > | `F3_WaspExF_Tab3` | `MW_wasp02` | `BLANK_F3_R2` *(PCR blank)* |
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — metadata.csv for the grassland plate</summary>
 
 ```csv
@@ -282,7 +282,7 @@ Now put the theory aside and actually run the pipeline:
 
 Read the parameters block in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/nextflow.config) for the full option list.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — the full command</summary>
 
 ```bash
@@ -305,19 +305,19 @@ nextflow run main.nf \
 
 ### Troubleshooting Step 4
 
-<details>
+<details markdown="1">
 <summary>❌ <code>Missing required parameter: --input</code> / <code>--outdir</code></summary>
 
 Check every `--input`, `--metadata`, `--tags_f`, `--tags_r` and `--outdir` is present and spelled correctly.
 </details>
 
-<details>
+<details markdown="1">
 <summary>❌ A well/sample is missing from the final ASV table</summary>
 
 Almost always a `primer_comb` mismatch — the tag combination in `metadata.csv` doesn't exactly match `<tags_f header>_<tags_r header>`. Double-check spelling and case.
 </details>
 
-<details>
+<details markdown="1">
 <summary>❌ <code>.command.sh: ... command not found</code> (exit status 127)</summary>
 
 You forgot **`-profile docker`**. Without it, Nextflow expects every tool (Cutadapt, Medaka, BLAST, ...) to already be installed locally.
@@ -335,7 +335,7 @@ Once you see `Pipeline completed successfully`, look inside `results/`:
 ls results
 ```
 
-<details>
+<details markdown="1">
 <summary>✅ Roughly what you'll see</summary>
 
 ```
@@ -377,7 +377,7 @@ Myriad's cluster uses singulairty to manage dependecines. You can use conda inst
 
 `-profile ucl_myriad` downloads and applies [`ucl_myriad.config`](https://github.com/nf-core/configs/blob/master/conf/ucl_myriad.config) automatically — no `-c` flag, and no separate `-profile singularity` needed (the profile enables Singularity itself). It's worth reading the actual config to see what a real one looks like:
 
-<details>
+<details markdown="1">
 <summary>What's actually in ucl_myriad.config</summary>
 
 ```groovy
@@ -435,7 +435,7 @@ While jobs are running, watch them with `qstat` on SGE — the same command [hpc
 <!--
 In some HPCs, running Nextflow directly from the login node is not recommended (contact your HPC admin for more information). In that case, submit your Nextflow command it as its own SGE (or slurm, if that is your HPC scheduler) job rather than running it directly in your terminal:
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — <code>run_nanopore_myriad.sh</code> (submit with <code>qsub run_nanopore_myriad.sh</code>)</summary>
 
 ```bash
@@ -473,7 +473,7 @@ The `-l mem=4G` / `-l h_rt=4:00:0` here are for the **driver job only** (Nextflo
 
 Taxonomy assignment has adjustable identity thresholds per rank — e.g. `--spident` (species), `--gpident` (genus). Work out how you'd tighten the species-level threshold to 98% identity, but **don't run it yet**:
 
-<details>
+<details markdown="1">
 <summary>Answer — the modified command</summary>
 
 ```bash

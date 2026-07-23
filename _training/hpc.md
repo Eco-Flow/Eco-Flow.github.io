@@ -116,7 +116,7 @@ You then also point Nextflow at a **cache directory** for containers (so they're
 export NXF_SINGULARITY_CACHEDIR=/path/to/shared/singularity_cache
 ```
 
-<details>
+<details markdown="1">
 <summary>🟨 Optional — a Slurm example</summary>
 
 ```groovy
@@ -141,7 +141,7 @@ singularity {
 Nextflow translates `cpus`, `memory` and `time` directives into the right `sbatch` requests automatically — you rarely need to write `sbatch` lines yourself.
 </details>
 
-<details>
+<details markdown="1">
 <summary>🟦 Optional — an SGE / UGE example</summary>
 
 ```groovy
@@ -262,7 +262,7 @@ tmux new -s rnaseq     # start a session
 
 **Option B — submit the driver as its own small job** (cleaner for long/production runs). Write a tiny submission script that requests modest resources (the driver itself is light) and runs the Nextflow command.
 
-<details>
+<details markdown="1">
 <summary>🟨 Optional — a Slurm submission script (<code>run.sh</code> → <code>sbatch run.sh</code>)</summary>
 
 ```bash
@@ -289,7 +289,7 @@ nextflow run nf-core/rnaseq -r 3.14.0 \
 Submit with `sbatch run.sh`.
 </details>
 
-<details>
+<details markdown="1">
 <summary>🟦 Optional — an SGE submission script (<code>run.sh</code> → <code>qsub run.sh</code>)</summary>
 
 ```bash

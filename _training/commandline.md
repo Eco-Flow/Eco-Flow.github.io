@@ -80,7 +80,7 @@ Your first job is always to answer two questions: *where am I?* and *what's here
 > ls
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `pwd` prints the folder you're in. In Codespaces that's:
@@ -107,7 +107,7 @@ README.md  codespaces.config  data  docs  exercise  hello-nextflow
 > tree
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `ls data` shows the FASTQ sequencing files you'll analyse later in the course:
@@ -142,7 +142,7 @@ SRR6357070_1.fastq.gz  SRR6357070_2.fastq.gz  SRR6357071_1.fastq.gz  ...
 > cd data              # the *same* relative command, from a different starting point
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 The first `cd data` works fine — you land in `.../eco-flow-training/data`. The second one, run from inside `docs`, fails instead:
@@ -163,7 +163,7 @@ There's no `data` folder *inside* `docs` — a relative path only ever means "a 
 > cd ../..                # back to eco-flow-training
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 This works from anywhere — `pwd` prints `/workspaces/training/eco-flow-training/data` regardless of where you ran it from. (Locally, substitute your own absolute path — see the "Where should I be?" note above.) That's the whole difference: **absolute paths are location-independent, relative paths aren't.**
@@ -195,7 +195,7 @@ Now that you can move around, let's make and manage files and folders.
 > ls
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 After you save and quit `nano`, `ls` shows your new file:
@@ -216,7 +216,7 @@ hello.txt
 > ls
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 The listings change at each step:
@@ -259,7 +259,7 @@ You'll often want to peek inside a file without opening an editor. These command
 > wc cancao_do_exilio
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `head -n 4` prints the first four lines of the poem, `tail -n 2` prints the last two, and `wc` reports three numbers — **lines, words, characters**:
@@ -286,7 +286,7 @@ Useful `grep` flags:
 > grep -n Deus cancao_do_exilio
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `grep` prints each line containing *palmeiras*; `-c` collapses that to a count; `-n` prefixes each match with its line number:
@@ -319,7 +319,7 @@ You won't need all of these today, but they're worth knowing.
 > zcat SRR6357070_1.fastq.gz | head -n 4
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 The first **read** in a FASTQ file — four lines: an ID, the DNA sequence, a `+`, and quality scores:
@@ -334,7 +334,7 @@ AAAAAEEEEEEEEEEEEEEEEEEEEEEEEEEEE...
 
 > 🤔 **Predict, then check:** a FASTQ file uses 4 lines per read. If `zcat file | wc -l` prints `4000`, how many reads is that? (Scroll to Block 5 to actually count them with a pipe.)
 
-<details>
+<details markdown="1">
 <summary>Extra commands (not needed for this course)</summary>
 
 | Command | What it does |
@@ -381,7 +381,7 @@ cat file | sort | uniq > sorted_uniq_file
 > history > my_history.txt
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 Nothing prints to the terminal — the output went into the file instead. Check it worked:
@@ -402,7 +402,7 @@ You should see a numbered list of every command you've run this session.
 >
 > Remember: 4 lines per read, so divide the answer by 4.
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 A single number — the total number of lines in the uncompressed file:
@@ -422,7 +422,7 @@ That's `200000 / 4 = 50000` reads. Piping meant we never had to save an uncompre
 > cat read1_files.txt
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `ls *.gz` lists only the `.gz` files; the second command doesn't print anything (it went into the file instead); `cat` shows what was saved:
@@ -464,7 +464,7 @@ You can combine flags: `ls -lah`. To see every flag a command supports, use `man
 > ls -lS      # largest first
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 Long format shows permissions, owner, size and date for each file:
@@ -508,7 +508,7 @@ Variables store information and are written with a `$` sign. **Environment varia
 > echo $PATH
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `echo $PATH` prints a colon-separated list of directories the shell searches for programs:
@@ -570,7 +570,7 @@ pwd            # the path should end in eco-flow-training
 mkdir rnaseq_experiment
 ```
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet</summary>
 
 ```bash
@@ -619,7 +619,7 @@ which nextflow
 nextflow info
 ```
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — full sequence</summary>
 
 ```bash
@@ -631,7 +631,7 @@ nextflow info       # prints the version you just installed
 ```
 </details>
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 `nextflow info` prints version and system details:
@@ -654,7 +654,7 @@ alias h1='head -n 1'    # h1  = show the first line of a file
 
 Add your own alias that shows the last 5 commands you ran.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet</summary>
 
 Add this line to `~/.bash_profile` (e.g. with `nano ~/.bash_profile`):

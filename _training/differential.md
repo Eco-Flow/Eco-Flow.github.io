@@ -157,7 +157,7 @@ cts <- read.csv("salmon.merged.gene_counts_length_scaled.tsv", h=T, row.names=1,
 > cts <- round(cts)
 > ```
 
-<details>
+<details markdown="1">
 <summary>💡 <b>Want to know more? The gold-standard route (offsets via <code>tximport</code>)</b></summary>
 
 Rounding length-scaled counts is a well-supported approximation, but the *most* rigorous way to bring Salmon output into DESeq2 doesn't round anything. Instead it imports Salmon's per-sample transcript estimates together with their average transcript lengths, and passes those lengths to DESeq2 as a **normalisation offset** — so each gene is corrected for length *per sample* inside the model, rather than once up front.
@@ -333,7 +333,7 @@ Each row is a gene. The columns mean:
 > ```
 > How many did you get? Now change the threshold to `0.01` — how many survive? What does that tell you about how confident you can be?
 
-<details>
+<details markdown="1">
 <summary>👀 <b>Reveal the answer (test dataset)</b></summary>
 
 Using the pre-run chr-I counts, you should get **6** genes at `padj < 0.05` and **4** at `padj < 0.01`. Tightening the threshold drops the count because you're demanding stronger evidence — a stricter false-discovery rate means fewer genes clear the bar, and the ones that survive are the calls you can be most confident in. (Your exact numbers may differ by one or two if you used your own RNA-Seq run rather than the committed file.)

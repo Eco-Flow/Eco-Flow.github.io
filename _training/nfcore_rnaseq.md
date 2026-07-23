@@ -58,7 +58,7 @@ We'll compare gene expression between **wild-type** yeast cells and cells with a
 
 Before running an RNA-Seq analysis, it helps to understand what it *is*. In short: RNA-Seq measures how much each gene is being **expressed** by sequencing the RNA in a sample, mapping those reads back to a reference genome, and counting how many land on each gene. This is covered in the lecture; the resources below go deeper.
 
-<details>
+<details markdown="1">
 <summary>📚 Great RNA-Seq learning resources</summary>
 
 - [Azenta — Quick-start guide to RNA-Seq data analysis](https://www.azenta.com/blog/quick-start-guide-rna-seq-data-analysis#step1)
@@ -90,7 +90,7 @@ The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't d
 > zcat data/SRR6357070_1.fastq.gz | head -n 2 | tail -n 1 | tr -d '\n' | wc -c
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Answer</summary>
 
 ```
@@ -129,7 +129,7 @@ Go to the nf-core/rnaseq page and read what the pipeline does and what inputs it
 
 <img src="/assets/training/img/image.png" alt="nf-core/rnaseq usage page" width="700"/>
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — what the pipeline needs</summary>
 
 To run nf-core/rnaseq you need three things:
@@ -175,7 +175,7 @@ It has four columns:
 
 Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.14.0/docs/usage#samplesheet-input) as a guide to build the 3 wild type and 3 knock down samples, then compare with the cheat sheet.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — full samplesheet.csv</summary>
 
 ```csv
@@ -210,7 +210,7 @@ wget -O genes.gff.gz https://raw.githubusercontent.com/nf-core/test-datasets/7f1
 > ls -lh genome.fasta genes.gff.gz
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Expected output</summary>
 
 Both files should be listed with a non-zero size:
@@ -265,7 +265,7 @@ params {
 
 > 📝 On your own laptop or an HPC you generally **wouldn't** need this file — you'd let the pipeline use its defaults, or write a config tuned to *your* machine. It exists purely to make the pipeline fit inside Codespaces.
 
-<details>
+<details markdown="1">
 <summary>Cheat sheet — the full command</summary>
 
 ```bash
@@ -300,19 +300,19 @@ The `\` at the end of each line just lets one command span several lines for rea
 
 If the run stops with an error, it's almost always one of these:
 
-<details>
+<details markdown="1">
 <summary>❌ <code>Missing required parameter: --input</code> / <code>--outdir</code></summary>
 
 You didn't supply one of the required parameters. Check every `--input`, `--fasta`, `--gff` and `--outdir` is present and spelled correctly.
 </details>
 
-<details>
+<details markdown="1">
 <summary>❌ <code>Not a valid path value: 'genes.gff.gz'</code></summary>
 
 A path is wrong or not absolute. Provide the **full** path, e.g. `/workspaces/training/eco-flow-training/genes.gff.gz`, and confirm the file exists with `ls -l`.
 </details>
 
-<details>
+<details markdown="1">
 <summary>❌ <code>.command.sh: line 7: fastqc: command not found</code> (exit status 127)</summary>
 
 You forgot **`-profile docker`**. Without it, Nextflow looks for the tools installed locally — but they aren't. Adding `-profile docker` makes each step run inside a container that already has the tool.
@@ -345,7 +345,7 @@ That's what the hash at the start of each line in the console output is:
 > ls -a work/a1/b2c3d4*/     # use a hash from *your* own output
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Roughly what you'll see</summary>
 
 ```
@@ -428,7 +428,7 @@ Once the pipeline finishes (`Pipeline completed successfully`), look inside your
 > ls my_results
 > ```
 
-<details>
+<details markdown="1">
 <summary>✅ Roughly what you'll see</summary>
 
 ```
@@ -462,7 +462,7 @@ Real analyses are rarely run just once — you tweak options and re-run. Two thi
 
 The pipeline has many options. For example, you can switch the alignment/quantification tools to STAR + RSEM with `--aligner star_rsem` (see the [alignment options docs](https://nf-co.re/rnaseq/3.14.0/docs/usage#alignment-options)). Work out how you'd modify your command — **but don't run it yet:**
 
-<details>
+<details markdown="1">
 <summary>Answer — the modified command</summary>
 
 ```bash
