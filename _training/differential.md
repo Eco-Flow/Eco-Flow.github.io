@@ -276,6 +276,16 @@ Now make a PCA plot:
 plotPCA(vsd, intgroup = "condition")
 ```
 
+> 💾 **Saving your plots (important if you're in a terminal / Codespace).** Running R from the command line, there's no pop-up plot window — you have to send each plot to a file. The pattern is: **open a graphics device → draw the plot → close the device with `dev.off()`.** The plot only appears in the file *after* `dev.off()`. For the PCA plot:
+> ```R
+> png("pca_plot.png", width = 800, height = 600)   # open a PNG device
+> plotPCA(vsd, intgroup = "condition")             # draw into it
+> dev.off()                                        # close it — file is written now
+> ```
+> Use `pdf("pca_plot.pdf")` instead if you'd prefer a vector file. The file lands in your working directory (`getwd()` to check). **In Codespaces, just click the file in the Explorer sidebar and it opens as a preview right inside the editor** — PNGs display natively, and a PDF viewer is pre-installed so `.pdf` files preview too. **Wrap every plot below in the same `png(...)` / `dev.off()` sandwich**, changing the filename each time (e.g. `dispersion.png`, `ma_plot.png`, `volcano.png`), otherwise you'll overwrite the previous one.
+>
+> ℹ️ `plotPCA` returns a **ggplot** object, so you can also save it with `ggsave("pca_plot.png")` after calling it. `plotDispEsts`, `plotMA` and `plotCounts` are base graphics, so they need the `png()` / `dev.off()` approach.
+
 > ✍️ **Your turn — interpret, don't just generate.** Look at your PCA plot and answer:
 > 1. Do the three wild-type samples cluster together, separate from the three knockdown samples?
 > 2. Which axis (PC1 or PC2) captures the condition difference, and what % of variance does it explain?
