@@ -10,6 +10,28 @@ order: 5
 
 ⏱ **Estimated time:** ~60–90 minutes (including pipeline run time) &nbsp;•&nbsp; 🟡 Practical
 
+> ⚠️ **Coming straight from the RNA-Seq practical? Make space first.** A Codespace has a small disk, and Part 3 fills a lot of it with pipeline containers and `work/` directories. If you start this pipeline on top of that, you'll run out of disk part-way through and the run will fail. Pick **one** of the two options below before you go any further.
+>
+> **Option A — start a fresh Codespace (simplest).** **Delete** your current Codespace, then open a new one from the link above. Step-by-step instructions: [Setup · Closing a Codespace and starting a fresh one](/training/setup/#closing-a-codespace-and-starting-a-fresh-one). Remember to **download anything you want to keep** from the RNA-Seq practical first — deleting is permanent.
+>
+> **Option B — clean up in place.** Keep the same Codespace, but throw away the leftovers from Part 3:
+>
+> ```bash
+> # from inside eco-flow-training — delete Nextflow's intermediate files
+> rm -rf work .nextflow .nextflow.log*
+>
+> # delete every Docker image that isn't currently in use
+> docker system prune -a -f
+> ```
+>
+> Then check you've actually got room — you want a few GB free under **Avail**:
+>
+> ```bash
+> df -h /workspaces
+> ```
+>
+> ⚠️ Option B removes your RNA-Seq `work/` directory, so anything you haven't copied out of it (or published to `results/`) is gone. The containers will simply be re-downloaded next time they're needed.
+
 In this practical you'll run **nanoporemetabarcoding**, a pipeline built by Eco-Flow ([`Eco-Flow/nanoporemetabarcoding`](https://github.com/Eco-Flow/nanoporemetabarcoding)) — from raw Nanopore reads all the way to a taxonomically-annotated ASV table.
 
 > ℹ️ **Not an official nf-core pipeline.** nanoporemetabarcoding was scaffolded with the [nf-core](https://nf-co.re) template and follows its conventions (module structure, config profiles, `-profile docker`, etc.), which is why some of the tooling will feel familiar to Part 3 of this workshop. But it isn't part of the official nf-core pipeline collection, isn't listed on nf-co.re, and has no tagged release yet, as it is still in active development.
