@@ -296,7 +296,9 @@ plotPCA(vsd, intgroup = "condition")
 We can also check that the model fit the data well by looking at the dispersion estimates:
 
 ```R
+png("dispersion.png", width = 800, height = 600)
 plotDispEsts(dds)
+dev.off()
 ```
 
 You should see the fitted red line running through a cloud of points that shrink toward it — that's the model borrowing information across genes. If it looks wildly off, revisit your design.
@@ -346,26 +348,32 @@ res_shrunk <- lfcShrink(dds, coef = "condition_kd_vs_wild", type = "apeglm")
 **MA plot** — fold change vs. mean expression, with significant genes highlighted:
 
 ```R
+png("ma_plot.png", width = 800, height = 600)
 plotMA(res_shrunk, ylim = c(-5, 5))
+dev.off()
 ```
 
 **Plot the counts for your top gene** — a great sanity check that a hit is real and not driven by one sample:
 
 ```R
 topGene <- rownames(res)[which.min(res$padj)]
+png("top_gene_counts.png", width = 800, height = 600)
 plotCounts(dds, gene = topGene, intgroup = "condition")
+dev.off()
 ```
 
 **Volcano plot** — significance vs. effect size, the classic RNA-seq figure:
 
 ```R
 res_df <- as.data.frame(res)
+png("volcano.png", width = 800, height = 600)
 with(res_df, plot(log2FoldChange, -log10(padj),
      pch = 20, main = "Volcano plot",
      xlab = "log2 fold change", ylab = "-log10 adjusted p-value"))
 # Highlight significant genes in red
 with(subset(res_df, padj < 0.05),
      points(log2FoldChange, -log10(padj), pch = 20, col = "red"))
+dev.off()
 ```
 
 > ✍️ **Your turn — close the loop.** Go back to the prediction you made at the very start. The Rap1 target gene on chromosome I is **CDC19** (pyruvate kinase; systematic name `YAL038W`, also known as PYK1).
@@ -377,7 +385,9 @@ with(subset(res_df, padj < 0.05),
 > 2. Rap1 *activates* CDC19, and our manipulated samples are a Rap1 **knockdown** — so did you correctly predict a **negative** log2FoldChange? Is it significant (`padj < 0.05`)?
 > 3. Look at the gene directly across the six samples:
 >    ```R
+>    png("cdc19_counts.png", width = 800, height = 600)
 >    plotCounts(dds, gene = "CDC19", intgroup = "condition")   # or "YAL038W"
+>    dev.off()
 >    ```
 >
 > 🧠 **Reflect.** Remember this is a small, largely synthetic test dataset with **only one chromosome** — so CDC19 may *not* actually come out significant, or may not move in the expected direction. That is itself the lesson: a biologically sensible hypothesis still has to be supported by data that has enough power to detect it. Write one sentence on what you found, and whether this dataset lets you draw any real conclusion about Rap1.
