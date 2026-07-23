@@ -89,17 +89,17 @@ The FASTQ files are compressed with `gzip` (they end in `.gz`), so they aren't d
 > zcat data/SRR6357070_1.fastq.gz | wc -l
 > zcat data/SRR6357070_1.fastq.gz | head -n 2 | tail -n 1 | tr -d '\n' | wc -c
 > ```
->
-> <details>
-> <summary>✅ Answer</summary>
->
-> ```
-> 200000
-> 101
-> ```
->
-> The first command shows there are `200000` lines in the file. A FASTQ record uses **4 lines per read**, so that corresponds to `50000` reads. The second command uses `head` and `tail` to grab the second line of the file, which is the first read sequence, and `wc -c` counts the number of characters in it. We add `tr -d '\n'` to strip the trailing newline first — without it, `wc -c` would also count the line break and report `102`. So the reads are `101` bases long. There are many ways to do this, and even copying the file into an editor and looking at it manually is fine.
-> </details>
+
+<details>
+<summary>✅ Answer</summary>
+
+```
+200000
+101
+```
+
+The first command shows there are `200000` lines in the file. A FASTQ record uses **4 lines per read**, so that corresponds to `50000` reads. The second command uses `head` and `tail` to grab the second line of the file, which is the first read sequence, and `wc -c` counts the number of characters in it. We add `tr -d '\n'` to strip the trailing newline first — without it, `wc -c` would also count the line break and report `102`. So the reads are `101` bases long. There are many ways to do this, and even copying the file into an editor and looking at it manually is fine.
+</details>
 
 ### Structure of a typical FASTQ file
 
@@ -209,19 +209,19 @@ wget -O genes.gff.gz https://raw.githubusercontent.com/nf-core/test-datasets/7f1
 > ```bash
 > ls -lh genome.fasta genes.gff.gz
 > ```
->
-> <details>
-> <summary>✅ Expected output</summary>
->
-> Both files should be listed with a non-zero size:
->
-> ```
-> -rw-r--r-- 1 user user  ...  genome.fasta
-> -rw-r--r-- 1 user user  ...  genes.gff.gz
-> ```
->
-> If a file is 0 bytes or missing, the download failed — check your internet connection and re-run the `wget`.
-> </details>
+
+<details>
+<summary>✅ Expected output</summary>
+
+Both files should be listed with a non-zero size:
+
+```
+-rw-r--r-- 1 user user  ...  genome.fasta
+-rw-r--r-- 1 user user  ...  genes.gff.gz
+```
+
+If a file is 0 bytes or missing, the download failed — check your internet connection and re-run the `wget`.
+</details>
 
 > 💡 The `-O` flag names the downloaded file. The genome is the yeast reference sequence; the GFF lists where each gene sits on that sequence.
 
@@ -344,19 +344,19 @@ That's what the hash at the start of each line in the console output is:
 > ls work
 > ls -a work/a1/b2c3d4*/     # use a hash from *your* own output
 > ```
->
-> <details>
-> <summary>✅ Roughly what you'll see</summary>
->
-> ```
-> .command.begin  .command.err  .command.log  .command.out
-> .command.run    .command.sh   .exitcode
-> CONTROL_REP1_1.fastq.gz -> /workspaces/training/.../SRR6357070_1.fastq.gz
-> CONTROL_REP1_fastqc.html
-> ```
->
-> The input files are **symlinks** back to their original location (that's why the work dir doesn't duplicate your data), and the outputs sit alongside them.
-> </details>
+
+<details>
+<summary>✅ Roughly what you'll see</summary>
+
+```
+.command.begin  .command.err  .command.log  .command.out
+.command.run    .command.sh   .exitcode
+CONTROL_REP1_1.fastq.gz -> /workspaces/training/.../SRR6357070_1.fastq.gz
+CONTROL_REP1_fastqc.html
+```
+
+The input files are **symlinks** back to their original location (that's why the work dir doesn't duplicate your data), and the outputs sit alongside them.
+</details>
 
 Note the leading `.` — these are hidden files, so plain `ls` won't show them. Use **`ls -a`**.
 
@@ -427,16 +427,16 @@ Once the pipeline finishes (`Pipeline completed successfully`), look inside your
 > ```bash
 > ls my_results
 > ```
->
-> <details>
-> <summary>✅ Roughly what you'll see</summary>
->
-> ```
-> fastqc  multiqc  pipeline_info  star_salmon  trimgalore  ...
-> ```
->
-> Each folder holds the output of one stage of the pipeline.
-> </details>
+
+<details>
+<summary>✅ Roughly what you'll see</summary>
+
+```
+fastqc  multiqc  pipeline_info  star_salmon  trimgalore  ...
+```
+
+Each folder holds the output of one stage of the pipeline.
+</details>
 
 The full catalogue of outputs is documented here: https://nf-co.re/rnaseq/3.14.0/docs/output — spend ~10 minutes skimming it while the run finishes.
 

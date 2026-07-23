@@ -109,19 +109,19 @@ The raw reads live in `wasp_course_data/`. Nanopore FASTQs are gzipped, so peek 
 > ```bash
 > zcat wasp_course_data/barcode01/plate1_combined.fastq.gz | head -8
 > ```
->
-> <details>
-> <summary>✅ Expected output</summary>
->
-> Groups of four lines per read, same FASTQ format as Illumina — but unlike the paired, fixed-length RNA-Seq reads from Part 3, Nanopore reads are **single, variable-length long reads** with no pair:
->
-> ```
-> @<read id> ...
-> ATGCGT...(a few hundred bp, length varies read to read)
-> +
-> !%'&&$#"...(quality string, same length as the sequence)
-> ```
-> </details>
+
+<details>
+<summary>✅ Expected output</summary>
+
+Groups of four lines per read, same FASTQ format as Illumina — but unlike the paired, fixed-length RNA-Seq reads from Part 3, Nanopore reads are **single, variable-length long reads** with no pair:
+
+```
+@<read id> ...
+ATGCGT...(a few hundred bp, length varies read to read)
++
+!%'&&$#"...(quality string, same length as the sequence)
+```
+</details>
 
 > ▶️ **Try it — count the reads**
 >
