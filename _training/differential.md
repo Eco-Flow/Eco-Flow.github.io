@@ -61,6 +61,27 @@ We need to account for:
 > 1. If Rap1 *activates* its targets, which direction (up or down) should a Rap1 target gene move when Rap1 is knocked **down**?
 > 2. **The challenge:** among the genes on chromosome I, one is a classic, textbook Rap1-activated **glycolytic** gene. Can you work out which one it is? (Hint: it encodes pyruvate kinase and is essential for growth on glucose.) Write down your guess — we'll return to it at the very end.
 
+## The two files you'll need
+
+Before starting R, make sure both of these are sitting in the folder you'll work from:
+
+1. **The counts table** — `salmon.merged.gene_counts.tsv`. Either the one your RNA-Seq run produced (in `<outdir>/star_salmon/`), or the pre-run copy at [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv).
+2. **A condition sheet** — `condition.tsv`. This is a small file *you* create; it tells DESeq2 which samples belong to which group. If you're quick-starting, we've already made one for you at [`data/differential/condition.tsv`](../data/differential/condition.tsv).
+
+If you need to make the condition sheet yourself, create a plain-text file called `condition.tsv` (a text editor, or `nano condition.tsv` in the terminal) containing exactly:
+
+```
+,condition,type
+CONTROL_REP1,wild,paired-end
+CONTROL_REP2,wild,paired-end
+CONTROL_REP3,wild,paired-end
+MANIPULATED_REP1,kd,single-read
+MANIPULATED_REP2,kd,single-read
+MANIPULATED_REP3,kd,single-read
+```
+
+> ⚠️ The names in the first column **must** match the sample column names in your counts table exactly (i.e. the sample names you chose in your nf-core samplesheet). If they don't match, DESeq2 will pair up the wrong samples.
+
 ## Start R
 
 Everything from here on runs inside `R`, not the shell. From your terminal (make sure you're in the `eco-flow-training` folder), start an interactive R session by typing:
@@ -104,27 +125,19 @@ The raw counts that DESeq2 requires are here: `<outdir_name>/star_salmon/salmon.
 `cts <- read.csv("salmon.merged.gene_counts.tsv", h=T, row.names=1, sep="\t")`
 #Read in the tab separated file, with first line as header, and first row as row names.
 
+> ✍️ **Your turn — look before you leap.** Before changing anything, inspect what you actually loaded:
+> ```R
+> head(cts)   # first few rows
+> ```
+> You should see your six sample columns — but also a `gene_name` column at the front. Spotting it here is exactly why we drop it in the next step.
+
 > ⚠️ **Drop the `gene_name` column.** This counts table has *two* leading columns — `gene_id` (now your row names) and `gene_name`. The latter is text, and DESeq2 needs a purely numeric count matrix, so remove it before continuing:
 > ```R
 > cts <- cts[, -1]   # drop the gene_name column, leaving only the 6 sample columns
 > ```
 > (If you loaded a counts file with only one leading column, skip this.)
 
-Next you need to make a coldata sheet, this tells DESeq2 which samples are different or part of a group. For our data we would want this:
-
-```
-,condition,type
-CONTROL_REP1,wild,paired-end
-CONTROL_REP2,wild,paired-end
-CONTROL_REP3,wild,paired-end
-MANIPULATED_REP1,kd,single-read
-MANIPULATED_REP2,kd,single-read
-MANIPULATED_REP3,kd,single-read
-```
-
-!Warning, you must make the names in column 1 exactly the same as what you chose when you wrote the samplesheet for nf-core rnaseq!
-
-Save this to a R variable called `coldata`.
+Next, load the condition sheet (`condition.tsv`) you prepared earlier into a variable called `coldata` — this is what tells DESeq2 which samples belong to which group:
 
 
 ```R
