@@ -28,6 +28,11 @@ META_OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "pipelines_meta.yml")
 README_OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "pipeline_readmes.yml")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
+# Repos we track on /numbers/ that aren't pipelines, so have no _pipelines/*.md
+# file to carry a `repo:` field. Star counts / last-updated only - no README is
+# pulled for these, since nothing on the site renders one.
+EXTRA_REPOS = ["Eco-Flow/training"]
+
 # Matches a whole line that's made up entirely of one or more badge images
 # wrapped in a link, e.g. [![label](badge.svg)](https://...), which is how
 # nf-core-template READMEs render their CI/Slack/social badges.
@@ -138,11 +143,13 @@ def main():
 
     meta_result = {}
     readme_result = {}
-    for repo in repos:
+    for repo in repos + EXTRA_REPOS:
         print(f"Fetching {repo}...")
         try:
             repo_info = api_get(f"/repos/{repo}")
             meta_result[repo] = fetch_meta(repo, repo_info)
+            if repo in EXTRA_REPOS:
+                continue
             readme = fetch_readme(repo, repo_info.get("default_branch", "main"))
             if readme:
                 readme_result[repo] = readme

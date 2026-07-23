@@ -65,7 +65,9 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="stat"><div class="stats__num">{{ site.data.training.parts | size }}</div><div class="stats__label">Training modules</div></div>
       <div class="stat"><div class="stats__num">234</div><div class="stats__label">Trainees taught</div></div>
       <div class="stat"><div class="stats__num">9</div><div class="stats__label">Events</div></div>
-      <div class="stat"><div class="stats__num">{{ site.pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
+      {%- comment -%} Only count real pipelines - _pipelines also holds the "About our pipelines" page. {%- endcomment -%}
+      {%- assign real_pipelines = site.pipelines | where_exp: "p", "p.repo" -%}
+      <div class="stat"><div class="stats__num">{{ real_pipelines | size }}</div><div class="stats__label">Pipelines</div></div>
     </div>
     <div class="stats" style="margin-top:2rem">
       <div class="stat"><div class="stats__num">{{ site.posts | size }}</div><div class="stats__label">Blog posts</div></div>
@@ -162,13 +164,15 @@ description: A snapshot of Eco-Flow's work, reach and community.
 
     <div class="grid grid--2" style="margin-top:3rem">
       <div class="card">
-        <h3 style="margin-top:0">Stars by pipeline</h3>
+        <h3 style="margin-top:0">Stars by repository</h3>
         <ol class="numbered">
-          {%- assign pipes = site.pipelines | sort: "nav_order" -%}
-          {%- for p in pipes -%}
-            {%- assign meta = site.data.pipelines_meta[p.title] -%}
-            {%- if meta and meta.stars -%}
-            <li>{{ p.title }} <span class="numbered__val">★ {{ meta.stars }}</span></li>
+          {%- comment -%}
+            Driven off pipelines_meta rather than site.pipelines, so repos we
+            track that aren't pipelines (e.g. Eco-Flow/training) are listed too.
+          {%- endcomment -%}
+          {%- for kv in site.data.pipelines_meta -%}
+            {%- if kv[1].stars -%}
+            <li><a href="https://github.com/{{ kv[0] }}">{{ kv[0] }}</a> <span class="numbered__val">★ {{ kv[1].stars }}</span></li>
             {%- endif -%}
           {%- endfor -%}
         </ol>

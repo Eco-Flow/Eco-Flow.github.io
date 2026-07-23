@@ -284,9 +284,12 @@ or a post and the count goes up on its own.
     beacon, so your testing no longer inflates the figures. Use `?notrack=0` to re-enable. It's
     stored per-browser in `localStorage`, so it sticks until you clear site data; only affects
     *future* visits, not ones already counted.
-- **GitHub stats** (total stars, tracked repos, stars-by-pipeline) come from the same
+- **GitHub stats** (total stars, tracked repos, stars-by-repository) come from the same
   [`_data/pipelines_meta.yml`](_data/pipelines_meta.yml) used by the pipeline pages — refreshed by
-  the `sync-pipeline-meta` Action described above.
+  the `sync-pipeline-meta` Action described above. Repos we track that aren't pipelines (so have no
+  `_pipelines/*.md` file to carry a `repo:` field) are listed in `EXTRA_REPOS` at the top of
+  [`scripts/sync_pipeline_meta.py`](scripts/sync_pipeline_meta.py) — currently `Eco-Flow/training`.
+  Add to that list to track another non-pipeline repo.
 
 ### The world map
 
