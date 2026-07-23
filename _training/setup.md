@@ -126,7 +126,7 @@ Closing the browser tab only **stops** the Codespace — it stays around, and so
 3. Click the **`···`** menu on its right-hand side.
 4. Choose **Delete**, then confirm.
 
-<!-- TODO: screenshot of https://github.com/codespaces showing the ··· menu open with Delete highlighted → save as img/codespaces_delete.png and swap in the line below -->
+![alt text](/assets/training/img/codespacesdelete.png)
 
 > ⚠️ **Deleting is permanent.** Anything you haven't saved elsewhere goes with it — **download** any results or scripts you want to keep first (right-click → **Download**, see above).
 
