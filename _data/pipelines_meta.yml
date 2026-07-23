@@ -9,8 +9,10 @@ Eco-Flow/excon:
   stars: 10
   updated_at: Jul 10, 2026
 Eco-Flow/nanoporemetabarcoding:
+  latest_release: v.1.0.0
+  released_at: Jul 23, 2026
   stars: 7
-  updated_at: Jul 22, 2026
+  updated_at: Jul 23, 2026
 Eco-Flow/pollen-metabarcoding:
   latest_release: v2.0.2
   released_at: Aug 1, 2024
