@@ -499,5 +499,5 @@ Add **`-resume`** and Nextflow reuses cached results for any step whose inputs h
 **Next steps:**
 
 - Adapt what you designed in Steps 2–3 to your **own** primer-tag scheme and run it on your own data.
-- Explore the full parameter list in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/master/nextflow.config) — worth tuning per-rank identity thresholds (`--spident`/`--gpident`/`--fpident`/`--opident`) and `--tax_list` for your own taxonomic group.
+- Explore the full parameter list in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/dev/nextflow.config) — worth tuning per-rank identity thresholds (`--spident`/`--gpident`/`--fpident`/`--opident`) and `--tax_list` for your own taxonomic group.
 - Running on a cluster other than Myriad? Step 6 above covers the concrete example; the bonus **[Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including a Slurm walkthrough).
