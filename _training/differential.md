@@ -10,7 +10,26 @@ order: 4
 
 ---
 
-Now that we have run the nf-core RNA-Seq pipeline, we have the raw counts needed to run differential expression using DESeq2.
+⏱ **Estimated time:** ~45–60 minutes &nbsp;•&nbsp; 🟡 Practical
+
+In this practical you'll take the gene-count table produced by the RNA-Seq pipeline and use **DESeq2** in `R` to find genes that are differentially expressed between our two conditions — from raw counts, through normalisation and quality control, to an annotated results table and the classic RNA-Seq figures (PCA, MA, and volcano plots).
+
+### What you'll do
+
+- Load a raw gene-count table into `R` and build a `DESeq2` dataset
+- Describe your samples with a **condition sheet** and set the correct reference level
+- **Pre-filter** low-count genes and run the differential expression test
+- Run **quality control** (PCA and dispersion plots) to decide whether to trust the experiment
+- Read and interpret the **results table** — fold changes, p-values, and adjusted p-values
+- **Visualise** your results and hunt for a biologically-motivated gene of interest
+
+> 🔗 **This section continues from [Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/).** If you completed that practical, you already have the counts table it produced (`<outdir>/star_salmon/salmon.merged.gene_counts.tsv`) — carry on with that.
+>
+> 🚀 **Didn't run the RNA-Seq pipeline, or want to jump straight in?** No problem — we've committed the exact counts table and condition sheet this section needs, so you can quick-start with pre-run data:
+> - Counts: [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv)
+> - Condition sheet: [`data/differential/condition.tsv`](../data/differential/condition.tsv)
+>
+> These are the real outputs from the chr-I yeast test dataset used in the previous section. Everywhere below that reads a counts or condition file, just point at these paths.
 
 ## Prerequisites
 
@@ -62,12 +81,6 @@ BiocManager::install("DESeq2")
 -> Write `yes` when prompted to agree to download.
 
 ## How to get the data into `R`
-
-> 🚀 **Starting here without running the RNA-Seq pipeline?** No problem. We've committed the exact counts table and condition sheet this section needs, so you can jump straight in:
-> - Counts: [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv)
-> - Condition sheet: [`data/differential/condition.tsv`](../data/differential/condition.tsv)
->
-> These are the real outputs from the chr-I yeast test dataset used in the previous section. Point the `read.csv` calls below at these paths and everything else works the same.
 
 To get the data into R from nf-core RNA-Seq, we can use either the `load` function in R or `read.csv`.
 
