@@ -31,9 +31,9 @@ top_pages:
   views: 3
 - path: /training/commandline/
   views: 2
-- path: /training/pipelines/
-  views: 2
 - path: /pipelines/about/
+  views: 2
+- path: /training/pipelines/
   views: 2
 - path: /pipelines/comparete/
   views: 2
