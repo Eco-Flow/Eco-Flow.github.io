@@ -61,6 +61,18 @@ We need to account for:
 > 1. If Rap1 *activates* its targets, which direction (up or down) should a Rap1 target gene move when Rap1 is knocked **down**?
 > 2. **The challenge:** among the genes on chromosome I, one is a classic, textbook Rap1-activated **glycolytic** gene. Can you work out which one it is? (Hint: it encodes pyruvate kinase and is essential for growth on glucose.) Write down your guess — we'll return to it at the very end.
 
+## Start R
+
+Everything from here on runs inside `R`, not the shell. From your terminal (make sure you're in the `eco-flow-training` folder), start an interactive R session by typing:
+
+```bash
+R
+```
+
+Your prompt changes from `$` to `>`, which means you're now in R and the commands below will work. To leave R later, type `quit()` (answer `n` when asked to save the workspace) and you'll be back at the shell.
+
+> 💡 Prefer RStudio? If you have it available, you can run all the R commands below there instead — just make sure your working directory points at the folder holding your counts and condition files (`setwd(...)` or **Session → Set Working Directory**).
+
 ## Load DESeq2
 
 If you have DESeq2 downloaded you simply need to call the library:
