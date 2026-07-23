@@ -488,29 +488,31 @@
   \ But if the overlap is 20 bp and there are 3 mismatches, the match is accepted\
   \ because the mismatch rate is 3/20 = 15%, which is below the 20% threshold. If\
   \ your primers are very similar, it is often best to set `--overlap` to at least\
-  \ the length of the longest primer to avoid spurious matches.\n\n**Nanofilt options:**\n\
-  \nNanofilt is run before demultiplexing and tag+primer trimming:\n\n```\n    //\
-  \ Nanofilt options\n    nano_quality                = null // Minimun read quality\
-  \ (phred score)\n    nano_read_length            = 250 // Minimum reads length\n\
-  ```\n\n4. Filter FASTQs with a mumber of reads equal or lower than (changing this\
-  \ value is not recommended):\n\n```\n    filt_fastq                  = 0\n```\n\n\
-  Check `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta` for examples\
-  \ of `tags_f` and `tags_r` files, respectively.\n\n**Blast options:**\n\n1. Path\
-  \ to an already built blast database:\n\n```\n    blast_db                   = 'path/to/blast.db'\
-  \ // Path to already built database\n```\n\n2. Or build a local BLAST database from\
-  \ a collection of sequences:\n\n```\n    custom_db                  = 'path/to/local/database.fasta'\
-  \ // Path to database to be built\n```\n\n3. The E value describes the number of\
-  \ one can \u201Cexpect\u201D to see by chance when searching a database of a particular\
-  \ size. The lower the value, the more significant a match is:\n\n```\n    evalue\
-  \                     = 0.001 // evalue cutoff\n```\n\n4. Maximum number of hits\
-  \ per query (consensus sequence):\n\n```\n    max_target_seqs            = 5 //\
-  \ Maximum number of hits per query\n```\n\n5. Maximum number of high-scoring segment\
-  \ pairs (HSPs) per subject (sequence in the database):\n\n```\n    max_hsps    \
-  \               = null // Maximum number of HSPs per subject (subjects in the database)\n\
-  ```\n\n6. Minimum query (consensus sequence) coverage per HSP:\n\n```\n    qcov_hsp_perc\
-  \              = 90 // Minimum query coverage per HSP\n```\n\nFor more details,\
-  \ check the appendix section of the [blast documentation](https://www.ncbi.nlm.nih.gov/books/NBK279690/).\n\
-  \n<!-- You should supply **either** the path to an already built database or a custom\
+  \ the length of the longest primer to avoid spurious matches.\n\n```\n    overlap\
+  \                     = null // Minimum overlap length for an adapter to be found\n\
+  ```\n\n**Nanofilt options:**\n\n1. Nanofilt is run before demultiplexing and tag+primer\
+  \ trimming:\n\n```\n    // Nanofilt options\n    nano_quality                = null\
+  \ // Minimun read quality (phred score)\n    nano_read_length            = 250 //\
+  \ Minimum reads length\n```\n\n2. Filter FASTQs with a mumber of reads equal or\
+  \ lower than (changing this value is not recommended):\n\n```\n    filt_fastq  \
+  \                = 0\n```\n\nCheck `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta`\
+  \ for examples of `tags_f` and `tags_r` files, respectively.\n\n**Blast options:**\n\
+  \n1. Path to an already built blast database:\n\n```\n    blast_db             \
+  \      = 'path/to/blast.db' // Path to already built database\n```\n\n2. Or build\
+  \ a local BLAST database from a collection of sequences:\n\n```\n    custom_db \
+  \                 = 'path/to/local/database.fasta' // Path to database to be built\n\
+  ```\n\n3. The E value describes the number of one can \u201Cexpect\u201D to see\
+  \ by chance when searching a database of a particular size. The lower the value,\
+  \ the more significant a match is:\n\n```\n    evalue                     = 0.001\
+  \ // evalue cutoff\n```\n\n4. Maximum number of hits per query (consensus sequence):\n\
+  \n```\n    max_target_seqs            = 5 // Maximum number of hits per query\n\
+  ```\n\n5. Maximum number of high-scoring segment pairs (HSPs) per subject (sequence\
+  \ in the database):\n\n```\n    max_hsps                   = null // Maximum number\
+  \ of HSPs per subject (subjects in the database)\n```\n\n6. Minimum query (consensus\
+  \ sequence) coverage per HSP:\n\n```\n    qcov_hsp_perc              = 90 // Minimum\
+  \ query coverage per HSP\n```\n\nFor more details, check the appendix section of\
+  \ the [blast documentation](https://www.ncbi.nlm.nih.gov/books/NBK279690/).\n\n\
+  <!-- You should supply **either** the path to an already built database or a custom\
   \ FASTA collection with sequences to built a custom one. If both are supplied the\
   \ pipeline will fail. -->\n\n**Assign taxonomy options:**\n\n1. Assign taxonomy\
   \ at different levels based on an identity threshold:\n\n```\n    // Assign taxonomy\
