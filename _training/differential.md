@@ -23,10 +23,10 @@ In this practical you'll take the gene-count table produced by the RNA-Seq pipel
 - Read and interpret the **results table** — fold changes, p-values, and adjusted p-values
 - **Visualise** your results and hunt for a biologically-motivated gene of interest
 
-> 🔗 **This section continues from [Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/).** If you completed that practical, you already have the counts table it produced (`<outdir>/star_salmon/salmon.merged.gene_counts.tsv`) — carry on with that.
+> 🔗 **This section continues from [Part 3 · nf-core RNA-Seq](/training/nfcore-rnaseq/).** If you completed that practical, you already have the counts your run produced in `<outdir>/star_salmon/` — carry on with that (we'll pick the right file below).
 >
 > 🚀 **Didn't run the RNA-Seq pipeline, or want to jump straight in?** No problem — we've committed the exact counts table and condition sheet this section needs, so you can quick-start with pre-run data:
-> - Counts: [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv)
+> - Counts: [`data/differential/salmon.merged.gene_counts_length_scaled.tsv`](../data/differential/salmon.merged.gene_counts_length_scaled.tsv)
 > - Condition sheet: [`data/differential/condition.tsv`](../data/differential/condition.tsv)
 >
 > These are the real outputs from the chr-I yeast test dataset used in the previous section. Everywhere below that reads a counts or condition file, just point at these paths.
@@ -65,7 +65,7 @@ We need to account for:
 
 Before starting R, make sure both of these are sitting in the folder you'll work from:
 
-1. **The counts table** — `salmon.merged.gene_counts.tsv`. Either the one your RNA-Seq run produced (in `<outdir>/star_salmon/`), or the pre-run copy at [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv).
+1. **The counts table** — `salmon.merged.gene_counts_length_scaled.tsv`. Either the one your RNA-Seq run produced (in `<outdir>/star_salmon/`), or the pre-run copy at [`data/differential/salmon.merged.gene_counts_length_scaled.tsv`](../data/differential/salmon.merged.gene_counts_length_scaled.tsv). See [Which counts file?](#which-counts-file) below for why we use this one and not the plain `salmon.merged.gene_counts.tsv`.
 2. **A condition sheet** — `condition.tsv`. This is a small file *you* create; it tells DESeq2 which samples belong to which group. If you're quick-starting, we've already made one for you at [`data/differential/condition.tsv`](../data/differential/condition.tsv).
 
 If you need to make the condition sheet yourself, create a plain-text file called `condition.tsv` (a text editor, or `nano condition.tsv` in the terminal) containing exactly:
@@ -118,12 +118,22 @@ BiocManager::install("DESeq2")
 To get the data into R from nf-core RNA-Seq, we can use either the `load` function in R or `read.csv`.
 
 
-### Load from the raw counts
+### Which counts file?
 
-The raw counts that DESeq2 requires are here: `<outdir_name>/star_salmon/salmon.merged.gene_counts.tsv`. If you used the default settings in nf-core rnaseq, if you chose a different aligner (e.g. `--aligner star_rsem`), then you would look in `star_rsem/rsem.merged.gene_counts.tsv` .
+The nf-core `star_salmon/` folder contains several count tables, and it matters which one you pick:
 
-`cts <- read.csv("salmon.merged.gene_counts.tsv", h=T, row.names=1, sep="\t")`
-#Read in the tab separated file, with first line as header, and first row as row names.
+| File | Use it? |
+| --- | --- |
+| `salmon.merged.gene_counts.tsv` | ❌ **Raw estimated counts.** Fractional, and they ignore that genes differ in length. Don't build your DESeq2 dataset from these. |
+| `salmon.merged.gene_counts_length_scaled.tsv` | ✅ **Use this one.** Length-corrected counts (`tximport`'s `lengthScaledTPM`). Salmon can't give you plain integers — this is the file the `tximport` authors intend you to put straight into DESeq2. |
+
+> 🧠 **Why the length-scaled file?** Salmon quantifies expression *probabilistically*, so its counts are never whole numbers, and a raw count doesn't account for the fact that a longer transcript collects more reads at the same expression level. The length-scaled file corrects for both — it's the honest input for DESeq2, not a workaround. (Curious about the fully rigorous alternative? See the drop-down at the end of this step.)
+
+Load it — it's a tab-separated file, first line as header, first column (`gene_id`) as row names:
+
+```R
+cts <- read.csv("salmon.merged.gene_counts_length_scaled.tsv", h=T, row.names=1, sep="\t")
+```
 
 > ✍️ **Your turn — look before you leap.** Before changing anything, inspect what you actually loaded:
 > ```R
@@ -136,6 +146,48 @@ The raw counts that DESeq2 requires are here: `<outdir_name>/star_salmon/salmon.
 > cts <- cts[, -1]   # drop the gene_name column, leaving only the 6 sample columns
 > ```
 > (If you loaded a counts file with only one leading column, skip this.)
+
+> ⚠️ **Round the counts to integers.** Even the length-scaled counts are still fractional (e.g. `4.161`), and DESeq2 needs whole numbers — otherwise building the dataset fails with:
+> ```
+> Error in DESeqDataSet(se, design = design, ignoreRank) :
+>   some values in assay are not integers
+> ```
+> Rounding **length-scaled** counts is exactly what the `tximport` documentation recommends for the `DESeqDataSetFromMatrix` route, so this is a legitimate step, not a fudge:
+> ```R
+> cts <- round(cts)
+> ```
+
+<details>
+<summary>💡 <b>Want to know more? The gold-standard route (offsets via <code>tximport</code>)</b></summary>
+
+Rounding length-scaled counts is a well-supported approximation, but the *most* rigorous way to bring Salmon output into DESeq2 doesn't round anything. Instead it imports Salmon's per-sample transcript estimates together with their average transcript lengths, and passes those lengths to DESeq2 as a **normalisation offset** — so each gene is corrected for length *per sample* inside the model, rather than once up front.
+
+nf-core already produced everything you need for this:
+
+- `salmon.merged.gene.SummarizedExperiment.rds` — a ready-made object holding counts, abundances **and** lengths
+- the per-sample `quant.sf` files plus `salmon.merged.tx2gene.tsv`, if you'd rather run `tximport` yourself
+
+Using the pre-made object:
+
+```R
+library(tximeta)   # or just readRDS
+se  <- readRDS("salmon.merged.gene.SummarizedExperiment.rds")
+dds <- DESeqDataSet(se, design = ~ condition)   # uses the length assay as an offset automatically
+```
+
+Or importing from scratch:
+
+```R
+library(tximport)
+tx2gene <- read.delim("salmon.merged.tx2gene.tsv", header = FALSE)
+files   <- file.path("star_salmon", coldata$sample, "quant.sf")
+txi     <- tximport(files, type = "salmon", tx2gene = tx2gene)
+dds     <- DESeqDataSetFromTximport(txi, colData = coldata, design = ~ condition)
+```
+
+Both apply a proper per-gene, per-sample length offset. For this small teaching dataset the difference in results is minimal, which is why we stick with the simpler length-scaled + `round()` approach above — but on a real study this is the method to reach for. See the [tximport vignette](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html) and the [DESeq2 vignette](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#salmon).
+
+</details>
 
 Next, load the condition sheet (`condition.tsv`) you prepared earlier into a variable called `coldata` — this is what tells DESeq2 which samples belong to which group:
 
