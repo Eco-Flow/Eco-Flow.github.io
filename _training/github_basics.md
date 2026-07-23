@@ -10,7 +10,9 @@ order: 6
 
 ⏱ **Estimated time:** ~45–60 minutes &nbsp;•&nbsp; 🟡 Practical
 
-So far you've *run* pipelines other people built. In real research you'll also need to **interact** with that code — report a problem you hit, ask for a feature, fix a typo in the docs, or contribute an improvement. On GitHub, that all happens through a small set of tools: the **README**, **Issues**, and **Pull Requests**. In this part you'll learn what each one is for, and then watch (and try) the full loop: **spot a problem → open an issue → fix it with Claude Code → open a pull request.**
+So far you've *run* pipelines other people built. In real research you'll also need to **interact** with that code — report a problem you hit, ask for a feature, fix a typo in the docs, or contribute an improvement. 
+
+On GitHub, that all happens through a small set of tools: the **README**, **Issues**, and **Pull Requests**. In this part you'll learn what each one is for, and then watch (and try) the full loop: **spot a problem → open an issue → fix it → open a pull request.**
 
 We'll use a real pipeline as our example: **[`Eco-Flow/nanoporemetabarcoding`](https://github.com/Eco-Flow/nanoporemetabarcoding)** — the same pipeline you ran in Part 5.
 
@@ -20,7 +22,7 @@ We'll use a real pipeline as our example: **[`Eco-Flow/nanoporemetabarcoding`](h
 
 - Understand a GitHub repository: the **README**, the **code**, the **Issues** tab and the **Pull Requests** tab
 - Learn what makes a **good issue** and write one
-- Watch a **live demo**: turn an issue into a fix using **Claude Code**
+- Watch a **live demo**: turn an issue into a fix using **Claude Code** (We will add a video soon)
 - Understand the nf-core **fork → branch → commit → pull request** flow — how a change gets reviewed and merged
 - **Your turn:** find something to improve in the pipeline and open your own issue (and, optionally, a PR)
 
@@ -152,7 +154,7 @@ Once enough changes have collected on `dev` and been tested, maintainers cut a *
 
 Why this matters to you as a *user*:
 
-- A tag never changes. `master` and `dev` keep moving, but `3.14.0` will always be exactly the same code — which is precisely why we pinned it with **`-r 3.14.0`** back in [Part 3](/training/nfcore-rnaseq/). Running a tagged release is what makes an analysis **reproducible**.
+- A tag never changes. `master` and `dev` keep moving, but `3.14.0` will always be exactly the same code.Running a tagged release is what makes an analysis **reproducible**.
 - Releases usually come with **release notes** / a `CHANGELOG` describing what's new, fixed, or broken since the last version — read these before upgrading.
 - Version numbers follow **semantic versioning** (`MAJOR.MINOR.PATCH`): a bumped *patch* (`3.14.0 → 3.14.1`) is a small fix, a *minor* (`3.14 → 3.15`) adds features, and a *major* (`3.x → 4.0`) may change behaviour in ways that break old commands.
 
@@ -164,7 +166,7 @@ Why this matters to you as a *user*:
 
 Now do it yourself. Use the list of README problems you noted in **Step 1** (or find a fresh issue).
 
-> ▶️ **Exercise A — open an issue (everyone should do this).**
+> ▶️ **Exercise A — open an issue (or explore existing issues).**
 >
 > On [`Eco-Flow/nanoporemetabarcoding`](https://github.com/Eco-Flow/nanoporemetabarcoding/issues), open a **New issue** for one concrete improvement you found. Make it a *good* issue (Step 2 checklist): clear title, what's wrong, and — if it's a bug — how to reproduce it. Submit it.
 
@@ -173,7 +175,7 @@ Now do it yourself. Use the list of README problems you noted in **Step 1** (or 
 > Follow the nf-core fork-based flow from Step 4:
 > 1. **Fork** [`Eco-Flow/nanoporemetabarcoding`](https://github.com/Eco-Flow/nanoporemetabarcoding) to your own account, then open **your fork** in a **Codespace**.
 > 2. Make a **branch** (e.g. `fix/readme-...`).
-> 3. Use **Claude Code** to make the change you described — for a small README fix you can even do it in the GitHub web editor (pencil ✏️ icon on the file on your fork's branch).
+> 3. Make a change to the code. Here, you could use **Claude Code** to make the change you described — for a small README fix you can even do it in the GitHub web editor (pencil ✏️ icon on the file on your fork's branch).
 > 4. **Commit**, push, and open a **pull request** *from your fork's branch to the upstream repo*. Reference your issue with `Fixes #<your issue number>` in the PR description — GitHub will auto-close the issue when the PR merges.
 > 5. Read your own **diff** in the PR — does it show exactly (and *only*) what you intended?
 
@@ -183,7 +185,7 @@ Now do it yourself. Use the list of README problems you noted in **Step 1** (or 
 
 ## Finish
 
-🎉 **You can now interact with a codebase, not just run it.** You know what a README, an Issue and a Pull Request are for, how a change flows from *problem* → *branch* → *commit* → *PR* → *merge*, and how to use **Claude Code** to help you make that change.
+🎉 **You should now be able interact with a codebase, not just run it.** You know what a README, an Issue and a Pull Request are for, how a change flows from *problem* → *branch* → *commit* → *PR* → *merge*, and how to use **Claude Code** to help you make that change.
 
 **Next steps:**
 
