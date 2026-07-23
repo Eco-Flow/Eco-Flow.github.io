@@ -63,6 +63,12 @@ BiocManager::install("DESeq2")
 
 ## How to get the data into `R`
 
+> 🚀 **Starting here without running the RNA-Seq pipeline?** No problem. We've committed the exact counts table and condition sheet this section needs, so you can jump straight in:
+> - Counts: [`data/differential/salmon.merged.gene_counts.tsv`](../data/differential/salmon.merged.gene_counts.tsv)
+> - Condition sheet: [`data/differential/condition.tsv`](../data/differential/condition.tsv)
+>
+> These are the real outputs from the chr-I yeast test dataset used in the previous section. Point the `read.csv` calls below at these paths and everything else works the same.
+
 To get the data into R from nf-core RNA-Seq, we can use either the `load` function in R or `read.csv`.
 
 
@@ -72,6 +78,12 @@ The raw counts that DESeq2 requires are here: `<outdir_name>/star_salmon/salmon.
 
 `cts <- read.csv("salmon.merged.gene_counts.tsv", h=T, row.names=1, sep="\t")`
 #Read in the tab separated file, with first line as header, and first row as row names.
+
+> ⚠️ **Drop the `gene_name` column.** This counts table has *two* leading columns — `gene_id` (now your row names) and `gene_name`. The latter is text, and DESeq2 needs a purely numeric count matrix, so remove it before continuing:
+> ```R
+> cts <- cts[, -1]   # drop the gene_name column, leaving only the 6 sample columns
+> ```
+> (If you loaded a counts file with only one leading column, skip this.)
 
 Next you need to make a coldata sheet, this tells DESeq2 which samples are different or part of a group. For our data we would want this:
 

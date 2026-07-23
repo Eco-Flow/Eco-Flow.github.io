@@ -270,7 +270,6 @@ params {
 
 ```bash
 nextflow run nf-core/rnaseq \
--r 3.14.0 \
 -profile docker \
 -c /workspaces/training/eco-flow-training/codespaces.config \
 --input /workspaces/training/eco-flow-training/samplesheet.csv \
