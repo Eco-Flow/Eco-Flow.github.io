@@ -2,7 +2,7 @@
 layout: "training"
 title: "Differential gene expression"
 num: "4"
-type: "Practical"
+type: "Practical \u00b7 R"
 order: 4
 ---
 
