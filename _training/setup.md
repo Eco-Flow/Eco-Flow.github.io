@@ -113,6 +113,25 @@ Press **`Ctrl + Shift + P`** (**`Cmd + Shift + P`** on a Mac) to open the **Comm
 
 Your Codespace keeps your files between sessions, but **closing the browser tab ends the session**, so **save anything important first** (`Ctrl + S`). You can reopen or manage your Codespaces any time at https://github.com/codespaces.
 
+<a id="closing-a-codespace-and-starting-a-fresh-one"></a>
+
+### 🧹 Closing a Codespace and starting a fresh one
+
+Closing the browser tab only **stops** the Codespace — it stays around, and so does everything on its disk (`work/` directories, downloaded containers, results). Some parts of this course ask you to start again from a **clean** Codespace, which means **deleting** the old one first.
+
+**To delete a Codespace:**
+
+1. Go to https://github.com/codespaces — every Codespace you own is listed there.
+2. Find the one for the `Eco-Flow/training` repo.
+3. Click the **`···`** menu on its right-hand side.
+4. Choose **Delete**, then confirm.
+
+<!-- TODO: screenshot of https://github.com/codespaces showing the ··· menu open with Delete highlighted → save as img/codespaces_delete.png and swap in the line below -->
+
+> ⚠️ **Deleting is permanent.** Anything you haven't saved elsewhere goes with it — **download** any results or scripts you want to keep first (right-click → **Download**, see above).
+
+**To start a fresh one:** go back to the [Open in GitHub Codespaces](https://codespaces.new/Eco-Flow/training) link (or the green **`< > Code`** button → **Codespaces** tab → **Create codespace on main**) and launch it exactly as you did the first time. It'll take a couple of minutes to build again, and you'll get a brand-new, empty disk.
+
 ### ✅ Orientation checklist
 
 Before you head to Part 1, make sure you can:
