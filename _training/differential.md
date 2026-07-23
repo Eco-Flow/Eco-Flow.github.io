@@ -259,6 +259,17 @@ First transform the counts so the variance is roughly constant across the range 
 vsd <- vst(dds, blind = TRUE)
 ```
 
+> ⚠️ **On this test dataset you'll hit an error here:**
+> ```
+> Error in vst(dds, blind = TRUE) : less than 'nsub' rows,
+>   it is recommended to use varianceStabilizingTransformation directly
+> ```
+> `vst()` is a *fast approximation* that fits the transform on a subsample of `nsub = 1000` genes — but our chr-I data only has ~80 genes left after filtering, so there aren't enough. The fix is to run the exact (unapproximated) transform instead, which the message itself points you to:
+> ```R
+> vsd <- varianceStabilizingTransformation(dds, blind = TRUE)
+> ```
+> On a full-genome dataset with thousands of genes, `vst()` works fine and is preferred for speed — this only bites on small datasets like ours.
+
 Now make a PCA plot:
 
 ```R
