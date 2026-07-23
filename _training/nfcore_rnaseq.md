@@ -27,6 +27,7 @@ In this practical you'll run a real, published-standard **nf-core RNA-Seq pipeli
 - Build a **samplesheet** describing your samples
 - Download a reference **genome** and **annotation**
 - **Run** the pipeline with Docker containers
+- **Monitor and debug** a run using the `work/` directory and `.command.*` files
 - Explore the **results** (quality reports and gene counts)
 - Learn to **`-resume`** a run and change pipeline options
 
@@ -322,7 +323,103 @@ If you get a different error, grab a tutor.
 
 ---
 
-## Step 6 — Explore the results
+## Step 6 — Monitoring a run: the `work/` directory and `.command.*` files
+
+While the pipeline runs (or after it fails), it helps to know **where Nextflow actually does the work** — this is the single most useful debugging skill in Nextflow, and it works the same for every pipeline you'll ever run.
+
+### The `work/` directory
+
+Nextflow doesn't run tools in your current folder. It creates a fresh, isolated directory for **every single task** under `work/`, stages that task's input files into it, and runs the command there. Only the files a pipeline chooses to *publish* get copied out to your `--outdir`.
+
+That's what the hash at the start of each line in the console output is:
+
+```
+[a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   [100%] 1 of 1 ✔
+```
+
+`a1/b2c3d4` is the **task directory** — `work/a1/b2c3d4.../`. (Nextflow shortens it on screen; the real directory name is longer.)
+
+> ▶️ **Look inside a task directory**
+>
+> ```bash
+> ls work
+> ls -a work/a1/b2c3d4*/     # use a hash from *your* own output
+> ```
+>
+> <details>
+> <summary>✅ Roughly what you'll see</summary>
+>
+> ```
+> .command.begin  .command.err  .command.log  .command.out
+> .command.run    .command.sh   .exitcode
+> CONTROL_REP1_1.fastq.gz -> /workspaces/training/.../SRR6357070_1.fastq.gz
+> CONTROL_REP1_fastqc.html
+> ```
+>
+> The input files are **symlinks** back to their original location (that's why the work dir doesn't duplicate your data), and the outputs sit alongside them.
+> </details>
+
+Note the leading `.` — these are hidden files, so plain `ls` won't show them. Use **`ls -a`**.
+
+### The `.command.*` files
+
+| File | What it holds |
+| :--- | :--- |
+| `.command.sh` | **The exact script that was run** for this task, with all parameters filled in. Read this first. |
+| `.command.out` | Whatever the tool printed to standard output. |
+| `.command.err` | Whatever the tool printed to standard error — **error messages usually live here**. |
+| `.command.log` | Both of the above combined. |
+| `.command.run` | The wrapper Nextflow built around your script (container/module setup, scheduler directives). Rarely needed, but this is where you check what Docker or Slurm was actually asked to do. |
+| `.exitcode` | The exit status. `0` = success; anything else = failure. |
+
+> ▶️ **Try it — see exactly what a step ran**
+>
+> ```bash
+> cat work/a1/b2c3d4*/.command.sh
+> ```
+>
+> You can even re-run that script by hand inside the directory, which is the fastest way to test a fix.
+
+### When a task fails
+
+Nextflow prints a block like this and stops:
+
+```
+ERROR ~ Error executing process > 'NFCORE_RNASEQ:...:STAR_ALIGN (CONTROL_REP1)'
+
+Caused by:
+  Process ... terminated with an error exit status (137)
+
+Command executed: [ ... ]
+Command exit status: 137
+Work dir:
+  /workspaces/training/work/e5/f6a7b89c0d1e2f...
+```
+
+The recipe is always the same:
+
+1. Copy the **`Work dir:`** path.
+2. `cd` into it.
+3. `cat .command.err` (and `.command.log`) to see the real error message.
+4. `cat .command.sh` to see what was run, and check the input symlinks with `ls -a`.
+
+> 💡 **Common exit codes:** `127` = command not found (usually a missing `-profile docker`), `137` = killed for using too much memory (raise the memory or lower `resourceLimits`), `1` = the tool itself reported an error — read `.command.err`.
+
+### Watching progress and cleaning up
+
+- **`.nextflow.log`** — the driver's own log, in the directory you launched from. If you ran with `-bg` (no output on screen), follow it with `tail -f .nextflow.log`.
+- **`nextflow log`** — lists your previous runs and their run names.
+- **`work/` grows fast.** It holds every intermediate file of every task, and can easily be many times the size of your results. Delete it only once you're happy with your results, and remember that deleting it also destroys the cache that `-resume` (Step 8) depends on:
+
+  ```bash
+  du -sh work          # how big has it got?
+  nextflow clean -f    # remove work data from previous runs
+  rm -rf work          # or just delete the lot
+  ```
+
+---
+
+## Step 7 — Explore the results
 
 Once the pipeline finishes (`Pipeline completed successfully`), look inside your `--outdir` folder (`my_results`).
 
@@ -358,7 +455,7 @@ We'll discuss the reports together in class.
 
 ---
 
-## Step 7 — Resuming a run and changing options
+## Step 8 — Resuming a run and changing options
 
 Real analyses are rarely run just once — you tweak options and re-run. Two things make that painless.
 

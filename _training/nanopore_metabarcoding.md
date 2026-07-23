@@ -323,6 +323,8 @@ Almost always a `primer_comb` mismatch — the tag combination in `metadata.csv`
 You forgot **`-profile docker`**. Without it, Nextflow expects every tool (Cutadapt, Medaka, BLAST, ...) to already be installed locally.
 </details>
 
+> 🔍 **Debugging any failure — the same recipe as before.** Every task runs in its own directory under `work/`, named after the hash Nextflow prints (`[a1/b2c3]`). When a task fails, Nextflow prints a `Work dir:` path — `cd` into it and read `.command.err` (the error), `.command.log` (all output) and `.command.sh` (the exact command that ran). Remember to use **`ls -a`**, since those files are hidden. This is covered in full in [RNA-Seq · Step 6 — Monitoring a run](/training/nfcore-rnaseq/#step-6--monitoring-a-run-the-work-directory-and-command-files).
+
 ---
 
 ## Step 5 — Explore the results
