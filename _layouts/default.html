@@ -7,5 +7,6 @@
       {{ content }}
     </main>
     {% include footer.html %}
+    <script defer src="{{ '/assets/copy-code.js' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}"></script>
   </body>
 </html>
