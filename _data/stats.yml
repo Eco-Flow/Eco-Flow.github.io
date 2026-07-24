@@ -2,19 +2,19 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-07-24'
 since: '2026-06-27'
-pageviews_all: 580
-visits_all: 220
-pageviews_30d: 580
-visits_30d: 220
-pageviews_7d: 187
-visits_7d: 91
+pageviews_all: 590
+visits_all: 230
+pageviews_30d: 590
+visits_30d: 230
+pageviews_7d: 189
+visits_7d: 93
 countries_7d: 10
 countries_all: 15
 top_pages:
 - path: /training/
   views: 51
 - path: /
-  views: 41
+  views: 43
 - path: /training/setup/
   views: 38
 - path: /about/
@@ -31,9 +31,9 @@ top_pages:
   views: 4
 - path: /pipelines/gwas/
   views: 3
-- path: /training/pipelines/
-  views: 2
 - path: /pipelines/about/
+  views: 2
+- path: /training/pipelines/
   views: 2
 - path: /pipelines/comparete/
   views: 2
@@ -49,11 +49,11 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 142
+  views: 143
 - name: DE
   views: 14
 - name: US
-  views: 9
+  views: 10
 - name: CN
   views: 7
 - name: ES
