@@ -6,8 +6,8 @@ pageviews_all: 610
 visits_all: 240
 pageviews_30d: 610
 visits_30d: 240
-pageviews_7d: 189
-visits_7d: 89
+pageviews_7d: 170
+visits_7d: 90
 countries_7d: 10
 countries_all: 15
 top_pages:
@@ -33,9 +33,9 @@ top_pages:
   views: 3
 - path: /pipelines/synteny/
   views: 2
-- path: /pipelines/about/
-  views: 2
 - path: /training/pipelines/
+  views: 2
+- path: /pipelines/about/
   views: 2
 - path: /services/
   views: 2
