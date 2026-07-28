@@ -1,10 +1,31 @@
 #!/usr/bin/env python3
-"""Fetch Cloudflare Web Analytics totals into a Jekyll data file.
+"""Fetch Cloudflare Web Analytics into Jekyll data files.
 
-Writes _data/stats.yml with page views, visits, country count and top pages,
-which the /numbers/ page renders. Runs from GitHub Actions (see
-.github/workflows/sync-cloudflare-stats.yml) so the API token stays a repo
-secret and never reaches the public site.
+Writes two files the /numbers/ page renders:
+
+- _data/stats.yml        : the live snapshot — accurate 7-day figures plus
+                           wider (30/90-day) headline totals.
+- _data/stats_totals.yml : a persisted, cumulative ledger of all-time totals
+                           (page views, visits, per-page and per-country
+                           counts), built by summing accurate *per-day*
+                           Cloudflare figures.
+
+Why per-day accumulation: Cloudflare only returns unsampled data over short
+windows. A single wide query (e.g. 90 days) is sampled — counts come back as
+lumpy multiples of the sample rate and rare events (a country with one visit)
+get dropped. So for true all-time totals we query **one calendar day at a
+time** (always unsampled) and add each day into the ledger exactly once,
+tracked in `counted_dates`. Summing non-overlapping days gives a real total
+with no double-counting and no sampling — the number that matches the
+Cloudflare dashboard.
+
+Idempotent: only whole days up to *yesterday* are ingested (today is still in
+progress), and a day already in `counted_dates` is never re-added. So the daily
+schedule, the 12h backup run, and per-push runs can all fire without
+double-counting, and a gap (Actions down for days) self-heals on the next run.
+
+Runs from GitHub Actions (see .github/workflows/sync-cloudflare-stats.yml) so
+the API token stays a repo secret and never reaches the public site.
 
 Required environment variables (set as GitHub Actions secrets):
   CLOUDFLARE_API_TOKEN   - token with "Account Analytics: Read" permission
@@ -28,9 +49,14 @@ import yaml
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "stats.yml")
+LEDGER_PATH = os.path.join(REPO_ROOT, "_data", "stats_totals.yml")
 
 API_URL = "https://api.cloudflare.com/client/v4/graphql"
 LAUNCH_DATE = "2026-06-27"  # first day the beacon was live
+
+# Ledger schema marker. Bump this to force a clean rebuild of stats_totals.yml
+# (discarding any totals produced by an earlier, less accurate method).
+LEDGER_METHOD = "per-day"
 
 API_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN")
 ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
@@ -125,6 +151,41 @@ query Breakdown($account: String!, $site: String!, $start: Date!, $end: Date!) {
 """
 
 
+# Per-day breakdown used to build the cumulative ledger. Each row carries its
+# `date`, so we can add whole, not-yet-counted days into the running totals.
+DAILY_QUERY = """
+query Daily($account: String!, $site: String!, $start: Date!, $end: Date!) {
+  viewer {
+    accounts(filter: { accountTag: $account }) {
+      byDay: rumPageloadEventsAdaptiveGroups(
+        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
+        limit: 1000
+        orderBy: [date_ASC]
+      ) {
+        count
+        sum { visits }
+        dimensions { date }
+      }
+      pages: rumPageloadEventsAdaptiveGroups(
+        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
+        limit: 5000
+      ) {
+        count
+        dimensions { date requestPath }
+      }
+      countries: rumPageloadEventsAdaptiveGroups(
+        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
+        limit: 5000
+      ) {
+        count
+        dimensions { date countryName }
+      }
+    }
+  }
+}
+"""
+
+
 SITES_QUERY = """
 query Sites($account: String!, $start: Date!, $end: Date!) {
   viewer {
@@ -153,6 +214,97 @@ def totals(start, end):
     return int(g["count"]), int((g.get("sum") or {}).get("visits") or 0)
 
 
+def update_ledger(yesterday):
+    """Accumulate accurate per-day figures into the cumulative ledger.
+
+    Reads the previous ledger, queries Cloudflare for every day not yet counted
+    (up to `yesterday`), and adds each whole day exactly once. Returns the new
+    ledger dict.
+    """
+    prev = load_yaml(LEDGER_PATH)
+    # Discard any ledger built by an older method so the totals rebuild cleanly
+    # from accurate per-day data.
+    if prev.get("method") != LEDGER_METHOD:
+        if prev:
+            print("Ledger method changed - rebuilding all-time totals from launch.")
+        prev = {}
+
+    counted = set(prev.get("counted_dates") or [])
+    pages = {p["path"]: int(p["views"]) for p in (prev.get("top_pages") or [])}
+    countries = {c["name"]: int(c["views"]) for c in (prev.get("top_countries") or [])}
+    pv = int(prev.get("pageviews") or 0)
+    vis = int(prev.get("visits") or 0)
+
+    # Query from the first uncounted day (or launch) up to yesterday. Re-querying
+    # a few already-counted days is harmless: the `counted` guard skips them.
+    if counted:
+        start = (datetime.date.fromisoformat(max(counted))
+                 + datetime.timedelta(days=1)).isoformat()
+    else:
+        start = LAUNCH_DATE
+
+    if start > yesterday:
+        # Nothing new to ingest yet (already up to date through yesterday).
+        return {
+            "updated": datetime.date.today().isoformat(),
+            "method": LEDGER_METHOD,
+            "counted_dates": sorted(counted),
+            "pageviews": pv,
+            "visits": vis,
+            "countries_count": len(countries),
+            "top_pages": _ranked(pages, "path"),
+            "top_countries": _ranked(countries, "name"),
+        }
+
+    data = graphql(DAILY_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
+                                 "start": start, "end": yesterday})
+
+    # Establish which whole days are new, from the per-day totals rows. Pages and
+    # countries are then only ingested for those same days, keeping every total
+    # consistent (never a page/country count for a day not in the headline sum).
+    new_dates = set()
+    for g in (data.get("byDay") or []):
+        day = g["dimensions"]["date"]
+        if day in counted or day > yesterday:
+            continue
+        pv += int(g["count"])
+        vis += int((g.get("sum") or {}).get("visits") or 0)
+        new_dates.add(day)
+
+    for g in (data.get("pages") or []):
+        if g["dimensions"]["date"] not in new_dates:
+            continue
+        path = g["dimensions"]["requestPath"] or "/"
+        pages[path] = pages.get(path, 0) + int(g["count"])
+
+    for g in (data.get("countries") or []):
+        if g["dimensions"]["date"] not in new_dates:
+            continue
+        name = g["dimensions"]["countryName"] or "Unknown"
+        countries[name] = countries.get(name, 0) + int(g["count"])
+
+    counted |= new_dates
+    print(f"Ledger: ingested {len(new_dates)} new day(s); "
+          f"{pv} page views / {vis} visits all-time across {len(countries)} countries.")
+
+    return {
+        "updated": datetime.date.today().isoformat(),
+        "method": LEDGER_METHOD,
+        "counted_dates": sorted(counted),
+        "pageviews": pv,
+        "visits": vis,
+        "countries_count": len(countries),
+        "top_pages": _ranked(pages, "path"),
+        "top_countries": _ranked(countries, "name"),
+    }
+
+
+def _ranked(counts, key):
+    """Turn a {name: views} map into a list sorted by views (desc), then name."""
+    return [{key: n, "views": v}
+            for n, v in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+
+
 def main():
     global ACCOUNT_ID
     if not API_TOKEN:
@@ -167,9 +319,11 @@ def main():
     today = datetime.date.today()
     d = lambda days: (today - datetime.timedelta(days=days)).isoformat()
     end = today.isoformat()
+    yesterday = (today - datetime.timedelta(days=1)).isoformat()
 
-    # "Total" spans 90 days (Cloudflare caps a single query at ~93 days) so it
-    # is always a superset of the 30- and 7-day figures.
+    # Wider headline totals. These span up to 90 days (Cloudflare caps a single
+    # query at ~93 days) and are *sampled*, so they're only a rough headline;
+    # the accurate all-time figures come from the per-day ledger below.
     pv_all, v_all = totals(d(90), end)
     pv_30, v_30 = totals(d(30), end)
     pv_7, v_7 = totals(d(7), end)
@@ -187,10 +341,8 @@ def main():
             print(f"No RUM data in this account yet for the last 30 days "
                   f"(queried siteTag={SITE_TAG}). Likely too soon after setup.")
 
-    # Breakdowns use the 7-day window: at low traffic Cloudflare samples wider
-    # queries (counts come back as lumpy multiples of the sample rate and rare
-    # events — e.g. a single visit from another country — get dropped). The
-    # 7-day window is unsampled, so top pages/countries are accurate.
+    # Live breakdowns use the 7-day window: at low traffic Cloudflare samples
+    # wider queries, so the 7-day window is the accurate "recent" view.
     bd = graphql(BREAKDOWN_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
                                    "start": d(7), "end": end})
 
@@ -199,33 +351,13 @@ def main():
         for p in (bd.get("pages") or [])
     ]
     country_groups = bd.get("countries") or []
-    # Keep up to 100 countries: the page lists the top few and uses the full
-    # set to shade the world map. "countryName" is actually an ISO-2 code (GB).
     top_countries = [
         {"name": (c["dimensions"]["countryName"] or "Unknown"), "views": int(c["count"])}
         for c in country_groups[:100]
     ]
 
-    # Sticky all-time countries. A single wide (e.g. 90-day) query is sampled,
-    # so it drops rare countries and could even dip below the 7-day figure.
-    # Instead we keep a persistent per-country record, updated nightly from the
-    # unsampled 7-day breakdown: presence is permanent (a country that ever
-    # visits stays on the map for good), and each country's shade intensity is
-    # the peak it has reached in any single 7-day window. Taking max() keeps it
-    # monotonic and avoids double-counting the overlapping nightly windows. The
-    # sliding 7-day window covers every day over time, so any country that ever
-    # appears is captured, and the all-time count can never fall below 7-day.
-    all_countries_map = {
-        c["name"]: int(c.get("views") or 0)
-        for c in (load_yaml(OUTPUT_PATH).get("all_countries") or [])
-    }
-    for c in country_groups:
-        name = c["dimensions"]["countryName"] or "Unknown"
-        all_countries_map[name] = max(all_countries_map.get(name, 0), int(c["count"]))
-    all_countries = [
-        {"name": n, "views": v}
-        for n, v in sorted(all_countries_map.items(), key=lambda kv: (-kv[1], kv[0]))
-    ]
+    # Accurate cumulative all-time totals, summed from unsampled per-day figures.
+    ledger = update_ledger(yesterday)
 
     out = {
         "updated": end,
@@ -237,23 +369,30 @@ def main():
         "pageviews_7d": pv_7,
         "visits_7d": v_7,
         "countries_7d": len(country_groups),
-        "countries_all": len(all_countries),
+        # All-time country count comes from the accurate ledger.
+        "countries_all": ledger["countries_count"],
         "top_pages": top_pages,
         "top_countries": top_countries,
-        # Persisted sticky all-time set (peak-week views per country); drives the
-        # "all-time" country list, the world map, and countries_all (its size).
-        "all_countries": all_countries,
     }
 
-    header = (
+    stats_header = (
         "# Auto-generated by scripts/fetch_cloudflare_stats.py (GitHub Actions).\n"
         "# DO NOT edit by hand - values are overwritten on the next nightly sync.\n"
     )
     with open(OUTPUT_PATH, "w") as f:
-        f.write(header)
+        f.write(stats_header)
         yaml.safe_dump(out, f, sort_keys=False, allow_unicode=True)
 
-    print(f"Wrote {OUTPUT_PATH}: {pv_all} page views all-time, {pv_30} in 30d.")
+    ledger_header = (
+        "# Auto-generated by scripts/fetch_cloudflare_stats.py (GitHub Actions).\n"
+        "# Cumulative all-time totals, summed from accurate per-day Cloudflare\n"
+        "# figures. Each day is counted once (see counted_dates). DO NOT edit.\n"
+    )
+    with open(LEDGER_PATH, "w") as f:
+        f.write(ledger_header)
+        yaml.safe_dump(ledger, f, sort_keys=False, allow_unicode=True)
+
+    print(f"Wrote {OUTPUT_PATH}: {pv_all} page views (90d headline), {pv_7} in 7d.")
 
 
 if __name__ == "__main__":

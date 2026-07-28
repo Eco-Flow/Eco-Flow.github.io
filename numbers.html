@@ -13,34 +13,36 @@ description: A snapshot of Eco-Flow's work, reach and community.
 {%- assign s = site.data.stats -%}
 
 {%- comment -%}
-  "Total" headline figures come straight from Cloudflare's since-launch window
-  (pageviews_all / visits_all) plus a monotonic all-time country union
-  (countries_all) — all guaranteed supersets of the live 7-day figures, so a
-  "total" can never read lower than "7 days". As belt-and-braces (in case a wide
-  Cloudflare query is sampled low), we still clamp each total up to the 7-day
-  value. The all-time top-N lists come from the weekly accumulator
-  (stats_totals); they're an approximate cumulative ranking, falling back to the
-  live 7-day lists if the accumulator is empty.
+  "Total" headline figures come from the cumulative ledger (stats_totals.yml):
+  accurate all-time totals summed from unsampled per-day Cloudflare figures. If
+  the ledger isn't populated yet, we fall back to Cloudflare's wider (sampled)
+  since-launch window (pageviews_all / visits_all). As belt-and-braces we still
+  clamp each total up to the live 7-day value, so a "total" can never read lower
+  than "7 days".
 {%- endcomment -%}
 {%- assign t = site.data.stats_totals -%}
-{%- assign tot_pv = s.pageviews_all | default: s.pageviews_7d -%}
-{%- assign tot_v = s.visits_all | default: s.visits_7d -%}
-{%- assign tot_c = s.countries_all | default: s.countries_7d -%}
+{%- assign tot_pv = t.pageviews | default: s.pageviews_all | default: s.pageviews_7d -%}
+{%- assign tot_v = t.visits | default: s.visits_all | default: s.visits_7d -%}
+{%- assign tot_c = t.countries_count | default: s.countries_all | default: s.countries_7d -%}
 {%- if s.pageviews_7d > tot_pv -%}{%- assign tot_pv = s.pageviews_7d -%}{%- endif -%}
 {%- if s.visits_7d > tot_v -%}{%- assign tot_v = s.visits_7d -%}{%- endif -%}
 {%- if s.countries_7d > tot_c -%}{%- assign tot_c = s.countries_7d -%}{%- endif -%}
 {%- comment -%}
-  Top pages "· total" = cumulative accumulator ranking (falls back to 7-day).
-  Countries list + world map = the sticky all-time set (s.all_countries): every
-  country that has ever visited stays, shaded by its busiest week. Falls back to
-  the live 7-day breakdown until the first fetch with all_countries has run.
+  Top pages "· total" and the all-time countries list + world map both come from
+  the cumulative ledger (stats_totals.yml): real all-time totals summed from
+  accurate per-day Cloudflare figures. Each falls back to the live 7-day
+  breakdown until the ledger has been populated by the first sync.
 {%- endcomment -%}
 {%- if t and t.top_pages and t.top_pages.size > 0 -%}
   {%- assign tot_pages = t.top_pages -%}
 {%- else -%}
   {%- assign tot_pages = s.top_pages -%}
 {%- endif -%}
-{%- assign tot_countries = s.all_countries | default: s.top_countries -%}
+{%- if t and t.top_countries and t.top_countries.size > 0 -%}
+  {%- assign tot_countries = t.top_countries -%}
+{%- else -%}
+  {%- assign tot_countries = s.top_countries -%}
+{%- endif -%}
 
 <div class="page-head">
   <div class="wrap">
@@ -85,9 +87,8 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <span class="eyebrow">Cloudflare Web Analytics</span>
       <h2>Web stats <span class="auto-star" title="Updated automatically from live data">★</span></h2>
       <p>
-        Measured privately, with no cookies{% if s.since %}, since {{ s.since | date: "%-d %B %Y" }}{% endif %} ·
-        last updated {{ s.updated | date: "%-d %B %Y" }}.
-        {% if s.since %}<br><span style="color:#8a9890;font-size:.92rem">Counting only began recently, so these figures are still small and growing.</span>{% endif %}
+        Private, cookieless analytics{% if s.since %} since {{ s.since | date: "%-d %B %Y" }}{% endif %} ·
+        updated {{ s.updated | date: "%-d %B %Y" }}.
       </p>
     </div>
     <div class="stats stats--3">
@@ -101,11 +102,8 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <div class="stat"><div class="stats__num">{{ s.countries_7d }}</div><div class="stats__label">Countries (7 days)</div></div>
     </div>
     <p style="color:#8a9890;font-size:.85rem;margin-top:1rem">
-      A <strong>visit</strong> is one arrival at the site (directly or from another website) and may
-      span several page views — the closest figure to &ldquo;how many people came&rdquo;. Because
-      tracking is cookieless, returning people aren't recognised, so this isn't a unique-visitor count.
-      Figures also include some automated (bot) traffic: Cloudflare's free tier doesn't separate bots
-      out in its data feed.
+      A <strong>visit</strong> is one arrival at the site; page views count every page opened.
+      Tracking is cookieless, so this isn't a unique-visitor count. Bot traffic is blocked.
     </p>
 
     {%- if tot_pages.size > 0 or tot_countries.size > 0 -%}
@@ -137,8 +135,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· all-time</span></h3>
       <div id="worldmap" class="worldmap"></div>
       <p style="color:#8a9890;font-size:.85rem;margin-top:.8rem">
-        Every country that has ever visited stays shaded, by its busiest week's page views.
-        Cloudflare reports location at country level only, so we can't break this down within a country.
+        Countries shaded by all-time page views.
       </p>
     </div>
     {%- endif -%}
