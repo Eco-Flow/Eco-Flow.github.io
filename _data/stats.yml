@@ -9,7 +9,7 @@ visits_30d: 260
 pageviews_7d: 169
 visits_7d: 90
 countries_7d: 10
-countries_all: 16
+countries_all: 10
 top_pages:
 - path: /training/
   views: 40
@@ -29,35 +29,35 @@ top_pages:
   views: 4
 - path: /pipelines/gwas/
   views: 3
+- path: /pipelines/synteny/
+  views: 2
+- path: /pipelines/excon/
+  views: 2
 - path: /2025/10/01/hackathon-london.html
   views: 2
 - path: /blog/
   views: 2
 - path: /training/pipelines/
   views: 2
-- path: /pipelines/excon/
-  views: 2
-- path: /pipelines/synteny/
-  views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
-- path: /partners/
-  views: 1
-- path: /numbers/
-  views: 1
-- path: /pipelines/about/
+- path: /events/2026-09-10-seqera-sessions-cambridge/
   views: 1
 - path: /training/differential
   views: 1
 - path: /training/nfcore-rnaseq/
   views: 1
+- path: /pipelines/about/
+  views: 1
+- path: /numbers/
+  views: 1
 - path: /training/hpc/
   views: 1
-- path: /pipelines/comparete/
+- path: /partners/
   views: 1
-- path: /events/2026-09-10-seqera-sessions-cambridge/
+- path: /pipelines/comparete/
   views: 1
 top_countries:
 - name: GB
@@ -79,37 +79,4 @@ top_countries:
 - name: MA
   views: 1
 - name: BR
-  views: 1
-all_countries:
-- name: GB
-  views: 300
-- name: SG
-  views: 33
-- name: US
-  views: 21
-- name: CN
-  views: 18
-- name: ES
-  views: 16
-- name: DE
-  views: 14
-- name: FR
-  views: 8
-- name: NL
-  views: 8
-- name: IL
-  views: 3
-- name: AR
-  views: 2
-- name: BE
-  views: 2
-- name: IT
-  views: 2
-- name: VN
-  views: 2
-- name: BR
-  views: 1
-- name: FI
-  views: 1
-- name: MA
   views: 1
