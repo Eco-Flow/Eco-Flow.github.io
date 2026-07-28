@@ -56,7 +56,7 @@ LAUNCH_DATE = "2026-06-27"  # first day the beacon was live
 
 # Ledger schema marker. Bump this to force a clean rebuild of stats_totals.yml
 # (discarding any totals produced by an earlier, less accurate method).
-LEDGER_METHOD = "per-day"
+LEDGER_METHOD = "per-day-single"  # bump to force a clean rebuild of the ledger
 
 API_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN")
 ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
@@ -151,34 +151,36 @@ query Breakdown($account: String!, $site: String!, $start: Date!, $end: Date!) {
 """
 
 
-# Per-day breakdown used to build the cumulative ledger. Each row carries its
-# `date`, so we can add whole, not-yet-counted days into the running totals.
-DAILY_QUERY = """
-query Daily($account: String!, $site: String!, $start: Date!, $end: Date!) {
+# Single-day breakdown used to build the cumulative ledger. Cloudflare samples
+# by the query's date SPAN (not its grouping), so a wide query returns rounded,
+# lumpy counts that drop rare countries. We therefore query ONE day per request
+# (the narrowest possible span) to keep each day's figures unsampled, then sum.
+DAY_QUERY = """
+query Day($account: String!, $site: String!, $day: Date!) {
   viewer {
     accounts(filter: { accountTag: $account }) {
-      byDay: rumPageloadEventsAdaptiveGroups(
-        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
-        limit: 1000
-        orderBy: [date_ASC]
+      totals: rumPageloadEventsAdaptiveGroups(
+        filter: { siteTag: $site, date_geq: $day, date_leq: $day }
+        limit: 1
       ) {
         count
         sum { visits }
-        dimensions { date }
       }
       pages: rumPageloadEventsAdaptiveGroups(
-        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
-        limit: 5000
+        filter: { siteTag: $site, date_geq: $day, date_leq: $day }
+        limit: 200
+        orderBy: [count_DESC]
       ) {
         count
-        dimensions { date requestPath }
+        dimensions { requestPath }
       }
       countries: rumPageloadEventsAdaptiveGroups(
-        filter: { siteTag: $site, date_geq: $start, date_leq: $end }
-        limit: 5000
+        filter: { siteTag: $site, date_geq: $day, date_leq: $day }
+        limit: 250
+        orderBy: [count_DESC]
       ) {
         count
-        dimensions { date countryName }
+        dimensions { countryName }
       }
     }
   }
@@ -235,56 +237,36 @@ def update_ledger(yesterday):
     pv = int(prev.get("pageviews") or 0)
     vis = int(prev.get("visits") or 0)
 
-    # Query from the first uncounted day (or launch) up to yesterday. Re-querying
-    # a few already-counted days is harmless: the `counted` guard skips them.
-    if counted:
-        start = (datetime.date.fromisoformat(max(counted))
-                 + datetime.timedelta(days=1)).isoformat()
-    else:
-        start = LAUNCH_DATE
-
-    if start > yesterday:
-        # Nothing new to ingest yet (already up to date through yesterday).
-        return {
-            "updated": datetime.date.today().isoformat(),
-            "method": LEDGER_METHOD,
-            "counted_dates": sorted(counted),
-            "pageviews": pv,
-            "visits": vis,
-            "countries_count": len(countries),
-            "top_pages": _ranked(pages, "path"),
-            "top_countries": _ranked(countries, "name"),
-        }
-
-    data = graphql(DAILY_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
-                                 "start": start, "end": yesterday})
-
-    # Establish which whole days are new, from the per-day totals rows. Pages and
-    # countries are then only ingested for those same days, keeping every total
-    # consistent (never a page/country count for a day not in the headline sum).
-    new_dates = set()
-    for g in (data.get("byDay") or []):
-        day = g["dimensions"]["date"]
-        if day in counted or day > yesterday:
+    # Walk every day from launch to yesterday, querying each uncounted day with
+    # its own single-day request (so it stays unsampled) and adding it once.
+    # Already-counted days are skipped without a request, so after the initial
+    # backfill this makes just one request per run.
+    day = datetime.date.fromisoformat(LAUNCH_DATE)
+    last = datetime.date.fromisoformat(yesterday)
+    ingested = 0
+    while day <= last:
+        iso = day.isoformat()
+        day += datetime.timedelta(days=1)
+        if iso in counted:
             continue
-        pv += int(g["count"])
-        vis += int((g.get("sum") or {}).get("visits") or 0)
-        new_dates.add(day)
 
-    for g in (data.get("pages") or []):
-        if g["dimensions"]["date"] not in new_dates:
-            continue
-        path = g["dimensions"]["requestPath"] or "/"
-        pages[path] = pages.get(path, 0) + int(g["count"])
+        data = graphql(DAY_QUERY, {"account": ACCOUNT_ID, "site": SITE_TAG,
+                                   "day": iso})
+        tgroups = data.get("totals") or []
+        if tgroups:
+            pv += int(tgroups[0]["count"])
+            vis += int((tgroups[0].get("sum") or {}).get("visits") or 0)
+        for g in (data.get("pages") or []):
+            path = g["dimensions"]["requestPath"] or "/"
+            pages[path] = pages.get(path, 0) + int(g["count"])
+        for g in (data.get("countries") or []):
+            name = g["dimensions"]["countryName"] or "Unknown"
+            countries[name] = countries.get(name, 0) + int(g["count"])
 
-    for g in (data.get("countries") or []):
-        if g["dimensions"]["date"] not in new_dates:
-            continue
-        name = g["dimensions"]["countryName"] or "Unknown"
-        countries[name] = countries.get(name, 0) + int(g["count"])
+        counted.add(iso)
+        ingested += 1
 
-    counted |= new_dates
-    print(f"Ledger: ingested {len(new_dates)} new day(s); "
+    print(f"Ledger: ingested {ingested} new day(s); "
           f"{pv} page views / {vis} visits all-time across {len(countries)} countries.")
 
     return {
