@@ -9,7 +9,7 @@ visits_30d: 260
 pageviews_7d: 169
 visits_7d: 90
 countries_7d: 10
-countries_all: 10
+countries_all: 14
 top_pages:
 - path: /training/
   views: 40
