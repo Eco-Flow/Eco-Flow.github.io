@@ -110,7 +110,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
     <div class="grid grid--2" style="margin-top:3rem">
       {%- if tot_pages.size > 0 -%}
       <div class="card">
-        <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· total</span></h3>
+        <h3 style="margin-top:0">Top pages <span style="color:#8a9890;font-weight:400">· all-time page views</span></h3>
         <ol class="numbered">
           {%- for p in tot_pages limit: 10 -%}
           <li><a href="{{ p.path }}">{{ p.path }}</a> <span class="numbered__val">{{ p.views }}</span></li>
@@ -120,10 +120,10 @@ description: A snapshot of Eco-Flow's work, reach and community.
       {%- endif -%}
       {%- if tot_countries.size > 0 -%}
       <div class="card">
-        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· all-time</span></h3>
+        <h3 style="margin-top:0">Top countries <span style="color:#8a9890;font-weight:400">· all-time visits</span></h3>
         <ol class="numbered">
           {%- for c in tot_countries limit: 10 -%}
-          <li>{{ site.data.country_names[c.name] | default: c.name }} <span class="numbered__val">{{ c.views }}</span></li>
+          <li>{{ site.data.country_names[c.name] | default: c.name }} <span class="numbered__val">{{ c.visits | default: c.views }}</span></li>
           {%- endfor -%}
         </ol>
       </div>
@@ -135,7 +135,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <h3 style="margin-bottom:1rem">Where in the world <span style="color:#8a9890;font-weight:400;font-size:1rem">· all-time</span></h3>
       <div id="worldmap" class="worldmap"></div>
       <p style="color:#8a9890;font-size:.85rem;margin-top:.8rem">
-        Countries shaded by all-time page views.
+        Countries shaded by all-time visits.
       </p>
     </div>
     {%- endif -%}
@@ -184,7 +184,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
 <script src="{{ '/assets/vendor/jsvectormap/world.js' | relative_url }}"></script>
 <script>
   (function () {
-    var values = { {% for c in tot_countries %}"{{ c.name }}": {{ c.views }}{% unless forloop.last %}, {% endunless %}{% endfor %} };
+    var values = { {% for c in tot_countries %}"{{ c.name }}": {{ c.visits | default: c.views }}{% unless forloop.last %}, {% endunless %}{% endfor %} };
 
     function hexToRgb(h) { h = h.replace('#', ''); return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)]; }
     function mix(a, b, t) {
@@ -205,7 +205,7 @@ description: A snapshot of Eco-Flow's work, reach and community.
         backgroundColor: 'transparent',
         regionStyle: { initial: { fill: '#e7ece9', stroke: '#ffffff', strokeWidth: 0.4 } }
       });
-      // Shade each country with data from light to dark green by its view count.
+      // Shade each country with data from light to dark green by its visit count.
       codes.forEach(function (code) {
         var region = map.regions[code];
         if (!region || !region.element) return;

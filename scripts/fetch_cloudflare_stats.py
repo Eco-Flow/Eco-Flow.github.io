@@ -56,7 +56,7 @@ LAUNCH_DATE = "2026-06-27"  # first day the beacon was live
 
 # Ledger schema marker. Bump this to force a clean rebuild of stats_totals.yml
 # (discarding any totals produced by an earlier, less accurate method).
-LEDGER_METHOD = "per-day-single"  # bump to force a clean rebuild of the ledger
+LEDGER_METHOD = "per-day-visits"  # bump to force a clean rebuild of the ledger
 
 API_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN")
 ACCOUNT_ID = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
@@ -143,6 +143,7 @@ query Breakdown($account: String!, $site: String!, $start: Date!, $end: Date!) {
         orderBy: [count_DESC]
       ) {
         count
+        sum { visits }
         dimensions { countryName }
       }
     }
@@ -180,6 +181,7 @@ query Day($account: String!, $site: String!, $day: Date!) {
         orderBy: [count_DESC]
       ) {
         count
+        sum { visits }
         dimensions { countryName }
       }
     }
@@ -234,6 +236,10 @@ def update_ledger(yesterday):
     counted = set(prev.get("counted_dates") or [])
     pages = {p["path"]: int(p["views"]) for p in (prev.get("top_pages") or [])}
     countries = {c["name"]: int(c["views"]) for c in (prev.get("top_countries") or [])}
+    # Per-country visits, tracked alongside page views so the /numbers/ country
+    # list can be shown in visits (sessions) rather than clicks.
+    country_visits = {c["name"]: int(c.get("visits") or 0)
+                      for c in (prev.get("top_countries") or [])}
     pv = int(prev.get("pageviews") or 0)
     vis = int(prev.get("visits") or 0)
 
@@ -262,6 +268,8 @@ def update_ledger(yesterday):
         for g in (data.get("countries") or []):
             name = g["dimensions"]["countryName"] or "Unknown"
             countries[name] = countries.get(name, 0) + int(g["count"])
+            country_visits[name] = (country_visits.get(name, 0)
+                                    + int((g.get("sum") or {}).get("visits") or 0))
 
         counted.add(iso)
         ingested += 1
@@ -277,14 +285,26 @@ def update_ledger(yesterday):
         "visits": vis,
         "countries_count": len(countries),
         "top_pages": _ranked(pages, "path"),
-        "top_countries": _ranked(countries, "name"),
+        # Ranked by visits (sessions), which is what the page displays.
+        "top_countries": _ranked(countries, "name", visits=country_visits,
+                                 by="visits"),
     }
 
 
-def _ranked(counts, key):
-    """Turn a {name: views} map into a list sorted by views (desc), then name."""
-    return [{key: n, "views": v}
-            for n, v in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+def _ranked(counts, key, visits=None, by="views"):
+    """Turn a {name: views} map into a list sorted by count (desc), then name.
+
+    If `visits` is given, each entry also carries a "visits" figure, and `by`
+    chooses which of the two the ranking uses.
+    """
+    def entry(n, v):
+        e = {key: n, "views": v}
+        if visits is not None:
+            e["visits"] = visits.get(n, 0)
+        return e
+
+    rows = [entry(n, v) for n, v in counts.items()]
+    return sorted(rows, key=lambda e: (-e[by], e[key]))
 
 
 def main():
@@ -334,9 +354,12 @@ def main():
     ]
     country_groups = bd.get("countries") or []
     top_countries = [
-        {"name": (c["dimensions"]["countryName"] or "Unknown"), "views": int(c["count"])}
+        {"name": (c["dimensions"]["countryName"] or "Unknown"),
+         "views": int(c["count"]),
+         "visits": int((c.get("sum") or {}).get("visits") or 0)}
         for c in country_groups[:100]
     ]
+    top_countries.sort(key=lambda c: (-c["visits"], c["name"]))
 
     # Accurate cumulative all-time totals, summed from unsampled per-day figures.
     ledger = update_ledger(yesterday)
