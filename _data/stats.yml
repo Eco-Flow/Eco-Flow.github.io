@@ -9,7 +9,7 @@ visits_30d: 260
 pageviews_7d: 52
 visits_7d: 36
 countries_7d: 8
-countries_all: 14
+countries_all: 13
 top_pages:
 - path: /
   views: 10
@@ -56,19 +56,27 @@ top_pages:
 - path: /jobs/
   views: 1
 top_countries:
-- name: GB
-  views: 23
 - name: CN
   views: 18
+  visits: 18
+- name: GB
+  views: 23
+  visits: 7
 - name: US
   views: 5
+  visits: 5
 - name: VN
   views: 2
+  visits: 2
 - name: BE
   views: 1
-- name: SG
-  views: 1
-- name: MA
-  views: 1
+  visits: 1
 - name: BR
   views: 1
+  visits: 1
+- name: MA
+  views: 1
+  visits: 1
+- name: SG
+  views: 1
+  visits: 1
