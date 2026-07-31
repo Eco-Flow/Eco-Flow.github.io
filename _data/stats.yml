@@ -6,17 +6,19 @@ pageviews_all: 640
 visits_all: 270
 pageviews_30d: 430
 visits_30d: 250
-pageviews_7d: 39
-visits_7d: 27
+pageviews_7d: 43
+visits_7d: 28
 countries_7d: 8
 countries_all: 13
 top_pages:
 - path: /
-  views: 9
+  views: 11
 - path: /training/commandline/
   views: 4
 - path: /services/
   views: 4
+- path: /blog/
+  views: 3
 - path: /training/
   views: 3
 - path: /pipelines/synteny/
@@ -24,8 +26,6 @@ top_pages:
 - path: /2025/10/01/hackathon-london.html
   views: 2
 - path: /about/
-  views: 2
-- path: /blog/
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
@@ -43,6 +43,8 @@ top_pages:
   views: 1
 - path: /jobs/
   views: 1
+- path: /2026/06/23/new-website-design.html
+  views: 1
 - path: /training/setup
   views: 1
 top_countries:
@@ -53,8 +55,8 @@ top_countries:
   views: 6
   visits: 6
 - name: GB
-  views: 16
-  visits: 4
+  views: 20
+  visits: 5
 - name: VN
   views: 2
   visits: 2
