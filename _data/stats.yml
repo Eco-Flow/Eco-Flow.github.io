@@ -6,8 +6,8 @@ pageviews_all: 640
 visits_all: 270
 pageviews_30d: 390
 visits_30d: 210
-pageviews_7d: 28
-visits_7d: 24
+pageviews_7d: 32
+visits_7d: 28
 countries_7d: 9
 countries_all: 14
 top_pages:
@@ -15,6 +15,8 @@ top_pages:
   views: 7
 - path: /2025/10/01/hackathon-london.html
   views: 4
+- path: /pipelines/synteny/
+  views: 3
 - path: /blog/
   views: 3
 - path: /about/
@@ -33,6 +35,8 @@ top_pages:
   views: 1
 - path: /pipelines/gwas/
   views: 1
+- path: /training/nfcore-rnaseq/
+  views: 1
 - path: /jobs/
   views: 1
 - path: /2026/06/23/new-website-design.html
@@ -44,11 +48,11 @@ top_countries:
   views: 11
   visits: 11
 - name: GB
-  views: 6
-  visits: 3
+  views: 9
+  visits: 6
 - name: US
-  views: 3
-  visits: 3
+  views: 4
+  visits: 4
 - name: SG
   views: 2
   visits: 2
