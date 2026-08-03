@@ -2,17 +2,19 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-03'
 since: '2026-06-27'
-pageviews_all: 650
-visits_all: 280
-pageviews_30d: 400
-visits_30d: 220
-pageviews_7d: 34
-visits_7d: 30
+pageviews_all: 660
+visits_all: 290
+pageviews_30d: 410
+visits_30d: 230
+pageviews_7d: 49
+visits_7d: 41
 countries_7d: 9
 countries_all: 14
 top_pages:
 - path: /
-  views: 6
+  views: 13
+- path: /training/
+  views: 8
 - path: /2025/10/01/hackathon-london.html
   views: 4
 - path: /pipelines/synteny/
@@ -21,7 +23,7 @@ top_pages:
   views: 3
 - path: /about/
   views: 2
-- path: /training/
+- path: /training/setup/
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
@@ -31,7 +33,7 @@ top_pages:
   views: 1
 - path: /training/commandline/
   views: 1
-- path: /training/setup/
+- path: /pipelines/about/
   views: 1
 - path: /training/differential
   views: 1
@@ -48,21 +50,21 @@ top_pages:
 - path: /training/setup
   views: 1
 top_countries:
+- name: GB
+  views: 22
+  visits: 15
 - name: CN
   views: 11
   visits: 11
-- name: GB
-  views: 11
-  visits: 8
 - name: US
-  views: 4
-  visits: 4
+  views: 7
+  visits: 7
+- name: BE
+  views: 2
+  visits: 2
 - name: SG
   views: 2
   visits: 2
-- name: BE
-  views: 1
-  visits: 1
 - name: BR
   views: 1
   visits: 1
