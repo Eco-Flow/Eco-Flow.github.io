@@ -418,10 +418,10 @@
   \ based on matching reverse tags-primers (combination of forward and reverse tags-primers)\n\
   4. Group amplicons reads into \"species\" (consensus sequences) ([`amplicon_sorter`](https://github.com/avierstr/amplicon_sorter))\n\
   5. Consensus sequence correction ([`Medaka`](https://github.com/nanoporetech/medaka))\n\
-  \   - Correction using the consensus sequence from aplicon_sorter as reference and\
-  \ the grouped amplicon reads as the basecalled data\n6. Create custom BLAST database\
-  \ ([`makeblastdb`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n7. Consensus\
-  \ sequence annotation based on database ([`blastn`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n\
+  \   - Correction using the consensus sequence from amplicon_sorter as reference\
+  \ and the grouped amplicon reads as the basecalled data\n6. Create custom BLAST\
+  \ database ([`makeblastdb`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n7.\
+  \ Consensus sequence annotation based on database ([`blastn`](https://www.ncbi.nlm.nih.gov/books/NBK279690/))\n\
   \   - Annotation is based on the best blast hit per consensus. And best blast hit\
   \ is based on:\n     1. First on the bit score\n     2. Second on the e-value\n\
   8. Assign taxonomy to blast hits using taxonomizr ([`taxonomizr`](https://github.com/sherrillmix/taxonomizr)).\
@@ -439,7 +439,7 @@
   The running time should be around 8 minutes on a machine with 12 cpus/threads.\n\
   \n<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline,\
   \ e.g. how to prepare samplesheets.\n     Explain what rows and columns represent.\
-  \ For instance (please edit as appropriate):\n-->\n\nFor running the pipleine on\
+  \ For instance (please edit as appropriate):\n-->\n\nFor running the pipeline on\
   \ your data, prepare a samplesheet with your input FASTQs that looks as follows:\n\
   \n```csv\nid,fastq\nfastq_id_1,path/to/reads1.fastq.gz\nfastq_id_2,path/to/reads2.fastq.gz\n\
   ...\n```\n\nThe first column represents the FASTQ id (e.g. plate number if the FASTQ\
@@ -458,7 +458,7 @@
   \nYou can optionally provide a metadata file in CSV format with the primer-tag combination\
   \ in the first column and the corresponding sample name in the second column:\n\n\
   ```\n    // Metadata with primer combinations\n    metadata                   =\
-  \ path/to/metadata.csv\n```\n\nThe strucutre of the CSV should be as follows:\n\n\
+  \ path/to/metadata.csv\n```\n\nThe structure of the CSV should be as follows:\n\n\
   ```\nid,primer_comb,sample\nfastq_id_1,<forward-primer-tag-id>_<forward-primer-tag-id>,sample1\n\
   fastq_id_2,<forward-primer-tag-id>_<forward-primer-tag-id>,sample2\n...\n```\n\n\
   > [!NOTE]\n> If <forward-primer-tag-id> and/or <forward-primer-tag-id> in the metadata\
@@ -477,7 +477,7 @@
   \ This can be a value between 0 and 1 (1 not included) if a maximum error rate wants\
   \ to be applied to all adapters, or it can be equal or greater than 1, in which\
   \ case it will be converted to a maximum error rate depending on the adapter length.\
-  \ Check [cutadatpt documentation](https://cutadapt.readthedocs.io/en/stable/guide.html)\
+  \ Check [cutadapt documentation](https://cutadapt.readthedocs.io/en/stable/guide.html)\
   \ for more information:\n\n```\n    error_rate                  = 2 // Error rate\
   \ for adapter removal\n```\n\n4. Primer-tag overlap. To calculate mismatches with\
   \ the `--error-rate` option, cutadapt considers only the aligned region (overlap)\
@@ -492,8 +492,8 @@
   \                     = null // Minimum overlap length for an adapter to be found\n\
   ```\n\n**Nanofilt options:**\n\n1. Nanofilt is run before demultiplexing and tag+primer\
   \ trimming:\n\n```\n    // Nanofilt options\n    nano_quality                = null\
-  \ // Minimun read quality (phred score)\n    nano_read_length            = 250 //\
-  \ Minimum reads length\n```\n\n2. Filter FASTQs with a mumber of reads equal or\
+  \ // Minimum read quality (phred score)\n    nano_read_length            = 250 //\
+  \ Minimum reads length\n```\n\n2. Filter FASTQs with a number of reads equal or\
   \ lower than (changing this value is not recommended):\n\n```\n    filt_fastq  \
   \                = 0\n```\n\nCheck `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta`\
   \ for examples of `tags_f` and `tags_r` files, respectively.\n\n**Blast options:**\n\
@@ -501,8 +501,8 @@
   \      = 'path/to/blast.db' // Path to already built database\n```\n\n2. Or build\
   \ a local BLAST database from a collection of sequences:\n\n```\n    custom_db \
   \                 = 'path/to/local/database.fasta' // Path to database to be built\n\
-  ```\n\n3. The E value describes the number of one can \u201Cexpect\u201D to see\
-  \ by chance when searching a database of a particular size. The lower the value,\
+  ```\n\n3. The E value describes the number of hits one can \u201Cexpect\u201D to\
+  \ see by chance when searching a database of a particular size. The lower the value,\
   \ the more significant a match is:\n\n```\n    evalue                     = 0.001\
   \ // evalue cutoff\n```\n\n4. Maximum number of hits per query (consensus sequence):\n\
   \n```\n    max_target_seqs            = 5 // Maximum number of hits per query\n\
@@ -543,11 +543,11 @@
   \ to the top-level results directory.\n\n### Quality reports\n\n#### Nanoplot\n\n\
   [`NanoPlot`](https://github.com/wdecoster/NanoPlot) is a tool that outputs QC reports\
   \ for raw, filtered -after nanofilt-, and demultiplexed reads. Nanoplot reports\
-  \ are store inside the nanoplot folder, and come in different formats.\n\n<details\
+  \ are stored inside the nanoplot folder, and come in different formats.\n\n<details\
   \ markdown=\"1\">\n<summary>Output files</summary>\n\n- `nanoplot/`\n  - `raw/<fastq_id>`:\
   \ Folder that contains the raw reads quality report.\n  - `filtered/<fastq_id>`:\
   \ Folder contains the filtered -after nanofilt- reads quality report.\n  - `demultiplexed/<fastq_id>/<sample_id>`:\
-  \ Contains the duemultiplexed reads quality report.\n\n</details>\n\n#### Multiqc\n\
+  \ Contains the demultiplexed reads quality report.\n\n</details>\n\n#### Multiqc\n\
   \n[MultiQC](http://multiqc.info) is a visualization tool that generates a single\
   \ HTML report summarising all of the NanoPlot QC results for raw, filtered, demultiplexed\
   \ reads. Most of the pipeline QC results are visualised in the report and further\
@@ -578,7 +578,7 @@
   \ `species`: Full taxonomic lineage of the matched sequence.\n- `Resolved.taxon`:\
   \ Final consensus taxon assigned to the ASV. A trailing `*` indicates that one or\
   \ more BLAST hits for the same ASV had no taxonomy in the database and were excluded\
-  \ from the LCR resolution. This ASV can be classified as `Unasigned` instead for\
+  \ from the LCR resolution. This ASV can be classified as `Unassigned` instead for\
   \ a more conservative approach.\n\n`ASV_table_pre-assigned.csv` contains the per-hit\
   \ taxonomy assignments before LCR consensus resolution \u2014 one row per BLAST\
   \ hit rather than one row per ASV.\n\n<details markdown=\"1\">\n<summary>Output\
