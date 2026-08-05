@@ -2,59 +2,25 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-05'
 since: '2026-06-27'
-pageviews_all: 660
-visits_all: 290
-pageviews_30d: 390
-visits_30d: 220
-pageviews_7d: 38
-visits_7d: 29
-countries_7d: 6
+pageviews_all: 680
+visits_all: 310
+pageviews_30d: 410
+visits_30d: 240
+pageviews_7d: 43
+visits_7d: 34
+countries_7d: 2
 countries_all: 14
 top_pages:
 - path: /
-  views: 14
-- path: /training/
-  views: 7
-- path: /pipelines/synteny/
-  views: 3
-- path: /2025/10/01/hackathon-london.html
-  views: 2
-- path: /training/setup/
-  views: 2
-- path: /2026/06/23/new-website-design.html
-  views: 2
-- path: /pipelines/excon/
-  views: 1
+  views: 20
 - path: /about/
-  views: 1
-- path: /blog/
-  views: 1
-- path: /pipelines/about/
-  views: 1
-- path: /training/nfcore-rnaseq/
-  views: 1
-- path: /pipelines/nanoporemetabarcoding/
-  views: 1
-- path: /jobs/
-  views: 1
-- path: /training/setup
-  views: 1
+  views: 10
+- path: /training/setup/
+  views: 10
 top_countries:
 - name: GB
-  views: 22
-  visits: 15
-- name: US
-  views: 10
-  visits: 10
-- name: BE
-  views: 1
-  visits: 1
-- name: PT
-  views: 2
-  visits: 1
-- name: SG
-  views: 2
-  visits: 1
-- name: VN
-  views: 1
-  visits: 1
+  views: 20
+  visits: 20
+- name: IE
+  views: 20
+  visits: 20
