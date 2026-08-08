@@ -6,15 +6,15 @@ pageviews_all: 680
 visits_all: 310
 pageviews_30d: 340
 visits_30d: 200
-pageviews_7d: 48
-visits_7d: 41
+pageviews_7d: 49
+visits_7d: 42
 countries_7d: 7
 countries_all: 15
 top_pages:
 - path: /
   views: 18
 - path: /training/
-  views: 8
+  views: 9
 - path: /about/
   views: 4
 - path: /pipelines/synteny/
@@ -46,8 +46,8 @@ top_countries:
   views: 24
   visits: 19
 - name: US
-  views: 13
-  visits: 13
+  views: 14
+  visits: 14
 - name: IE
   views: 3
   visits: 3
