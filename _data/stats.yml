@@ -2,26 +2,28 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-10'
 since: '2026-06-27'
-pageviews_all: 600
-visits_all: 100
-pageviews_30d: 320
-visits_30d: 180
-pageviews_7d: 55
-visits_7d: 45
+pageviews_all: 710
+visits_all: 330
+pageviews_30d: 330
+visits_30d: 190
+pageviews_7d: 68
+visits_7d: 57
 countries_7d: 5
 countries_all: 15
 top_pages:
 - path: /
-  views: 21
+  views: 26
 - path: /training/
   views: 10
 - path: /about/
-  views: 6
+  views: 9
 - path: /pipelines/
-  views: 5
+  views: 7
 - path: /pipelines/about/
-  views: 3
+  views: 4
 - path: /training/setup/
+  views: 2
+- path: /2025/09/01/biofair-fellowship.html
   views: 2
 - path: /pipelines/nanoporemetabarcoding/
   views: 2
@@ -39,13 +41,13 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 27
-  visits: 22
+  views: 34
+  visits: 29
 - name: US
-  views: 15
-  visits: 15
+  views: 20
+  visits: 20
 - name: SG
-  views: 9
+  views: 10
   visits: 4
 - name: IE
   views: 3
