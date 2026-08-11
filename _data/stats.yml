@@ -2,17 +2,17 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-11'
 since: '2026-06-27'
-pageviews_all: 710
-visits_all: 330
-pageviews_30d: 330
-visits_30d: 190
-pageviews_7d: 51
-visits_7d: 43
-countries_7d: 4
+pageviews_all: 730
+visits_all: 350
+pageviews_30d: 350
+visits_30d: 210
+pageviews_7d: 60
+visits_7d: 52
+countries_7d: 6
 countries_all: 15
 top_pages:
 - path: /
-  views: 20
+  views: 28
 - path: /about/
   views: 9
 - path: /pipelines/
@@ -22,7 +22,7 @@ top_pages:
 - path: /training/
   views: 3
 - path: /2025/09/01/biofair-fellowship.html
-  views: 2
+  views: 3
 - path: /partners/
   views: 1
 - path: /pipelines/genomeqc/
@@ -36,15 +36,21 @@ top_pages:
 - path: /2026/06/23/new-website-design.html
   views: 1
 top_countries:
+- name: US
+  views: 21
+  visits: 21
 - name: GB
   views: 20
   visits: 19
-- name: US
-  views: 16
-  visits: 16
 - name: SG
   views: 12
   visits: 5
 - name: IE
   views: 3
   visits: 3
+- name: NL
+  views: 3
+  visits: 3
+- name: IL
+  views: 1
+  visits: 1
