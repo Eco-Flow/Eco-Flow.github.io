@@ -6,13 +6,13 @@ pageviews_all: 740
 visits_all: 360
 pageviews_30d: 340
 visits_30d: 220
-pageviews_7d: 58
-visits_7d: 48
+pageviews_7d: 59
+visits_7d: 49
 countries_7d: 7
 countries_all: 18
 top_pages:
 - path: /
-  views: 24
+  views: 25
 - path: /about/
   views: 8
 - path: /pipelines/
@@ -40,11 +40,11 @@ top_pages:
 - path: /jobs/
   views: 1
 top_countries:
+- name: US
+  views: 19
+  visits: 19
 - name: GB
   views: 19
-  visits: 18
-- name: US
-  views: 18
   visits: 18
 - name: SG
   views: 15
