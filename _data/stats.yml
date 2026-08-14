@@ -2,17 +2,17 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-14'
 since: '2026-06-27'
-pageviews_all: 740
-visits_all: 360
-pageviews_30d: 340
-visits_30d: 220
-pageviews_7d: 55
-visits_7d: 46
+pageviews_all: 750
+visits_all: 370
+pageviews_30d: 350
+visits_30d: 230
+pageviews_7d: 58
+visits_7d: 49
 countries_7d: 8
 countries_all: 18
 top_pages:
 - path: /
-  views: 23
+  views: 25
 - path: /about/
   views: 7
 - path: /pipelines/
@@ -41,23 +41,25 @@ top_pages:
   views: 1
 - path: /jobs/
   views: 1
+- path: /events/2026-07-21-nanometabarcoding-newcastle/
+  views: 1
 top_countries:
 - name: GB
-  views: 17
-  visits: 17
+  views: 18
+  visits: 18
 - name: US
-  views: 17
-  visits: 17
+  views: 18
+  visits: 18
 - name: SG
   views: 14
   visits: 5
 - name: NL
   views: 3
   visits: 3
-- name: FI
-  views: 1
-  visits: 1
 - name: IL
+  views: 2
+  visits: 2
+- name: FI
   views: 1
   visits: 1
 - name: JP
