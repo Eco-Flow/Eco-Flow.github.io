@@ -6,8 +6,8 @@ pageviews_all: 770
 visits_all: 390
 pageviews_30d: 350
 visits_30d: 250
-pageviews_7d: 56
-visits_7d: 47
+pageviews_7d: 57
+visits_7d: 48
 countries_7d: 8
 countries_all: 19
 top_pages:
@@ -17,9 +17,9 @@ top_pages:
   views: 7
 - path: /pipelines/
   views: 6
-- path: /pipelines/genomeqc/
-  views: 3
 - path: /training/
+  views: 4
+- path: /pipelines/genomeqc/
   views: 3
 - path: /2025/09/01/biofair-fellowship.html
   views: 3
@@ -45,8 +45,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 18
-  visits: 18
+  views: 19
+  visits: 19
 - name: GB
   views: 15
   visits: 15
