@@ -2,28 +2,30 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-17'
 since: '2026-06-27'
-pageviews_all: 770
+pageviews_all: 790
 visits_all: 390
-pageviews_30d: 330
+pageviews_30d: 350
 visits_30d: 240
-pageviews_7d: 46
-visits_7d: 39
+pageviews_7d: 55
+visits_7d: 40
 countries_7d: 8
 countries_all: 19
 top_pages:
 - path: /
-  views: 20
+  views: 21
 - path: /about/
-  views: 5
-- path: /pipelines/genomeqc/
-  views: 3
+  views: 6
 - path: /training/
+  views: 6
+- path: /pipelines/genomeqc/
   views: 3
 - path: /2025/09/01/biofair-fellowship.html
   views: 3
 - path: /pipelines/
   views: 3
 - path: /pipelines/about/
+  views: 2
+- path: /events/
   views: 2
 - path: /pipelines/synteny/
   views: 1
@@ -35,6 +37,10 @@ top_pages:
   views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
+- path: /blog/
+  views: 1
+- path: /training/hpc/
+  views: 1
 - path: /jobs/
   views: 1
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
@@ -44,8 +50,8 @@ top_countries:
   views: 18
   visits: 18
 - name: GB
-  views: 9
-  visits: 9
+  views: 18
+  visits: 10
 - name: SG
   views: 11
   visits: 4
