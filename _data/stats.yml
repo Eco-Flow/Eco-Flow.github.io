@@ -6,9 +6,9 @@ pageviews_all: 790
 visits_all: 390
 pageviews_30d: 350
 visits_30d: 240
-pageviews_7d: 40
-visits_7d: 28
-countries_7d: 9
+pageviews_7d: 42
+visits_7d: 29
+countries_7d: 10
 countries_all: 19
 top_pages:
 - path: /
@@ -18,6 +18,8 @@ top_pages:
 - path: /about/
   views: 3
 - path: /pipelines/genomeqc/
+  views: 2
+- path: /blog/
   views: 2
 - path: /events/
   views: 2
@@ -33,13 +35,13 @@ top_pages:
   views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
-- path: /blog/
-  views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /pipelines/
   views: 1
 - path: /training/hpc/
+  views: 1
+- path: /pipelines/nanoporemetabarcoding/
   views: 1
 - path: /jobs/
   views: 1
@@ -47,8 +49,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 12
-  visits: 12
+  views: 13
+  visits: 13
 - name: GB
   views: 11
   visits: 3
@@ -73,3 +75,6 @@ top_countries:
 - name: KR
   views: 1
   visits: 1
+- name: VN
+  views: 1
+  visits: 0
