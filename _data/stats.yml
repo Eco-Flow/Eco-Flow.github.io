@@ -6,19 +6,21 @@ pageviews_all: 790
 visits_all: 390
 pageviews_30d: 350
 visits_30d: 240
-pageviews_7d: 28
-visits_7d: 17
-countries_7d: 7
+pageviews_7d: 36
+visits_7d: 22
+countries_7d: 8
 countries_all: 19
 top_pages:
+- path: /
+  views: 8
 - path: /training/
   views: 6
-- path: /
-  views: 4
-- path: /about/
+- path: /pipelines/excon/
   views: 3
 - path: /pipelines/genomeqc/
-  views: 2
+  views: 3
+- path: /about/
+  views: 3
 - path: /blog/
   views: 2
 - path: /events/
@@ -27,11 +29,11 @@ top_pages:
   views: 1
 - path: /training/).
   views: 1
-- path: /pipelines/excon/
-  views: 1
 - path: /training/commandline/
   views: 1
 - path: /numbers/
+  views: 1
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /training/hpc/
   views: 1
@@ -43,13 +45,16 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 8
-  visits: 8
+  views: 11
+  visits: 11
 - name: GB
   views: 11
   visits: 3
 - name: IE
   views: 2
+  visits: 2
+- name: PT
+  views: 5
   visits: 2
 - name: SG
   views: 4
