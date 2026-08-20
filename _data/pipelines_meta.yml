@@ -7,7 +7,7 @@ Eco-Flow/excon:
   latest_release: v2.4.0
   released_at: Aug 16, 2026
   stars: 11
-  updated_at: Aug 18, 2026
+  updated_at: Aug 19, 2026
 Eco-Flow/nanoporemetabarcoding:
   latest_release: v.1.0.0
   released_at: Jul 23, 2026
@@ -28,7 +28,7 @@ Eco-Flow/training:
   updated_at: Jul 24, 2026
 nf-core/genomeqc:
   stars: 25
-  updated_at: Aug 18, 2026
+  updated_at: Aug 19, 2026
 nf-core/gwas:
   stars: 28
   updated_at: Aug 12, 2026
