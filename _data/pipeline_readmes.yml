@@ -99,7 +99,7 @@
   \ with any set of species that have a genome (fasta) and annotation (gff) file.\
   \ \n(minimum of 5 species ideally up to around 30). Maximum 100 species (normally).\
   \ \n\n## Overview\n\nThe general pipeline logic is as follows:\n\n<img width=\"\
-  398\" alt=\"image\" src=\"https://raw.githubusercontent.com/Eco-Flow/excon/main/docs/images/excon_pipeline.4.svg\"\
+  398\" alt=\"image\" src=\"https://raw.githubusercontent.com/Eco-Flow/excon/main/docs/images/excon_pipeline.5.svg\"\
   \ align=\"right\" />\n\n* Downloads genome and annotation files from NCBI `[NCBIGENOMEDOWNLOAD]`,\
   \ or you provide your own.\n* Unzips the files, if necessary `[GUNZIP]`\n* Sanitises\
   \ GFF annotations and extracts longest isoform `[AGAT_SPKEEPLONGESTISOFORM]`.\n\
