@@ -6,15 +6,15 @@ pageviews_all: 790
 visits_all: 390
 pageviews_30d: 220
 visits_30d: 180
-pageviews_7d: 33
-visits_7d: 19
+pageviews_7d: 34
+visits_7d: 20
 countries_7d: 8
 countries_all: 19
 top_pages:
 - path: /
   views: 8
 - path: /training/
-  views: 5
+  views: 6
 - path: /pipelines/excon/
   views: 4
 - path: /pipelines/genomeqc/
@@ -43,8 +43,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 9
-  visits: 9
+  views: 10
+  visits: 10
 - name: PT
   views: 8
   visits: 3
