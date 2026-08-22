@@ -6,7 +6,7 @@ pageviews_all: 800
 visits_all: 400
 pageviews_30d: 220
 visits_30d: 180
-pageviews_7d: 31
+pageviews_7d: 32
 visits_7d: 16
 countries_7d: 7
 countries_all: 19
@@ -18,7 +18,7 @@ top_pages:
 - path: /pipelines/excon/
   views: 3
 - path: /numbers/
-  views: 2
+  views: 3
 - path: /about/
   views: 2
 - path: /blog/
@@ -50,7 +50,7 @@ top_countries:
   views: 2
   visits: 2
 - name: BR
-  views: 2
+  views: 3
   visits: 1
 - name: GB
   views: 9
