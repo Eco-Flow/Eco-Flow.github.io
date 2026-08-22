@@ -232,7 +232,10 @@ These pages are built from YAML data files — edit the data, not the page:
   `name`, `affiliation`, `url`.
 - **External projects** (Pipelines page "Projects we support"):
   [`_data/external_projects.yml`](_data/external_projects.yml) — projects we advise on
-  but don't own. Each entry: `name`, `org`, `url` (links out to the repo), `summary`.
+  but don't own. Each entry: `name`, `org`, `url` (links out to the repo), `summary`, and
+  optionally `repo` (`org/name`, e.g. `RBGKew/fspassemblypipeline`) — add `repo` to also
+  surface that project's live star count in the "Pipelines we've helped build" callout on
+  the [Numbers page](#the-eco-flow-in-numbers-page-numbers).
 - **Training course** (the `/training/` page): [`_data/training.yml`](_data/training.yml) —
   course intro, funder credit, and the list of `parts`. Lessons are pulled from the training repo
   and rendered on-site — see ["Adding a training lesson"](#adding-a-training-lesson-the-training-course).
@@ -290,6 +293,13 @@ or a post and the count goes up on its own.
   `_pipelines/*.md` file to carry a `repo:` field) are listed in `EXTRA_REPOS` at the top of
   [`scripts/sync_pipeline_meta.py`](scripts/sync_pipeline_meta.py) — currently `Eco-Flow/training`.
   Add to that list to track another non-pipeline repo.
+- **"Pipelines we've helped build"** — the callout at the top of the GitHub stats section lists
+  external projects (from [`_data/external_projects.yml`](_data/external_projects.yml)) with their
+  live star count, sourced from [`_data/external_projects_meta.yml`](_data/external_projects_meta.yml)
+  — also refreshed by `sync-pipeline-meta`. Deliberately kept **separate** from `pipelines_meta.yml`
+  and the totals above: these are repos led by other teams, not Eco-Flow's own, so their stars
+  shouldn't inflate our GitHub stars total. To track a new external project here, just give its
+  entry in `external_projects.yml` a `repo:` field — the sync script picks it up automatically.
 
 ### The world map
 

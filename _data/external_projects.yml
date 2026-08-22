@@ -4,6 +4,7 @@
 - name: FSP Assembly Pipeline
   org: Royal Botanic Gardens, Kew
   url: https://github.com/RBGKew/fspassemblypipeline
+  repo: RBGKew/fspassemblypipeline
   summary: >
     A Nextflow/nf-core workflow for genome assembly from short-read sequencing
     data — covering pre-processing, assembly and quality control. Developed by
@@ -11,6 +12,7 @@
 - name: Domain Annotation Pipeline
   org: UCL Orengo Group
   url: https://github.com/UCLOrengoGroup/domain-annotation-pipeline
+  repo: UCLOrengoGroup/domain-annotation-pipeline
   summary: >
     A Nextflow pipeline that produces consensus protein-domain annotations for
     protein structures, combining the Chainsaw, Merizo and UniDoc domain parsers.

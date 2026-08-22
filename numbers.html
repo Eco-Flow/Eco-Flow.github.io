@@ -154,6 +154,27 @@ description: A snapshot of Eco-Flow's work, reach and community.
       <span class="eyebrow">GitHub</span>
       <h2>GitHub stats <span class="auto-star" title="Updated automatically from live data">★</span></h2>
     </div>
+
+    {%- comment -%}
+      Projects we've made substantial contributions to but don't own - their
+      stars aren't ours to claim, so they're kept out of the totals below and
+      shown here as a separate, clearly-labelled callout.
+    {%- endcomment -%}
+    {%- if site.data.external_projects and site.data.external_projects.size > 0 -%}
+    <div class="card" style="margin-bottom:2.5rem">
+      <h3 style="margin-top:0">Pipelines we've helped build <span class="auto-star" title="Updated automatically from live data">★</span></h3>
+      <p>Beyond our own pipelines, we've made substantial contributions to these projects led by other teams:</p>
+      <ol class="numbered">
+        {%- for proj in site.data.external_projects -%}
+          {%- assign ext_meta = site.data.external_projects_meta[proj.repo] -%}
+          {%- if ext_meta -%}
+          <li><a href="{{ proj.url }}">{{ proj.name }}</a> <span class="numbered__val">★ {{ ext_meta.stars }}</span></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
+    </div>
+    {%- endif -%}
+
     <div class="stats">
       <div class="stat"><div class="stats__num">{{ stars }}</div><div class="stats__label">GitHub stars</div></div>
       <div class="stat"><div class="stats__num">{{ site.data.pipelines_meta | size }}</div><div class="stats__label">Tracked repositories</div></div>

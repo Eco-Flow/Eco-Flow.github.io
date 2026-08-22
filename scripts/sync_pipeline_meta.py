@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 """Sync per-pipeline GitHub data into Jekyll data files:
 
-- _data/pipelines_meta.yml    star count, latest release, last-updated date
-- _data/pipeline_readmes.yml  cleaned-up README content (badges/logo header
-                               stripped, relative links/images rewritten to
-                               absolute GitHub URLs)
+- _data/pipelines_meta.yml          star count, latest release, last-updated date
+- _data/pipeline_readmes.yml        cleaned-up README content (badges/logo header
+                                     stripped, relative links/images rewritten to
+                                     absolute GitHub URLs)
+- _data/external_projects_meta.yml  star count only, for repos we don't own
+                                     (external projects we've helped build)
 
 The repo list is derived from the `repo:` front matter field in _pipelines/*.md
 (not a separate config), so adding `repo:` to a new pipeline file is enough to
-pick it up on the next sync.
+pick it up on the next sync. External projects are read the same way, from the
+`repo:` field of each entry in _data/external_projects.yml. Their stars are
+kept in a separate file and are never folded into the pipelines_meta.yml totals
+on /numbers/ — those totals represent Eco-Flow's own repos, not repos we merely
+advise on.
 """
 
 import datetime
@@ -26,6 +32,8 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PIPELINES_DIR = os.path.join(REPO_ROOT, "_pipelines")
 META_OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "pipelines_meta.yml")
 README_OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "pipeline_readmes.yml")
+EXTERNAL_PROJECTS_PATH = os.path.join(REPO_ROOT, "_data", "external_projects.yml")
+EXTERNAL_META_OUTPUT_PATH = os.path.join(REPO_ROOT, "_data", "external_projects_meta.yml")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
 # Repos we track on /numbers/ that aren't pipelines, so have no _pipelines/*.md
@@ -58,6 +66,14 @@ def collect_pipelines():
         if repo:
             pipelines.append(repo)
     return sorted(set(pipelines))
+
+
+def collect_external_project_repos():
+    if not os.path.exists(EXTERNAL_PROJECTS_PATH):
+        return []
+    with open(EXTERNAL_PROJECTS_PATH, encoding="utf-8") as f:
+        projects = yaml.safe_load(f) or []
+    return sorted({p["repo"] for p in projects if p.get("repo")})
 
 
 def api_get(path, raw=False):
@@ -164,6 +180,21 @@ def main():
     with open(README_OUTPUT_PATH, "w", encoding="utf-8") as f:
         yaml.safe_dump(readme_result, f, sort_keys=True, default_flow_style=False, default_style="|")
     print(f"Wrote {README_OUTPUT_PATH}")
+
+    external_repos = collect_external_project_repos()
+    if external_repos:
+        external_meta_result = {}
+        for repo in external_repos:
+            print(f"Fetching {repo} (external project)...")
+            try:
+                repo_info = api_get(f"/repos/{repo}")
+                external_meta_result[repo] = {"stars": repo_info.get("stargazers_count", 0)}
+            except urllib.error.HTTPError as e:
+                print(f"  failed: {e}", file=sys.stderr)
+
+        with open(EXTERNAL_META_OUTPUT_PATH, "w", encoding="utf-8") as f:
+            yaml.safe_dump(external_meta_result, f, sort_keys=True, default_flow_style=False)
+        print(f"Wrote {EXTERNAL_META_OUTPUT_PATH}")
 
 
 if __name__ == "__main__":

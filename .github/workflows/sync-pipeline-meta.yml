@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add _data/pipelines_meta.yml _data/pipeline_readmes.yml
+          git add _data/pipelines_meta.yml _data/pipeline_readmes.yml _data/external_projects_meta.yml
           if ! git diff --cached --quiet; then
             git commit -m "Sync pipeline metadata from GitHub"
             git pull --rebase origin publish
