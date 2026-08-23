@@ -6,9 +6,9 @@ pageviews_all: 810
 visits_all: 410
 pageviews_30d: 230
 visits_30d: 190
-pageviews_7d: 34
-visits_7d: 16
-countries_7d: 6
+pageviews_7d: 36
+visits_7d: 18
+countries_7d: 7
 countries_all: 19
 top_pages:
 - path: /
@@ -19,6 +19,8 @@ top_pages:
   views: 5
 - path: /pipelines/excon/
   views: 3
+- path: /training/commandline/
+  views: 2
 - path: /blog/
   views: 2
 - path: /events/
@@ -43,8 +45,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 8
-  visits: 8
+  views: 9
+  visits: 9
 - name: PT
   views: 8
   visits: 3
@@ -56,6 +58,9 @@ top_countries:
   visits: 2
 - name: GB
   views: 9
+  visits: 1
+- name: SG
+  views: 1
   visits: 1
 - name: VN
   views: 1
