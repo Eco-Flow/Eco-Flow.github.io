@@ -1304,8 +1304,8 @@
   \nFor further information or help, don't hesitate to get in touch on the [Slack\
   \ `#genomeqc` channel](https://nfcore.slack.com/channels/genomeqc) (you can join\
   \ with [this invite](https://nf-co.re/join/slack)).\n\n## Citations\n\nIf you use\
-  \ nf-core/genomeqc for your analysis, please cite it using the following doi: https://doi.org/10.48546/WORKFLOWHUB.WORKFLOW.2181.1,\
-  \ until the paper is accepted in a peer reviwed journal.\n\nAn extensive list of\
+  \ nf-core/genomeqc for your analysis, please cite our preprint: https://doi.org/10.64898/2026.08.20.745971,\
+  \ until the paper is accepted in a peer reviewed journal.\n\nAn extensive list of\
   \ references for the tools used by the pipeline can be found in the [`CITATIONS.md`](https://github.com/nf-core/genomeqc/blob/dev/CITATIONS.md)\
   \ file.\n\nYou can cite the `nf-core` publication as follows:\n\n> **The nf-core\
   \ framework for community-curated bioinformatics pipelines.**\n>\n> Philip Ewels,\
