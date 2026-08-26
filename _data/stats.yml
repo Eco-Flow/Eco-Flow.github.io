@@ -2,20 +2,20 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-26'
 since: '2026-06-27'
-pageviews_all: 810
-visits_all: 410
-pageviews_30d: 190
-visits_30d: 160
-pageviews_7d: 30
-visits_7d: 20
+pageviews_all: 800
+visits_all: 300
+pageviews_30d: 200
+visits_30d: 170
+pageviews_7d: 31
+visits_7d: 21
 countries_7d: 4
 countries_all: 19
 top_pages:
 - path: /
   views: 7
-- path: /pipelines/excon/
-  views: 4
 - path: /training/commandline/
+  views: 5
+- path: /pipelines/excon/
   views: 4
 - path: /numbers/
   views: 4
@@ -41,11 +41,11 @@ top_countries:
 - name: US
   views: 12
   visits: 12
+- name: SG
+  views: 5
+  visits: 4
 - name: PT
   views: 8
-  visits: 3
-- name: SG
-  views: 4
   visits: 3
 - name: BR
   views: 6
