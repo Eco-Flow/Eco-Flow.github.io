@@ -2,20 +2,20 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-28'
 since: '2026-06-27'
-pageviews_all: 830
-visits_all: 430
-pageviews_30d: 190
-visits_30d: 160
-pageviews_7d: 29
-visits_7d: 17
-countries_7d: 4
+pageviews_all: 850
+visits_all: 450
+pageviews_30d: 210
+visits_30d: 180
+pageviews_7d: 33
+visits_7d: 21
+countries_7d: 5
 countries_all: 19
 top_pages:
 - path: /training/commandline/
+  views: 6
+- path: /
   views: 5
 - path: /numbers/
-  views: 4
-- path: /
   views: 4
 - path: /training/
   views: 3
@@ -35,20 +35,27 @@ top_pages:
   views: 1
 - path: /training/differential/
   views: 1
+- path: /2026/03/19/hackathon-london.html
+  views: 1
 - path: /services/
+  views: 1
+- path: /pipelines/
   views: 1
 - path: /jobs/
   views: 1
 top_countries:
 - name: US
-  views: 10
-  visits: 10
+  views: 12
+  visits: 12
 - name: SG
-  views: 5
-  visits: 4
+  views: 6
+  visits: 5
 - name: BR
   views: 6
   visits: 2
 - name: ES
   views: 8
+  visits: 1
+- name: FR
+  views: 1
   visits: 1
