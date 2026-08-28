@@ -716,20 +716,20 @@
   \ in the first column and the corresponding sample name in the second column:\n\n\
   ```\n    // Metadata with primer combinations\n    metadata                   =\
   \ path/to/metadata.csv\n```\n\nThe structure of the CSV should be as follows:\n\n\
-  ```\nid,primer_comb,sample\nfastq_id_1,<forward-primer-tag-id>_<forward-primer-tag-id>,sample1\n\
+  ```\nid,tag_primer,sample\nfastq_id_1,<forward-primer-tag-id>_<forward-primer-tag-id>,sample1\n\
   fastq_id_2,<forward-primer-tag-id>_<forward-primer-tag-id>,sample2\n...\n```\n\n\
   > [!NOTE]\n> If <forward-primer-tag-id> and/or <forward-primer-tag-id> in the metadata\
   \ samplesheet don't match the ids in the primer-tag FASTA files, demultiplexing\
   \ won't work. Make sure they have the exact same name.\n\nThe id of the metadata\
   \ should match the id of the samplesheet (see [usage](#usage)), and values for the\
-  \ `primer_comb` and `sample` fields should be unique within id groups. See `./test_data/metadata.csv`\
+  \ `tag_primer` and `sample` fields should be unique within id groups. See `./test_data/metadata.csv`\
   \ for an example. If set to `null` (value by default), the pipeline will use the\
   \ primer-tag combination as the sample ID in the final ASV table.\n\n**Demultiplex\
   \ options:**\n\n1. List of forward primer-tag combinations in FASTA format:\n\n\
-  ```\n    // Cutadapt options\n    tags_f                      = 'path/to/forward/primer-tag.fasta'\
+  ```\n    // Cutadapt options\n    tag_primers_f                      = 'path/to/forward/primer-tag.fasta'\
   \ // List of forward primer-tag combinations in fasta format\n```\n\n2. List of\
-  \ reverse primer-tag combinations in FASTA format:\n\n```\n    tags_r          \
-  \            = 'path/to/reverse/primer-tag.fasta' // List of forward primer-tag\
+  \ reverse primer-tag combinations in FASTA format:\n\n```\n    tag_primers_r   \
+  \                   = 'path/to/reverse/primer-tag.fasta' // List of forward primer-tag\
   \ combinations in fasta format\n```\n\n3. Set the error rate for adapter removal.\
   \ This can be a value between 0 and 1 (1 not included) if a maximum error rate wants\
   \ to be applied to all adapters, or it can be equal or greater than 1, in which\
@@ -748,52 +748,52 @@
   \ the length of the longest primer to avoid spurious matches.\n\n```\n    overlap\
   \                     = null // Minimum overlap length for an adapter to be found\n\
   ```\n\n**Nanofilt options:**\n\n1. Nanofilt is run before demultiplexing and tag+primer\
-  \ trimming:\n\n```\n    // Nanofilt options\n    nano_quality                = null\
-  \ // Minimum read quality (phred score)\n    nano_read_length            = 250 //\
-  \ Minimum reads length\n```\n\n2. Filter FASTQs with a number of reads equal or\
-  \ lower than (changing this value is not recommended):\n\n```\n    filt_fastq  \
-  \                = 0\n```\n\nCheck `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta`\
-  \ for examples of `tags_f` and `tags_r` files, respectively.\n\n**Blast options:**\n\
-  \n1. Path to an already built blast database:\n\n```\n    blast_db             \
-  \      = 'path/to/blast.db' // Path to already built database\n```\n\n2. Or build\
-  \ a local BLAST database from a collection of sequences:\n\n```\n    custom_db \
-  \                 = 'path/to/local/database.fasta' // Path to database to be built\n\
-  ```\n\n3. The E value describes the number of hits one can \u201Cexpect\u201D to\
-  \ see by chance when searching a database of a particular size. The lower the value,\
-  \ the more significant a match is:\n\n```\n    evalue                     = 0.001\
-  \ // evalue cutoff\n```\n\n4. Maximum number of hits per query (consensus sequence):\n\
-  \n```\n    max_target_seqs            = 5 // Maximum number of hits per query\n\
-  ```\n\n5. Maximum number of high-scoring segment pairs (HSPs) per subject (sequence\
-  \ in the database):\n\n```\n    max_hsps                   = null // Maximum number\
-  \ of HSPs per subject (subjects in the database)\n```\n\n6. Minimum query (consensus\
-  \ sequence) coverage per HSP:\n\n```\n    qcov_hsp_perc              = 90 // Minimum\
-  \ query coverage per HSP\n```\n\nFor more details, check the appendix section of\
-  \ the [blast documentation](https://www.ncbi.nlm.nih.gov/books/NBK279690/).\n\n\
-  <!-- You should supply **either** the path to an already built database or a custom\
+  \ trimming:\n\n```\n    // Nanofilt options\n    min_read_quality              \
+  \  = null // Minimum read quality (phred score)\n    min_read_length           \
+  \ = 250 // Minimum reads length\n```\n\n2. Filter FASTQs with a number of reads\
+  \ equal or lower than (changing this value is not recommended):\n\n```\n    min_reads\
+  \                  = 0\n```\n\nCheck `./test_data/primers_f.fasta` and `./test_data/primers_r.fasta`\
+  \ for examples of `tag_primers_f` and `tag_primers_r` files, respectively.\n\n**Blast\
+  \ options:**\n\n1. Path to an already built blast database:\n\n```\n    blast_db\
+  \                   = 'path/to/blast.db' // Path to already built database\n```\n\
+  \n2. Or build a local BLAST database from a collection of sequences:\n\n```\n  \
+  \  custom_db                  = 'path/to/local/database.fasta' // Path to database\
+  \ to be built\n```\n\n3. The E value describes the number of hits one can \u201C\
+  expect\u201D to see by chance when searching a database of a particular size. The\
+  \ lower the value, the more significant a match is:\n\n```\n    evalue         \
+  \            = 0.001 // evalue cutoff\n```\n\n4. Maximum number of hits per query\
+  \ (consensus sequence):\n\n```\n    max_target_seqs            = 5 // Maximum number\
+  \ of hits per query\n```\n\n5. Maximum number of high-scoring segment pairs (HSPs)\
+  \ per subject (sequence in the database):\n\n```\n    max_hsps                 \
+  \  = null // Maximum number of HSPs per subject (subjects in the database)\n```\n\
+  \n6. Minimum query (consensus sequence) coverage per HSP:\n\n```\n    qcov_hsp_perc\
+  \              = 90 // Minimum query coverage per HSP\n```\n\nFor more details,\
+  \ check the appendix section of the [blast documentation](https://www.ncbi.nlm.nih.gov/books/NBK279690/).\n\
+  \n<!-- You should supply **either** the path to an already built database or a custom\
   \ FASTA collection with sequences to built a custom one. If both are supplied the\
   \ pipeline will fail. -->\n\n**Assign taxonomy options:**\n\n1. Assign taxonomy\
   \ at different levels based on an identity threshold:\n\n```\n    // Assign taxonomy\
-  \ options\n    spident                     = null // Identity threshold (in %) for\
-  \ taxonomy assignment at species level. If not set, the value by default will be\
-  \ 99. Set to > 100 if not wanting to assign species\n    gpident               \
-  \      = null // Identity threshold (in %) for taxonomy assignment at genus level.\
-  \ If not set, the value by default will be 90\n    fpident                     =\
-  \ null // Identity threshold (in %) for taxonomy assignment at family level. If\
-  \ not set, the value by default will be 80\n    opident                     = null\
-  \ // Identity threshold (in %) for taxonomy assignment at order level. If not set,\
-  \ the value by default will be 70\n```\n\n2. Path to `taxonomizr` SQL database:\n\
-  \n```\n    sql_db                      = 'path/to/taxonomizr/database.sqlite' //\
-  \ Path to the taxonomizr SQLite database\n```\n\n**Command line arguments:**\n\n\
-  Alternatively, instead of modifying the `nextflow.config` file, you can provide/modify\
+  \ options\n    min_pident_species                     = null // Identity threshold\
+  \ (in %) for taxonomy assignment at species level. If not set, the value by default\
+  \ will be 99. Set to > 100 if not wanting to assign species\n    min_pident_genus\
+  \                     = null // Identity threshold (in %) for taxonomy assignment\
+  \ at genus level. If not set, the value by default will be 90\n    min_pident_family\
+  \                     = null // Identity threshold (in %) for taxonomy assignment\
+  \ at family level. If not set, the value by default will be 80\n    min_pident_order\
+  \                     = null // Identity threshold (in %) for taxonomy assignment\
+  \ at order level. If not set, the value by default will be 70\n```\n\n2. Path to\
+  \ `taxonomizr` SQL database:\n\n```\n    sql_db                      = 'path/to/taxonomizr/database.sqlite'\
+  \ // Path to the taxonomizr SQLite database\n```\n\n**Command line arguments:**\n\
+  \nAlternatively, instead of modifying the `nextflow.config` file, you can provide/modify\
   \ pipeline options by specifying them as command line arguments. For example:\n\n\
   ```bash\nnextflow run main.nf \\\n   -profile <docker/singularity/.../institute>\
-  \ \\\n   --input samplesheet.csv \\\n   --outdir <OUTDIR>\n   --nano_quality 10\n\
-  \   --evalue 1e-10\n   --tags_f path/to/forward/tags+primers.fasta\n   --tags_r\
-  \ path/to/reverse/tags+primers.fasta\n   ...\n```\n\n## Pipeline output\n\n<!--\
-  \ To see the results of an example test run with a full size dataset refer to the\
-  \ [results](https://nf-co.re/nanoporemetabarcoding/results) tab on the nf-core website\
-  \ pipeline page.\nFor more details about the output files and reports, please refer\
-  \ to the\n[output documentation](https://nf-co.re/nanoporemetabarcoding/output).\
+  \ \\\n   --input samplesheet.csv \\\n   --outdir <OUTDIR>\n   --min_read_quality\
+  \ 10\n   --evalue 1e-10\n   --tag_primers_f path/to/forward/tags+primers.fasta\n\
+  \   --tag_primers_r path/to/reverse/tags+primers.fasta\n   ...\n```\n\n## Pipeline\
+  \ output\n\n<!-- To see the results of an example test run with a full size dataset\
+  \ refer to the [results](https://nf-co.re/nanoporemetabarcoding/results) tab on\
+  \ the nf-core website pipeline page.\nFor more details about the output files and\
+  \ reports, please refer to the\n[output documentation](https://nf-co.re/nanoporemetabarcoding/output).\
   \ -->\n\n<!-- For an example of some of the relevant results check the `./results`\
   \ folder in this repo. -->\n\nThe files listed below will be created in the results\
   \ directory (set by `--outdir`) after the pipeline has finished. All paths are relative\
@@ -1265,15 +1265,15 @@
   \ an input **samplesheet** in **csv format** (e.g. `samplesheet.csv`). You can prepare\
   \ your sampplesheet using:\n\n### 1. Local files\n\nSimply point out to your local\
   \ genome assembly and annotation (in FASTA and GFF format, respectively) using the\
-  \ `fasta` and `gff` fields:\n\n```csv\nspecies,fasta,gff\nspecies_1,/path/to/genome1.fasta,/path/to/annotation1.gff3\n\
-  species_2,/path/to/genome2.fasta,/path/to/annotation2.gff3\nspecies_3,/path/to/genome3.fasta,/path/to/annotation3.gff3\n\
+  \ `fasta` and `gff` fields:\n\n```csv\nassembly,fasta,gff\nassembly_1,/path/to/genome1.fasta,/path/to/annotation1.gff3\n\
+  assembly_2,/path/to/genome2.fasta,/path/to/annotation2.gff3\nassembly_3,/path/to/genome3.fasta,/path/to/annotation3.gff3\n\
   ```\n\n### 2. ncbi accessions\n\nAdditionally, you can run the pipeline providing\
   \ ncbi accessions (RefSeq or GenBank, depeding on the mode you wish to run) in the\
-  \ `ncbi` field:\n\n```csv\nspecies,ncbi\nspecies_1,GCF_000000001.1\nspecies_2,GCF_000000002.1\n\
-  species_3,GCF_000000003.1\n```\n\n### 3. Both\n\nYou can combine both input types\
-  \ in the same samplesheet:\n\n```csv\nspecies,ncbi,fasta,gff\nspecies_1,GCF_000000001.1\n\
-  species_2,,/path/to/genome2.fasta,/path/to/annotation2.gff3\nspecies_3,GCF_000000003.1\n\
-  species_4,,/path/to/genome4.fasta,/path/to/annotation4.gff3\n```\n\n### Run the\
+  \ `ncbi` field:\n\n```csv\nassembly,ncbi\nassembly_1,GCF_000000001.1\nassembly_2,GCF_000000002.1\n\
+  assembly_3,GCF_000000003.1\n```\n\n### 3. Both\n\nYou can combine both input types\
+  \ in the same samplesheet:\n\n```csv\nassembly,ncbi,fasta,gff\nassembly_1,GCF_000000001.1\n\
+  assembly_2,,/path/to/genome2.fasta,/path/to/annotation2.gff3\nassembly_3,GCF_000000003.1\n\
+  assembly_4,,/path/to/genome4.fasta,/path/to/annotation4.gff3\n```\n\n### Run the\
   \ pipeline\n\nRun the pipeline using:\n\n```bash\nnextflow run nf-core/genomeqc\
   \ \\\n   -profile <docker/singularity/.../institute> \\\n   --input samplesheet.csv\
   \ \\\n   --outdir <OUTDIR>\n```\n\nYou can run the pipeline using a test profile\
