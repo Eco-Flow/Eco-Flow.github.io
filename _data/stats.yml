@@ -6,8 +6,8 @@ pageviews_all: 850
 visits_all: 450
 pageviews_30d: 210
 visits_30d: 180
-pageviews_7d: 32
-visits_7d: 20
+pageviews_7d: 33
+visits_7d: 21
 countries_7d: 5
 countries_all: 19
 top_pages:
@@ -37,6 +37,8 @@ top_pages:
   views: 1
 - path: /2026/03/19/hackathon-london.html
   views: 1
+- path: /training/nanopore-metabarcoding/
+  views: 1
 - path: /services/
   views: 1
 - path: /pipelines/
@@ -45,8 +47,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 11
-  visits: 11
+  views: 12
+  visits: 12
 - name: SG
   views: 6
   visits: 5
