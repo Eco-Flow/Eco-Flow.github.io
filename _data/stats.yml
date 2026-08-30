@@ -2,34 +2,36 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-30'
 since: '2026-06-27'
-pageviews_all: 1000
-visits_all: 0
+pageviews_all: 850
+visits_all: 450
 pageviews_30d: 210
 visits_30d: 180
-pageviews_7d: 38
-visits_7d: 29
+pageviews_7d: 47
+visits_7d: 37
 countries_7d: 5
 countries_all: 19
 top_pages:
 - path: /training/commandline/
   views: 6
 - path: /
-  views: 4
+  views: 5
 - path: /pipelines/synteny/
-  views: 2
-- path: /pipelines/excon/
-  views: 2
+  views: 3
 - path: /about/
-  views: 2
+  views: 3
 - path: /funding/
-  views: 2
+  views: 3
 - path: /blog/
+  views: 3
+- path: /services/
+  views: 3
+- path: /pipelines/
+  views: 3
+- path: /pipelines/excon/
   views: 2
 - path: /training/
   views: 2
-- path: /services/
-  views: 2
-- path: /pipelines/
+- path: /2025/09/01/biofair-fellowship.html
   views: 2
 - path: /pipelines/comparete/
   views: 2
@@ -37,9 +39,9 @@ top_pages:
   views: 1
 - path: /training/github-basics/
   views: 1
-- path: /training/pipelines/
+- path: /training/setup/
   views: 1
-- path: /2025/09/01/biofair-fellowship.html
+- path: /training/pipelines/
   views: 1
 - path: /training/differential/
   views: 1
@@ -55,11 +57,11 @@ top_pages:
   views: 1
 top_countries:
 - name: CN
-  views: 12
-  visits: 11
+  views: 20
+  visits: 18
 - name: US
-  views: 11
-  visits: 11
+  views: 12
+  visits: 12
 - name: SG
   views: 6
   visits: 5
