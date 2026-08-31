@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-08-31'
 since: '2026-06-27'
-pageviews_all: 800
-visits_all: 300
+pageviews_all: 850
+visits_all: 450
 pageviews_30d: 210
 visits_30d: 180
-pageviews_7d: 47
-visits_7d: 36
+pageviews_7d: 49
+visits_7d: 37
 countries_7d: 6
 countries_all: 19
 top_pages:
@@ -17,13 +17,13 @@ top_pages:
   views: 4
 - path: /pipelines/synteny/
   views: 3
-- path: /pipelines/excon/
-  views: 3
 - path: /about/
   views: 3
 - path: /funding/
   views: 3
 - path: /blog/
+  views: 3
+- path: /pipelines/excon/
   views: 3
 - path: /services/
   views: 3
@@ -37,6 +37,8 @@ top_pages:
   views: 2
 - path: /pipelines/genomeqc/
   views: 1
+- path: /citations/
+  views: 1
 - path: /training/github-basics/
   views: 1
 - path: /training/setup/
@@ -44,6 +46,8 @@ top_pages:
 - path: /training/pipelines/
   views: 1
 - path: /training/differential/
+  views: 1
+- path: /events/
   views: 1
 - path: /pipelines/gwas/
   views: 1
@@ -60,8 +64,8 @@ top_countries:
   views: 20
   visits: 18
 - name: US
-  views: 11
-  visits: 11
+  views: 13
+  visits: 12
 - name: SG
   views: 6
   visits: 4
