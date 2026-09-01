@@ -6,20 +6,20 @@ pageviews_all: 870
 visits_all: 450
 pageviews_30d: 230
 visits_30d: 180
-pageviews_7d: 53
-visits_7d: 35
-countries_7d: 7
+pageviews_7d: 63
+visits_7d: 41
+countries_7d: 8
 countries_all: 19
 top_pages:
 - path: /
+  views: 9
+- path: /about/
   views: 6
 - path: /training/commandline/
-  views: 4
-- path: /about/
-  views: 4
-- path: /blog/
-  views: 4
+  views: 5
 - path: /training/
+  views: 5
+- path: /blog/
   views: 4
 - path: /pipelines/synteny/
   views: 3
@@ -35,19 +35,21 @@ top_pages:
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
+- path: /pipelines/gwas/
+  views: 2
 - path: /pipelines/comparete/
   views: 2
-- path: /pipelines/genomeqc/
-  views: 1
-- path: /citations/
+- path: /pipelines/pollen-metabarcoding/
   views: 1
 - path: /training/github-basics/
   views: 1
 - path: /training/setup/
   views: 1
-- path: /training/differential/
+- path: /citations/
   views: 1
-- path: /pipelines/gwas/
+- path: /pipelines/genomeqc/
+  views: 1
+- path: /training/differential/
   views: 1
 - path: /2026/03/19/hackathon-london.html
   views: 1
@@ -57,21 +59,26 @@ top_pages:
   views: 1
 - path: /pipelines/nanoporemetabarcoding/
   views: 1
+- path: /2026/06/23/new-website-design.html
+  views: 1
 top_countries:
 - name: CN
   views: 20
   visits: 18
 - name: US
-  views: 10
-  visits: 9
+  views: 13
+  visits: 12
 - name: SG
-  views: 7
-  visits: 5
+  views: 12
+  visits: 7
 - name: ES
   views: 8
   visits: 1
 - name: FR
   views: 1
+  visits: 1
+- name: GB
+  views: 2
   visits: 1
 - name: KR
   views: 1
