@@ -27,8 +27,10 @@ Eco-Flow/training:
   stars: 6
   updated_at: Jul 24, 2026
 nf-core/genomeqc:
+  latest_release: 1.0.0
+  released_at: Sep 1, 2026
   stars: 26
-  updated_at: Aug 28, 2026
+  updated_at: Sep 1, 2026
 nf-core/gwas:
   stars: 28
   updated_at: Aug 12, 2026
