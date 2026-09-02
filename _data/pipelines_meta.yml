@@ -12,7 +12,7 @@ Eco-Flow/nanoporemetabarcoding:
   latest_release: v.1.0.0
   released_at: Jul 23, 2026
   stars: 8
-  updated_at: Aug 27, 2026
+  updated_at: Sep 1, 2026
 Eco-Flow/pollen-metabarcoding:
   latest_release: v2.0.2
   released_at: Aug 1, 2024
@@ -33,4 +33,4 @@ nf-core/genomeqc:
   updated_at: Sep 1, 2026
 nf-core/gwas:
   stars: 28
-  updated_at: Aug 12, 2026
+  updated_at: Sep 1, 2026
