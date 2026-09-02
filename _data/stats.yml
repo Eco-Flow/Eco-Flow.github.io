@@ -6,61 +6,19 @@ pageviews_all: 800
 visits_all: 300
 pageviews_30d: 240
 visits_30d: 190
-pageviews_7d: 66
-visits_7d: 44
+pageviews_7d: 70
+visits_7d: 50
 countries_7d: 9
 countries_all: 20
 top_pages:
+- path: /training/commandline/
+  views: 30
+- path: /training/
+  views: 20
 - path: /
   views: 10
-- path: /about/
-  views: 6
-- path: /training/commandline/
-  views: 5
-- path: /training/
-  views: 5
-- path: /pipelines/excon/
-  views: 4
-- path: /blog/
-  views: 4
-- path: /pipelines/synteny/
-  views: 3
-- path: /events/
-  views: 3
-- path: /services/
-  views: 3
-- path: /pipelines/
-  views: 3
-- path: /funding/
-  views: 2
-- path: /training/setup/
-  views: 2
-- path: /2025/09/01/biofair-fellowship.html
-  views: 2
-- path: /pipelines/gwas/
-  views: 2
-- path: /2026/03/19/hackathon-london.html
-  views: 2
-- path: /training/github-basics/
-  views: 1
-- path: /pipelines/pollen-metabarcoding/
-  views: 1
-- path: /citations/
-  views: 1
-- path: /pipelines/genomeqc/
-  views: 1
-- path: /training/differential/
-  views: 1
-- path: /training/nanopore-metabarcoding/
-  views: 1
-- path: /training/nfcore-rnaseq/
-  views: 1
-- path: /pipelines/comparete/
-  views: 1
 - path: /pipelines/nanoporemetabarcoding/
-  views: 1
-- path: /2026/06/23/new-website-design.html
-  views: 1
+  views: 10
 top_countries:
 - name: CN
   views: 20
