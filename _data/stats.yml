@@ -2,26 +2,26 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-03'
 since: '2026-06-27'
-pageviews_all: 880
-visits_all: 460
-pageviews_30d: 220
-visits_30d: 170
-pageviews_7d: 68
-visits_7d: 45
-countries_7d: 9
+pageviews_all: 900
+visits_all: 480
+pageviews_30d: 240
+visits_30d: 190
+pageviews_7d: 73
+visits_7d: 50
+countries_7d: 10
 countries_all: 21
 top_pages:
 - path: /
-  views: 10
+  views: 13
 - path: /about/
   views: 6
 - path: /pipelines/excon/
   views: 5
+- path: /training/
+  views: 5
 - path: /pipelines/synteny/
   views: 4
 - path: /blog/
-  views: 4
-- path: /training/
   views: 4
 - path: /training/commandline/
   views: 4
@@ -51,6 +51,8 @@ top_pages:
   views: 1
 - path: /training/github-basics/
   views: 1
+- path: /training/).
+  views: 1
 - path: /training/differential/
   views: 1
 - path: /training/nanopore-metabarcoding/
@@ -66,19 +68,22 @@ top_countries:
   views: 21
   visits: 19
 - name: US
-  views: 14
-  visits: 13
+  views: 16
+  visits: 15
 - name: SG
   views: 14
   visits: 8
+- name: GB
+  views: 3
+  visits: 2
+- name: NL
+  views: 2
+  visits: 2
 - name: ES
   views: 8
   visits: 1
 - name: FR
   views: 1
-  visits: 1
-- name: GB
-  views: 2
   visits: 1
 - name: HK
   views: 1
