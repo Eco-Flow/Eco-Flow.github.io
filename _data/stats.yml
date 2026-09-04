@@ -6,34 +6,87 @@ pageviews_all: 900
 visits_all: 480
 pageviews_30d: 240
 visits_30d: 190
-pageviews_7d: 70
-visits_7d: 50
-countries_7d: 5
+pageviews_7d: 72
+visits_7d: 53
+countries_7d: 10
 countries_all: 21
 top_pages:
-- path: /training/commandline/
-  views: 20
 - path: /
-  views: 20
-- path: /training/).
-  views: 10
+  views: 12
+- path: /training/setup/
+  views: 6
+- path: /training/commandline/
+  views: 6
 - path: /training/
-  views: 10
+  views: 6
+- path: /about/
+  views: 5
+- path: /pipelines/excon/
+  views: 4
+- path: /blog/
+  views: 4
+- path: /pipelines/synteny/
+  views: 3
+- path: /events/
+  views: 3
+- path: /pipelines/
+  views: 3
+- path: /funding/
+  views: 2
+- path: /2025/09/01/biofair-fellowship.html
+  views: 2
+- path: /pipelines/gwas/
+  views: 2
+- path: /2026/03/19/hackathon-london.html
+  views: 2
+- path: /services/
+  views: 2
 - path: /pipelines/nanoporemetabarcoding/
-  views: 10
+  views: 2
+- path: /training/github-basics/
+  views: 1
+- path: /pipelines/pollen-metabarcoding/
+  views: 1
+- path: /citations/
+  views: 1
+- path: /training/).
+  views: 1
+- path: /training/nanopore-metabarcoding/
+  views: 1
+- path: /training/nfcore-rnaseq/
+  views: 1
+- path: /jobs/
+  views: 1
+- path: /2026/06/23/new-website-design.html
+  views: 1
 top_countries:
+- name: CN
+  views: 21
+  visits: 19
 - name: US
-  views: 20
-  visits: 20
-- name: FR
-  views: 10
-  visits: 10
-- name: NL
-  views: 10
-  visits: 10
+  views: 16
+  visits: 15
 - name: SG
-  views: 10
+  views: 16
   visits: 10
+- name: BE
+  views: 5
+  visits: 2
+- name: GB
+  views: 3
+  visits: 2
+- name: NL
+  views: 2
+  visits: 2
+- name: FR
+  views: 1
+  visits: 1
+- name: HK
+  views: 1
+  visits: 1
+- name: KR
+  views: 1
+  visits: 1
 - name: AR
-  views: 20
+  views: 6
   visits: 0
