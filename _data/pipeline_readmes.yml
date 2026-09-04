@@ -663,10 +663,7 @@
   \ of what types of data the pipeline ingests, a brief overview of the\n   major\
   \ pipeline sections and the types of output it produces. You're giving an overview\
   \ to someone new\n   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction\n\
-  -->\n\n<!-- TODO nf-core: Include a figure that guides the user through the major\
-  \ workflow steps. Many nf-core\n     workflows use the \"tube map\" design for that.\
-  \ See https://nf-co.re/docs/community/brand/workflow-schematics#examples for examples.\
-  \   -->\n<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps\
+  -->\n\n<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps\
   \ in the pipeline -->\n\n1. Filtering and trimming ([`NanoFilt`](https://github.com/wdecoster/nanofilt))\n\
   2. Read QC ([`NanoPlot`](https://github.com/wdecoster/NanoPlot))\n   - Ran on both\
   \ raw and filtered and trimmed reads\n3. Tags+primer based demultiplexing and trimming\
