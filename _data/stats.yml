@@ -6,23 +6,23 @@ pageviews_all: 910
 visits_all: 480
 pageviews_30d: 230
 visits_30d: 170
-pageviews_7d: 57
-visits_7d: 36
-countries_7d: 10
+pageviews_7d: 63
+visits_7d: 42
+countries_7d: 11
 countries_all: 21
 top_pages:
 - path: /
-  views: 13
+  views: 14
+- path: /training/setup/
+  views: 7
 - path: /training/
   views: 7
 - path: /pipelines/excon/
   views: 5
 - path: /training/commandline/
   views: 5
-- path: /training/setup/
-  views: 5
 - path: /about/
-  views: 3
+  views: 4
 - path: /events/
   views: 3
 - path: /blog/
@@ -35,11 +35,15 @@ top_pages:
   views: 1
 - path: /training/).
   views: 1
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
+  views: 1
 - path: /citations/
   views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
 - path: /2026/07/21/diets-symposium-workshop.html
+  views: 1
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /pipelines/gwas/
   views: 1
@@ -53,11 +57,11 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 14
-  visits: 13
+  views: 17
+  visits: 16
 - name: SG
-  views: 16
-  visits: 10
+  views: 18
+  visits: 12
 - name: GB
   views: 9
   visits: 4
@@ -71,6 +75,9 @@ top_countries:
   views: 2
   visits: 2
 - name: CO
+  views: 1
+  visits: 1
+- name: DE
   views: 1
   visits: 1
 - name: HK
