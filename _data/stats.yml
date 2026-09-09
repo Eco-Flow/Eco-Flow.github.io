@@ -2,17 +2,17 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-09'
 since: '2026-06-27'
-pageviews_all: 910
+pageviews_all: 920
 visits_all: 480
-pageviews_30d: 220
+pageviews_30d: 230
 visits_30d: 160
-pageviews_7d: 39
-visits_7d: 30
+pageviews_7d: 44
+visits_7d: 33
 countries_7d: 9
 countries_all: 22
 top_pages:
 - path: /
-  views: 10
+  views: 13
 - path: /training/setup/
   views: 6
 - path: /pipelines/excon/
@@ -20,6 +20,10 @@ top_pages:
 - path: /training/
   views: 4
 - path: /training/commandline/
+  views: 2
+- path: /2026/07/21/diets-symposium-workshop.html
+  views: 2
+- path: /blog/
   views: 2
 - path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 2
@@ -29,11 +33,7 @@ top_pages:
   views: 1
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 1
-- path: /2026/07/21/diets-symposium-workshop.html
-  views: 1
 - path: /about/
-  views: 1
-- path: /blog/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
@@ -47,14 +47,14 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 11
-  visits: 11
+  views: 13
+  visits: 13
 - name: SG
   views: 9
   visits: 7
 - name: GB
-  views: 7
-  visits: 3
+  views: 10
+  visits: 4
 - name: BE
   views: 5
   visits: 2
