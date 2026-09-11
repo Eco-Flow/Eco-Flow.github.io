@@ -6,19 +6,19 @@ pageviews_all: 940
 visits_all: 500
 pageviews_30d: 210
 visits_30d: 150
-pageviews_7d: 35
-visits_7d: 25
+pageviews_7d: 42
+visits_7d: 30
 countries_7d: 8
 countries_all: 22
 top_pages:
 - path: /
-  views: 9
+  views: 10
 - path: /training/setup/
-  views: 4
+  views: 5
+- path: /training/
+  views: 5
 - path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 4
-- path: /training/
-  views: 3
 - path: /pipelines/excon/
   views: 2
 - path: /training/commandline/
@@ -31,11 +31,17 @@ top_pages:
   views: 1
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 1
+- path: /citations/
+  views: 1
 - path: /about/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
+- path: /training/differential/
+  views: 1
 - path: /2026/03/19/hackathon-london.html
+  views: 1
+- path: /training/nfcore-rnaseq/
   views: 1
 - path: /pipelines/
   views: 1
@@ -43,17 +49,17 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 10
-  visits: 10
+  views: 12
+  visits: 12
 - name: SG
-  views: 6
-  visits: 5
+  views: 7
+  visits: 6
+- name: BE
+  views: 9
+  visits: 4
 - name: GB
   views: 10
   visits: 4
-- name: BE
-  views: 5
-  visits: 2
 - name: CN
   views: 1
   visits: 1
