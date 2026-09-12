@@ -6,8 +6,8 @@ pageviews_all: 940
 visits_all: 500
 pageviews_30d: 200
 visits_30d: 140
-pageviews_7d: 34
-visits_7d: 25
+pageviews_7d: 35
+visits_7d: 26
 countries_7d: 8
 countries_all: 23
 top_pages:
@@ -33,6 +33,8 @@ top_pages:
   views: 1
 - path: /about/
   views: 1
+- path: /training/pipelines/
+  views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /training/differential/
@@ -48,8 +50,8 @@ top_countries:
   views: 11
   visits: 11
 - name: SG
-  views: 6
-  visits: 5
+  views: 7
+  visits: 6
 - name: GB
   views: 9
   visits: 3
