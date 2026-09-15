@@ -6,14 +6,14 @@ pageviews_all: 960
 visits_all: 520
 pageviews_30d: 190
 visits_30d: 130
-pageviews_7d: 36
-visits_7d: 28
+pageviews_7d: 37
+visits_7d: 29
 countries_7d: 7
 countries_all: 23
 top_pages:
-- path: /training/
-  views: 7
 - path: /
+  views: 8
+- path: /training/
   views: 7
 - path: /pipelines/excon/
   views: 3
@@ -48,10 +48,10 @@ top_countries:
 - name: US
   views: 8
   visits: 8
-- name: BE
-  views: 5
-  visits: 3
 - name: GB
+  views: 6
+  visits: 4
+- name: BE
   views: 5
   visits: 3
 - name: SG
