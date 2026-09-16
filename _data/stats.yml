@@ -2,19 +2,21 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-16'
 since: '2026-06-27'
-pageviews_all: 960
-visits_all: 520
-pageviews_30d: 190
-visits_30d: 130
-pageviews_7d: 38
-visits_7d: 29
-countries_7d: 7
+pageviews_all: 980
+visits_all: 540
+pageviews_30d: 210
+visits_30d: 150
+pageviews_7d: 42
+visits_7d: 33
+countries_7d: 8
 countries_all: 23
 top_pages:
 - path: /
-  views: 8
+  views: 10
 - path: /training/
   views: 7
+- path: /2026/03/11/nf-core_hackathon_london_26.html
+  views: 4
 - path: /2026/07/21/diets-symposium-workshop.html
   views: 3
 - path: /2026/03/19/hackathon-london.html
@@ -24,8 +26,6 @@ top_pages:
 - path: /pipelines/excon/
   views: 2
 - path: /about/
-  views: 2
-- path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 2
 - path: /pipelines/nanoporemetabarcoding/
   views: 2
@@ -44,24 +44,27 @@ top_pages:
 - path: /training/nfcore-rnaseq/
   views: 1
 top_countries:
+- name: US
+  views: 12
+  visits: 10
 - name: NL
   views: 8
-  visits: 8
-- name: US
-  views: 10
   visits: 8
 - name: GB
   views: 6
   visits: 4
+- name: SG
+  views: 7
+  visits: 4
 - name: BE
   views: 5
-  visits: 3
-- name: SG
-  views: 6
   visits: 3
 - name: IE
   views: 2
   visits: 2
 - name: JM
+  views: 1
+  visits: 1
+- name: VN
   views: 1
   visits: 1
