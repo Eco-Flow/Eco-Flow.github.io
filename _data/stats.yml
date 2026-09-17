@@ -6,15 +6,15 @@ pageviews_all: 980
 visits_all: 540
 pageviews_30d: 190
 visits_30d: 150
-pageviews_7d: 37
-visits_7d: 30
+pageviews_7d: 39
+visits_7d: 31
 countries_7d: 8
 countries_all: 23
 top_pages:
+- path: /training/
+  views: 8
 - path: /
   views: 8
-- path: /training/
-  views: 7
 - path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 4
 - path: /2026/03/19/hackathon-london.html
@@ -39,6 +39,8 @@ top_pages:
   views: 1
 - path: /training/nfcore-rnaseq/
   views: 1
+- path: /jobs/
+  views: 1
 top_countries:
 - name: NL
   views: 8
@@ -47,8 +49,8 @@ top_countries:
   views: 10
   visits: 8
 - name: SG
-  views: 7
-  visits: 4
+  views: 9
+  visits: 5
 - name: BE
   views: 5
   visits: 3
