@@ -1288,16 +1288,21 @@
   \ Credits\n\nnf-core/genomeqc was originally written by [Chris Wyatt](https://github.com/chriswyatt1)\
   \ and [Fernando Duarte](https://github.com/FernandoDuarteF) at the University College\
   \ London.\n\nWe thank the following people for their extensive assistance in the\
-  \ development of this pipeline:\n\n- [Mahesh Binzer-Panchal](https://github.com/mahesh-panchal)\
-  \ ([National Bioinformatics Infrastructure Sweden](https://nbis.se/))\n- [Usman\
-  \ Rashid](https://github.com/GallVp) ([The New Zealand Institute for Plant and Food\
-  \ Research](https://www.plantandfood.com/en-nz/))\n- [Lauren Huet](https://github.com/LaurenHuet)\
+  \ development of this pipeline:\n\n### Code contributions\n\n- [Lauren Huet](https://github.com/LaurenHuet)\
   \ ([Schmidt Ocean Institute](https://schmidtocean.org/))\n- [Stephen Turner](https://github.com/stephenturner/)\
   \ ([Colossal Biosciences](https://colossal.com/))\n- [Felipe Perez Cobos](https://github.com/fperezcobos)\
   \ ([Institute of Agrifood Research and Technology](https://www.irta.cat/en/))\n\
   - [Simon Murray](https://github.com/SimonDMurray) ([Nextflow Ambassador](https://www.nextflow.io/our_ambassadors.html))\n\
-  \n## Contributions and Support\n\nIf you would like to contribute to this pipeline,\
-  \ please see the [contributing guidelines](https://github.com/nf-core/genomeqc/blob/main/docs/CONTRIBUTING.md).\n\
+  \n### Guidance\n\n- [Usman Rashid](https://github.com/GallVp) ([The New Zealand\
+  \ Institute for Plant and Food Research](https://www.plantandfood.com/en-nz/))\n\
+  - [Mahesh Binzer-Panchal](https://github.com/mahesh-panchal) ([National Bioinformatics\
+  \ Infrastructure Sweden](https://nbis.se/))\n\n### Review\n\n- [Victoria Begley](https://github.com/Vicbeg)\n\
+  - [awgymer](https://github.com/awgymer)\n- [S\xE9bastien Guizard](https://github.com/sguizard)\
+  \ (The Roslin Institute)\n- [Matthias H\xF6rtenhuber](https://github.com/mashehu)\
+  \ (SciLifeLab Data Centre)\n- [Famke B\xE4uerle](https://github.com/famosab) (University\
+  \ of Tuebingen)\n- [Jacques Dainat](https://github.com/Juke34) (IRD)\n\n## Contributions\
+  \ and Support\n\nIf you would like to contribute to this pipeline, please see the\
+  \ [contributing guidelines](https://github.com/nf-core/genomeqc/blob/main/docs/CONTRIBUTING.md).\n\
   \nFor further information or help, don't hesitate to get in touch on the [Slack\
   \ `#genomeqc` channel](https://nfcore.slack.com/channels/genomeqc) (you can join\
   \ with [this invite](https://nf-co.re/join/slack)).\n\n## Citations\n\nIf you use\
