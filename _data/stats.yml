@@ -6,8 +6,8 @@ pageviews_all: 980
 visits_all: 540
 pageviews_30d: 190
 visits_30d: 150
-pageviews_7d: 49
-visits_7d: 41
+pageviews_7d: 51
+visits_7d: 43
 countries_7d: 8
 countries_all: 23
 top_pages:
@@ -31,11 +31,15 @@ top_pages:
   views: 2
 - path: /pipelines/
   views: 2
+- path: /jobs/
+  views: 2
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /citations/
   views: 1
 - path: /pipelines/pollen-metabarcoding/
+  views: 1
+- path: /funding/
   views: 1
 - path: /2025/04/01/hackathon-london.html
   views: 1
@@ -53,12 +57,10 @@ top_pages:
   views: 1
 - path: /services/
   views: 1
-- path: /jobs/
-  views: 1
 top_countries:
 - name: SG
-  views: 22
-  visits: 17
+  views: 24
+  visits: 19
 - name: NL
   views: 8
   visits: 8
