@@ -6,8 +6,8 @@ pageviews_all: 980
 visits_all: 540
 pageviews_30d: 190
 visits_30d: 150
-pageviews_7d: 54
-visits_7d: 46
+pageviews_7d: 56
+visits_7d: 47
 countries_7d: 8
 countries_all: 23
 top_pages:
@@ -15,35 +15,39 @@ top_pages:
   views: 10
 - path: /training/
   views: 7
+- path: /jobs/
+  views: 3
 - path: /about/
   views: 3
 - path: /pipelines/excon/
   views: 3
-- path: /pipelines/nanoporemetabarcoding/
+- path: /training/differential/
   views: 3
 - path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 3
-- path: /training/).
-  views: 2
+- path: /pipelines/nanoporemetabarcoding/
+  views: 3
 - path: /2026/07/21/diets-symposium-workshop.html
-  views: 2
-- path: /training/differential/
   views: 2
 - path: /2026/03/19/hackathon-london.html
   views: 2
 - path: /pipelines/
   views: 2
-- path: /jobs/
+- path: /training/).
   views: 2
+- path: /2026/05/27/leuven-evolutionary-genomics.html
+  views: 1
+- path: /citations/
+  views: 1
+- path: /pipelines/pollen-metabarcoding/
+  views: 1
 - path: /funding/
   views: 1
 - path: /2025/04/01/hackathon-london.html
   views: 1
 - path: /blog/
   views: 1
-- path: /pipelines/pollen-metabarcoding/
-  views: 1
-- path: /citations/
+- path: /pipelines/genomeqc/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
@@ -57,14 +61,10 @@ top_pages:
   views: 1
 - path: /training/hpc/
   views: 1
-- path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
-- path: /pipelines/genomeqc/
-  views: 1
 top_countries:
 - name: SG
-  views: 26
-  visits: 21
+  views: 28
+  visits: 22
 - name: US
   views: 11
   visits: 9
