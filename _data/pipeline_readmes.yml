@@ -90,6 +90,8 @@
   \ run main.nf -profile docker,test_bacteria -resume --orthofinder`\n\n# Test a docker\
   \ container:\n`docker run -it --volume $PWD:$PWD <container> bash`"
 "Eco-Flow/excon": "# EXCON\n\n[![GitHub release](https://img.shields.io/github/v/release/Eco-Flow/excon)](https://github.com/Eco-Flow/excon/releases/latest)\n\
+  [![Pipeline Tests](https://github.com/Eco-Flow/excon/actions/workflows/test-pipeline.yml/badge.svg)](https://github.com/Eco-Flow/excon/actions/workflows/test-pipeline.yml)\n\
+  [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)\n\
   \nA Nextflow pipeline for gene family **EX**pansion and **CON**traction analysis\
   \ \nacross multiple species using CAFE5.\n\nGiven a set of genome assemblies and\
   \ annotations, EXCON builds orthogroups with \nOrthoFinder, fits and compares multiple\
