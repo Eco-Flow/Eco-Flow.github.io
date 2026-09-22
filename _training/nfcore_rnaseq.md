@@ -12,7 +12,7 @@ order: 3
 
 ⏱ **Estimated time:** ~60–90 minutes (including pipeline run time) &nbsp;•&nbsp; 🟡 Practical
 
-In this practical you'll run a real, published-standard **nf-core RNA-Seq pipeline** ([nf-core/rnaseq](https://nf-co.re/rnaseq/3.14.0)) on example data — from raw sequencing reads all the way to a gene-count table and a quality report.
+In this practical you'll run a real, published-standard **nf-core RNA-Seq pipeline** ([nf-core/rnaseq](https://nf-co.re/rnaseq/3.26.0)) on example data — from raw sequencing reads all the way to a gene-count table and a quality report.
 
 **nf-core** is a community that builds gold-standard, reproducible data pipelines that have become the industry standard.
 
@@ -125,7 +125,7 @@ This layout is important because it lets the pipeline keep the sequence and its 
 
 ## Step 2 — Explore the pipeline's requirements
 
-Go to the nf-core/rnaseq page and read what the pipeline does and what inputs it expects: 👉 **https://nf-co.re/rnaseq/3.14.0**
+Go to the nf-core/rnaseq page and read what the pipeline does and what inputs it expects: 👉 **https://nf-co.re/rnaseq/3.26.0**
 
 <img src="/assets/training/img/image.png" alt="nf-core/rnaseq usage page" width="700"/>
 
@@ -173,7 +173,7 @@ It has four columns:
 >
 > This scans the `data` directory, infers sample names from the FASTQ filenames, and writes a CSV that you can inspect and adjust before using it. Because this example dataset mixes paired-end and single-end reads, it is worth checking the generated file carefully and renaming samples if you want to match the `CONTROL_REP*` / `MANIPULATED_REP*` names used later in the course.
 
-Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.14.0/docs/usage#samplesheet-input) as a guide to build the 3 wild type and 3 knock down samples, then compare with the cheat sheet.
+Try to build the samplesheet yourself using the [example on the nf-core page](https://nf-co.re/rnaseq/3.26.0/docs/usage#samplesheet-input) as a guide to build the 3 wild type and 3 knock down samples, then compare with the cheat sheet.
 
 <details markdown="1">
 <summary>Cheat sheet — full samplesheet.csv</summary>
@@ -231,16 +231,18 @@ If a file is 0 bytes or missing, the download failed — check your internet con
 
 Now run nf-core/rnaseq, pointing it at your genome (`--fasta`), annotation (`--gff`), samplesheet (`--input`) and an output directory name (`--outdir`, choose anything).
 
-Read the official run instructions here: https://nf-co.re/rnaseq/3.14.0/docs/usage
+Read the official run instructions here: https://nf-co.re/rnaseq/3.26.0/docs/usage
 
 Two extra flags you **must** include in this environment:
 
 - **`-profile docker`** — runs every step inside its Docker container, so you don't have to install any of the underlying tools. (On an HPC you'd use `-profile singularity` or `apptainer` instead — ask your HPC team.)
 - **`-c .../codespaces.config`** — a small custom config that adapts the pipeline to the tiny Codespaces machine. Without it the run is likely to fail. See below for exactly what it does.
 
-We also pin the pipeline version with **`-r 3.14.0`** so you get exactly the version this course was written for.
+We also pin the pipeline version with **`-r 3.26.0`** so you get exactly the version this course was written for.
 
-> 💡 **Why pin the version?** Without `-r`, Nextflow runs the *latest* revision of the pipeline. Pipeline parameters change between releases (options get renamed or removed), so an un-pinned command can silently break over time. Pinning to `3.14.0` guarantees this exact command keeps working — pinning is the safe choice, not a risky one.
+> 💡 **Why pin the version?** Without `-r`, Nextflow runs the *latest* revision of the pipeline. Pipeline parameters change between releases (options get renamed or removed), so an un-pinned command can silently break over time. Pinning to `3.26.0` guarantees this exact command keeps working — pinning is the safe choice, not a risky one.
+>
+> ⚠️ **Pin to a release your Nextflow can actually run.** Nextflow itself evolves too. For nf-core/rnaseq, releases before `3.17` use an older config style that recent Nextflow versions refuse to read, stopping immediately with `Config parsing failed`. If you ever see that, move the `-r` up to a newer release of the pipeline.
 
 #### What is the `codespaces.config` and why do we need it?
 
@@ -270,6 +272,7 @@ params {
 
 ```bash
 nextflow run nf-core/rnaseq \
+-r 3.26.0 \
 -profile docker \
 -c /workspaces/training/eco-flow-training/codespaces.config \
 --input /workspaces/training/eco-flow-training/samplesheet.csv \
@@ -286,11 +289,11 @@ The `\` at the end of each line just lets one command span several lines for rea
 > ✅ **What success looks like:** Nextflow prints a banner and then a live list of processes as they run — something like:
 >
 > ```
->  N E X T F L O W   ~  version 24.x.x
+>  N E X T F L O W   ~  version 26.x.x
 >  Launching `https://github.com/nf-core/rnaseq` [gigantic_newton] ...
 >  executor >  local
->  [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   [100%] 6 of 6 ✔
->  [e5/f6a7b8] NFCORE_RNASEQ:...:STAR_ALIGN (...)         [ 50%] 3 of 6
+>  [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   | 6 of 6 ✔
+>  [e5/f6a7b8] NFCORE_RNASEQ:...:STAR_ALIGN (...)         | 3 of 6
 >  ...
 > ```
 >
@@ -333,7 +336,7 @@ Nextflow doesn't run tools in your current folder. It creates a fresh, isolated 
 That's what the hash at the start of each line in the console output is:
 
 ```
-[a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   [100%] 1 of 1 ✔
+[a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   | 1 of 1 ✔
 ```
 
 `a1/b2c3d4` is the **task directory** — `work/a1/b2c3d4.../`. (Nextflow shortens it on screen; the real directory name is longer.)
@@ -438,7 +441,7 @@ fastqc  multiqc  pipeline_info  star_salmon  trimgalore  ...
 Each folder holds the output of one stage of the pipeline.
 </details>
 
-The full catalogue of outputs is documented here: https://nf-co.re/rnaseq/3.14.0/docs/output — spend ~10 minutes skimming it while the run finishes.
+The full catalogue of outputs is documented here: https://nf-co.re/rnaseq/3.26.0/docs/output — spend ~10 minutes skimming it while the run finishes.
 
 **The two things to look at first:**
 
@@ -460,14 +463,14 @@ Real analyses are rarely run just once — you tweak options and re-run. Two thi
 
 ### Changing an option
 
-The pipeline has many options. For example, you can switch the alignment/quantification tools to STAR + RSEM with `--aligner star_rsem` (see the [alignment options docs](https://nf-co.re/rnaseq/3.14.0/docs/usage#alignment-options)). Work out how you'd modify your command — **but don't run it yet:**
+The pipeline has many options. For example, you can switch the alignment/quantification tools to STAR + RSEM with `--aligner star_rsem` (see the [alignment options docs](https://nf-co.re/rnaseq/3.26.0/docs/usage#alignment-options)). Work out how you'd modify your command — **but don't run it yet:**
 
 <details markdown="1">
 <summary>Answer — the modified command</summary>
 
 ```bash
 nextflow run nf-core/rnaseq \
--r 3.14.0 \
+-r 3.26.0 \
 -profile docker \
 -c /workspaces/training/eco-flow-training/codespaces.config \
 --input /workspaces/training/eco-flow-training/samplesheet.csv \
@@ -487,7 +490,7 @@ Add **`-resume`** and Nextflow will reuse the **cached** results of any steps th
 > ✅ **What you'll see with `-resume`:** unchanged processes are marked as cached, e.g.
 >
 > ```
-> [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)  [100%] 6 of 6, cached: 6 ✔
+> [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)  | 6 of 6, cached: 6 ✔
 > ```
 >
 > The word **`cached`** tells you Nextflow skipped the real work and reused the previous result — a huge time-saver during development.

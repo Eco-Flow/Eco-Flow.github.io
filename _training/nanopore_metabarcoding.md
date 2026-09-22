@@ -488,7 +488,7 @@ nextflow run main.nf \
 
 Add **`-resume`** and Nextflow reuses cached results for any step whose inputs haven't changed — so re-running the command above only re-executes taxonomy assignment (and anything downstream of it), not the demultiplexing or clustering steps.
 
-> ✅ **What you'll see with `-resume`:** unchanged processes marked `cached`, e.g. `[a1/b2c3] ...:CUTADAPT_FORWARD (woodland) [100%] 1 of 1, cached: 1 ✔`.
+> ✅ **What you'll see with `-resume`:** unchanged processes marked `cached`, e.g. `[a1/b2c3] ...:CUTADAPT_FORWARD (woodland) | 1 of 1, cached: 1 ✔`.
 
 ---
 

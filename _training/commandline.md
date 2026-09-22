@@ -637,7 +637,7 @@ nextflow info       # prints the version you just installed
 `nextflow info` prints version and system details:
 
 ```
-Version: 24.x.x build xxxx
+Version: 26.x.x build xxxx
 System: ...
 Runtime: ...
 ```
