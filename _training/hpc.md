@@ -371,10 +371,10 @@ watch -n 2 squeue      # Ctrl+C to stop watching
 >
 > ```
 > executor >  slurm (8)
-> [f4/044c12] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-> [94/ace98a] NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE)     | 3 of 3 ✔
-> [68/46c1d9] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-> [be/7be914] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+> [f4/044c12] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+> [94/ace98a] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+> [68/46c1d9] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+> [be/7be914] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
 > -[nf-core/demo] Pipeline completed successfully-
 > ```
 >

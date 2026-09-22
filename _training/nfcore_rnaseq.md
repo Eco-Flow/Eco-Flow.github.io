@@ -293,8 +293,8 @@ The `\` at the end of each line just lets one command span several lines for rea
 >  N E X T F L O W   ~  version 26.x.x
 >  Launching `https://github.com/nf-core/rnaseq` [gigantic_newton] ...
 >  executor >  local
->  [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   | 6 of 6 ✔
->  [e5/f6a7b8] NFCORE_RNASEQ:...:STAR_ALIGN (...)         | 3 of 6
+>  [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   [100%] 6 of 6 ✔
+>  [e5/f6a7b8] NFCORE_RNASEQ:...:STAR_ALIGN (...)         [ 50%] 3 of 6
 >  ...
 > ```
 >
@@ -337,7 +337,7 @@ Nextflow doesn't run tools in your current folder. It creates a fresh, isolated 
 That's what the hash at the start of each line in the console output is:
 
 ```
-[a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   | 1 of 1 ✔
+[a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)   [100%] 1 of 1 ✔
 ```
 
 `a1/b2c3d4` is the **task directory** — `work/a1/b2c3d4.../`. (Nextflow shortens it on screen; the real directory name is longer.)
@@ -491,7 +491,7 @@ Add **`-resume`** and Nextflow will reuse the **cached** results of any steps th
 > ✅ **What you'll see with `-resume`:** unchanged processes are marked as cached, e.g.
 >
 > ```
-> [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)  | 6 of 6, cached: 6 ✔
+> [a1/b2c3d4] NFCORE_RNASEQ:...:FASTQC (CONTROL_REP1)  [100%] 6 of 6, cached: 6 ✔
 > ```
 >
 > The word **`cached`** tells you Nextflow skipped the real work and reused the previous result — a huge time-saver during development.
