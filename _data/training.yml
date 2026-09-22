@@ -52,9 +52,19 @@ parts:
     type: Practical
     body: Issues, pull requests, READMEs and Claude Code — how to report, fix and contribute changes to a pipeline, using nanoporemetabarcoding as the worked example.
     file: github_basics.md
-  - num: "★"
+  - num: "7"
     title: Running a pipeline on an HPC
+    type: Practical · optional
+    body: Run an nf-core pipeline on a Slurm/SGE cluster that's already set up — get the pipeline, submit and watch jobs, keep Nextflow alive, and avoid the common gotchas. Practise on a mini Slurm cluster in Codespaces.
+    file: hpc.md
+  - num: "8"
+    title: Monitoring runs with Seqera Platform
+    type: Practical · optional
+    body: Follow your runs live in the browser with Seqera Platform, from Codespaces or your HPC, plus an overview of launching pipelines from it.
+    file: seqera_platform.md
+  - num: "★"
+    title: "Advanced: setting up Nextflow for your HPC"
     type: Advanced
     bonus: true
-    body: Advanced material, only for those who need to run pipelines on their own institutional cluster — what to ask your HPC team, where to find configs, and how to adapt and test one. Reading and reference, not a hands-on run.
-    file: hpc.md
+    body: Advanced material for people setting up Nextflow on a cluster with no ready-made config — what to ask your HPC team, where to find configs, and how to adapt and test one. Reading and reference, not a hands-on run.
+    file: hpc_config.md
