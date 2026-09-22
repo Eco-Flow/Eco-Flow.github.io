@@ -328,16 +328,10 @@ nextflow config ~/nf_practical/demo -profile test,singularity
 ```
 </details>
 
-Now go back to the course folder:
+Keep the clone — you'll run it in the next step. For now, go back to the course folder, so the run's working files land there:
 
 ```bash
 cd /workspaces/training/eco-flow-training
-```
-
-When you're finished with the clone you can remove it. **Check the path before pressing enter** — `rm -rf` deletes without asking:
-
-```bash
-rm -rf ~/nf_practical      # the folder you created above, nothing else
 ```
 
 ---
@@ -357,11 +351,15 @@ process {
 }
 ```
 
-`executor = 'slurm'` is the whole trick; `queue` says which partition to use. Now run nf-core/demo with it. The `test` profile supplies tiny example data, so you need no inputs of your own:
+`executor = 'slurm'` is the whole trick; `queue` says which partition to use.
+
+Now run the pipeline with it — the same copy you cloned and read in Step 3, so you know exactly what's about to run. The `test` profile supplies tiny example data, so you need no inputs of your own:
 
 ```bash
-nextflow run nf-core/demo -r 1.2.0 -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
+nextflow run ~/nf_practical/demo -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
 ```
+
+(No `-r` here: the clone is already fixed at release 1.2.0 by the `git checkout` you did. Running the downloaded copy instead — `nextflow run nf-core/demo -r 1.2.0 …` — does exactly the same thing.)
 
 While it runs, open a **second terminal** (the ➕ in the terminal panel) and watch jobs come and go:
 
@@ -459,6 +457,8 @@ Follow its output with `tail -f nf_driver_<JOBID>.log`.
 > 1. While pipeline jobs are running, cancel the **driver**: `scancel <driver JOBID>`. Check `squeue`: its pipeline jobs go too, because Nextflow cancels its own jobs when it stops.
 > 2. Submit it again: `sbatch hpc/run_demo_slurm.sh` (the script already includes `-resume`).
 > 3. When it finishes, find the steps that were reused: `grep -i cached nf_driver_<new JOBID>.log`
+
+Notice the script runs `nf-core/demo -r 1.2.0` rather than your clone: a job script should stand on its own, so it names the pipeline and its version instead of depending on a folder that might move. That's how you'd write it on a real cluster too.
 
 One line in that script is worth a look: **`-w work_slurm`**. `-w` chooses where Nextflow keeps its working files. Here it gives this run a folder of its own, so it doesn't simply reuse everything Step 4 already finished. On a cluster you use the same flag for a different reason: those files get very large, so you point `-w` at wherever your cluster wants big data to live.
 
@@ -653,6 +653,12 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 ## Finish
 
 🎉 **You've run a pipeline through a real job scheduler**, and seen how Nextflow turns each step into a job — exactly as it will on your institution's cluster.
+
+> 🧹 **Tidying up.** The practice clone from Step 3 is no longer needed once you've finished the lesson. **Check the path before pressing enter** — `rm -rf` deletes without asking:
+>
+> ```bash
+> rm -rf ~/nf_practical
+> ```
 
 **Next steps:**
 
