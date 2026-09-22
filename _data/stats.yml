@@ -6,24 +6,26 @@ pageviews_all: 990
 visits_all: 550
 pageviews_30d: 180
 visits_30d: 140
-pageviews_7d: 57
-visits_7d: 44
+pageviews_7d: 70
+visits_7d: 47
 countries_7d: 6
 countries_all: 23
 top_pages:
 - path: /
-  views: 15
+  views: 19
+- path: /training/
+  views: 6
+- path: /training/hpc/
+  views: 6
 - path: /training/differential/
   views: 5
 - path: /jobs/
   views: 3
+- path: /training/hpc-config/
+  views: 3
 - path: /about/
   views: 3
-- path: /training/
-  views: 3
 - path: /2026/03/11/nf-core_hackathon_london_26.html
-  views: 3
-- path: /training/hpc/
   views: 3
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 2
@@ -33,12 +35,6 @@ top_pages:
   views: 2
 - path: /pipelines/nanoporemetabarcoding/
   views: 2
-- path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
-- path: /citations/
-  views: 1
-- path: /training/hpc-config/
-  views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
 - path: /funding/
@@ -47,9 +43,13 @@ top_pages:
   views: 1
 - path: /blog/
   views: 1
-- path: /2025/09/01/biofair-fellowship.html
+- path: /citations/
   views: 1
-- path: /pipelines/genomeqc/
+- path: /training/seqera-platform/
+  views: 1
+- path: /2026/05/27/leuven-evolutionary-genomics.html
+  views: 1
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /events/
   views: 1
@@ -59,6 +59,8 @@ top_pages:
   views: 1
 - path: /services/
   views: 1
+- path: /pipelines/genomeqc/
+  views: 1
 - path: /pipelines/excon/
   views: 1
 top_countries:
@@ -66,17 +68,17 @@ top_countries:
   views: 28
   visits: 24
 - name: US
-  views: 15
-  visits: 13
+  views: 17
+  visits: 15
 - name: DE
   views: 4
   visits: 3
 - name: GB
   views: 3
   visits: 3
+- name: BR
+  views: 17
+  visits: 1
 - name: VN
   views: 1
   visits: 1
-- name: BR
-  views: 6
-  visits: 0
