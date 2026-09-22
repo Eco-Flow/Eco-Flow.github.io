@@ -14,13 +14,3 @@
 [build.environment]
   RUBY_VERSION = "3.3.6"
   TRAINING_REF = "main"
-
-# Preview this pull request against the HPC module branch of Eco-Flow/training,
-# which is not merged there yet. Remove this block before merging: once the
-# lessons are on the training repo's main branch, the default above is correct.
-[context.deploy-preview.environment]
-  TRAINING_REF = "split-hpc-modules"
-
-[context.branch-deploy.environment]
-  TRAINING_REF = "split-hpc-modules"
-
