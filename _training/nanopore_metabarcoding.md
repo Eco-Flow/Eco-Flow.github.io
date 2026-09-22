@@ -4,6 +4,7 @@ title: "Run the nanopore metabarcoding pipeline"
 num: "5"
 type: "Practical"
 order: 5
+file: "nanopore_metabarcoding.md"
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*

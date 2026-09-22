@@ -4,6 +4,7 @@ title: "Running a pipeline on an HPC"
 num: "\u2605"
 type: "Advanced"
 order: 7
+file: "hpc.md"
 bonus: true
 ---
 

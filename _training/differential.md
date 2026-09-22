@@ -4,6 +4,7 @@ title: "Differential gene expression"
 num: "4"
 type: "Practical \u00b7 R"
 order: 4
+file: "differential.md"
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*

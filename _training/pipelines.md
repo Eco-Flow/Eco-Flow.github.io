@@ -4,6 +4,7 @@ title: "Pipelines with Nextflow"
 num: "2"
 type: "Lecture"
 order: 2
+file: "pipelines.md"
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*

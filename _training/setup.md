@@ -4,6 +4,7 @@ title: "Setup"
 num: "0"
 type: "Practical"
 order: 0
+file: "setup.md"
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*

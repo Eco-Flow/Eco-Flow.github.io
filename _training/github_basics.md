@@ -4,6 +4,7 @@ title: "Interacting with code on GitHub"
 num: "6"
 type: "Practical"
 order: 6
+file: "github_basics.md"
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
