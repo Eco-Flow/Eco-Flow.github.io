@@ -33,8 +33,13 @@ DATA_PATH = os.path.join(REPO_ROOT, "_data", "training.yml")
 OUT_DIR = os.path.join(REPO_ROOT, "_training")
 IMG_DIR = os.path.join(REPO_ROOT, "assets", "training", "img")
 
-# Source of the lessons (raw Markdown + the img/ folder beside them).
-RAW_BASE = "https://raw.githubusercontent.com/Eco-Flow/training/main/eco-flow-training/docs/"
+# Source of the lessons (raw Markdown + the img/ folder beside them). Set
+# TRAINING_REF to pull the lessons from a branch or tag of the training repo
+# instead of main, to preview lesson work before it is merged there.
+TRAINING_REF = os.environ.get("TRAINING_REF", "main")
+RAW_BASE = "https://raw.githubusercontent.com/Eco-Flow/training/{}/eco-flow-training/docs/".format(
+    TRAINING_REF
+)
 # Where images end up in the built site (no baseurl, so a root-absolute path).
 IMG_WEB_BASE = "/assets/training/img/"
 

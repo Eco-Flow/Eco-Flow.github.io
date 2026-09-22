@@ -45,3 +45,5 @@ layout: default
     {%- endif -%}
   </div>
 </article>
+
+<script type="module" src="{{ '/assets/mermaid-init.js' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}"></script>
