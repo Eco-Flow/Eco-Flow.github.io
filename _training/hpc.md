@@ -230,7 +230,11 @@ Checking nf-core/demo:1.2.0 ...
 
 This is what `nextflow run nf-core/demo` does automatically the first time: it downloads the pipeline from GitHub into `~/.nextflow/assets/`, and **`-r` picks the release**. To delete a downloaded copy, use `nextflow drop nf-core/demo`.
 
+That copy is Nextflow's to manage — it's filed away under a long path like `~/.nextflow/assets/.repos/nf-core/demo/clones/<commit>/`, which is fine for running but awkward for reading. When you want to *look at* a pipeline's code, clone it instead.
+
 ### Way B — clone it yourself
+
+**Do this one too** — the exercise after it reads files from this copy.
 
 > ▶️ **Try it**
 >
@@ -268,14 +272,17 @@ With a clone, you point Nextflow at the **folder** rather than the pipeline name
 
 Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline: each step (a *process*) has a **label**, and `conf/base.config` turns labels into resources.
 
-Run these inside the copy you just cloned (`~/nf_practical/demo`):
+These files come from the copy you cloned in Way B, so start by moving into it:
 
 > ▶️ **Challenge — what does FastQC ask for?**
 >
 > ```bash
+> cd ~/nf_practical/demo      # the clone from Way B
 > grep -n "label" modules/nf-core/fastqc/main.nf
 > grep -n -A4 "withLabel:process_low" conf/base.config
 > ```
+>
+> (`No such file or directory`? You're not in the clone — go back and do Way B first.)
 >
 > 1. How many CPUs, how much memory and how much time does the FASTQC step ask for?
 > 2. The numbers are multiplied by `task.attempt`, which is `1` on the first try and `2` on a retry. What does FASTQC ask for on its second try?
