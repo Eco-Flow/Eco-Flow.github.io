@@ -1,0 +1,2 @@
+# Used by scripts/sync_training.py
+PyYAML>=6.0

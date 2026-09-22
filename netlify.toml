@@ -1,0 +1,16 @@
+# Netlify is used only for *preview* builds of this site — pull request deploy
+# previews and branch deploys. Production stays on GitHub Pages, served from
+# the `publish` branch.
+#
+# The training lessons live in a separate repository (Eco-Flow/training) and are
+# pulled in at build time by scripts/sync_training.py. TRAINING_REF chooses which
+# branch of that repo to pull from, so a branch here can preview lesson work
+# before it is merged there. See test_locally.md.
+
+[build]
+  publish = "_site"
+  command = "pip install --quiet -r requirements.txt && python3 scripts/sync_training.py && bundle exec jekyll build"
+
+[build.environment]
+  RUBY_VERSION = "3.3.6"
+  TRAINING_REF = "main"

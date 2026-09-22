@@ -48,6 +48,9 @@ authors: Chris Wyatt, Fernando Duarte
 # Internal docs / config that should not be published as pages.
 exclude:
   - README.md
+  - netlify.toml
+  - requirements.txt
+  - scripts
   - MAINTAINING.md
   - test_locally.md
   - website-structure.md

@@ -65,3 +65,37 @@ bundle exec jekyll server
 ```
 
 To preview the site, navigate to [http://localhost:4000](http://localhost:4000).
+
+---
+
+## Previewing training lessons from a branch
+
+The training lessons live in a separate repository, [Eco-Flow/training](https://github.com/Eco-Flow/training), and are pulled in at build time by `scripts/sync_training.py`. By default they come from that repo's `main` branch, so lesson changes are only visible here once they are merged there.
+
+To preview lesson work before then, set **`TRAINING_REF`** to the branch you want:
+
+```
+scripts/preview_training.sh split-hpc-modules
+```
+
+That syncs the lessons from that branch and serves the site at <http://localhost:4000/training/>. Without an argument it uses `main`.
+
+It rewrites `_training/` and `assets/training/`, so afterwards run:
+
+```
+git checkout -- _training assets/training
+```
+
+Note that a lesson only appears if it is listed in `_data/training.yml` — add an entry there as well when previewing a brand new page.
+
+### Shareable previews (Netlify)
+
+`netlify.toml` builds the same thing on Netlify, which gives a preview URL for every pull request opened in **this** repository. Production is unaffected: the live site is still GitHub Pages, served from `publish`.
+
+To preview a training branch, set the ref in the pull request's own `netlify.toml`:
+
+```toml
+[context.deploy-preview.environment]
+  TRAINING_REF = "the-training-branch"
+```
+
