@@ -55,7 +55,7 @@ parts:
   - num: "7"
     title: Running a pipeline on an HPC
     type: Practical · optional
-    body: Run an nf-core pipeline on a Slurm/SGE cluster that's already set up — get the pipeline, submit and watch jobs, keep Nextflow alive, and avoid the common gotchas. Practise on a mini Slurm cluster in Codespaces.
+    body: Run an nf-core pipeline on a Slurm/SGE cluster that's already set up — get the pipeline, submit and watch jobs, keep Nextflow alive, and avoid common mistakes. Practise on a mini Slurm cluster in Codespaces.
     file: hpc.md
   - num: "8"
     title: Monitoring runs with Seqera Platform
