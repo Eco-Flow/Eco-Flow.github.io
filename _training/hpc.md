@@ -434,7 +434,7 @@ The usual answer is to submit the driver *itself* as a small job. That's what `h
 ```bash
 cat hpc/run_demo_slurm.sh
 sbatch hpc/run_demo_slurm.sh
-watch -n 2 squeue
+watch -n 2 squeue      # Ctrl+C to stop watching
 ```
 
 <details markdown="1">
@@ -457,6 +457,8 @@ Follow its output with `tail -f nf_driver_<JOBID>.log`.
 > 1. While pipeline jobs are running, cancel the **driver**: `scancel <driver JOBID>`. Check `squeue`: its pipeline jobs go too, because Nextflow cancels its own jobs when it stops.
 > 2. Submit it again: `sbatch hpc/run_demo_slurm.sh` (the script already includes `-resume`).
 > 3. When it finishes, find the steps that were reused: `grep -i cached nf_driver_<new JOBID>.log`
+
+> ⚠️ **One driver at a time in a folder.** Each `sbatch hpc/run_demo_slurm.sh` starts another Nextflow run, and two runs launched from the same folder share the same work directory and cache, so they get in each other's way. If `squeue` shows two `nf_driver` jobs, `scancel` the extra one.
 
 Notice the script runs `nf-core/demo -r 1.2.0` rather than your clone: a job script should stand on its own, so it names the pipeline and its version instead of depending on a folder that might move. That's how you'd write it on a real cluster too.
 
