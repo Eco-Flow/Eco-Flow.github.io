@@ -1,11 +1,10 @@
 ---
 layout: "training"
 title: "Running a pipeline on an HPC"
-num: "\u2605"
-type: "Advanced"
+num: "7"
+type: "Practical \u00b7 optional"
 order: 7
 file: "hpc.md"
-bonus: true
 ---
 
 🚀 **Start now:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eco-Flow/training) — *first launch takes a couple of minutes to build.*
@@ -17,7 +16,7 @@ bonus: true
 > 🎯 **Who is this for?** Anyone who wants to run an nf-core pipeline on their institution's **High-Performance Computing (HPC) cluster**, where Nextflow is already available and your cluster already has a ready-made config on [nf-co.re/configs](https://nf-co.re/configs).
 >
 > - 🖥️ **No cluster?** You can still do most of this page in Codespaces, on a tiny practice Slurm "cluster" you start with one command.
-> - 🛠️ **Need to *build* a config for a cluster that doesn't have one yet?** That's the separate ★ [Advanced: setting up Nextflow for your HPC](./hpc_config.md) page.
+> - 🛠️ **Need to *build* a config for a cluster that doesn't have one yet?** That's the separate ★ [Advanced: setting up Nextflow for your HPC](/training/hpc-config/) page.
 
 Throughout this page, command blocks are marked:
 
@@ -104,7 +103,7 @@ That's the `-profile ucl_myriad` you saw in [Part 5](/training/nanopore-metabarc
 3. **Ask the community.** The [nf-core Slack](https://nf-co.re/join/slack) is friendly, and you can open an issue on [nf-core/configs](https://github.com/nf-core/configs/issues) describing your cluster — people there build configs regularly.
 4. **Ask us.** Email Eco-Flow at **ecoflow . ucl @ gmail . com** and we'll help you put one together, or talk to your HPC team with you.
 
-Writing one yourself is covered in ★ [Advanced: setting up Nextflow for your HPC](./hpc_config.md).
+Writing one yourself is covered in ★ [Advanced: setting up Nextflow for your HPC](/training/hpc-config/).
 
 ### Where your files should be
 
@@ -116,7 +115,7 @@ Writing one yourself is covered in ★ [Advanced: setting up Nextflow for your H
 
 > ⚠️ **Ask where large data should live — don't assume.** Many clusters have a "scratch" area for this, but not all do, and the rules differ: some aren't backed up, and some delete files you haven't touched for a few weeks. Your HPC team (or your cluster's page on nf-co.re/configs) will tell you. Two things to remember once you know: copy results somewhere safe, and if `work/` is deleted, `-resume` has nothing left to resume from.
 
-📋 The full list of questions worth asking your HPC team is in [Step 1 of the advanced page](./hpc_config.md).
+📋 The full list of questions worth asking your HPC team is in [Step 1 of the advanced page](/training/hpc-config/).
 
 ---
 
@@ -424,7 +423,7 @@ process {
 }
 ```
 
-You rarely need to write this yourself: if your cluster is on [nf-co.re/configs](https://nf-co.re/configs), its profile already contains it. Writing one from scratch is the ★ [advanced page](./hpc_config.md).
+You rarely need to write this yourself: if your cluster is on [nf-co.re/configs](https://nf-co.re/configs), its profile already contains it. Writing one from scratch is the ★ [advanced page](/training/hpc-config/).
 </details> Now run nf-core/demo with it. The `test` profile supplies tiny example data, so you don't need any inputs of your own:
 
 ```bash
@@ -661,7 +660,7 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 | **Keep your run command in a script** (like `run.sh`) and in git | Reproducible, easy to rerun, easy to share (see [Part 6](/training/github-basics/)) |
 | **Clean up when you're happy** | `nextflow clean -f`, or delete `work/`, but only once you won't need `-resume` |
 
-> 🔍 **Exit codes 130–145** (for example `137` or `140`) usually mean the **scheduler killed the job** for going over its memory or time. nf-core pipelines retry once with double the resources (Step 2). If a step fails again, it needs more than it's allowed: ask your HPC team, or see how to raise a label's resources on the ★ [advanced page](./hpc_config.md).
+> 🔍 **Exit codes 130–145** (for example `137` or `140`) usually mean the **scheduler killed the job** for going over its memory or time. nf-core pipelines retry once with double the resources (Step 2). If a step fails again, it needs more than it's allowed: ask your HPC team, or see how to raise a label's resources on the ★ [advanced page](/training/hpc-config/).
 
 ---
 
@@ -681,6 +680,6 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 
 **Next steps:**
 
-- Continue to **[Part 8 · Seqera Platform ▶️](./seqera_platform.md)** to watch your runs live in the browser.
-- Your cluster has no ready-made config? See ★ **[Advanced: setting up Nextflow for your HPC](./hpc_config.md)**.
+- Continue to **[Part 8 · Seqera Platform ▶️](/training/seqera-platform/)** to watch your runs live in the browser.
+- Your cluster has no ready-made config? See ★ **[Advanced: setting up Nextflow for your HPC](/training/hpc-config/)**.
 - Stuck? The [nf-core Slack](https://nf-co.re/join/slack) is friendly and full of people running pipelines on clusters like yours. Or get in touch with us at Eco-Flow: **ecoflow . ucl @ gmail . com**

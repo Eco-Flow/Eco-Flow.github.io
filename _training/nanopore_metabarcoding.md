@@ -360,7 +360,7 @@ nanoplot/  blast/  assign_taxa/  community_matrix/  plots/  multiqc/  pipeline_i
 
 ## Step 6 — Running on an HPC (Myriad example)
 
-> 🎯 For the general concepts see **[Part 7 · Running a pipeline on an HPC](/training/hpc/)** (getting a pipeline, submitting and watching jobs, keeping Nextflow alive) and, if your cluster has no config yet, ★ **[Advanced: setting up Nextflow for your HPC](./hpc_config.md)** (talking to your HPC admin, writing a config from scratch, testing it). This step is a concrete worked example on top of those, using UCL's **Myriad** cluster.
+> 🎯 For the general concepts see **[Part 7 · Running a pipeline on an HPC](/training/hpc/)** (getting a pipeline, submitting and watching jobs, keeping Nextflow alive) and, if your cluster has no config yet, ★ **[Advanced: setting up Nextflow for your HPC](/training/hpc-config/)** (talking to your HPC admin, writing a config from scratch, testing it). This step is a concrete worked example on top of those, using UCL's **Myriad** cluster.
 
 Because nanoporemetabarcoding was build from the nf-core template, it inherits nf-core's **institutional config** mechanism — so if your institution already has a config, you don't write anything yourself. Browse **[nf-co.re/configs](https://nf-co.re/configs/)** to check — UCL's Myriad cluster is listed there.
 
@@ -407,7 +407,7 @@ singularity {
 Two things worth noticing, since they're easy to get wrong writing your own config:
 
 - **Myriad uses SGE**, whose `-l mem=` flag is **memory per core, not per job** — so the config computes `task.memory / task.cpus` on the fly for every process, rather than using a single fixed value.
-- The **Singularity cache** (`cacheDir`) is pointed at `~/Scratch`, not the home directory — home quotas on Myriad are small, and containers are large. Always check where your own cluster wants large/scratch data to live (Step 1 in [hpc_config.md](./hpc_config.md)). This is usally the case for most HPCs.
+- The **Singularity cache** (`cacheDir`) is pointed at `~/Scratch`, not the home directory — home quotas on Myriad are small, and containers are large. Always check where your own cluster wants large/scratch data to live (Step 1 in [hpc_config.md](/training/hpc-config/)). This is usally the case for most HPCs.
 </details>
 
 > ▶️ **Try it — test the config before a real run**
@@ -415,7 +415,7 @@ Two things worth noticing, since they're easy to get wrong writing your own conf
 > ```bash
 > nextflow run main.nf -profile test_synth,my_hpc_config --outdir results
 > ```
-> Same idea as Step 6 of [hpc_config.md](./hpc_config.md): run the tiny test profile first and check the banner says `executor >  sge`, not `executor >  local` — that confirms jobs are actually going to the scheduler, not running on the login node.
+> Same idea as Step 6 of [hpc_config.md](/training/hpc-config/): run the tiny test profile first and check the banner says `executor >  sge`, not `executor >  local` — that confirms jobs are actually going to the scheduler, not running on the login node.
 
 While jobs are running, watch them with `qstat` on SGE — the SGE equivalent of Slurm's `squeue` (both are covered in [Part 7](/training/hpc/)). Both print a status column whose codes mean the same underlying thing but look different:
 
@@ -462,7 +462,7 @@ The `-l mem=4G` / `-l h_rt=4:00:0` here are for the **driver job only** (Nextflo
 </details>
 -->
 
-> 💡 **Other schedulers (Slurm, etc.):** the same institutional-profile trick applies wherever nf-core/configs has a listed cluster — check https://nf-co.re/configs first. If yours isn't listed, [hpc_config.md](./hpc_config.md) has side-by-side minimal config examples for both **SGE** and **Slurm**: the main differences are `executor.name` (`'sge'` vs `'slurm'`), how you request memory (SGE: per-core via `clusterOptions`; Slurm: per-job via `--mem`), and the queue/partition option name. A Slurm submission script for this same pipeline would look like the Slurm driver-job example in [Part 7](/training/hpc/), swapping in nanoporemetabarcoding's `--input`/`--metadata`/`--tags_f`/`--tags_r`/`--custom_db` flags shown above.
+> 💡 **Other schedulers (Slurm, etc.):** the same institutional-profile trick applies wherever nf-core/configs has a listed cluster — check https://nf-co.re/configs first. If yours isn't listed, [hpc_config.md](/training/hpc-config/) has side-by-side minimal config examples for both **SGE** and **Slurm**: the main differences are `executor.name` (`'sge'` vs `'slurm'`), how you request memory (SGE: per-core via `clusterOptions`; Slurm: per-job via `--mem`), and the queue/partition option name. A Slurm submission script for this same pipeline would look like the Slurm driver-job example in [Part 7](/training/hpc/), swapping in nanoporemetabarcoding's `--input`/`--metadata`/`--tags_f`/`--tags_r`/`--custom_db` flags shown above.
 
 > 🙋 **No institutional config for your cluster?** Just get your HPC admin in touch with us at Eco-Flow and we will build one.
 
@@ -501,4 +501,4 @@ Add **`-resume`** and Nextflow reuses cached results for any step whose inputs h
 
 - Adapt what you designed in Steps 2–3 to your **own** primer-tag scheme and run it on your own data.
 - Explore the full parameter list in [`nextflow.config`](https://github.com/Eco-Flow/nanoporemetabarcoding/blob/dev/nextflow.config) — worth tuning per-rank identity thresholds (`--spident`/`--gpident`/`--fpident`/`--opident`) and `--tax_list` for your own taxonomic group.
-- Running on a cluster other than Myriad? Step 6 above covers the concrete example; **[Part 7 · Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including Slurm and SGE examples), and ★ **[Advanced: setting up Nextflow for your HPC](./hpc_config.md)** covers writing a config if your cluster doesn't have one.
+- Running on a cluster other than Myriad? Step 6 above covers the concrete example; **[Part 7 · Running a pipeline on an HPC](/training/hpc/)** covers the general concepts (including Slurm and SGE examples), and ★ **[Advanced: setting up Nextflow for your HPC](/training/hpc-config/)** covers writing a config if your cluster doesn't have one.
