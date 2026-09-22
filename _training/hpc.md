@@ -462,7 +462,7 @@ Follow its output with `tail -f nf_driver_<JOBID>.log`.
 
 Notice the script runs `nf-core/demo -r 1.2.0` rather than your clone: a job script should stand on its own, so it names the pipeline and its version instead of depending on a folder that might move. That's how you'd write it on a real cluster too.
 
-One line in that script is worth a look: **`-w work_slurm`**. `-w` chooses where Nextflow keeps its working files. Here it gives this run a folder of its own, so it doesn't simply reuse everything Step 4 already finished. On a cluster you use the same flag for a different reason: those files get very large, so you point `-w` at wherever your cluster wants big data to live.
+One line in that script is worth a look: **`-w work_slurm`**. `-w` chooses where Nextflow keeps its working files, and this run keeps them separate from Step 4's rather than mixing the two together. It doesn't stop `-resume` reusing work: that cache lives in the folder you launched from, so steps Step 4 already finished can show up here as `Cached process >` lines. On a cluster, `-w` matters for a different reason — those files get very large, so you point it at wherever your cluster keeps big data.
 
 ---
 
