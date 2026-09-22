@@ -121,6 +121,9 @@ def front_matter(part, order):
         "num": str(part.get("num", "")),
         "type": part.get("type", ""),
         "order": order,
+        # Jekyll does not expose `name` for collection documents, so the layout
+        # matches this against _data/training.yml to build the prev/next links.
+        "file": part.get("file", ""),
     }
     if part.get("bonus"):
         fields["bonus"] = True

@@ -3,8 +3,9 @@ layout: default
 ---
 {%- assign parts = site.data.training.parts -%}
 {%- assign idx = -1 -%}
+{%- assign this_file = page.file | default: page.name -%}
 {%- for p in parts -%}
-  {%- if p.file == page.name -%}{%- assign idx = forloop.index0 -%}{%- endif -%}
+  {%- if p.file == this_file -%}{%- assign idx = forloop.index0 -%}{%- endif -%}
 {%- endfor -%}
 
 <article class="section">
