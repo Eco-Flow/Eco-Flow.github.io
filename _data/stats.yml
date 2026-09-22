@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-22'
 since: '2026-06-27'
-pageviews_all: 0
-visits_all: 0
+pageviews_all: 800
+visits_all: 300
 pageviews_30d: 180
 visits_30d: 140
-pageviews_7d: 46
-visits_7d: 39
+pageviews_7d: 48
+visits_7d: 41
 countries_7d: 5
 countries_all: 23
 top_pages:
@@ -21,6 +21,8 @@ top_pages:
   views: 3
 - path: /jobs/
   views: 3
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
+  views: 2
 - path: /training/
   views: 2
 - path: /pipelines/
@@ -62,12 +64,12 @@ top_countries:
 - name: US
   views: 12
   visits: 10
+- name: DE
+  views: 4
+  visits: 3
 - name: GB
   views: 3
   visits: 3
-- name: DE
-  views: 2
-  visits: 1
 - name: VN
   views: 1
   visits: 1
