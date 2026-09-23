@@ -48,11 +48,11 @@ It gives you, in a browser:
 ## Step 1 — Create an account and an access token
 
 1. Go to **[cloud.seqera.io](https://cloud.seqera.io)** and sign in with GitHub, Google, or an email address. (With email, you're sent a sign-in link rather than setting a password.)
-2. Once you're in, open the **user menu** (your name, top right) and choose **Settings → Your tokens**.
+2. Once you're in, open the **user menu** (your name, top right) and choose **Settings → Your tokens**. The page is headed *Access tokens*.
 3. Select **Add token**, give it a name you'll recognise (e.g. `codespaces-training`), and create it.
 4. **Copy the token now.** It's shown only once. If you lose it, delete it and make a new one.
 
-<!-- TODO: add screenshots of the token page and the runs page -->
+<img src="/assets/training/img/seqera_access_tokens.png" alt="The Access tokens page in Seqera Platform, with the Add token button at the top right" width="700"/>
 
 > 🔐 **A token is a password.** Anyone holding it can act as you in the Platform. Don't paste it into a file you might commit, a chat message, or a shared notebook. If it leaks, delete it on this page — that immediately stops it working.
 

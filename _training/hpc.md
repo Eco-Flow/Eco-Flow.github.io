@@ -488,7 +488,9 @@ singularity --version || apptainer --version
 
 This is the most useful thing to check. The nf-core community keeps ready-made configs for around 160 institutions at **[nf-co.re/configs](https://nf-co.re/configs)**, each describing that cluster's scheduler, container engine and limits — so you don't have to write the `executor`/`queue` config from Step 4 yourself. The page lists them by name: `cambridge`, `crick`, `eddie`, `imperial`, `sanger`, `ucl_myriad` and many more.
 
-<!-- TODO: add a screenshot of the nf-co.re/configs profile list here -->
+<img src="/assets/training/img/nfcore_configs_list.png" alt="The nf-co.re/configs page: a searchable list of institutional configs, each row showing a cluster description and the executor it uses, such as slurm" width="650"/>
+
+Each row is one cluster, and the **Executor** column tells you which scheduler it uses — a quick way to see how common Slurm and SGE are in practice.
 
 If yours is listed, add it as a profile and Nextflow knows how to talk to your cluster:
 
