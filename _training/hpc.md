@@ -272,17 +272,17 @@ With a clone, you point Nextflow at the **main.nf** rather than the pipeline nam
 
 Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline: each step (a **process**) has a **label**, and `conf/base.config` turns labels into resources.
 
-These files come from the copy you cloned in Way B, so start by moving into it:
+These files come from the copy you cloned in Way B, and that's where Way B left you, so run these as they are:
 
 > ▶️ **Challenge — what does FastQC ask for?**
 >
 > ```bash
-> cd ./nf_practical/demo      # the clone from Way B
+> pwd      # should end in nf_practical/demo
 > grep -n "label" modules/nf-core/fastqc/main.nf
 > grep -n -A4 "withLabel:process_low" conf/base.config
 > ```
 >
-> (`No such file or directory`? You're not in the clone — go back and do Way B first.)
+> (`No such file or directory`? You're somewhere else — go back with `cd /workspaces/training/eco-flow-training/nf_practical/demo`, or do Way B first if you skipped it.)
 >
 > 1. How many CPUs, how much memory and how much time does the FASTQC step ask for?
 > 2. The numbers are multiplied by `task.attempt`, which is `1` on the first try and `2` on a retry. What does FASTQC ask for on its second try?
@@ -323,8 +323,8 @@ On a cluster these numbers become the job's request: a job asking for 12 GB wait
 `nextflow config` prints the configuration after all profiles and config files are merged. Compare these two and look at the `docker {` and `singularity {` blocks — switching the profile just flips which container engine is `enabled`:
 
 ```bash
-nextflow config ~/nf_practical/demo -profile test,docker
-nextflow config ~/nf_practical/demo -profile test,singularity
+nextflow config . -profile test,docker        # "." = the clone you're standing in
+nextflow config . -profile test,singularity
 ```
 </details>
 
@@ -356,7 +356,7 @@ process {
 Now run the pipeline with it — the same copy you cloned and read in Step 3, so you know exactly what's about to run. The `test` profile supplies tiny example data, so you need no inputs of your own:
 
 ```bash
-nextflow run ~/nf_practical/demo -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
+nextflow run ./nf_practical/demo -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
 ```
 
 (No `-r` here: the clone is already fixed at release 1.2.0 by the `git checkout` you did. Running the downloaded copy instead — `nextflow run nf-core/demo -r 1.2.0 …` — does exactly the same thing.)
@@ -661,7 +661,7 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 > 🧹 **Tidying up.** The practice clone from Step 3 is no longer needed once you've finished the lesson. **Check the path before pressing enter** — `rm -rf` deletes without asking:
 >
 > ```bash
-> rm -rf ~/nf_practical
+> rm -rf /workspaces/training/eco-flow-training/nf_practical
 > ```
 
 **Next steps:**
