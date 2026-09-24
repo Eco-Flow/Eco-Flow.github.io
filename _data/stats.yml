@@ -6,13 +6,13 @@ pageviews_all: 1020
 visits_all: 580
 pageviews_30d: 210
 visits_30d: 170
-pageviews_7d: 101
-visits_7d: 72
+pageviews_7d: 105
+visits_7d: 75
 countries_7d: 6
 countries_all: 23
 top_pages:
 - path: /
-  views: 36
+  views: 38
 - path: /training/
   views: 9
 - path: /training/hpc/
@@ -29,15 +29,17 @@ top_pages:
   views: 3
 - path: /training/hpc-config/
   views: 3
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
+  views: 3
 - path: /2025/04/01/hackathon-london.html
   views: 2
 - path: /numbers/
   views: 2
-- path: /events/2026-10-15-nf-core-hackathon-barcelona/
-  views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
 - path: /pipelines/
+  views: 2
+- path: /pipelines/genomeqc/
   views: 2
 - path: /pipelines/pollen-metabarcoding/
   views: 1
@@ -59,8 +61,6 @@ top_pages:
   views: 1
 - path: /services/
   views: 1
-- path: /pipelines/genomeqc/
-  views: 1
 - path: /2026/03/11/nf-core_hackathon_london_26.html
   views: 1
 - path: /pipelines/nanoporemetabarcoding/
@@ -69,17 +69,17 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 36
-  visits: 33
+  views: 38
+  visits: 35
 - name: SG
-  views: 30
+  views: 31
   visits: 26
 - name: IE
   views: 6
   visits: 6
 - name: DE
-  views: 4
-  visits: 3
+  views: 5
+  visits: 4
 - name: BR
   views: 23
   visits: 2
