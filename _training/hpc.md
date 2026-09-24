@@ -13,18 +13,17 @@ file: "hpc.md"
 
 ⏱ **Estimated time:** ~40 minutes &nbsp;•&nbsp; 🟡 Practical · optional
 
-> 🎯 **Who is this for?** Anyone who will run nf-core pipelines on a **High-Performance Computing (HPC) cluster** — or who wants to understand how that works before they get an account on one.
+> 🎯 **Who is this for?** Anyone who will run nf-core pipelines on a **High-Performance Computing (HPC) cluster**.
 >
-> **You don't need a cluster for this lesson.** In Step 1 you'll turn your Codespace into a small working cluster, running the same scheduler software (**Slurm**) that real HPCs use. Every command you type here is one you'd type on a real cluster. Step 6 then covers what changes when you move to your institution's machine.
+> **You don't need a cluster for this lesson.** In Step 1 you'll turn your Codespace into a small working cluster, running the same HPC scheduler software (**Slurm**). Every command you type here is one you'd type on a real cluster. Step 6 then covers what changes when you move to your institution's machine.
 
 ### What you'll learn
 
 - How a cluster works: login node, scheduler, compute nodes
 - How to submit, watch and cancel jobs yourself
-- How to get a pipeline, and what decides the resources each step asks for
-- How to make Nextflow submit every task to the scheduler for you
-- How to keep a long run alive, and resume it after an interruption
-- What to change when you move to your own cluster, and the common mistakes
+- How to get a pipeline onto the cluster
+- How to run Nextflow on an HPC
+- How to keep a long run alive, and running in the background
 
 ---
 
@@ -32,7 +31,7 @@ file: "hpc.md"
 
 So far everything has run on one machine. A cluster is **many machines sharing one filesystem**. You log in to a shared **login node**, and a **scheduler** hands out time on the **compute nodes** to everyone's jobs.
 
-Nextflow can talk to the scheduler for you, so you never write submission scripts by hand. The `nextflow run` process you start (the **driver**) does no analysis itself: it sends every task to the scheduler as a **separate job**, then watches them. Remember the parallel tasks from [Part 2](/training/pipelines/)? On a cluster they really can run on different machines at the same time.
+Nextflow can talk to the scheduler for you, so you never write submission scripts by hand. The `nextflow run` process you start (the **driver**) does no analysis itself: it sends every task to the scheduler as a **separate job** with the correct resources/time/container, to compute nodes. 
 
 ```mermaid
 flowchart LR
@@ -48,12 +47,12 @@ flowchart LR
 
 | Term | What it means |
 | :--- | :--- |
-| **Login node** | Where you land after `ssh`. Shared by everyone: fine for editing files and submitting jobs, **not** for running heavy tools. |
+| **Login node** | Where you land after `ssh`. Fine for editing files and submitting jobs, **not** for running heavy tools. |
 | **Compute node** | The machines that do the real work. You only get them by submitting jobs. |
 | **Scheduler** | Decides which job runs where, and when. Common ones: **Slurm**, **SGE**, PBS, LSF. |
 | **Job** | One piece of work sent to the scheduler, with a request for CPUs, memory and time. |
 | **Queue / partition** | A named group of compute nodes with its own limits. SGE calls it a *queue*, Slurm a *partition*. |
-| **Driver** | The `nextflow run` process itself. It submits and watches jobs, and must keep running until the pipeline finishes. |
+| **Driver** | The `nextflow run` process itself. It submits and orchestrates jobs, and must keep running until the pipeline finishes. |
 
 ---
 
@@ -68,7 +67,7 @@ bash hpc/start_slurm.sh
 <details markdown="1">
 <summary>✅ Expected output</summary>
 
-The first time it installs Slurm, which takes about a minute. Then:
+This script installs Slurm, which takes about a minute. Then:
 
 ```
 ▶ Your practice Slurm cluster is ready 🎉
@@ -87,9 +86,9 @@ You now have a real Slurm installation: the same software that runs on thousands
 
 ## Step 2 — Submit a job yourself
 
-Before letting Nextflow do it, submit one job by hand, so you can see what Nextflow will be doing for you later.
+Before we dive into Nextflow, lets submit a job the old fashioned way with a submission/job script.
 
-Work is sent to a cluster as a **job script**: a shell script whose header says what it needs.
+In slurm, this will look like the following:.
 
 > ▶️ **Try it — write the script**
 >
