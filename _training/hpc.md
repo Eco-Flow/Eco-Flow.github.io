@@ -78,7 +78,7 @@ codespace*    up   infinite      1   idle codespaces-abc123
 That table comes from **`sinfo`**, which lists the machines a scheduler has. Yours has one partition, `codespace`, with one node — your Codespace — currently `idle`.
 </details>
 
-You now have a real Slurm installation: the same software that runs on thousands of HPC systems, with the same commands. What it *doesn't* have is other machines, so nothing here runs any faster — but everything you do from now on works identically on a real cluster.
+You now have a real Slurm installation: the same software that runs on thousands of HPC systems, with the same commands. What it *doesn't* have is other machines, so nothing here runs any faster.
 
 > ⚠️ **If your Codespace restarts**, run `bash hpc/start_slurm.sh` again. It's safe to re-run at any time.
 
@@ -108,6 +108,8 @@ In slurm, this will look like the following:.
 > echo "Finished"
 > ```
 
+The `#SBATCH` lines are the **resource request**: how many CPUs, how much memory, how long, and which partition. The scheduler uses them to decide where and when your job runs.
+
 > ▶️ **Try it — submit it and watch it**
 >
 > ```bash
@@ -124,7 +126,6 @@ Submitted batch job 1
                  1 codespace    hello   vscode  R       0:01      1 codespaces-abc123
 ```
 
-- The `#SBATCH` lines are the **resource request**: how many CPUs, how much memory, how long, and which partition. The scheduler uses them to decide where and when your job runs.
 - `ST` is the job's state: `R` = running, `PD` = pending (waiting for resources).
 - After about 30 seconds the job finishes and drops off `squeue`. Its output is in the file named by `--output`: read it with `cat hello_1.log`.
 </details>
@@ -142,7 +143,7 @@ Submitted batch job 1
 >
 > The job disappears from the queue, and its log stops where you interrupted it.
 
-**Remember this script — Step 4 is the punchline.** You've just written a job script by hand. When you run a pipeline, Nextflow writes one of these *per task* and submits them all for you.
+You've just written a job script by hand, easy. But when you run a pipeline, Nextflow writes one of these *per task* and submits them all for you. That's where Nextflow excels.
 
 ### The commands, on both common schedulers
 
@@ -191,11 +192,11 @@ Submit with `qsub hello_job.sh`, watch with `qstat`, cancel with `qdel <job id>`
 
 ---
 
-## Step 3 — Get a pipeline, and see what it asks for
+## Step 3 — Get a pipeline on the cluster
 
-There are two ways to get a pipeline. Both work the same here and on a cluster.
+There are two ways to get a pipeline.
 
-We'll use **[nf-core/demo](https://nf-co.re/demo)**: a tiny nf-core pipeline (FastQC → trimming with seqtk → MultiQC) that runs in a couple of minutes.
+We'll use **[nf-core/demo](https://nf-co.re/demo)**: a tiny nf-core pipeline (FastQC → trimming with seqtk → MultiQC) that runs in a couple of minutes. This is the same for any nf-core pipeline!
 
 ### Way A — let Nextflow fetch it
 
@@ -238,8 +239,8 @@ That copy is Nextflow's to manage — it's filed away under a long path like `~/
 > ▶️ **Try it**
 >
 > ```bash
-> mkdir -p ~/nf_practical      # a folder of its own, easy to find and remove later
-> cd ~/nf_practical
+> mkdir -p ./nf_practical      # a folder of its own
+> cd ./nf_practical
 > git clone https://github.com/nf-core/demo.git
 > cd demo
 > git checkout 1.2.0
@@ -256,7 +257,7 @@ ro-crate-metadata.json  subworkflows  tests  tower.yml  workflows
 ```
 </details>
 
-With a clone, you point Nextflow at the **folder** rather than the pipeline name — that's what `nextflow run main.nf` did in [Part 5](/training/nanopore-metabarcoding/). There's nothing to run here: Step 4 uses the copy from Way A.
+With a clone, you point Nextflow at the **main.nf** rather than the pipeline name ("nf/core/demo").
 
 | | **Way A:** `nextflow run nf-core/demo -r 1.2.0` | **Way B:** `git clone` |
 | :--- | :--- | :--- |
@@ -269,14 +270,14 @@ With a clone, you point Nextflow at the **folder** rather than the pipeline name
 
 ### Who decides the CPUs and memory?
 
-Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline: each step (a *process*) has a **label**, and `conf/base.config` turns labels into resources.
+Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline: each step (a **process**) has a **label**, and `conf/base.config` turns labels into resources.
 
 These files come from the copy you cloned in Way B, so start by moving into it:
 
 > ▶️ **Challenge — what does FastQC ask for?**
 >
 > ```bash
-> cd ~/nf_practical/demo      # the clone from Way B
+> cd ./nf_practical/demo      # the clone from Way B
 > grep -n "label" modules/nf-core/fastqc/main.nf
 > grep -n -A4 "withLabel:process_low" conf/base.config
 > ```
