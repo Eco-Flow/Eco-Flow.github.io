@@ -2,21 +2,21 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-25'
 since: '2026-06-27'
-pageviews_all: 1020
-visits_all: 580
-pageviews_30d: 210
-visits_30d: 170
-pageviews_7d: 109
-visits_7d: 78
+pageviews_all: 1040
+visits_all: 590
+pageviews_30d: 230
+visits_30d: 180
+pageviews_7d: 116
+visits_7d: 81
 countries_7d: 7
 countries_all: 23
 top_pages:
 - path: /
-  views: 41
+  views: 42
+- path: /training/
+  views: 12
 - path: /training/hpc/
   views: 9
-- path: /training/
-  views: 8
 - path: /training/differential/
   views: 6
 - path: /pipelines/excon/
@@ -35,6 +35,8 @@ top_pages:
   views: 2
 - path: /numbers/
   views: 2
+- path: /events/
+  views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
 - path: /pipelines/
@@ -49,6 +51,8 @@ top_pages:
   views: 1
 - path: /blog/
   views: 1
+- path: /pipelines/about/
+  views: 1
 - path: /pipelines/pollen-metabarcoding/
   views: 1
 - path: /training/seqera-platform/
@@ -56,8 +60,6 @@ top_pages:
 - path: /citations/
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
-- path: /events/
   views: 1
 - path: /pipelines/gwas/
   views: 1
@@ -71,10 +73,10 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 40
-  visits: 37
+  views: 41
+  visits: 38
 - name: SG
-  views: 31
+  views: 32
   visits: 25
 - name: IE
   views: 6
@@ -82,12 +84,12 @@ top_countries:
 - name: DE
   views: 5
   visits: 4
+- name: CN
+  views: 3
+  visits: 3
+- name: GB
+  views: 6
+  visits: 3
 - name: BR
   views: 23
-  visits: 2
-- name: CN
-  views: 2
-  visits: 2
-- name: GB
-  views: 2
   visits: 2
