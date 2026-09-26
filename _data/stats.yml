@@ -6,13 +6,13 @@ pageviews_all: 860
 visits_all: 580
 pageviews_30d: 220
 visits_30d: 170
-pageviews_7d: 97
-visits_7d: 64
+pageviews_7d: 100
+visits_7d: 67
 countries_7d: 7
 countries_all: 23
 top_pages:
 - path: /
-  views: 39
+  views: 40
 - path: /training/
   views: 11
 - path: /training/hpc/
@@ -35,6 +35,8 @@ top_pages:
   views: 2
 - path: /about/
   views: 2
+- path: /training/setup/
+  views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
 - path: /jobs/
@@ -53,11 +55,11 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 39
-  visits: 36
+  views: 40
+  visits: 37
 - name: SG
-  views: 18
-  visits: 12
+  views: 20
+  visits: 14
 - name: IE
   views: 6
   visits: 6
