@@ -2,19 +2,19 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-27'
 since: '2026-06-27'
-pageviews_all: 0
-visits_all: 0
+pageviews_all: 860
+visits_all: 580
 pageviews_30d: 210
 visits_30d: 160
-pageviews_7d: 100
-visits_7d: 66
+pageviews_7d: 101
+visits_7d: 67
 countries_7d: 7
 countries_all: 23
 top_pages:
 - path: /
   views: 40
 - path: /training/
-  views: 11
+  views: 12
 - path: /training/hpc/
   views: 9
 - path: /training/differential/
@@ -57,8 +57,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 40
-  visits: 37
+  views: 41
+  visits: 38
 - name: SG
   views: 19
   visits: 12
