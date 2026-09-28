@@ -2,22 +2,26 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-28'
 since: '2026-06-27'
-pageviews_all: 850
-visits_all: 590
-pageviews_30d: 200
-visits_30d: 150
-pageviews_7d: 98
-visits_7d: 65
+pageviews_all: 860
+visits_all: 600
+pageviews_30d: 210
+visits_30d: 160
+pageviews_7d: 106
+visits_7d: 71
 countries_7d: 7
 countries_all: 23
 top_pages:
 - path: /
-  views: 40
+  views: 45
 - path: /training/
   views: 12
 - path: /training/hpc/
   views: 8
 - path: /pipelines/excon/
+  views: 4
+- path: /2025/09/01/biofair-fellowship.html
+  views: 4
+- path: /training/differential/
   views: 4
 - path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 3
@@ -27,18 +31,14 @@ top_pages:
   views: 3
 - path: /training/setup/
   views: 3
-- path: /2025/09/01/biofair-fellowship.html
-  views: 3
-- path: /training/differential/
-  views: 3
 - path: /pipelines/synteny/
+  views: 2
+- path: /pipelines/genomeqc/
   views: 2
 - path: /numbers/
   views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
-- path: /pipelines/genomeqc/
-  views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /funding/
@@ -59,23 +59,23 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 41
-  visits: 38
+  views: 42
+  visits: 39
 - name: SG
-  views: 15
-  visits: 9
+  views: 16
+  visits: 10
 - name: IE
   views: 6
   visits: 6
 - name: CN
   views: 5
   visits: 5
+- name: GB
+  views: 10
+  visits: 5
+- name: BR
+  views: 24
+  visits: 3
 - name: DE
   views: 3
   visits: 3
-- name: BR
-  views: 23
-  visits: 2
-- name: GB
-  views: 5
-  visits: 2
