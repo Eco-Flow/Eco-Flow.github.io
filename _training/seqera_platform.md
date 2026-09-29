@@ -105,7 +105,7 @@ tower {
 
 ## Step 3 — Watch a run live 🖥️
 
-Add **`-with-tower`** to any `nextflow run` command. Let's use the same small pipeline as [Part 7](/training/hpc/):
+Add **`-with-tower`** to any `nextflow run` command. Let's use the same small pipeline as [Part 8](/training/hpc/):
 
 ```bash
 nextflow run nf-core/demo -r 1.2.0 -profile test,docker --outdir demo_results -with-tower
@@ -131,7 +131,7 @@ The page updates as the run progresses. There's a lot on it; these are the parts
 > ▶️ **Challenge — read the run**
 >
 > 1. In **Tasks**, open the FASTQC task and find the **work directory** and the **command** it ran. Does the command look like the `.command.sh` you read in Part 3?
-> 2. In **Metrics**, which process used the most memory? In [Part 7 Step 2](/training/hpc/) you found that FASTQC *asks* for 12 GB. How much did it actually use?
+> 2. In **Metrics**, which process used the most memory? In [Part 8 Step 4](/training/hpc/) you found that FASTQC *asks* for 12 GB. How much did it actually use?
 > 3. Run the command again with `-resume` added. What changes in the **Tasks** tab?
 
 <details markdown="1">
@@ -150,7 +150,7 @@ The page updates as the run progresses. There's a lot on it; these are the parts
 
 This is where the Platform really earns its place: a run on a cluster can last for days, and checking on it otherwise means logging back in and hunting through logs.
 
-It's the same flag. In the driver job script from [Part 7 Step 5](/training/hpc/), add the token and `-with-tower`:
+It's the same flag. In the driver job script from [Part 8 Step 5](/training/hpc/), add the token and `-with-tower`:
 
 ```bash
 export TOWER_ACCESS_TOKEN=<your token>       # better: put this in ~/.bashrc
@@ -193,7 +193,7 @@ Monitoring only sends information *out*. The Platform can also **start** runs fo
 | **Datasets** | Samplesheets uploaded and versioned in the Platform, selectable from the Launchpad. |
 | **Secrets** | Credentials (e.g. for private registries) that pipelines can use without anyone seeing them. |
 
-For an **HPC**, the interesting piece is the **[Agent](https://docs.seqera.io/platform-cloud/supported_software/agent/overview)**. Clusters almost never accept inbound connections, so instead of the Platform connecting in, you run a small program on the login node that connects *out* to the Platform and waits for work. It's a single binary, started inside `tmux` so it keeps running (the same trick as Part 7's Option A), and it submits jobs to your scheduler as you.
+For an **HPC**, the interesting piece is the **[Agent](https://docs.seqera.io/platform-cloud/supported_software/agent/overview)**. Clusters almost never accept inbound connections, so instead of the Platform connecting in, you run a small program on the login node that connects *out* to the Platform and waits for work. It's a single binary, started inside `tmux` so it keeps running (the same trick as the `tmux` tip in Step 5 of [Part 8](/training/hpc/)), and it submits jobs to your scheduler as you.
 
 > 🧭 **Is it worth it?** If you're comfortable running pipelines from the terminal, monitoring (Steps 3–4) gives you most of the benefit for five minutes of setup. The Launchpad pays off when several people need to run the same pipeline, or when the people running it aren't command-line users. Setting up a compute environment usually needs your HPC or cloud team involved.
 

@@ -145,7 +145,8 @@ Submitted batch job 1
 
 You've just written a job script by hand, easy. But when you run a pipeline, Nextflow writes one of these *per task* and submits them all for you. That's where Nextflow excels.
 
-### The commands, on both common schedulers
+<details markdown="1">
+<summary>📋 Extra info — the same commands on Slurm and SGE</summary>
 
 Your cluster may use **SGE** instead of Slurm. The ideas are identical, the names differ:
 
@@ -167,10 +168,7 @@ And the job states you'll see most often:
 | Finishing up | `CG` | `t` |
 | Rejected — usually a bad resource request | `F` | `Eqw` |
 
-<details markdown="1">
-<summary>🟦 The same job script for SGE</summary>
-
-SGE reads the same kind of header, with `#$` instead of `#SBATCH`:
+**The same job script for SGE.** SGE reads the same kind of header, with `#$` instead of `#SBATCH`:
 
 ```bash
 #!/bin/bash
@@ -194,11 +192,7 @@ Submit with `qsub hello_job.sh`, watch with `qstat`, cancel with `qdel <job id>`
 
 ## Step 3 — Get a pipeline on the cluster
 
-There are two ways to get a pipeline.
-
-We'll use **[nf-core/demo](https://nf-co.re/demo)**: a tiny nf-core pipeline (FastQC → trimming with seqtk → MultiQC) that runs in a couple of minutes. This is the same for any nf-core pipeline!
-
-### Way A — let Nextflow fetch it
+We'll use **[nf-core/demo](https://nf-co.re/demo)**: a tiny nf-core pipeline (FastQC → trimming with seqtk → MultiQC) that runs in a couple of minutes. You get it the same way as any nf-core pipeline: Nextflow fetches it for you.
 
 > ▶️ **Try it**
 >
@@ -230,85 +224,47 @@ Checking nf-core/demo:1.2.0 ...
 
 This is what `nextflow run nf-core/demo` does automatically the first time: it downloads the pipeline from GitHub into `~/.nextflow/assets/`, and **`-r` picks the release**. To delete a downloaded copy, use `nextflow drop nf-core/demo`.
 
-That copy is Nextflow's to manage — it's filed away under a long path like `~/.nextflow/assets/.repos/nf-core/demo/clones/<commit>/`, which is fine for running but awkward for reading. When you want to *look at* a pipeline's code, clone it instead.
-
-### Way B — clone it yourself
-
-**Do this one too** — Step 4 runs this copy.
-
-> ▶️ **Try it**
->
-> ```bash
-> mkdir -p ./nf_practical      # a folder of its own
-> cd ./nf_practical
-> git clone https://github.com/nf-core/demo.git
-> cd demo
-> git checkout 1.2.0
-> ls
-> ```
+> ⚠️ **Always pin the version** (see [Part 3](/training/nfcore-rnaseq/)). Nextflow itself changes too, and a very old pipeline release may not run on a current Nextflow. If an old release stops with `Config parsing failed`, move `-r` to a newer release.
 
 <details markdown="1">
-<summary>✅ Roughly what you'll see</summary>
+<summary>🔍 Optional — clone the pipeline yourself, to read or edit its code</summary>
+
+Nextflow's copy is filed away under a long path like `~/.nextflow/assets/.repos/nf-core/demo/clones/<commit>/`, which is fine for running but awkward for reading. When you want to *look at* or change a pipeline's code, clone it instead:
+
+```bash
+git clone --branch 1.2.0 https://github.com/nf-core/demo.git nf_practical/demo
+ls nf_practical/demo
+```
+
+`--branch 1.2.0` checks out that release. Git will mention a "detached HEAD": that's normal when you check out a release rather than a branch.
 
 ```
 CHANGELOG.md  CITATIONS.md  CODE_OF_CONDUCT.md  LICENSE  README.md  assets  conf  docs
 main.nf  modules  modules.json  nextflow.config  nextflow_schema.json  nf-test.config
 ro-crate-metadata.json  subworkflows  tests  tower.yml  workflows
 ```
-</details>
 
-Keep the clone — Step 4 runs it. For now, go back to the course folder, so everything below runs from one place:
+To run a clone, point Nextflow at its **main.nf** rather than the pipeline name, and leave out `-r` (the clone is already fixed at 1.2.0):
 
 ```bash
-cd /workspaces/training/eco-flow-training
+nextflow run ./nf_practical/demo/main.nf -profile test,docker --outdir demo_results
 ```
 
-With a clone, you point Nextflow at the **main.nf** rather than the pipeline name ("nf/core/demo").
-
-| | **Way A:** `nextflow run nf-core/demo -r 1.2.0` | **Way B:** `git clone` |
+| | **Let Nextflow fetch it** | **Clone it yourself** |
 | :--- | :--- | :--- |
 | **Best for** | Running a published pipeline as-is | Editing the code, pipelines not on nf-core, development branches |
 | **Where it lives** | `~/.nextflow/assets/` (managed for you) | Wherever you cloned it |
-| **Pin the version** | `-r 1.2.0` | `git checkout 1.2.0` (`-r` isn't used for a folder) |
+| **Pin the version** | `-r 1.2.0` | `git clone --branch 1.2.0`, or `git checkout 1.2.0` in an existing clone (`-r` isn't used for a folder) |
 | **Update** | `nextflow pull nf-core/demo -r <new version>` | `git pull` for the latest code, or `git checkout <new version>` for a release |
 
-> ⚠️ **Always pin the version** (see [Part 3](/training/nfcore-rnaseq/)). Nextflow itself changes too, and a very old pipeline release may not run on a current Nextflow. If an old release stops with `Config parsing failed`, move `-r` to a newer release.
-
-### Who decides the CPUs and memory?
-
-Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline itself, in two parts.
-
-**First, each step carries a label.** Open a module in the clone you just made — `nf_practical/demo/modules/nf-core/fastqc/main.nf` — and the third line says:
-
-```groovy
-process FASTQC {
-    tag "${meta.id}"
-    label 'process_low'
-```
-
-**Second, the pipeline's `conf/base.config` turns each label into a resource request:**
-
-```groovy
-withLabel:process_low {
-    cpus   = { 2     * task.attempt }
-    memory = { 12.GB * task.attempt }
-    time   = { 4.h   * task.attempt }
-}
-```
-
-So FASTQC asks for **2 CPUs, 12 GB and 4 hours**, and on a cluster that becomes the job's request: it waits until a node with 12 GB free is available. You'll see the request Nextflow actually sends in the next step.
-
-> 💡 **`task.attempt`** is `1` on the first try and `2` on a retry, so a step that gets killed for using too much memory automatically asks for double next time. (nf-core pipelines retry on exit codes 130–145 — the codes schedulers use when they kill a job.)
-
-<details markdown="1">
-<summary>🔍 Optional — a tour of the pipeline folder</summary>
+**A tour of the pipeline folder:**
 
 | Path | What's in it |
 | :--- | :--- |
 | `main.nf` | The entry point: what `nextflow run` starts |
 | `workflows/` | The main workflow: which steps run, in what order |
 | `subworkflows/`, `modules/` | The building blocks. `modules/nf-core/` are shared with other nf-core pipelines, `modules/local/` are specific to this one |
-| `conf/base.config` | Resources for each label (what you just looked at) |
+| `conf/base.config` | Resources for each label (see *Who decides each step's CPUs and memory* in Step 4) |
 | `conf/test.config` | The `test` profile: tiny example input and small resource caps |
 | `nextflow.config` | Default parameters, and the **profiles** (`docker`, `singularity`, `test`, institutional configs…) |
 | `nextflow_schema.json` | Every `--parameter`, with its description and allowed values |
@@ -319,16 +275,22 @@ So FASTQC asks for **2 CPUs, 12 GB and 4 hours**, and on a cluster that becomes 
 nextflow config ./nf_practical/demo/main.nf -profile test,docker
 nextflow config ./nf_practical/demo/main.nf -profile test,singularity
 ```
+
+When you've finished the lesson, you can delete the clone. **Check the path before pressing enter** — `rm -rf` deletes without asking:
+
+```bash
+rm -rf /workspaces/training/eco-flow-training/nf_practical
+```
 </details>
 
 ---
 
 ## Step 4 — Let Nextflow submit the jobs
 
-Now let's try running a pipeline. Start the way you would on a laptop, with no cluster config at all — the same copy you cloned in Step 3, and the `test` profile for its tiny example data:
+Now let's try running a pipeline. Start the way you would on a laptop, with no cluster config at all — the pipeline from Step 3, with the `test` profile for its tiny example data:
 
 ```bash
-nextflow run ./nf_practical/demo/main.nf -profile test,docker --outdir demo_results
+nextflow run nf-core/demo -r 1.2.0 -profile test,docker --outdir demo_results
 ```
 
 Watch the line near the top of the output:
@@ -367,10 +329,8 @@ process {
 Run exactly the same command again, with the config added:
 
 ```bash
-nextflow run ./nf_practical/demo/main.nf -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
+nextflow run nf-core/demo -r 1.2.0 -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results
 ```
-
-(No `-r` here: the clone is already fixed at release 1.2.0 by the `git checkout` you did. Running the downloaded copy instead — `nextflow run nf-core/demo -r 1.2.0 …` — does exactly the same thing.)
 
 While it runs, open a **second terminal** (the ➕ in the terminal panel) and watch jobs come and go:
 
@@ -391,15 +351,16 @@ watch -n 2 squeue      # Ctrl+C to stop watching
 >
 > If it says **`executor >  local`**, the config wasn't picked up and the tasks ran outside the scheduler. Check the `-c hpc/slurm_codespaces.config` path.
 
-> ▶️ **Challenge — what did Nextflow ask Slurm for?**
->
-> Nextflow writes a job script for every task: the `.command.run` file you met in [Part 3](/training/nfcore-rnaseq/). Take the hash from a **FASTQC** line of *your* output and look at the top of its script:
->
-> ```bash
-> grep "^#SBATCH" work/94/ace98a*/.command.run     # use your own FASTQC hash
-> ```
->
-> In Step 3 you found FASTQC wants 2 CPUs, 12 GB and 4 hours. Does the job ask for that? If not, why not?
+<details markdown="1">
+<summary>▶️ Optional challenge — what did Nextflow ask Slurm for?</summary>
+
+Nextflow writes a job script for every task: the `.command.run` file you met in [Part 3](/training/nfcore-rnaseq/). Take the hash from a **FASTQC** line of *your* output and look at the top of its script:
+
+```bash
+grep "^#SBATCH" work/94/ace98a*/.command.run     # use your own FASTQC hash
+```
+
+Normally FASTQC asks for **2 CPUs, 12 GB and 4 hours**. Does this job ask for that? If not, why not?
 
 <details markdown="1">
 <summary>✅ Answer</summary>
@@ -418,6 +379,35 @@ watch -n 2 squeue      # Ctrl+C to stop watching
 It asks for **2 CPUs (`-c 2`)**, but only **4 GB** and **1 hour**. The `test` profile caps every step at 2 CPUs, 4 GB and 1 hour (a `resourceLimits` block in `conf/test.config`) so the test runs anywhere. In a real run the same job would ask for the full 12 GB and 4 hours. `-p codespace` comes from the `queue` line in our config.
 
 It's the same kind of file you wrote in Step 2 — you just didn't have to write it. On an SGE cluster, the same task's script would start with `#$ -N …` and `#$ -l h_rt=…` instead.
+</details>
+</details>
+
+<details markdown="1">
+<summary>💡 <b>Want to know more? Who decides each step's CPUs and memory</b></summary>
+
+Every step asks the scheduler for CPUs, memory and time. Those numbers come from the pipeline itself, in two parts.
+
+**First, each step carries a label.** Every module has one near the top. Here's the start of FASTQC's, [`modules/nf-core/fastqc/main.nf`](https://github.com/nf-core/demo/blob/1.2.0/modules/nf-core/fastqc/main.nf):
+
+```groovy
+process FASTQC {
+    tag "${meta.id}"
+    label 'process_low'
+```
+
+**Second, the pipeline's [`conf/base.config`](https://github.com/nf-core/demo/blob/1.2.0/conf/base.config) turns each label into a resource request:**
+
+```groovy
+withLabel:process_low {
+    cpus   = { 2     * task.attempt }
+    memory = { 12.GB * task.attempt }
+    time   = { 4.h   * task.attempt }
+}
+```
+
+So FASTQC asks for **2 CPUs, 12 GB and 4 hours**, and on a cluster that becomes the job's request: it waits until a node with 12 GB free is available.
+
+> 💡 **`task.attempt`** is `1` on the first try and `2` on a retry, so a step that gets killed for using too much memory automatically asks for double next time. (nf-core pipelines retry on exit codes 130–145 — the codes schedulers use when they kill a job.)
 </details>
 
 <details markdown="1">
@@ -438,9 +428,9 @@ You rarely write this yourself: if your cluster is listed on [nf-co.re/configs](
 
 ## Step 5 — Keep the run alive
 
-A real analysis runs for hours or days, and **the driver has to keep running the whole time**. If you close your laptop or lose your connection, `nextflow run` stops, and the pipeline stops with it.
+A real analysis runs for hours or days, and **the driver has to keep running the whole time**. If you close your laptop or lose your connection, `nextflow run` stops, and the pipeline stops with it. There are two ways to keep it going, and you'll mostly use the first.
 
-The usual answer is to submit the driver *itself* as a small job. That's what `hpc/run_demo_slurm.sh` does:
+**1. Submit the driver as a job** — the right choice for anything long. It works on every cluster, and on the ones that forbid long-running processes on the login node it's the only option. The driver becomes a small job of its own, which is what `hpc/run_demo_slurm.sh` does:
 
 ```bash
 cat hpc/run_demo_slurm.sh
@@ -469,11 +459,30 @@ Follow its output with `tail -f nf_driver_<JOBID>.log`.
 > 2. Submit it again: `sbatch hpc/run_demo_slurm.sh` (the script already includes `-resume`).
 > 3. When it finishes, find the steps that were reused: `grep -i cached nf_driver_<new JOBID>.log`
 
-> ⚠️ **One driver at a time in a folder.** Each `sbatch hpc/run_demo_slurm.sh` starts another Nextflow run, and two runs launched from the same folder share the same work directory and cache, so they get in each other's way. If `squeue` shows two `nf_driver` jobs, `scancel` the extra one.
+> ⚠️ **One driver at a time in a folder.** Each `sbatch hpc/run_demo_slurm.sh` (or `-bg` run, below) starts another Nextflow run, and two runs launched from the same folder share the same cache, so they get in each other's way. If `squeue` shows two `nf_driver` jobs, `scancel` the extra one.
 
-Notice the script runs `nf-core/demo -r 1.2.0` rather than your clone: a job script should stand on its own, so it names the pipeline and its version instead of depending on a folder that might move. That's how you'd write it on a real cluster too.
+<details markdown="1">
+<summary>📋 Extra info — what's <code>-w work_slurm</code> in the script?</summary>
 
-One line in that script is worth a look: **`-w work_slurm`**. `-w` chooses where Nextflow keeps its working files, and this run keeps them separate from Step 4's rather than mixing the two together. It doesn't stop `-resume` reusing work: that cache lives in the folder you launched from, so steps Step 4 already finished can show up here as `Cached process >` lines. On a cluster, `-w` matters for a different reason — those files get very large, so you point it at wherever your cluster keeps big data.
+`-w` chooses where Nextflow keeps its working files, and this run keeps them separate from Step 4's rather than mixing the two together. It doesn't stop `-resume` reusing work: that cache lives in the folder you launched from, so steps Step 4 already finished can show up here as `Cached process >` lines. On a cluster, `-w` matters for a different reason — those files get very large, so you point it at wherever your cluster keeps big data.
+</details>
+
+**2. Run it in the background with `-bg`** — simpler, and fine for shorter runs on clusters that allow them. Add the flag and Nextflow detaches itself: you get your prompt back, and you can close your terminal without stopping the run.
+
+> ▶️ **Try it** — once `squeue` shows no `nf_driver` job, run Step 4's command with `-bg` on the end:
+>
+> ```bash
+> nextflow run nf-core/demo -r 1.2.0 -profile test,docker -c hpc/slurm_codespaces.config --outdir demo_results -bg > bg_run.log
+> tail -f bg_run.log      # Ctrl+C stops watching, not the run
+> ```
+
+Nextflow still prints its progress, so send it to a file (`> bg_run.log`), or it keeps appearing in your terminal. Check on it with `tail -f bg_run.log` whenever you log back in. To stop the run early, use `kill $(cat .nextflow.pid)`: Nextflow saves its process ID in `.nextflow.pid` when you use `-bg`.
+
+<details markdown="1">
+<summary>🖥️ Prefer <code>tmux</code> or <code>screen</code>?</summary>
+
+Start a session on the login node (`tmux new -s myrun`), run Nextflow inside it normally, then detach with `Ctrl+b` then `d`. It keeps running after you log out, and `tmux attach -t myrun` puts you back in front of the live output.
+</details>
 
 ---
 
@@ -509,9 +518,12 @@ If yours is listed, add it as a profile and Nextflow knows how to talk to your c
 nextflow run nf-core/demo -r 1.2.0 -profile test,<your_cluster> --outdir demo_results
 ```
 
-That's the `-profile ucl_myriad` you saw in [Part 5](/training/nanopore-metabarcoding/). **Open your cluster's page first** — most list setup steps, such as which Java module to load.
+That's the `-profile ucl_myriad` you saw in [Part 6](/training/nanopore-metabarcoding/). **Open your cluster's page first** — most list setup steps, such as which Java module to load.
 
-**Not listed?** In order:
+<details markdown="1">
+<summary>❓ Not listed? Where to get a config</summary>
+
+In order:
 
 1. **Ask around your institution.** Someone in a neighbouring group often has a working config already.
 2. **Ask your HPC team.** They may not know Nextflow, but they can tell you the scheduler, queue names and limits, which is most of what a config needs.
@@ -519,6 +531,7 @@ That's the `-profile ucl_myriad` you saw in [Part 5](/training/nanopore-metabarc
 4. **Ask us.** Email Eco-Flow at **ecoflow . ucl @ gmail . com** and we'll help you put one together.
 
 Writing one yourself is covered in ★ [Advanced: setting up Nextflow for your HPC](/training/hpc-config/).
+</details>
 
 ### 3. Where your files should be
 
@@ -530,11 +543,9 @@ Writing one yourself is covered in ★ [Advanced: setting up Nextflow for your H
 
 > ⚠️ **Ask where large data should live — don't assume.** Many clusters have a "scratch" area for this, but not all, and the rules differ: some aren't backed up, some delete files you haven't touched for a few weeks. Your HPC team, or your cluster's page on nf-co.re/configs, will tell you. Two things to remember once you know: copy results somewhere safe, and if `work/` is deleted, `-resume` has nothing left to resume from.
 
-### 4. Keeping the driver alive
+### 4. Your own driver script
 
-There are two ways worth knowing, and you'll mostly use the first.
-
-**1. Submit the driver as a job** — Step 5's approach, and the right one for anything long. It works on every cluster, and on the ones that forbid long-running processes on the login node it's the only option. Write a small `run.sh` and submit it:
+On your cluster, write your own version of Step 5's `hpc/run_demo_slurm.sh`: your partition or queue, a `module load` line if your cluster uses modules, `-profile singularity,<your_cluster>`, and `-w` pointing at wherever your cluster keeps large data:
 
 <details markdown="1">
 <summary>🟨 Slurm — <code>run.sh</code>, submit with <code>sbatch run.sh</code></summary>
@@ -582,27 +593,7 @@ nextflow run nf-core/demo -r 1.2.0 \
 ```
 </details>
 
-**2. Run it in the background with `-bg`** — simpler, and fine for shorter runs on clusters that allow them. Add the flag and Nextflow detaches itself: you get your prompt back, and you can close your terminal without stopping the run.
-
-```bash
-nextflow run nf-core/demo -r 1.2.0 \
-  -profile singularity,<your_cluster> \
-  --outdir /path/to/results \
-  -w /path/with/space/work \
-  -resume -bg
-```
-
-Progress goes to `.nextflow.log`, so check on it whenever you log back in:
-
-```bash
-tail -f .nextflow.log
-```
-
-<details markdown="1">
-<summary>🖥️ Prefer <code>tmux</code> or <code>screen</code>?</summary>
-
-Start a session on the login node (`tmux new -s myrun`), run Nextflow inside it normally, then detach with `Ctrl+b` then `d`. It keeps running after you log out, and `tmux attach -t myrun` puts you back in front of the live output.
-</details>
+For a shorter run, the same `nextflow run` line with `-bg` works too (Step 5).
 
 <details markdown="1">
 <summary>🧬 Optional — rerun Part 3's RNA-Seq analysis on your cluster</summary>
@@ -666,10 +657,10 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 | **Pre-download if compute nodes are offline** | Use `nextflow pull` or `nf-core pipelines download` on the login node |
 | **Add `-resume` after fixing a problem** | Finished steps are reused instead of recomputed |
 | **Read `<outdir>/pipeline_info/`** | nf-core writes an execution report, timeline and trace there, showing how much memory and time each step *really* used |
-| **Keep your run command in a script** (like `run.sh`) and in git | Reproducible, easy to rerun, easy to share (see [Part 6](/training/github-basics/)) |
+| **Keep your run command in a script** (like `run.sh`) and in git | Reproducible, easy to rerun, easy to share (see [Part 7](/training/github-basics/)) |
 | **Clean up when you're happy** | `nextflow clean -f`, or delete `work/`, but only once you won't need `-resume` |
 
-> 🔍 **Exit codes 130–145** (for example `137` or `140`) usually mean the **scheduler killed the job** for going over its memory or time. nf-core pipelines retry once with double the resources (Step 3). If a step fails again, it needs more than it's allowed: ask your HPC team, or see how to raise a label's resources on the ★ [advanced page](/training/hpc-config/).
+> 🔍 **Exit codes 130–145** (for example `137` or `140`) usually mean the **scheduler killed the job** for going over its memory or time. nf-core pipelines retry once with double the resources (Step 4). If a step fails again, it needs more than it's allowed: ask your HPC team, or see how to raise a label's resources on the ★ [advanced page](/training/hpc-config/).
 
 ---
 
@@ -679,7 +670,7 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 - A job is a script with a **resource request** in its header (`#SBATCH`, or `#$` on SGE). You wrote one in Step 2.
 - Nextflow writes those scripts for you: **`executor = 'slurm'`** (or `'sge'`) is all it takes, and each step's CPUs and memory come from its **label** in `conf/base.config`.
 - **Smoke-test** with the `test` profile and check the banner says `executor > slurm`, not `local`.
-- Keep the **driver** alive as its own job, and use **`-resume`** after any interruption.
+- Keep the **driver** alive, as its own job or with **`-bg`**, and use **`-resume`** after any interruption.
 - On your own cluster: load Nextflow, use **Singularity**, and check [nf-co.re/configs](https://nf-co.re/configs) for a ready-made profile before writing anything yourself.
 
 ---
@@ -688,14 +679,8 @@ nf-core/rnaseq 3.26.0 needs **Nextflow 25.04.3 or newer** (`nextflow -version`).
 
 🎉 **You've run a pipeline through a real job scheduler**, and seen how Nextflow turns each step into a job — exactly as it will on your institution's cluster.
 
-> 🧹 **Tidying up.** The practice clone from Step 3 is no longer needed once you've finished the lesson. **Check the path before pressing enter** — `rm -rf` deletes without asking:
->
-> ```bash
-> rm -rf /workspaces/training/eco-flow-training/nf_practical
-> ```
-
 **Next steps:**
 
-- Continue to **[Part 8 · Seqera Platform ▶️](/training/seqera-platform/)** to watch your runs live in the browser.
+- Continue to **[Part 9 · Seqera Platform ▶️](/training/seqera-platform/)** to watch your runs live in the browser.
 - Your cluster has no ready-made config? See ★ **[Advanced: setting up Nextflow for your HPC](/training/hpc-config/)**.
 - Stuck? The [nf-core Slack](https://nf-co.re/join/slack) is full of people running pipelines on clusters like yours. Or get in touch with us at Eco-Flow: **ecoflow . ucl @ gmail . com**

@@ -14,7 +14,7 @@ bonus: true
 
 ⏱ **Estimated time:** ~20 minutes reading &nbsp;•&nbsp; 🟣 Advanced / optional &nbsp;•&nbsp; Reference, not a hands-on run
 
-> 👋 **Just want to run a pipeline on your cluster?** You probably want **[Part 7 · Running a pipeline on an HPC](/training/hpc/)** instead. This page is only needed when your cluster doesn't have a working Nextflow config yet.
+> 👋 **Just want to run a pipeline on your cluster?** You probably want **[Part 8 · Running a pipeline on an HPC](/training/hpc/)** instead. This page is only needed when your cluster doesn't have a working Nextflow config yet.
 
 > 🎯 **Who is this for?** The person *setting up* Nextflow on a **High-Performance Computing (HPC) cluster** that has no ready-made config: a researcher working with their HPC team, or the admin themselves. This is a *conceptual guide with pointers*, not a step-by-step you can run here (every cluster is different).
 
@@ -25,7 +25,7 @@ bonus: true
 - Where to find **existing configs** you can reuse or adapt
 - How to sketch a minimal config (with optional **SGE** and **Slurm** examples)
 - How to **test** a config on a tiny pipeline before a real run
-- What to do once it works: share it, and run pipelines as in [Part 7](/training/hpc/)
+- What to do once it works: share it, and run pipelines as in [Part 8](/training/hpc/)
 
 ---
 
@@ -243,9 +243,9 @@ Once this tiny test passes, you can trust the config for real runs.
 
 ## Next — running it for real
 
-With a working config, you run pipelines like any other user of your cluster: swap `-profile docker` for **`-profile singularity -c mycluster.config`**, and keep the Nextflow driver alive while the pipeline runs. How to do that (a driver job script for Slurm or SGE, `tmux`, or `-bg`) is covered in **[Part 7 · Running a pipeline on an HPC](/training/hpc/)**, Step 5.
+With a working config, you run pipelines like any other user of your cluster: swap `-profile docker` for **`-profile singularity -c mycluster.config`**, and keep the Nextflow driver alive while the pipeline runs. How to do that (a driver job script for Slurm or SGE, `tmux`, or `-bg`) is covered in **[Part 8 · Running a pipeline on an HPC](/training/hpc/)**, Steps 5 and 6.
 
-> 🤝 **Share your config.** Once it works, consider adding it to [nf-core/configs](https://github.com/nf-core/configs), so everyone at your institution can simply use `-profile <your_cluster>`. That's a pull request, just like in [Part 6](/training/github-basics/).
+> 🤝 **Share your config.** Once it works, consider adding it to [nf-core/configs](https://github.com/nf-core/configs), so everyone at your institution can simply use `-profile <your_cluster>`. That's a pull request, just like in [Part 7](/training/github-basics/).
 
 ---
 
@@ -255,4 +255,4 @@ With a working config, you run pipelines like any other user of your cluster: sw
 - **Ask your admin** the scheduler, container engine, queues and limits (Step 1). And if they can help you build and test the config.
 - **Reuse** an nf-core/configs profile if one exists, or **adapt** a similar one.
 - **Test** it first with `-profile test,singularity` on a tiny pipeline and confirm the `executor > slurm/sge` line.
-- Then run with **`-profile singularity -c mycluster.config`**, keeping the Nextflow driver alive as in [Part 7](/training/hpc/) (a driver job, `tmux`, or `-bg`).
+- Then run with **`-profile singularity -c mycluster.config`**, keeping the Nextflow driver alive as in [Part 8](/training/hpc/) (a driver job, `tmux`, or `-bg`).
