@@ -39,9 +39,10 @@ description: Open, tested and documented Nextflow pipelines for agri-ecology res
       <div class="grid grid--3">
         {%- for p in in_group -%}
         {%- assign meta = site.data.pipelines_meta[p.repo] -%}
-        <a class="card pipeline-card" href="{{ p.url | relative_url }}">
+        {%- comment -%} A div, not an <a>: the GitHub and paper buttons are their own links, and links can't nest. The title link stretches over the whole card instead. {%- endcomment -%}
+        <div class="card card--link pipeline-card">
           <div class="pipeline-card__top">
-            <span class="pipeline-card__name">{{ p.title }}</span>
+            <a class="pipeline-card__name pipeline-card__link" href="{{ p.url | relative_url }}">{{ p.title }}</a>
           </div>
           {%- if p.summary -%}<p>{{ p.summary }}</p>{%- endif -%}
           {%- if meta -%}
@@ -51,7 +52,16 @@ description: Open, tested and documented Nextflow pipelines for agri-ecology res
           </div>
           {%- endif -%}
           <span class="chip{% if group == 'Released' %} chip--status{% elsif group == 'In development' %} chip--dev{% else %} chip--early{% endif %}">{{ group }}</span>
-        </a>
+          {%- comment -%} Always rendered, even when empty, so the status chips line up across a row. {%- endcomment -%}
+          <div class="pipeline-card__actions">
+            {%- if p.repo -%}
+            <a class="btn btn--ghost btn--sm" href="https://github.com/{{ p.repo }}" target="_blank" rel="noopener">{% include icon-github.html size=15 %} GitHub</a>
+            {%- endif -%}
+            {%- if p.paper_url -%}
+            <a class="btn btn--ghost btn--sm" href="{{ p.paper_url }}" target="_blank" rel="noopener">{{ p.paper_type | default: "Paper" }} ↗</a>
+            {%- endif -%}
+          </div>
+        </div>
         {%- endfor -%}
       </div>
     </div>

@@ -223,6 +223,24 @@ a.card:hover, .card--link:hover { transform: translateY(-3px); box-shadow: $shad
 .pipeline-card__stats { display: flex; gap: .8rem; margin-bottom: .6rem; }
 .pipeline-card__stats .stat { font-size: .8rem; color: $faint; font-family: $font-mono; }
 
+// Card with GitHub/paper buttons: the card is a <div>, and the title link's
+// ::after covers the whole card so it stays clickable; the buttons sit above it.
+// The actions row always renders with a min-height, so status chips line up
+// across a row whether or not a card has a paper.
+.pipeline-card { position: relative; }
+.pipeline-card__link { color: $ink; }
+.pipeline-card__link:hover { color: $green-dark; text-decoration: none; }
+.pipeline-card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.pipeline-card__actions {
+  position: relative; z-index: 1;
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  min-height: 2.2rem; margin-top: .6rem;
+}
+.btn--sm { font-size: .85rem; padding: .35rem .9rem; }
+
+.pipeline-paper { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; margin: 1rem 0 0; }
+.pipeline-paper__cite { font-size: .9rem; color: $muted; }
+
 .pipeline-meta-row {
   display: flex;
   align-items: center;

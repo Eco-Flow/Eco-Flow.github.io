@@ -123,8 +123,15 @@ repo: Eco-Flow/my-pipeline        # owner/name on GitHub — see "Live GitHub st
 nav_order: 8                     # controls order in the nav dropdown & lists
 status: Released                 # Released | In development | Early development
 summary: "One sentence shown on the pipeline cards."
+paper_url: https://doi.org/10.1101/2025.01.01.123456   # optional — the pipeline's paper or preprint
+paper_type: Preprint             # optional — "Paper" (default) or "Preprint"; the button label
+paper_citation: "Smith et al. (2025) bioRxiv"          # optional — short text shown next to the button
 ---
 ```
+
+If `paper_url` is set, a **Paper**/**Preprint** button appears on the pipeline's card on
+/pipelines/ and a "Read the paper" button at the top of its own page. When a preprint is
+published, just change `paper_url` to the journal DOI and `paper_type` to `Paper`.
 
 A new pipeline automatically appears in:
 - the **Pipelines** dropdown in the top navigation,
