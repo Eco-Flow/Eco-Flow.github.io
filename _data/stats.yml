@@ -6,18 +6,20 @@ pageviews_all: 850
 visits_all: 590
 pageviews_30d: 210
 visits_30d: 160
-pageviews_7d: 70
-visits_7d: 60
+pageviews_7d: 110
+visits_7d: 73
 countries_7d: 7
 countries_all: 23
 top_pages:
 - path: /
-  views: 43
+  views: 44
 - path: /training/
-  views: 12
+  views: 13
 - path: /training/hpc/
   views: 8
 - path: /pipelines/excon/
+  views: 6
+- path: /training/differential/
   views: 4
 - path: /2025/09/01/biofair-fellowship.html
   views: 4
@@ -29,10 +31,6 @@ top_pages:
   views: 3
 - path: /training/setup/
   views: 3
-- path: /training/differential/
-  views: 3
-- path: /pipelines/synteny/
-  views: 2
 - path: /pipelines/genomeqc/
   views: 2
 - path: /numbers/
@@ -41,19 +39,23 @@ top_pages:
   views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
-- path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
-- path: /2025/04/01/hackathon-london.html
-  views: 1
-- path: /training/github-basics/
-  views: 1
+- path: /pipelines/synteny/
+  views: 2
 - path: /pipelines/about/
   views: 1
 - path: /training/seqera-platform/
   views: 1
+- path: /2025/03/19/nextflow_training.html
+  views: 1
+- path: /training/github-basics/
+  views: 1
 - path: /events/
   views: 1
+- path: /2025/04/01/hackathon-london.html
+  views: 1
 - path: /pipelines/
+  views: 1
+- path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 1
@@ -62,17 +64,17 @@ top_countries:
   views: 41
   visits: 38
 - name: SG
-  views: 15
-  visits: 9
+  views: 16
+  visits: 10
+- name: GB
+  views: 14
+  visits: 7
+- name: CN
+  views: 6
+  visits: 6
 - name: IE
   views: 6
   visits: 6
-- name: CN
-  views: 5
-  visits: 5
-- name: GB
-  views: 10
-  visits: 5
 - name: BR
   views: 24
   visits: 3
