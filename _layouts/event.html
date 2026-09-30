@@ -18,6 +18,9 @@ layout: default
       {%- if page.writeup -%}
         <p class="article-xref"><a href="{{ page.writeup | relative_url }}">Read our write-up of this event →</a></p>
       {%- endif -%}
+      {%- if page.video and page.video != 'pending' -%}
+        <p class="article-xref"><a href="#recording">Watch the recording ↓</a></p>
+      {%- endif -%}
       {%- if page.slides -%}
         <p class="article-xref"><a href="#slides">Jump to the slides ↓</a></p>
       {%- endif -%}
@@ -26,6 +29,21 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
+
+    {%- if page.video -%}
+    <div class="slide-deck" id="recording">
+      <h2>Recording</h2>
+      <div class="slide-deck__frame">
+        {%- if page.video == 'pending' -%}
+        <div class="slide-deck__placeholder">
+          <p>🎬 The recording of this session will be posted here once it's available.</p>
+        </div>
+        {%- else -%}
+        <iframe src="{{ page.video }}" title="{{ page.title }} — recording" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endif -%}
 
     {%- if page.slides -%}
     <div class="slide-deck" id="slides">
