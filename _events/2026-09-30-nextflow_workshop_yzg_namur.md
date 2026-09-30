@@ -3,7 +3,8 @@ title: 'Nextflow: Reproducible Scientific Workflows at Scale'
 date: 2026-09-30
 description: 'An online Nextflow workshop for the Young Zoologist Group (Université de Namur, Belgium), covering amplicon data analysis with nf-core/ampliseq and running pipelines on an HPC.'
 author: 'Christopher Wyatt'
-organiser: yzg
+host: yzg
+role: delivering
 location: Online
 type: [training]
 tags: ["nextflow", "nf-core", "training", "hpc", "ampliseq", "amplicon", "online"]

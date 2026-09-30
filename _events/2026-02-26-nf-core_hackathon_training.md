@@ -3,7 +3,8 @@ title: 'nf-core pre-hackathon training'
 date: 2026-03-05
 description: 'Pre hackathon training in London.'
 author: 'Christopher Wyatt'
-organiser: nf-core
+host: [nf-core, ucl]
+role: delivering
 location: London, UK
 type: [training]
 tags: ["nextflow", "hackathon", "nf-core", "nfcore"]

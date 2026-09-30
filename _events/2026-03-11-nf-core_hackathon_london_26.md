@@ -3,7 +3,8 @@ title: 'nf-core hackathon London announcement'
 date: 2026-03-11
 description: 'The March 2026 nf-core hackathon in London.'
 author: 'Christopher Wyatt'
-organiser: nf-core
+host: [nf-core, ucl]
+role: running
 writeup: /2026/03/19/hackathon-london.html
 location: London, UK
 type: [hackathon]

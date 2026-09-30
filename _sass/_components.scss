@@ -330,15 +330,15 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
   background: $white; box-shadow: $shadow; transition: all .18s ease;
 }
 .post-item:hover { transform: translateY(-2px); box-shadow: $shadow-hover; border-color: rgba(47,158,100,.35); }
-// Organiser logo sticker (Events page)
-.post-item__org {
+// Host logo(s) in an Events card's corner; joint hosts stack vertically
+.post-item__hosts {
   position: absolute;
   top: 1.2rem; right: 1.2rem;
-  width: 40px; height: 40px;
-  object-fit: contain;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  img { width: 40px; height: auto; max-height: 40px; object-fit: contain; }
 }
-.post-item:has(.post-item__org) { padding-right: 4rem; }
-@include sm { .post-item__org { width: 32px; height: 32px; top: 1rem; right: 1rem; } }
+.post-item:has(.post-item__hosts) { padding-right: 4rem; }
+@include sm { .post-item__hosts { top: 1rem; right: 1rem; img { width: 32px; max-height: 32px; } } }
 .post-item__meta { font-size: .82rem; color: $faint; font-family: $font-mono; margin-bottom: .35rem; }
 .post-item__title { font-family: $font-head; font-size: 1.2rem; font-weight: 600; margin: 0 0 .4rem; }
 .post-item__title a { color: $ink; &:hover { color: $green-dark; text-decoration: none; } }
@@ -356,6 +356,9 @@ h2 .auto-star { font-size: .7em; vertical-align: super; }
 .etype--training   { background: #e7eefb; color: #274b8a; border-color: #cfdcf4; }
 .etype--hackathon  { background: #fbf1dd; color: #8a5a12; border-color: #f0ddb6; }
 .etype--networking { background: #efeafa; color: #4b3b8f; border-color: #ded4f2; }
+// Eco-Flow's role tag: outlined, with the tree logo, so it reads apart from the type pills
+.etype--eco-flow   { background: $white; color: $green-dark; border-color: $green;
+  img { width: 14px; height: 14px; } }
 .post-item__xref { margin: .6rem 0 0; font-size: .9rem; font-weight: 500; a { color: $green-dark; &:hover { color: $green; } } }
 // Cross-reference link between an event page and its blog write-up
 .article-xref { margin: 1rem 0 0; font-weight: 500; a { color: $green-dark; &:hover { color: $green; } } }

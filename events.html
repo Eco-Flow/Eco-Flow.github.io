@@ -10,9 +10,10 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
     <h1>Events</h1>
     <p>Training, workshops, hackathons and other events — upcoming and past.</p>
     <p style="color:#5b6b63;font-size:.95rem;margin-top:.6rem">
-      The logo in each card's corner shows who runs the event: those marked with the
-      <strong>Eco-Flow</strong> tree are organised by us; the rest (such as the
-      <strong>nf-core</strong> apple) are community events we take part in or recommend.
+      The logo in each card's corner shows who hosts the event. The green
+      <strong>Eco-Flow</strong> tag shows our part in it: <em>Run by Eco-Flow</em> for our own events,
+      <em>Delivered by Eco-Flow</em> when we give a talk or training at someone else's event, or
+      <em>attending</em>. Events without the tag are ones we're promoting.
     </p>
   </div>
 </div>
@@ -30,10 +31,9 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
         {%- if event_date >= today -%}
           {%- assign upcoming = upcoming | plus: 1 -%}
           <li class="post-item">
-            {%- assign org = site.data.organisers[event.organiser] | default: site.data.organisers['eco-flow'] -%}
-            {%- if org -%}<img class="post-item__org" src="{{ org.logo | relative_url }}" alt="{{ org.name }}" title="Organised by {{ org.name }}">{%- endif -%}
+            {%- include event-hosts.html host=event.host -%}
             <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}{% if event.location %} · {% include event-location.html location=event.location %}{% endif %}</div>
-            {%- include event-types.html types=event.type -%}
+            {%- include event-types.html types=event.type role=event.role date=event.date -%}
             <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
             {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}
             {%- if event.writeup -%}<p class="post-item__xref"><a href="{{ event.writeup | relative_url }}">Read the write-up →</a></p>{%- endif -%}
@@ -52,10 +52,9 @@ description: Upcoming and past training, workshops and hackathons from Eco-Flow.
         {%- assign event_date = event.date | date: '%Y%m%d' -%}
         {%- if event_date < today -%}
           <li class="post-item">
-            {%- assign org = site.data.organisers[event.organiser] | default: site.data.organisers['eco-flow'] -%}
-            {%- if org -%}<img class="post-item__org" src="{{ org.logo | relative_url }}" alt="{{ org.name }}" title="Organised by {{ org.name }}">{%- endif -%}
+            {%- include event-hosts.html host=event.host -%}
             <div class="post-item__meta">{{ event.date | date: "%B %-d, %Y" }}{% if event.location %} · {% include event-location.html location=event.location %}{% endif %}</div>
-            {%- include event-types.html types=event.type -%}
+            {%- include event-types.html types=event.type role=event.role date=event.date -%}
             <h3 class="post-item__title"><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
             {%- if event.description -%}<p class="post-item__excerpt">{{ event.description }}</p>{%- endif -%}
             {%- if event.writeup -%}<p class="post-item__xref"><a href="{{ event.writeup | relative_url }}">Read the write-up →</a></p>{%- endif -%}

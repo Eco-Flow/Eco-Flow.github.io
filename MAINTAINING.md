@@ -88,10 +88,15 @@ The Events page automatically lists it under **Upcoming** until its date passes,
 it to **Past events**.
 
 You can also list **events run by others** (e.g. an nf-core hackathon) — just paraphrase the
-details and link to the original. Add an **`organiser:`** field to control the logo sticker shown
-in the card's corner; valid keys are in [`_data/organisers.yml`](_data/organisers.yml)
-(`eco-flow`, `nf-core`, `ucl` — defaults to `eco-flow` if omitted). To add a new organiser, drop a
-square logo in `img/` and add an entry to that file.
+details and link to the original. Two fields describe who's involved:
+
+- **`host:`** — whose event it is. Its logo goes in the card's corner, and the event page says
+  "Hosted by …". Valid keys are in [`_data/hosts.yml`](_data/hosts.yml) (defaults to `eco-flow`
+  if omitted); use a list for a joint event, e.g. `host: [nf-core, ucl]`. To add a new host, drop
+  a logo in `img/` and add an entry to that file.
+- **`role:`** — Eco-Flow's part in it, shown as a green Eco-Flow tag: `running` (our own event),
+  `delivering` (we give a talk or training at someone else's event) or `attending`. Leave it out
+  for events we're only promoting. Labels are in [`_data/event_roles.yml`](_data/event_roles.yml).
 
 ### Events vs blog posts — the workflow
 

@@ -3,7 +3,8 @@ title: 'Eco-flow nanometabarcoding workshop'
 date: 2026-07-21
 description: 'A workshop of part of the Dietary Interactions in Ecology Through Sequencing (DIETS) Symposium : https://foragingecology.com/diets/'
 author: 'Christopher Wyatt'
-organiser: eco-flow
+host: diets
+role: delivering
 writeup: /2026/07/21/diets-symposium-workshop.html
 location: Durham, UK
 type: [training]

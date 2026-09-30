@@ -1,0 +1,10 @@
+# Eco-Flow's part in an event -> green Eco-Flow tag beside the event-type pills.
+# Set `role:` in an event's front matter to one of these keys; leave it out for
+# events we're only promoting. `label_past` (optional) is used once the date passes.
+running:
+  label: Run by Eco-Flow
+delivering:
+  label: Delivered by Eco-Flow
+attending:
+  label: Eco-Flow attending
+  label_past: Attended by Eco-Flow

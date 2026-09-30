@@ -1,9 +1,22 @@
-{%- comment -%}Event-type pills. Pass a list via `types` (e.g. include.types = event.type).{%- endcomment -%}
-{%- if include.types and include.types.size > 0 -%}
+{%- comment -%}Event-type pills, then Eco-Flow's role tag. Pass a list via `types` (e.g. include.types = event.type),
+and optionally `role` (a key from _data/event_roles.yml) plus the event `date`, so past events get `label_past`.{%- endcomment -%}
+{%- assign er = site.data.event_roles[include.role] -%}
+{%- assign has_types = false -%}
+{%- if include.types and include.types.size > 0 -%}{%- assign has_types = true -%}{%- endif -%}
+{%- if has_types or er -%}
   <div class="etypes">
     {%- for t in include.types -%}
       {%- assign et = site.data.event_types[t] -%}
       {%- if et -%}<span class="etype etype--{{ t }}">{{ et.icon }} {{ et.label }}</span>{%- endif -%}
     {%- endfor -%}
+    {%- if er -%}
+      {%- assign er_label = er.label -%}
+      {%- if er.label_past -%}
+        {%- assign er_date = include.date | date: '%Y%m%d' -%}
+        {%- assign er_today = 'now' | date: '%Y%m%d' -%}
+        {%- if er_date < er_today -%}{%- assign er_label = er.label_past -%}{%- endif -%}
+      {%- endif -%}
+      <span class="etype etype--eco-flow"><img src="{{ '/img/favicon-32.png' | relative_url }}" alt="">{{ er_label }}</span>
+    {%- endif -%}
   </div>
 {%- endif -%}

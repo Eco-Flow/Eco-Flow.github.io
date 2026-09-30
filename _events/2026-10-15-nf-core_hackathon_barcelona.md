@@ -3,7 +3,8 @@ title: 'nf-core Hackathon — Barcelona, October 2026'
 date: 2026-10-15
 description: 'The October 2026 in-person nf-core hackathon in Barcelona, part of Nextflow Summit 2026 week.'
 author: 'Christopher Wyatt'
-organiser: nf-core
+host: nf-core
+role: attending
 location: Barcelona, Spain
 type: [hackathon, training]
 tags: ["nextflow", "nf-core", "hackathon", "barcelona"]

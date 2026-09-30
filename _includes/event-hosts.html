@@ -1,0 +1,13 @@
+{%- comment -%}Event host(s) from _data/hosts.yml. Pass `host` (a key or a list of keys; defaults to eco-flow).
+`as="text"` renders "Hosted by X & Y"; otherwise renders the corner logo(s) for an Events card.{%- endcomment -%}
+{%- assign host_keys = include.host | default: 'eco-flow' | join: ',' | split: ',' -%}
+{%- if include.as == 'text' -%}
+  Hosted by {% for k in host_keys %}{% assign h = site.data.hosts[k] %}{% if h %}{% unless forloop.first %} &amp; {% endunless %}{{ h.name }}{% endif %}{% endfor %}
+{%- else -%}
+  <div class="post-item__hosts">
+    {%- for k in host_keys -%}
+      {%- assign h = site.data.hosts[k] -%}
+      {%- if h -%}<img src="{{ h.logo | relative_url }}" alt="{{ h.name }}" title="Hosted by {{ h.name }}">{%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
