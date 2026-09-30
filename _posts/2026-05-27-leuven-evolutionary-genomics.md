@@ -3,6 +3,7 @@ title: 'Nextflow, nf-core and synteny in Leuven'
 date: 2026-05-27
 description: "Sharing Nextflow, nf-core and our synteny pipeline at the Mini-Symposium on Evolutionary Genomics at KU Leuven."
 author: 'Chris Wyatt'
+event: /events/2026-05-27-leuven-evolutionary-genomics/
 tags: ["nextflow", "nf-core", "synteny", "talk", "genomics"]
 ---
 
