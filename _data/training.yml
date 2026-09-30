@@ -43,21 +43,26 @@ parts:
     body: Take the counts from the RNA-Seq pipeline and find what changed — normalise with DESeq2, run differential expression, and interpret the results in R.
     file: differential.md
   - num: "5"
+    title: Run an nf-core ampliseq pipeline
+    type: Practical
+    body: Hands-on — run nf-core/ampliseq on 16S amplicon data from river and soil samples, from raw reads to taxonomic classification, diversity stats and a QC report.
+    file: nfcore_ampliseq.md
+  - num: "6"
     title: Run the nanopore metabarcoding pipeline
     type: Practical
     body: Hands-on — run Eco-Flow's nanoporemetabarcoding pipeline end to end, from raw Nanopore reads to a taxonomically-annotated community table.
     file: nanopore_metabarcoding.md
-  - num: "6"
+  - num: "7"
     title: Interacting with code on GitHub
     type: Practical
     body: Issues, pull requests, READMEs and Claude Code — how to report, fix and contribute changes to a pipeline, using nanoporemetabarcoding as the worked example.
     file: github_basics.md
-  - num: "7"
+  - num: "8"
     title: Running a pipeline on an HPC
     type: Practical · optional
     body: Run an nf-core pipeline on a Slurm/SGE cluster that's already set up — get the pipeline, submit and watch jobs, keep Nextflow alive, and avoid common mistakes. Practise on a mini Slurm cluster in Codespaces.
     file: hpc.md
-  - num: "8"
+  - num: "9"
     title: Monitoring runs with Seqera Platform
     type: Practical · optional
     body: Follow your runs live in the browser with Seqera Platform, from Codespaces or your HPC, plus an overview of launching pipelines from it.

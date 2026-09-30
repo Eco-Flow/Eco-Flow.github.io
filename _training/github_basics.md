@@ -1,9 +1,9 @@
 ---
 layout: "training"
 title: "Interacting with code on GitHub"
-num: "6"
+num: "7"
 type: "Practical"
-order: 6
+order: 7
 file: "github_basics.md"
 ---
 

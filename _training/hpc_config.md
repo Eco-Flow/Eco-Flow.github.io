@@ -3,7 +3,7 @@ layout: "training"
 title: "Advanced: setting up Nextflow for your HPC"
 num: "\u2605"
 type: "Advanced"
-order: 9
+order: 10
 file: "hpc_config.md"
 bonus: true
 ---

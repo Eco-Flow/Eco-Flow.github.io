@@ -1,9 +1,9 @@
 ---
 layout: "training"
 title: "Monitoring runs with Seqera Platform"
-num: "8"
+num: "9"
 type: "Practical \u00b7 optional"
-order: 8
+order: 9
 file: "seqera_platform.md"
 ---
 

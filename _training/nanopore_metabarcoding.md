@@ -1,9 +1,9 @@
 ---
 layout: "training"
 title: "Run the nanopore metabarcoding pipeline"
-num: "5"
+num: "6"
 type: "Practical"
-order: 5
+order: 6
 file: "nanopore_metabarcoding.md"
 ---
 

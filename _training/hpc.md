@@ -1,9 +1,9 @@
 ---
 layout: "training"
 title: "Running a pipeline on an HPC"
-num: "7"
+num: "8"
 type: "Practical \u00b7 optional"
-order: 7
+order: 8
 file: "hpc.md"
 ---
 
