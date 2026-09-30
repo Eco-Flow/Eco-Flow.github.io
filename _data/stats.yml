@@ -2,21 +2,21 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-30'
 since: '2026-06-27'
-pageviews_all: 1000
-visits_all: 0
+pageviews_all: 900
+visits_all: 620
 pageviews_30d: 300
 visits_30d: 230
-pageviews_7d: 158
-visits_7d: 114
+pageviews_7d: 160
+visits_7d: 116
 countries_7d: 8
 countries_all: 23
 top_pages:
 - path: /
-  views: 45
+  views: 46
 - path: /training/
   views: 38
 - path: /training/setup/
-  views: 11
+  views: 12
 - path: /pipelines/excon/
   views: 7
 - path: /training/nfcore-ampliseq/
@@ -83,12 +83,12 @@ top_countries:
 - name: IE
   views: 21
   visits: 21
+- name: CN
+  views: 16
+  visits: 16
 - name: GB
   views: 36
   visits: 16
-- name: CN
-  views: 14
-  visits: 14
 - name: SG
   views: 16
   visits: 10
