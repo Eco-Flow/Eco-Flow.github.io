@@ -448,7 +448,7 @@ Real analyses are rarely run just once — you tweak options and re-run.
 
 ### The `-resume` flag
 
-Add **`-resume`** and Nextflow will reuse the **cached** results of any steps that haven't changed, instead of recomputing them from scratch.
+Add **`-resume`** and Nextflow will reuse the **cached** results of any steps that haven't changed, instead of recomputing them from scratch. It will use the work directory, which can be set using the `-w` flag. By default, the work directory will in the directory where you run the pipeline.
 
 > ✅ **What you'll see with `-resume`:** unchanged processes are marked as cached, e.g.
 >
