@@ -3,7 +3,7 @@ title: 'Mini-Symposium on Evolutionary Genomics, KU Leuven'
 date: 2026-05-27
 description: 'A talk on genome rearrangements in the haplodiploids and our Eco-Flow/synteny pipeline, plus an introduction to Nextflow and nf-core, at KU Leuven.'
 author: 'Christopher Wyatt'
-organiser: ku-leuven
+organiser: eco-flow
 writeup: /2026/05/27/leuven-evolutionary-genomics.html
 location: Leuven, Belgium
 type: [talk]
