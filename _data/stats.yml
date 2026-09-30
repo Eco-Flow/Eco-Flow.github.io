@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-09-30'
 since: '2026-06-27'
-pageviews_all: 900
-visits_all: 620
+pageviews_all: 1000
+visits_all: 0
 pageviews_30d: 300
 visits_30d: 230
-pageviews_7d: 160
-visits_7d: 116
+pageviews_7d: 140
+visits_7d: 110
 countries_7d: 8
 countries_all: 23
 top_pages:
@@ -37,6 +37,8 @@ top_pages:
   views: 2
 - path: /events/2026-03-11-nf-core-hackathon-london-26/
   views: 2
+- path: /events/
+  views: 2
 - path: /funding/
   views: 2
 - path: /blog/
@@ -54,8 +56,6 @@ top_pages:
 - path: /2025/04/01/hackathon-london.html
   views: 1
 - path: /2026/07/21/diets-symposium-workshop.html
-  views: 1
-- path: /events/
   views: 1
 - path: /training/hpc-config/
   views: 1
@@ -93,8 +93,8 @@ top_countries:
   views: 16
   visits: 10
 - name: BR
-  views: 3
-  visits: 2
+  views: 4
+  visits: 3
 - name: DE
   views: 1
   visits: 1
