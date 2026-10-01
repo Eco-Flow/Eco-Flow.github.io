@@ -37,3 +37,9 @@ We're accepting expressions of interest. If you'd like us to build a pipeline �
 ## Funding & partners
 
 Funded by the **BBSRC** (Bioinformatics and Biological Resources Fund), hosted at **UCL**, and supported by **[Seqera Labs](https://seqera.io/)**. We build to the standards of **[nf-core](https://nf-co.re/)**.
+
+## Site automation
+
+The site rebuilds itself every night (~00:07 UTC) through the [`daily-rebuild`](.github/workflows/daily-rebuild.yml) GitHub Action. The Events page sorts upcoming and past events when the site is built, so this nightly rebuild is what moves an event into **Past events** once its date has gone by. To move one straight away, open the **Actions** tab → *Daily site rebuild* → *Run workflow*. GitHub Actions is free for public repositories like this one, so the rebuild costs nothing.
+
+Other Actions keep pipeline details, training lessons and site stats in sync each day. See [MAINTAINING.md](MAINTAINING.md) for details.
