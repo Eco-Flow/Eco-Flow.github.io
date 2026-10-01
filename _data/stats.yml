@@ -25,35 +25,35 @@ top_pages:
   views: 5
 - path: /training/hpc/
   views: 5
-- path: /2025/09/01/biofair-fellowship.html
-  views: 4
 - path: /training/nfcore-rnaseq/
   views: 4
+- path: /2025/09/01/biofair-fellowship.html
+  views: 4
+- path: /pipelines/synteny/
+  views: 3
 - path: /pipelines/comparete/
   views: 3
 - path: /pipelines/genomeqc/
   views: 3
 - path: /pipelines/
   views: 3
-- path: /2026/07/21/diets-symposium-workshop.html
-  views: 3
 - path: /events/
+  views: 3
+- path: /2026/07/21/diets-symposium-workshop.html
   views: 3
 - path: /blog/
   views: 3
-- path: /pipelines/synteny/
-  views: 3
-- path: /events/2026-03-11-nf-core-hackathon-london-26/
-  views: 2
-- path: /about/
+- path: /pipelines/about/
   views: 2
 - path: /funding/
   views: 2
-- path: /pipelines/about/
+- path: /about/
   views: 2
-- path: /training/pipelines/
-  views: 1
+- path: /events/2026-03-11-nf-core-hackathon-london-26/
+  views: 2
 - path: /2025/03/19/nextflow_training.html
+  views: 1
+- path: /training/pipelines/
   views: 1
 - path: /training/github-basics/
   views: 1
