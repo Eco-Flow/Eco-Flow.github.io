@@ -85,7 +85,10 @@ tags: ["workshop", "metabarcoding"]
 ```
 
 The Events page automatically lists it under **Upcoming** until its date passes, then moves
-it to **Past events**.
+it to **Past events**. That split is worked out when the site is built, so the
+[`daily-rebuild`](.github/workflows/daily-rebuild.yml) Action rebuilds the site every night
+(~00:07 UTC) to move finished events across. To move one straight away, run that Action from
+the Actions tab → *Run workflow*.
 
 You can also list **events run by others** (e.g. an nf-core hackathon) — just paraphrase the
 details and link to the original. Two fields describe who's involved:

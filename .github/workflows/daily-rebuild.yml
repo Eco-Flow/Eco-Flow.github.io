@@ -1,0 +1,22 @@
+name: Daily site rebuild
+
+# The Events page sorts upcoming vs past events (and "attending" vs "attended"
+# tags) when the site is built, so finished events only move to "Past events"
+# on the next build. This asks GitHub Pages to rebuild once a day, without a
+# commit, so that happens even on days nothing else is pushed.
+on:
+  schedule:
+    - cron: "7 0 * * *" # daily at 00:07 UTC, just after the date changes
+  workflow_dispatch: {}
+
+permissions:
+  pages: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request a GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
