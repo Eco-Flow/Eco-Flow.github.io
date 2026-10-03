@@ -6,21 +6,21 @@ pageviews_all: 930
 visits_all: 620
 pageviews_30d: 320
 visits_30d: 230
-pageviews_7d: 171
-visits_7d: 110
+pageviews_7d: 174
+visits_7d: 113
 countries_7d: 7
 countries_all: 23
 top_pages:
-- path: /training/
-  views: 39
 - path: /
+  views: 40
+- path: /training/
   views: 39
 - path: /training/setup/
   views: 12
 - path: /training/nfcore-ampliseq/
   views: 7
 - path: /training/differential/
-  views: 6
+  views: 7
 - path: /pipelines/excon/
   views: 6
 - path: /training/hpc/
@@ -31,19 +31,21 @@ top_pages:
   views: 5
 - path: /pipelines/
   views: 4
-- path: /training/nfcore-rnaseq/
-  views: 4
 - path: /2026/07/21/diets-symposium-workshop.html
+  views: 4
+- path: /training/nfcore-rnaseq/
   views: 4
 - path: /pipelines/synteny/
   views: 4
+- path: /events/
+  views: 3
 - path: /pipelines/genomeqc/
   views: 3
 - path: /blog/
   views: 3
-- path: /events/
-  views: 3
 - path: /events/2026-09-30-nextflow-workshop-yzg-namur/
+  views: 2
+- path: /pipelines/pollen-metabarcoding/
   views: 2
 - path: /about/
   views: 2
@@ -53,15 +55,13 @@ top_pages:
   views: 2
 - path: /2025/03/19/nextflow_training.html
   views: 1
-- path: /2025/09/01/biofair-fellowship.html
-  views: 1
 - path: /pipelines/gwas/
   views: 1
-- path: /training/pipelines/
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /training/nanopore-metabarcoding/
   views: 1
-- path: /pipelines/pollen-metabarcoding/
+- path: /training/pipelines/
   views: 1
 - path: /services/
   views: 1
@@ -83,8 +83,8 @@ top_countries:
   views: 39
   visits: 21
 - name: US
-  views: 21
-  visits: 20
+  views: 22
+  visits: 21
 - name: CN
   views: 19
   visits: 19
@@ -92,8 +92,8 @@ top_countries:
   views: 15
   visits: 15
 - name: SG
-  views: 11
-  visits: 9
+  views: 13
+  visits: 11
 - name: BR
   views: 2
   visits: 2
