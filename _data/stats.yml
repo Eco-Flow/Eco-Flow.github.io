@@ -2,18 +2,18 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-04'
 since: '2026-06-27'
-pageviews_all: 930
-visits_all: 620
+pageviews_all: 700
+visits_all: 400
 pageviews_30d: 300
 visits_30d: 210
-pageviews_7d: 172
-visits_7d: 111
+pageviews_7d: 174
+visits_7d: 113
 countries_7d: 7
 countries_all: 23
 top_pages:
-- path: /training/
-  views: 39
 - path: /
+  views: 40
+- path: /training/
   views: 39
 - path: /training/setup/
   views: 10
@@ -33,16 +33,18 @@ top_pages:
   views: 5
 - path: /2026/07/21/diets-symposium-workshop.html
   views: 4
-- path: /training/nfcore-rnaseq/
-  views: 4
 - path: /pipelines/synteny/
   views: 4
-- path: /events/
-  views: 3
+- path: /training/nfcore-rnaseq/
+  views: 4
 - path: /pipelines/genomeqc/
   views: 3
 - path: /blog/
   views: 3
+- path: /events/
+  views: 3
+- path: /events/2026-03-11-nf-core-hackathon-london-26/
+  views: 2
 - path: /events/2026-09-30-nextflow-workshop-yzg-namur/
   views: 2
 - path: /pipelines/pollen-metabarcoding/
@@ -51,19 +53,17 @@ top_pages:
   views: 2
 - path: /funding/
   views: 2
-- path: /events/2026-03-11-nf-core-hackathon-london-26/
+- path: /services/
   views: 2
 - path: /2025/03/19/nextflow_training.html
   views: 1
 - path: /pipelines/gwas/
   views: 1
-- path: /2025/09/01/biofair-fellowship.html
-  views: 1
 - path: /training/nanopore-metabarcoding/
   views: 1
-- path: /training/pipelines/
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
-- path: /services/
+- path: /training/pipelines/
   views: 1
 - path: /training/hpc-config/
   views: 1
@@ -79,12 +79,12 @@ top_countries:
 - name: GB
   views: 64
   visits: 24
+- name: CN
+  views: 22
+  visits: 22
 - name: BE
   views: 39
   visits: 21
-- name: CN
-  views: 20
-  visits: 20
 - name: US
   views: 21
   visits: 20
