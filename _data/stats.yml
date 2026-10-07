@@ -6,13 +6,13 @@ pageviews_all: 890
 visits_all: 590
 pageviews_30d: 320
 visits_30d: 220
-pageviews_7d: 172
-visits_7d: 113
-countries_7d: 7
+pageviews_7d: 174
+visits_7d: 115
+countries_7d: 8
 countries_all: 23
 top_pages:
 - path: /
-  views: 39
+  views: 40
 - path: /training/
   views: 39
 - path: /training/setup/
@@ -67,6 +67,8 @@ top_pages:
   views: 1
 - path: /events/2026-03-11-nf-core-hackathon-london-26/
   views: 1
+- path: /events/2026-07-08-workflowhub-community-meeting/
+  views: 1
 - path: /pipelines/nanoporemetabarcoding/
   views: 1
 - path: /jobs/
@@ -78,11 +80,11 @@ top_countries:
 - name: GB
   views: 59
   visits: 23
+- name: CN
+  views: 22
+  visits: 22
 - name: BE
   views: 39
-  visits: 21
-- name: CN
-  views: 21
   visits: 21
 - name: IE
   views: 15
@@ -90,6 +92,9 @@ top_countries:
 - name: SG
   views: 10
   visits: 6
+- name: AT
+  views: 1
+  visits: 1
 - name: BR
   views: 1
   visits: 1
