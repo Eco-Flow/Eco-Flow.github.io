@@ -6,48 +6,52 @@ pageviews_all: 890
 visits_all: 600
 pageviews_30d: 340
 visits_30d: 240
-pageviews_7d: 89
-visits_7d: 56
+pageviews_7d: 94
+visits_7d: 61
 countries_7d: 6
 countries_all: 24
 top_pages:
 - path: /
-  views: 22
+  views: 23
 - path: /training/
-  views: 9
+  views: 10
 - path: /pipelines/excon/
   views: 6
 - path: /training/differential/
+  views: 6
+- path: /pipelines/synteny/
   views: 5
 - path: /pipelines/about/
   views: 5
-- path: /pipelines/synteny/
-  views: 5
 - path: /pipelines/
   views: 4
-- path: /events/2026-09-30-nextflow-workshop-yzg-namur/
-  views: 3
 - path: /pipelines/comparete/
   views: 3
 - path: /training/hpc/
   views: 3
 - path: /events/
   views: 3
+- path: /events/2026-09-30-nextflow-workshop-yzg-namur/
+  views: 3
 - path: /pipelines/genomeqc/
   views: 2
-- path: /pipelines/pollen-metabarcoding/
-  views: 2
-- path: /2026/07/21/diets-symposium-workshop.html
+- path: /training/setup/
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
-- path: /training/seqera-platform/
-  views: 1
-- path: /training/setup/
-  views: 1
+- path: /2026/07/21/diets-symposium-workshop.html
+  views: 2
+- path: /pipelines/pollen-metabarcoding/
+  views: 2
 - path: /funding/
   views: 1
+- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
+  views: 1
+- path: /training/seqera-platform/
+  views: 1
 - path: /about/
+  views: 1
+- path: /training/commandline/
   views: 1
 - path: /pipelines/gwas/
   views: 1
@@ -63,23 +67,21 @@ top_pages:
   views: 1
 - path: /training/nfcore-ampliseq/
   views: 1
-- path: /events/2026-07-16-cloud-genomics-hackathon-aws/
-  views: 1
 - path: /pipelines/nanoporemetabarcoding/
   views: 1
 top_countries:
 - name: US
-  views: 22
-  visits: 22
+  views: 25
+  visits: 25
 - name: GB
   views: 37
   visits: 14
 - name: SG
-  views: 16
-  visits: 11
+  views: 17
+  visits: 12
 - name: CN
-  views: 8
-  visits: 8
+  views: 9
+  visits: 9
 - name: AT
   views: 1
   visits: 1
