@@ -6,8 +6,8 @@ pageviews_all: 890
 visits_all: 600
 pageviews_30d: 350
 visits_30d: 260
-pageviews_7d: 62
-visits_7d: 54
+pageviews_7d: 64
+visits_7d: 55
 countries_7d: 6
 countries_all: 24
 top_pages:
@@ -16,9 +16,9 @@ top_pages:
 - path: /training/differential/
   views: 7
 - path: /pipelines/excon/
-  views: 5
+  views: 6
 - path: /training/
-  views: 4
+  views: 5
 - path: /pipelines/nanoporemetabarcoding/
   views: 3
 - path: /training/setup/
@@ -69,10 +69,10 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 20
-  visits: 20
-- name: SG
   views: 21
+  visits: 21
+- name: SG
+  views: 22
   visits: 15
 - name: CN
   views: 12
