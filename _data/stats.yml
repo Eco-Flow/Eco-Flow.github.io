@@ -2,24 +2,24 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-12'
 since: '2026-06-27'
-pageviews_all: 800
-visits_all: 500
+pageviews_all: 880
+visits_all: 610
 pageviews_30d: 340
 visits_30d: 250
-pageviews_7d: 65
-visits_7d: 52
-countries_7d: 7
+pageviews_7d: 70
+visits_7d: 54
+countries_7d: 8
 countries_all: 24
 top_pages:
 - path: /
-  views: 12
+  views: 13
 - path: /pipelines/excon/
+  views: 6
+- path: /training/
   views: 6
 - path: /pipelines/nanoporemetabarcoding/
   views: 4
 - path: /training/setup/
-  views: 4
-- path: /training/
   views: 4
 - path: /pipelines/
   views: 3
@@ -37,6 +37,8 @@ top_pages:
   views: 2
 - path: /2025/09/01/biofair-fellowship.html
   views: 2
+- path: /training/pipelines/
+  views: 2
 - path: /pipelines/synteny/
   views: 1
 - path: /training/seqera-platform/
@@ -49,9 +51,9 @@ top_pages:
   views: 1
 - path: /training/hpc-config/
   views: 1
-- path: /2026/05/27/leuven-evolutionary-genomics.html
-  views: 1
 - path: /training/nfcore_ampliseq/
+  views: 1
+- path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /2026/03/19/hackathon-london.html
   views: 1
@@ -80,12 +82,15 @@ top_countries:
   views: 9
   visits: 9
 - name: GB
-  views: 5
-  visits: 5
+  views: 6
+  visits: 6
 - name: AT
   views: 1
   visits: 1
 - name: BE
+  views: 4
+  visits: 1
+- name: IT
   views: 4
   visits: 1
 - name: KR
