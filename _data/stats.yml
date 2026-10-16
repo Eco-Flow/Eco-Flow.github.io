@@ -2,28 +2,28 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-16'
 since: '2026-06-27'
-pageviews_all: 880
+pageviews_all: 890
 visits_all: 620
-pageviews_30d: 360
+pageviews_30d: 370
 visits_30d: 250
-pageviews_7d: 78
-visits_7d: 48
+pageviews_7d: 83
+visits_7d: 50
 countries_7d: 11
 countries_all: 26
 top_pages:
-- path: /pipelines/nanoporemetabarcoding/
-  views: 6
 - path: /training/differential/
-  views: 6
+  views: 7
 - path: /training/
   views: 6
+- path: /pipelines/nanoporemetabarcoding/
+  views: 6
 - path: /pipelines/
+  views: 6
+- path: /training/nfcore-rnaseq/
   views: 5
 - path: /
-  views: 4
+  views: 5
 - path: /pipelines/excon/
-  views: 4
-- path: /training/nfcore-rnaseq/
   views: 4
 - path: /about/
   views: 4
@@ -39,9 +39,9 @@ top_pages:
   views: 2
 - path: /pipelines/genomeqc/
   views: 2
-- path: /data/differential/salmon.merged.gene_counts_length_scaled.tsv
-  views: 2
 - path: /events/2026-02-26-nf-core-hackathon-training/
+  views: 2
+- path: /data/differential/salmon.merged.gene_counts_length_scaled.tsv
   views: 2
 - path: /data/differential/condition.tsv
   views: 2
@@ -53,11 +53,13 @@ top_pages:
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
+- path: /training/nfcore-ampliseq/
+  views: 1
 - path: /events/
   views: 1
-- path: /training/nfcore_ampliseq/
+- path: /2025/10/01/Pollen_metabarcoding_paper.html
   views: 1
-- path: /training/nfcore-ampliseq/
+- path: /training/nfcore_ampliseq/
   views: 1
 - path: /events/2026-03-11-nf-core-hackathon-london-26/
   views: 1
@@ -65,25 +67,25 @@ top_pages:
   views: 1
 - path: /events/2026-07-08-workflowhub-community-meeting/
   views: 1
-- path: /2025/10/01/Pollen_metabarcoding_paper.html
+- path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 1
 - path: /events/2026-05-27-leuven-evolutionary-genomics/
-  views: 1
-- path: /events/2026-10-15-nf-core-hackathon-barcelona/
   views: 1
 - path: /events/2026-09-30-nextflow-workshop-yzg-namur/
   views: 1
 - path: /training/commandline/
   views: 1
+- path: /404.html
+  views: 1
 - path: /2026/06/23/new-website-design.html
   views: 1
 top_countries:
 - name: SG
-  views: 35
-  visits: 27
+  views: 36
+  visits: 28
 - name: US
-  views: 12
-  visits: 8
+  views: 13
+  visits: 9
 - name: CN
   views: 5
   visits: 5
@@ -97,13 +99,13 @@ top_countries:
   views: 1
   visits: 1
 - name: ES
-  views: 4
+  views: 5
   visits: 1
 - name: GB
   views: 1
   visits: 1
 - name: IT
-  views: 12
+  views: 14
   visits: 1
 - name: KR
   views: 1
