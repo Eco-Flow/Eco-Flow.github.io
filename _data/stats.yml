@@ -6,17 +6,17 @@ pageviews_all: 900
 visits_all: 630
 pageviews_30d: 360
 visits_30d: 240
-pageviews_7d: 75
-visits_7d: 46
+pageviews_7d: 77
+visits_7d: 47
 countries_7d: 11
 countries_all: 26
 top_pages:
+- path: /
+  views: 8
+- path: /pipelines/
+  views: 7
 - path: /training/differential/
   views: 7
-- path: /
-  views: 7
-- path: /pipelines/
-  views: 6
 - path: /training/nfcore-rnaseq/
   views: 5
 - path: /training/
@@ -84,8 +84,8 @@ top_countries:
   views: 33
   visits: 27
 - name: US
-  views: 14
-  visits: 10
+  views: 15
+  visits: 11
 - name: CN
   views: 2
   visits: 2
@@ -99,7 +99,7 @@ top_countries:
   views: 5
   visits: 1
 - name: GB
-  views: 1
+  views: 2
   visits: 1
 - name: IT
   views: 14
