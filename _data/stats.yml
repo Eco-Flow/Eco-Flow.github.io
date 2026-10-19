@@ -2,17 +2,17 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-19'
 since: '2026-06-27'
-pageviews_all: 800
-visits_all: 500
+pageviews_all: 890
+visits_all: 640
 pageviews_30d: 370
 visits_30d: 250
-pageviews_7d: 80
-visits_7d: 49
-countries_7d: 5
+pageviews_7d: 83
+visits_7d: 51
+countries_7d: 10
 countries_all: 26
 top_pages:
 - path: /
-  views: 11
+  views: 13
 - path: /training/differential/
   views: 8
 - path: /pipelines/
@@ -21,9 +21,9 @@ top_pages:
   views: 6
 - path: /training/nfcore-rnaseq/
   views: 6
-- path: /pipelines/nanoporemetabarcoding/
-  views: 4
 - path: /training/
+  views: 5
+- path: /pipelines/nanoporemetabarcoding/
   views: 4
 - path: /pipelines/excon/
   views: 3
@@ -76,18 +76,33 @@ top_pages:
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 1
 top_countries:
-- name: US
-  views: 30
-  visits: 30
 - name: SG
-  views: 10
-  visits: 10
-- name: BE
-  views: 10
-  visits: 0
+  views: 32
+  visits: 26
+- name: US
+  views: 21
+  visits: 18
+- name: AR
+  views: 1
+  visits: 1
+- name: CN
+  views: 1
+  visits: 1
+- name: CO
+  views: 1
+  visits: 1
 - name: ES
-  views: 10
-  visits: 0
+  views: 5
+  visits: 1
+- name: GB
+  views: 3
+  visits: 1
 - name: IT
-  views: 10
+  views: 16
+  visits: 1
+- name: VE
+  views: 1
+  visits: 1
+- name: BE
+  views: 2
   visits: 0
