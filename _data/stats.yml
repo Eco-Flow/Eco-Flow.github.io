@@ -2,28 +2,30 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-22'
 since: '2026-06-27'
-pageviews_all: 780
-visits_all: 570
-pageviews_30d: 370
-visits_30d: 240
-pageviews_7d: 73
-visits_7d: 51
+pageviews_all: 790
+visits_all: 580
+pageviews_30d: 380
+visits_30d: 250
+pageviews_7d: 78
+visits_7d: 54
 countries_7d: 7
 countries_all: 26
 top_pages:
 - path: /
-  views: 19
+  views: 22
 - path: /pipelines/
   views: 8
 - path: /training/differential/
   views: 5
 - path: /pipelines/excon/
   views: 4
+- path: /training/nfcore-rnaseq/
+  views: 4
 - path: /training/
   views: 4
 - path: /training/pipelines/
   views: 3
-- path: /training/nfcore-rnaseq/
+- path: /about/
   views: 3
 - path: /training/hpc/
   views: 2
@@ -34,8 +36,6 @@ top_pages:
 - path: /data/differential/salmon.merged.gene_counts_length_scaled.tsv
   views: 2
 - path: /data/differential/condition.tsv
-  views: 2
-- path: /about/
   views: 2
 - path: /events/2026-09-10-seqera-sessions-cambridge/
   views: 1
@@ -72,8 +72,11 @@ top_countries:
   views: 31
   visits: 25
 - name: US
-  views: 26
-  visits: 23
+  views: 28
+  visits: 24
+- name: GB
+  views: 5
+  visits: 2
 - name: CO
   views: 1
   visits: 1
@@ -83,9 +86,6 @@ top_countries:
 - name: VE
   views: 1
   visits: 1
-- name: GB
-  views: 2
-  visits: 0
 - name: IT
   views: 7
   visits: 0
