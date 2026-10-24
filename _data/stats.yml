@@ -6,9 +6,9 @@ pageviews_all: 800
 visits_all: 580
 pageviews_30d: 400
 visits_30d: 250
-pageviews_7d: 68
-visits_7d: 45
-countries_7d: 7
+pageviews_7d: 80
+visits_7d: 50
+countries_7d: 8
 countries_all: 27
 top_pages:
 - path: /
@@ -16,7 +16,7 @@ top_pages:
 - path: /training/
   views: 7
 - path: /pipelines/
-  views: 6
+  views: 7
 - path: /about/
   views: 4
 - path: /training/differential/
@@ -35,6 +35,8 @@ top_pages:
   views: 1
 - path: /2026/07/21/diets-symposium-workshop.html
   views: 1
+- path: /training/setup/
+  views: 1
 - path: /pipelines/about/
   views: 1
 - path: /training/seqera-platform/
@@ -50,8 +52,8 @@ top_countries:
   views: 25
   visits: 24
 - name: SG
-  views: 15
-  visits: 11
+  views: 16
+  visits: 12
 - name: GB
   views: 17
   visits: 7
@@ -64,6 +66,9 @@ top_countries:
 - name: PT
   views: 4
   visits: 1
+- name: CN
+  views: 1
+  visits: 0
 - name: IT
   views: 5
   visits: 0
