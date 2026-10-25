@@ -2,21 +2,21 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-25'
 since: '2026-06-27'
-pageviews_all: 790
+pageviews_all: 800
 visits_all: 570
-pageviews_30d: 390
+pageviews_30d: 400
 visits_30d: 240
-pageviews_7d: 66
-visits_7d: 43
+pageviews_7d: 73
+visits_7d: 48
 countries_7d: 8
 countries_all: 27
 top_pages:
 - path: /
-  views: 25
+  views: 28
 - path: /training/
   views: 8
 - path: /pipelines/
-  views: 6
+  views: 8
 - path: /about/
   views: 4
 - path: /training/differential/
@@ -27,8 +27,12 @@ top_pages:
   views: 3
 - path: /training/nfcore-rnaseq/
   views: 2
+- path: /services/
+  views: 2
 - path: /training/hpc/
   views: 2
+- path: /pipelines/genomeqc/
+  views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /training/hpc-config/
@@ -41,22 +45,20 @@ top_pages:
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
-- path: /services/
-  views: 1
 - path: /pipelines/nanoporemetabarcoding/
   views: 1
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 1
 top_countries:
 - name: US
-  views: 21
-  visits: 20
+  views: 23
+  visits: 22
 - name: SG
   views: 17
   visits: 13
 - name: GB
-  views: 16
-  visits: 7
+  views: 21
+  visits: 10
 - name: FI
   views: 1
   visits: 1
