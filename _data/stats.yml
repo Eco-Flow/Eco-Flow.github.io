@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-10-27'
 since: '2026-06-27'
-pageviews_all: 780
-visits_all: 550
-pageviews_30d: 380
-visits_30d: 230
-pageviews_7d: 75
-visits_7d: 48
+pageviews_all: 790
+visits_all: 560
+pageviews_30d: 390
+visits_30d: 240
+pageviews_7d: 78
+visits_7d: 50
 countries_7d: 9
 countries_all: 27
 top_pages:
@@ -20,7 +20,7 @@ top_pages:
 - path: /training/nfcore-rnaseq/
   views: 6
 - path: /about/
-  views: 4
+  views: 5
 - path: /training/differential/
   views: 4
 - path: /pipelines/excon/
@@ -29,13 +29,15 @@ top_pages:
   views: 3
 - path: /pipelines/genomeqc/
   views: 2
+- path: /training/hpc-config/
+  views: 2
 - path: /training/setup/
   views: 2
 - path: /training/hpc/
   views: 2
-- path: /2026/05/27/leuven-evolutionary-genomics.html
+- path: /numbers/
   views: 1
-- path: /training/hpc-config/
+- path: /2026/05/27/leuven-evolutionary-genomics.html
   views: 1
 - path: /2026/07/21/diets-symposium-workshop.html
   views: 1
@@ -53,14 +55,14 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 17
-  visits: 16
+  views: 18
+  visits: 17
 - name: SG
   views: 22
   visits: 15
 - name: GB
-  views: 20
-  visits: 10
+  views: 22
+  visits: 11
 - name: CN
   views: 3
   visits: 2
