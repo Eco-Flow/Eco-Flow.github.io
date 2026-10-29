@@ -6,9 +6,9 @@ pageviews_all: 820
 visits_all: 590
 pageviews_30d: 400
 visits_30d: 250
-pageviews_7d: 113
-visits_7d: 75
-countries_7d: 11
+pageviews_7d: 124
+visits_7d: 84
+countries_7d: 14
 countries_all: 27
 top_pages:
 - path: /
@@ -22,36 +22,38 @@ top_pages:
 - path: /training/nfcore-rnaseq/
   views: 8
 - path: /training/differential/
-  views: 5
+  views: 8
 - path: /training/setup/
-  views: 5
+  views: 7
 - path: /training/hpc/
-  views: 4
+  views: 5
 - path: /services/
+  views: 5
+- path: /pipelines/pollen-metabarcoding/
   views: 4
+- path: /pipelines/synteny/
+  views: 3
 - path: /pipelines/excon/
   views: 3
-- path: /pipelines/pollen-metabarcoding/
-  views: 3
-- path: /pipelines/genomeqc/
-  views: 2
-- path: /numbers/
-  views: 2
-- path: /training/hpc-config/
+- path: /training/github-basics/
   views: 2
 - path: /funding/
   views: 2
-- path: /pipelines/synteny/
+- path: /training/hpc-config/
   views: 2
-- path: /training/github-basics/
+- path: /numbers/
+  views: 2
+- path: /pipelines/genomeqc/
+  views: 2
+- path: /pipelines/nanoporemetabarcoding/
   views: 2
 - path: /2025/04/01/hackathon-london.html
-  views: 1
-- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /2026/07/21/diets-symposium-workshop.html
   views: 1
 - path: /2026/05/27/leuven-evolutionary-genomics.html
+  views: 1
+- path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /training/nfcore-ampliseq/
   views: 1
@@ -59,7 +61,7 @@ top_pages:
   views: 1
 - path: /training/commandline/
   views: 1
-- path: /pipelines/nanoporemetabarcoding/
+- path: /pipelines/comparete/
   views: 1
 - path: /jobs/
   views: 1
@@ -67,13 +69,13 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 28
-  visits: 26
+  views: 34
+  visits: 32
 - name: GB
-  views: 35
+  views: 36
   visits: 20
 - name: SG
-  views: 28
+  views: 29
   visits: 20
 - name: CN
   views: 3
@@ -94,6 +96,15 @@ top_countries:
   views: 1
   visits: 1
 - name: HU
+  views: 1
+  visits: 1
+- name: IN
+  views: 1
+  visits: 1
+- name: KE
+  views: 1
+  visits: 1
+- name: MX
   views: 1
   visits: 1
 - name: IT
