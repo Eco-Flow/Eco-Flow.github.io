@@ -6,13 +6,13 @@ pageviews_all: 820
 visits_all: 590
 pageviews_30d: 400
 visits_30d: 250
-pageviews_7d: 120
-visits_7d: 87
+pageviews_7d: 126
+visits_7d: 89
 countries_7d: 13
 countries_all: 30
 top_pages:
 - path: /
-  views: 21
+  views: 23
 - path: /about/
   views: 11
 - path: /pipelines/
@@ -26,9 +26,9 @@ top_pages:
 - path: /training/
   views: 7
 - path: /pipelines/pollen-metabarcoding/
-  views: 6
+  views: 7
 - path: /services/
-  views: 5
+  views: 6
 - path: /training/hpc/
   views: 4
 - path: /pipelines/synteny/
@@ -46,6 +46,10 @@ top_pages:
 - path: /pipelines/genomeqc/
   views: 2
 - path: /training/commandline/
+  views: 2
+- path: /pipelines/nanoporemetabarcoding/
+  views: 2
+- path: /jobs/
   views: 2
 - path: /2025/04/01/hackathon-london.html
   views: 1
@@ -67,21 +71,17 @@ top_pages:
   views: 1
 - path: /pipelines/comparete/
   views: 1
-- path: /pipelines/nanoporemetabarcoding/
-  views: 1
-- path: /jobs/
-  views: 1
 - path: /events/2026-07-21-nanometabarcoding-newcastle/
   views: 1
 top_countries:
 - name: US
-  views: 37
-  visits: 36
+  views: 38
+  visits: 37
 - name: SG
   views: 28
   visits: 21
 - name: GB
-  views: 33
+  views: 34
   visits: 18
 - name: CN
   views: 3
@@ -91,6 +91,9 @@ top_countries:
   visits: 2
 - name: IN
   views: 2
+  visits: 2
+- name: PT
+  views: 6
   visits: 2
 - name: AR
   views: 3
@@ -106,9 +109,6 @@ top_countries:
   visits: 1
 - name: MX
   views: 1
-  visits: 1
-- name: PT
-  views: 2
   visits: 1
 - name: IT
   views: 3
