@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-11-03'
 since: '2026-06-27'
-pageviews_all: 810
-visits_all: 580
-pageviews_30d: 270
-visits_30d: 180
-pageviews_7d: 121
-visits_7d: 94
+pageviews_all: 820
+visits_all: 590
+pageviews_30d: 280
+visits_30d: 190
+pageviews_7d: 127
+visits_7d: 97
 countries_7d: 12
 countries_all: 30
 top_pages:
@@ -23,15 +23,17 @@ top_pages:
   views: 7
 - path: /pipelines/pollen-metabarcoding/
   views: 7
+- path: /pipelines/synteny/
+  views: 6
+- path: /pipelines/excon/
+  views: 5
 - path: /training/hpc/
   views: 5
 - path: /training/differential/
   views: 5
 - path: /training/
   views: 5
-- path: /pipelines/synteny/
-  views: 5
-- path: /pipelines/excon/
+- path: /services/
   views: 4
 - path: /training/hpc-config/
   views: 4
@@ -41,27 +43,27 @@ top_pages:
   views: 3
 - path: /pipelines/genomeqc/
   views: 3
-- path: /services/
-  views: 3
 - path: /training/commandline/
   views: 3
 - path: /pipelines/nanoporemetabarcoding/
   views: 3
 - path: /training/github-basics/
   views: 2
+- path: /training/seqera-platform/
+  views: 2
 - path: /numbers/
   views: 2
 - path: /events/2026-05-27-leuven-evolutionary-genomics/
   views: 2
+- path: /2026/06/23/new-website-design.html
+  views: 2
 - path: /2025/04/01/hackathon-london.html
-  views: 1
-- path: /funding/
   views: 1
 - path: /training/pipelines/
   views: 1
 - path: /pipelines/about/
   views: 1
-- path: /training/seqera-platform/
+- path: /funding/
   views: 1
 - path: /2025/10/01/Pollen_metabarcoding_paper.html
   views: 1
@@ -73,16 +75,16 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 41
-  visits: 40
+  views: 43
+  visits: 42
 - name: CN
   views: 20
   visits: 18
 - name: SG
-  views: 24
-  visits: 17
+  views: 27
+  visits: 18
 - name: GB
-  views: 18
+  views: 19
   visits: 11
 - name: IN
   views: 2
