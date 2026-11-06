@@ -6,21 +6,21 @@ pageviews_all: 820
 visits_all: 590
 pageviews_30d: 280
 visits_30d: 200
-pageviews_7d: 87
-visits_7d: 72
+pageviews_7d: 90
+visits_7d: 74
 countries_7d: 10
 countries_all: 30
 top_pages:
 - path: /
   views: 14
 - path: /training/
-  views: 7
+  views: 8
 - path: /training/setup/
-  views: 6
+  views: 7
+- path: /pipelines/excon/
+  views: 5
 - path: /training/nfcore-rnaseq/
   views: 5
-- path: /pipelines/excon/
-  views: 4
 - path: /training/commandline/
   views: 4
 - path: /training/hpc-config/
@@ -69,14 +69,14 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 31
-  visits: 31
+  views: 32
+  visits: 32
 - name: CN
   views: 20
   visits: 18
 - name: SG
-  views: 21
-  visits: 16
+  views: 23
+  visits: 17
 - name: IN
   views: 2
   visits: 2
