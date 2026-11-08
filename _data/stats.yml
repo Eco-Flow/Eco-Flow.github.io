@@ -6,8 +6,8 @@ pageviews_all: 0
 visits_all: 0
 pageviews_30d: 280
 visits_30d: 200
-pageviews_7d: 58
-visits_7d: 47
+pageviews_7d: 59
+visits_7d: 48
 countries_7d: 7
 countries_all: 31
 top_pages:
@@ -27,9 +27,9 @@ top_pages:
   views: 3
 - path: /about/
   views: 3
-- path: /training/pipelines/
-  views: 2
 - path: /training/seqera-platform/
+  views: 3
+- path: /training/pipelines/
   views: 2
 - path: /training/nfcore-rnaseq/
   views: 2
@@ -62,8 +62,8 @@ top_countries:
   views: 28
   visits: 26
 - name: SG
-  views: 22
-  visits: 17
+  views: 23
+  visits: 18
 - name: GB
   views: 2
   visits: 1
