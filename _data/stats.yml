@@ -6,11 +6,13 @@ pageviews_all: 830
 visits_all: 600
 pageviews_30d: 280
 visits_30d: 200
-pageviews_7d: 67
-visits_7d: 57
+pageviews_7d: 70
+visits_7d: 60
 countries_7d: 7
 countries_all: 31
 top_pages:
+- path: /
+  views: 7
 - path: /training/
   views: 6
 - path: /training/differential/
@@ -18,8 +20,6 @@ top_pages:
 - path: /pipelines/excon/
   views: 4
 - path: /training/hpc-config/
-  views: 4
-- path: /
   views: 4
 - path: /training/seqera-platform/
   views: 4
@@ -57,9 +57,9 @@ top_pages:
   views: 1
 - path: /pipelines/genomeqc/
   views: 1
-- path: /pipelines/comparete/
-  views: 1
 - path: /pipelines/nanoporemetabarcoding/
+  views: 1
+- path: /pipelines/comparete/
   views: 1
 - path: /2025/05/13/Boston_nfcore_hackathon.html
   views: 1
@@ -69,8 +69,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 38
-  visits: 36
+  views: 41
+  visits: 39
 - name: SG
   views: 23
   visits: 18
