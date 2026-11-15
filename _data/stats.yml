@@ -6,13 +6,13 @@ pageviews_all: 860
 visits_all: 610
 pageviews_30d: 310
 visits_30d: 230
-pageviews_7d: 78
-visits_7d: 58
+pageviews_7d: 80
+visits_7d: 60
 countries_7d: 11
 countries_all: 35
 top_pages:
 - path: /
-  views: 15
+  views: 17
 - path: /pipelines/nanoporemetabarcoding/
   views: 4
 - path: /training/nfcore-rnaseq/
@@ -73,8 +73,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 36
-  visits: 35
+  views: 38
+  visits: 37
 - name: SG
   views: 18
   visits: 15
