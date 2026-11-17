@@ -2,56 +2,60 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-11-17'
 since: '2026-06-27'
-pageviews_all: 0
-visits_all: 0
+pageviews_all: 840
+visits_all: 610
 pageviews_30d: 290
 visits_30d: 220
-pageviews_7d: 70
-visits_7d: 50
+pageviews_7d: 78
+visits_7d: 56
 countries_7d: 13
 countries_all: 36
 top_pages:
 - path: /
-  views: 24
+  views: 25
 - path: /training/
   views: 7
 - path: /pipelines/excon/
   views: 4
 - path: /pipelines/nanoporemetabarcoding/
   views: 4
-- path: /training/hpc/
-  views: 3
 - path: /about/
   views: 3
-- path: /blog/
+- path: /training/hpc/
   views: 3
 - path: /pipelines/about/
   views: 3
-- path: /2026/06/23/new-website-design.html
+- path: /blog/
+  views: 3
+- path: /pipelines/synteny/
   views: 2
-- path: /training/nfcore-rnaseq/
+- path: /training/setup/
   views: 2
 - path: /training/nfcore_ampliseq
   views: 2
 - path: /training/nanopore-metabarcoding/
   views: 2
-- path: /training/setup/
+- path: /training/nfcore-rnaseq/
   views: 2
-- path: /training/pipelines/
-  views: 1
+- path: /2026/06/23/new-website-design.html
+  views: 2
 - path: /training/github-basics/
+  views: 1
+- path: /2026/07/21/diets-symposium-workshop.html
+  views: 1
+- path: /training/hpc-config/
+  views: 1
+- path: /training/pipelines/
   views: 1
 - path: /training/seqera-platform/
   views: 1
-- path: /2026/07/21/diets-symposium-workshop.html
+- path: /training/nfcore-ampliseq/
   views: 1
 - path: /2025/09/01/biofair-fellowship.html
   views: 1
 - path: /training/differential/
   views: 1
-- path: /training/hpc-config/
-  views: 1
-- path: /training/nfcore-ampliseq/
+- path: /events/
   views: 1
 - path: /services/
   views: 1
@@ -63,15 +67,13 @@ top_pages:
   views: 1
 - path: /training/commandline/
   views: 1
-- path: /pipelines/synteny/
-  views: 1
 top_countries:
 - name: US
-  views: 29
-  visits: 27
+  views: 31
+  visits: 29
 - name: SG
-  views: 13
-  visits: 10
+  views: 14
+  visits: 11
 - name: GB
   views: 18
   visits: 6
