@@ -2,26 +2,28 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-11-19'
 since: '2026-06-27'
-pageviews_all: 600
-visits_all: 400
+pageviews_all: 850
+visits_all: 620
 pageviews_30d: 290
 visits_30d: 220
-pageviews_7d: 30
-visits_7d: 30
-countries_7d: 3
+pageviews_7d: 54
+visits_7d: 46
+countries_7d: 12
 countries_all: 36
 top_pages:
 - path: /
-  views: 17
+  views: 18
 - path: /training/
   views: 6
 - path: /pipelines/synteny/
-  views: 3
+  views: 4
 - path: /pipelines/excon/
   views: 3
 - path: /about/
   views: 2
 - path: /blog/
+  views: 2
+- path: /training/nfcore-rnaseq/
   views: 2
 - path: /training/hpc/
   views: 2
@@ -49,17 +51,42 @@ top_pages:
   views: 1
 - path: /training/nanopore-metabarcoding/
   views: 1
-- path: /training/nfcore-rnaseq/
-  views: 1
 - path: /pipelines/comparete/
   views: 1
 top_countries:
-- name: ID
-  views: 10
-  visits: 10
-- name: SG
-  views: 10
-  visits: 10
 - name: US
-  views: 10
-  visits: 10
+  views: 30
+  visits: 27
+- name: SG
+  views: 7
+  visits: 6
+- name: GB
+  views: 5
+  visits: 5
+- name: CN
+  views: 2
+  visits: 2
+- name: DE
+  views: 2
+  visits: 2
+- name: BR
+  views: 1
+  visits: 1
+- name: EC
+  views: 1
+  visits: 1
+- name: ID
+  views: 1
+  visits: 1
+- name: IE
+  views: 1
+  visits: 1
+- name: BD
+  views: 1
+  visits: 0
+- name: IT
+  views: 2
+  visits: 0
+- name: MY
+  views: 1
+  visits: 0
