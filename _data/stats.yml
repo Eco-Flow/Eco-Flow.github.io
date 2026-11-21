@@ -6,13 +6,13 @@ pageviews_all: 860
 visits_all: 620
 pageviews_30d: 310
 visits_30d: 240
-pageviews_7d: 71
-visits_7d: 56
+pageviews_7d: 73
+visits_7d: 58
 countries_7d: 13
 countries_all: 36
 top_pages:
 - path: /
-  views: 23
+  views: 24
 - path: /training/
   views: 10
 - path: /about/
@@ -24,6 +24,8 @@ top_pages:
 - path: /pipelines/excon/
   views: 3
 - path: /training/commandline/
+  views: 2
+- path: /training/hpc-config/
   views: 2
 - path: /blog/
   views: 2
@@ -37,13 +39,11 @@ top_pages:
   views: 1
 - path: /training/nfcore-ampliseq/
   views: 1
-- path: /training/hpc-config/
-  views: 1
 - path: /training/github-basics/
   views: 1
-- path: /training/pipelines/
-  views: 1
 - path: /pipelines/about/
+  views: 1
+- path: /training/pipelines/
   views: 1
 - path: /events/
   views: 1
@@ -57,8 +57,8 @@ top_pages:
   views: 1
 top_countries:
 - name: US
-  views: 35
-  visits: 32
+  views: 37
+  visits: 34
 - name: GB
   views: 12
   visits: 8
