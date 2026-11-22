@@ -6,15 +6,15 @@ pageviews_all: 880
 visits_all: 630
 pageviews_30d: 310
 visits_30d: 240
-pageviews_7d: 77
-visits_7d: 58
+pageviews_7d: 81
+visits_7d: 61
 countries_7d: 11
 countries_all: 37
 top_pages:
 - path: /
-  views: 30
+  views: 31
 - path: /training/
-  views: 11
+  views: 12
 - path: /about/
   views: 6
 - path: /training/setup/
@@ -31,11 +31,15 @@ top_pages:
   views: 2
 - path: /training/pipelines/
   views: 2
+- path: /training/nfcore-rnaseq/
+  views: 2
 - path: /pipelines/nanoporemetabarcoding/
   views: 2
 - path: /partners/
   views: 1
 - path: /pipelines/genomeqc/
+  views: 1
+- path: /numbers/
   views: 1
 - path: /training/nfcore-ampliseq/
   views: 1
@@ -43,19 +47,17 @@ top_pages:
   views: 1
 - path: /events/
   views: 1
-- path: /training/nfcore-rnaseq/
-  views: 1
 - path: /pipelines/
   views: 1
 - path: /training/hpc/
   views: 1
 top_countries:
 - name: US
-  views: 39
-  visits: 36
+  views: 41
+  visits: 38
 - name: GB
-  views: 12
-  visits: 8
+  views: 14
+  visits: 9
 - name: GH
   views: 15
   visits: 5
