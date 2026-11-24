@@ -2,12 +2,12 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-11-24'
 since: '2026-06-27'
-pageviews_all: 1010
-visits_all: 660
-pageviews_30d: 410
-visits_30d: 250
-pageviews_7d: 225
-visits_7d: 108
+pageviews_all: 1020
+visits_all: 670
+pageviews_30d: 420
+visits_30d: 260
+pageviews_7d: 227
+visits_7d: 110
 countries_7d: 6
 countries_all: 37
 top_pages:
@@ -31,15 +31,17 @@ top_pages:
   views: 3
 - path: /services/
   views: 3
+- path: /pipelines/excon/
+  views: 2
 - path: /training/nfcore-ampliseq/
   views: 2
 - path: /training/differential/
   views: 2
 - path: /events/
   views: 2
-- path: /pipelines/excon/
-  views: 1
 - path: /partners/
+  views: 1
+- path: /events/2026-09-30-nextflow-workshop-yzg-namur/
   views: 1
 - path: /numbers/
   views: 1
@@ -60,15 +62,15 @@ top_countries:
   views: 171
   visits: 66
 - name: US
-  views: 34
-  visits: 32
+  views: 35
+  visits: 33
 - name: GH
   views: 15
   visits: 5
-- name: DE
-  views: 2
-  visits: 2
 - name: SG
+  views: 3
+  visits: 3
+- name: DE
   views: 2
   visits: 2
 - name: IE
