@@ -2,23 +2,23 @@
 # DO NOT edit by hand - values are overwritten on the next nightly sync.
 updated: '2026-11-25'
 since: '2026-06-27'
-pageviews_all: 1020
-visits_all: 670
-pageviews_30d: 420
-visits_30d: 270
-pageviews_7d: 223
-visits_7d: 105
+pageviews_all: 1040
+visits_all: 680
+pageviews_30d: 440
+visits_30d: 280
+pageviews_7d: 231
+visits_7d: 106
 countries_7d: 6
 countries_all: 37
 top_pages:
 - path: /training/nfcore-rnaseq/
   views: 58
 - path: /training/
-  views: 54
+  views: 55
 - path: /
-  views: 52
+  views: 54
 - path: /pipelines/
-  views: 10
+  views: 12
 - path: /training/setup/
   views: 10
 - path: /about/
@@ -28,8 +28,10 @@ top_pages:
 - path: /training/pipelines/
   views: 5
 - path: /services/
-  views: 3
+  views: 4
 - path: /pipelines/synteny/
+  views: 2
+- path: /blog/
   views: 2
 - path: /training/differential/
   views: 2
@@ -61,8 +63,8 @@ top_pages:
   views: 1
 top_countries:
 - name: GB
-  views: 171
-  visits: 66
+  views: 179
+  visits: 67
 - name: US
   views: 32
   visits: 30
