@@ -138,17 +138,40 @@
     transition: max-height .25s ease;
   }
   // Open state (hamburger tapped): reveal and restore padding + border.
+  // The expanded About/Pipelines lists make the menu taller than a phone
+  // screen, so cap it at the space under the 68px header (dvh tracks the
+  // mobile URL bar) and let it scroll on its own.
   #nav-check:checked ~ .nav__links {
-    max-height: 90vh;
+    max-height: calc(100vh - 68px);
+    max-height: calc(100dvh - 68px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     padding: 1rem 1.5rem 1.2rem;
     border-bottom: 1px solid $border;
   }
+  // Freeze the page behind the open menu so swipes scroll the menu, not the page.
+  html:has(#nav-check:checked) { overflow: hidden; }
   .nav__link, .nav__dropdown { width: 100%; padding: .55rem 0; border-bottom: 1px solid $border; }
   .nav__menu {
     position: static; transform: none; opacity: 1; visibility: visible;
     box-shadow: none; border: 0; padding: .3rem 0 .3rem 1rem; min-width: 0;
   }
+  // About/Pipelines sub-lists start collapsed; tapping the row opens them
+  // (script in _includes/header.html). The row's own divider is the toggle's;
+  // the dropdown only adds one under the list when it's open.
+  .nav__dropdown { padding: 0; border-bottom: 0; }
+  .nav__dropdown.is-open { border-bottom: 1px solid $border; }
+  .nav__dropdown-toggle { display: flex; }
+  .nav__dropdown .nav__menu { display: none; }
+  .nav__dropdown.is-open .nav__menu { display: block; }
+  .nav__dropdown.is-open .nav__caret { transform: rotate(180deg); }
+  // A tap counts as hover/focus: cancel the desktop dropdown's slide-in
+  // transform, which would shift the open list sideways.
+  .nav__dropdown:hover .nav__menu,
+  .nav__dropdown:focus-within .nav__menu { transform: none; }
 }
+.nav__caret { display: inline-block; transition: transform .2s ease; }
 
 // --- Search ----------------------------------------------------------------
 

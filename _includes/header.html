@@ -14,7 +14,7 @@
       {%- for item in site.data.nav -%}
         {%- if item.dropdown == "pipelines" -%}
           <li class="nav__dropdown">
-            <a href="{{ '/pipelines/' | relative_url }}" class="nav__link nav__dropdown-toggle">Pipelines ▾</a>
+            <a href="{{ '/pipelines/' | relative_url }}" class="nav__link nav__dropdown-toggle">Pipelines<span class="nav__caret" aria-hidden="true">▾</span></a>
             <ul class="nav__menu">
               {%- assign pipes = site.pipelines | sort: "nav_order" -%}
               {%- for p in pipes -%}
@@ -24,7 +24,7 @@
           </li>
         {%- elsif item.children -%}
           <li class="nav__dropdown">
-            <a href="{{ item.url | relative_url }}" class="nav__link nav__dropdown-toggle">{{ item.title }} ▾</a>
+            <a href="{{ item.url | relative_url }}" class="nav__link nav__dropdown-toggle">{{ item.title }}<span class="nav__caret" aria-hidden="true">▾</span></a>
             <ul class="nav__menu">
               {%- for child in item.children -%}
                 <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
@@ -69,4 +69,29 @@
     </div>
   </div>
 </header>
+<script>
+  // Mobile menu: About/Pipelines sub-lists start collapsed and open on tap
+  // (styles in _sass/_layout.scss). On desktop they stay hover dropdowns and the
+  // tab links to its page. 820px must match $bp-md in _sass/_variables.scss.
+  (function () {
+    var mobile = window.matchMedia('(max-width: 820px)');
+    var toggles = document.querySelectorAll('.nav__dropdown-toggle');
+    function sync() {
+      Array.prototype.forEach.call(toggles, function (t) {
+        if (mobile.matches) t.setAttribute('aria-expanded', t.parentNode.classList.contains('is-open') ? 'true' : 'false');
+        else t.removeAttribute('aria-expanded');
+      });
+    }
+    Array.prototype.forEach.call(toggles, function (t) {
+      t.addEventListener('click', function (e) {
+        if (!mobile.matches) return;
+        e.preventDefault();
+        t.parentNode.classList.toggle('is-open');
+        sync();
+      });
+    });
+    if (mobile.addEventListener) mobile.addEventListener('change', sync);
+    sync();
+  })();
+</script>
 <script src="{{ '/assets/search.js' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}" defer></script>
