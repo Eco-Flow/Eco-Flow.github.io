@@ -90,7 +90,7 @@
   \ run main.nf -profile docker,test_bacteria -resume --orthofinder`\n\n# Test a docker\
   \ container:\n`docker run -it --volume $PWD:$PWD <container> bash`"
 "Eco-Flow/excon": "# EXCON\n\n[![GitHub release](https://img.shields.io/github/v/release/Eco-Flow/excon)](https://github.com/Eco-Flow/excon/releases/latest)\n\
-  [![Pipeline Tests](https://github.com/Eco-Flow/excon/actions/workflows/test-pipeline.yml/badge.svg)](https://github.com/Eco-Flow/excon/actions/workflows/test-pipeline.yml)\n\
+  [![Pipeline Tests](https://github.com/Eco-Flow/excon/actions/workflows/nf-test.yml/badge.svg)](https://github.com/Eco-Flow/excon/actions/workflows/nf-test.yml)\n\
   [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)\n\
   \nA Nextflow pipeline for gene family **EX**pansion and **CON**traction analysis\
   \ \nacross multiple species using CAFE5.\n\nGiven a set of genome assemblies and\
@@ -103,31 +103,34 @@
   \ up to around 30). Maximum 100 species (normally). \n\n## Overview\n\nThe general\
   \ pipeline logic is as follows:\n\n<img width=\"398\" alt=\"image\" src=\"https://raw.githubusercontent.com/Eco-Flow/excon/main/docs/images/excon_pipeline.5.svg\"\
   \ align=\"right\" />\n\n* Downloads genome and annotation files from NCBI `[NCBIGENOMEDOWNLOAD]`,\
-  \ or you provide your own.\n* Unzips the files, if necessary `[GUNZIP]`\n* Sanitises\
-  \ GFF annotations and extracts longest isoform `[AGAT_SPKEEPLONGESTISOFORM]`.\n\
-  * Gets the protein sequences `[GFFREAD]`.\n* Renames the genes to gene name (as\
-  \ some will be isoform name) `RENAME_FASTA`.\n* Finds orthologous genes across species\
-  \ `[ORTHOFINDER_CAFE]`, or accepts a pre-computed tree and orthogroups to skip this\
-  \ step (see `--input_tree` / `--input_orthogroups`).\n* Optionally re-infers the\
-  \ species tree with IQ-TREE2 from a concatenated single-copy orthogroup alignment\
-  \ `[EXTRACT_SINGLE_COPY]`, `[ALIGN_SINGLE_COPY]`, `[CONCAT_SINGLE_COPY]`, `[IQTREE_SPECIES_TREE]`,\
-  \ `[ROOT_TREE]` (see `--iqtree_species_tree`).\n* Rescales OrthoFinder branch lengths\
-  \ and converts to an ultrametric tree for CAFE `[RESCALE_TREE]`, `[CAFE_PREP]`,\
-  \ or time-calibrates it with `ape::chronos` when node ages are supplied `[DATE_TREE]`\
-  \ (see `--tree_calibrations`).\n* Optionally restricts the analysis to one clade\
-  \ `[PRUNE_TREE]` (see `--cafe_clade` / `--cafe_species`).\n* Prepares gene count\
-  \ input, estimates the error model, and builds an ultrametric tree `[CAFE_PREP]`.\n\
-  * Runs CAFE5 with k=1 to k=`cafe_max_k` (default 6) rate categories in parallel\
-  \ `[CAFE_RUN_K]`.\n* Compares all k runs by AIC and selects the best k `[CAFE_SELECT_K]`.\n\
-  * Re-runs CAFE5 at the best k with Poisson birth-death (`-p`) `[CAFE_RUN_BEST]`.\n\
-  * Compares uniform vs Poisson model at the best k by likelihood, selects the winner\
-  \ `[CAFE_MODEL_COMPARE]`.\n* Plots gene family expansions and contractions for the\
-  \ best model `[CAFE_PLOT]`.\n\n### Optional \u2014 GO enrichment (`--run_eggnog`\
-  \ or `--predownloaded_gofiles`)\n\n* GO annotation can be run in two ways:\n- **Run\
-  \ EggNOG-mapper** (`--run_eggnog`): assigns GO terms from scratch using the EggNOG\
-  \ database (~45 GB). \n  Provide `--eggnog_data_dir` to reuse a pre-downloaded copy\
-  \ and avoid re-downloading on every run.\n- **Supply your own GO files** (`--predownloaded_gofiles`):\
-  \ if you already have gene-to-GO mappings, \n  point to a directory of `{species_id}.go.txt`\
+  \ or you provide your own.\n* Or starts from proteomes you provide, one protein\
+  \ per gene `[PREPARE_PROTEINS]` (see `--input_proteins`).\n* Unzips the files, if\
+  \ necessary `[GUNZIP]`\n* Sanitises GFF annotations and extracts longest isoform\
+  \ `[AGAT_SPKEEPLONGESTISOFORM]`.\n* Gets the protein sequences `[GFFREAD]`.\n* Renames\
+  \ the genes to gene name (as some will be isoform name) `RENAME_FASTA`.\n* Finds\
+  \ orthologous genes across species `[ORTHOFINDER_CAFE]`, or accepts a pre-computed\
+  \ tree and orthogroups to skip this step (see `--input_tree` / `--input_orthogroups`).\n\
+  * Optionally re-infers the species tree with IQ-TREE2 from a concatenated single-copy\
+  \ orthogroup alignment `[EXTRACT_SINGLE_COPY]`, `[ALIGN_SINGLE_COPY]`, `[CONCAT_SINGLE_COPY]`,\
+  \ `[IQTREE_SPECIES_TREE]`, `[ROOT_TREE]` (see `--iqtree_species_tree`).\n* Rescales\
+  \ OrthoFinder branch lengths and converts to an ultrametric tree for CAFE `[RESCALE_TREE]`,\
+  \ `[CAFE_PREP]`, or time-calibrates it when node ages are supplied, with `ape::chronos`\
+  \ `[DATE_TREE]` or IQ-TREE's LSD2 (subworkflow `[LSD2_DATING]`: `[LSD2_PREPARE]`,\
+  \ `[DATE_TREE_LSD2]`, `[LSD2_CHECK]`) (see `--tree_calibrations`, `--dating_method`).\n\
+  * Optionally restricts the analysis to one clade `[PRUNE_TREE]` (see `--cafe_clade`\
+  \ / `--cafe_species`).\n* Prepares gene count input, estimates the error model,\
+  \ and builds an ultrametric tree `[CAFE_PREP]`.\n* Runs CAFE5 with k=1 to k=`cafe_max_k`\
+  \ (default 6) rate categories in parallel `[CAFE_RUN_K]`.\n* Compares all k runs\
+  \ by AIC and selects the best k `[CAFE_SELECT_K]`.\n* Re-runs CAFE5 at the best\
+  \ k with Poisson birth-death (`-p`) `[CAFE_RUN_BEST]`.\n* Compares uniform vs Poisson\
+  \ model at the best k by likelihood, selects the winner `[CAFE_MODEL_COMPARE]`.\n\
+  * Plots gene family expansions and contractions for the best model `[CAFE_PLOT]`.\n\
+  \n### Optional \u2014 GO enrichment (`--run_eggnog` or `--predownloaded_gofiles`)\n\
+  \n* GO annotation can be run in two ways:\n- **Run EggNOG-mapper** (`--run_eggnog`):\
+  \ assigns GO terms from scratch using the EggNOG database (~45 GB). \n  Provide\
+  \ `--eggnog_data_dir` to reuse a pre-downloaded copy and avoid re-downloading on\
+  \ every run.\n- **Supply your own GO files** (`--predownloaded_gofiles`): if you\
+  \ already have gene-to-GO mappings, \n  point to a directory of `{species_id}.go.txt`\
   \ files and skip EggNOG entirely (see [Parameters](#go-annotation-optional) below).\n\
   * Optionally downloads the EggNOG-mapper database `[EGGNOG_DOWNLOAD]`. Default is\
   \ on, unless you provide it.\n* Optionally assigns GO terms to genes using EggNOG-mapper\
@@ -172,9 +175,20 @@
   Drosophila_simulans,data/Drosophila_simulans/genome.fna.gz,data/Drosophila_simulans/genomic.gff.gz\n\
   Drosophila_santomea,data/Drosophila_santomea/genome.fna.gz,data/Drosophila_santomea/genomic.gff.gz\n\
   ```\n\n> **Note:** Genomes should be chromosome-level, not contig-level. RefSeq\
-  \ IDs must be used (not GenBank IDs).\n\n## Parameters\n\n### Core options\n\n|\
-  \ Parameter | Description | Default |\n|-----------|-------------|---------|\n|\
-  \ `--input` | Path to input CSV file | Required unless using `--input_tree` + `--input_orthogroups`\
+  \ IDs must be used (not GenBank IDs).\n\n### Starting from proteins (`--input_proteins`)\n\
+  \nIf you have proteomes rather than genomes and annotations, give them in a separate\
+  \ 2-field CSV\nwith `--input_proteins`, instead of `--input` or as well as it:\n\
+  \n```\nSpecies_A,/path/to/Species_A.proteins.fa.gz\nSpecies_B,/path/to/Species_B.proteins.fa\n\
+  ```\n\nEach proteome should hold **one protein per gene** (e.g. the longest isoform),\
+  \ named by the ID\nyou want for that gene. The pipeline uses the proteins as they\
+  \ are, apart from stop codons:\n- A final stop is removed.\n- Internal stops are\
+  \ handled as `--internal_stop_action` says (`longest_orf` by default; see\n  [Internal\
+  \ stop codons](#internal-stop-codons-optional)). Both `*` and `.` count as stops;\n\
+  \  `gffread -y` writes `.` unless run with `-S`.\n- Repeated IDs and empty sequences\
+  \ are skipped with a warning.\n\n`--stats` and `--chromo_go` need genomes and annotations,\
+  \ so they only cover species given in\n`--input`.\n\n## Parameters\n\n### Core options\n\
+  \n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  | `--input` | Path to input CSV file | Required unless using `--input_tree` + `--input_orthogroups`\
   \ without `--run_eggnog` or `--stats` |\n| `--outdir` | Output directory | `results`\
   \ |\n| `--groups` | NCBI taxonomy group for genome download (e.g. `insects`, `bacteria`)\
   \ | `insects` |\n| `--help` | Display help message | `false` |\n| `--custom_config`\
@@ -292,30 +306,35 @@
   \ is not repeated. A previous run's `iqtree/species_tree.best_scheme` records the\
   \ model chosen for each partition; the coordinates must match the supermatrix, so\
   \ only use a file produced from the same orthogroups. Supplying it suppresses the\
-  \ default `-m MFP` | `null` |\n| `--iqtree_partition_model` | Model written per\
-  \ partition. `AA` lets ModelFinder pick one per orthogroup; set e.g. `LG+F+G4` to\
-  \ fix it and skip model selection. With a partition file the model has to be set\
-  \ here rather than through `--iqtree_args '-m ...'`. | `AA` |\n\n```bash\nnextflow\
-  \ run main.nf \\\n  --input input.csv \\\n  --iqtree_species_tree \\\n  --iqtree_outgroup\
-  \ Drosophila_yakuba \\\n  -profile docker\n```\n\nOutputs are written to `results/species_tree/`:\n\
-  \n| File | Description |\n|------|-------------|\n| `SpeciesTree_rooted.nwk` | The\
-  \ rooted tree used for CAFE5 |\n| `iqtree/species_tree.treefile` | Unrooted IQ-TREE2\
-  \ ML tree with support values |\n| `iqtree/species_tree.iqtree` | IQ-TREE2 report,\
-  \ including the model chosen per partition |\n| `supermatrix/supermatrix.faa` |\
-  \ Concatenated alignment |\n| `supermatrix/partitions.txt` | Partition boundaries,\
-  \ one per orthogroup |\n\n> **No particular `--orthofinder_method` is needed.**\
-  \ The single-copy orthogroups are aligned\n> by the pipeline itself, so this works\
-  \ with OrthoFinder's default (DendroBLAST) mode as well\n> as `-M msa`. The default\
-  \ is considerably faster, since `-M msa` aligns *every* orthogroup and\n> builds\
-  \ a gene tree for each, while only the single-copy ones are needed here.\n> `--iqtree_species_tree`\
-  \ cannot be combined with `--input_tree`/`--input_orthogroups`, since\n> those skip\
-  \ OrthoFinder entirely.\n\n### Reusing a finished run\n\n`--orthofinder_results`\
-  \ points at the results directory of a completed OrthoFinder run, so it\nis not\
-  \ repeated and the orthogroup/HOG identifiers are preserved exactly. The gene-count\
-  \ table\nis picked up automatically \u2014 `Phylogenetic_Hierarchical_Orthogroups/N0.tsv`\
-  \ if present (an\nOrthoFinder v2 run), otherwise `Orthogroups/Orthogroups.tsv` (v3,\
-  \ where N0.tsv was folded into\nit as of v3.1.0 \u2014 see the \"Skipping OrthoFinder\"\
-  \ note below for why). Pass `--input_orthogroups`\nalongside `--orthofinder_results`\
+  \ default `-m MFP` | `null` |\n| `--iqtree_min_occupancy` | Smallest fraction of\
+  \ species a single-copy orthogroup must contain. `1` keeps only orthogroups with\
+  \ every species exactly once; with many species few pass, so e.g. `0.9` also keeps\
+  \ those lacking up to 10% of species (never fewer than 4 present) and fills the\
+  \ missing species with gaps. Species present must still have exactly one copy. |\
+  \ `1` |\n| `--iqtree_partition_model` | Model written per partition. `AA` lets ModelFinder\
+  \ pick one per orthogroup; set e.g. `LG+F+G4` to fix it and skip model selection.\
+  \ With a partition file the model has to be set here rather than through `--iqtree_args\
+  \ '-m ...'`. | `AA` |\n\n```bash\nnextflow run main.nf \\\n  --input input.csv \\\
+  \n  --iqtree_species_tree \\\n  --iqtree_outgroup Drosophila_yakuba \\\n  -profile\
+  \ docker\n```\n\nOutputs are written to `results/species_tree/`:\n\n| File | Description\
+  \ |\n|------|-------------|\n| `SpeciesTree_rooted.nwk` | The rooted tree used for\
+  \ CAFE5 |\n| `iqtree/species_tree.treefile` | Unrooted IQ-TREE2 ML tree with support\
+  \ values |\n| `iqtree/species_tree.iqtree` | IQ-TREE2 report, including the model\
+  \ chosen per partition |\n| `supermatrix/supermatrix.faa` | Concatenated alignment\
+  \ |\n| `supermatrix/partitions.txt` | Partition boundaries, one per orthogroup |\n\
+  \n> **No particular `--orthofinder_method` is needed.** The single-copy orthogroups\
+  \ are aligned\n> by the pipeline itself, so this works with OrthoFinder's default\
+  \ (DendroBLAST) mode as well\n> as `-M msa`. The default is considerably faster,\
+  \ since `-M msa` aligns *every* orthogroup and\n> builds a gene tree for each, while\
+  \ only the single-copy ones are needed here.\n> `--iqtree_species_tree` cannot be\
+  \ combined with `--input_tree`/`--input_orthogroups`, since\n> those skip OrthoFinder\
+  \ entirely.\n\n### Reusing a finished run\n\n`--orthofinder_results` points at the\
+  \ results directory of a completed OrthoFinder run, so it\nis not repeated and the\
+  \ orthogroup/HOG identifiers are preserved exactly. The gene-count table\nis picked\
+  \ up automatically \u2014 `Phylogenetic_Hierarchical_Orthogroups/N0.tsv` if present\
+  \ (an\nOrthoFinder v2 run), otherwise `Orthogroups/Orthogroups.tsv` (v3, where N0.tsv\
+  \ was folded into\nit as of v3.1.0 \u2014 see the \"Skipping OrthoFinder\" note\
+  \ below for why). Pass `--input_orthogroups`\nalongside `--orthofinder_results`\
   \ to override this and pin a specific file instead. With\n`--iqtree_species_tree`\
   \ it also needs `--proteome_dir`, holding the proteomes those gene IDs\nrefer to\
   \ (`results/proteomes/`, written by `RENAME_FASTA`). Add `--skip_cafe` to build\
@@ -404,15 +423,30 @@
   \ it resolved to and the age actually fitted |\n| `dating_qc.tsv` | Model settings,\
   \ root age, shortest branch, ultrametric/binary checks |\n\n`--chronos_model` (`discrete`,\
   \ `correlated`, `relaxed`), `--chronos_lambda` and\n`--chronos_rate_categories`\
-  \ tune the fit.\n\n> **Dating failures are fatal, by design.** `ape::chronos` reports\
-  \ non-convergence as a\n> *warning* and still returns a tree, so the pipeline treats\
-  \ any chronos warning as an error\n> rather than publishing a tree that did not\
-  \ converge. It also checks that the fitted node ages\n> match the calibrations you\
-  \ asked for, and that the result is ultrametric and binary.\n\n> **Calibrations\
-  \ are yours to justify.** The pipeline applies the ages you give it; it has no\n\
-  > opinion on which fossils or published estimates are appropriate. Record their\
-  \ provenance \u2014\n> `dating_calibrations.tsv` is published to make that easy.\n\
-  \n### CAFE gene family evolution\n\n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
+  \ tune the fit.\n\n**Dating with IQ-TREE (LSD2) instead.** With `--iqtree_species_tree`,\
+  \ `--dating_method lsd2`\ndates the IQ-TREE tree with IQ-TREE's least-square dating\
+  \ (`--date`), from the same calibration\ntable. The supermatrix the tree was built\
+  \ from gives LSD2 its branch-length variances, and the\ntree's branch lengths, topology\
+  \ and root are kept. LSD2 needs at least one calibration with an\nexact age (`age_min`\
+  \ equal to `age_max`); other calibrations can be bounds. The same three\nfiles are\
+  \ written to `results/species_tree/`, with IQ-TREE's own output (`dated.timetree.nex`,\n\
+  `dated.timetree.lsd`, `dated.log`) in `results/species_tree/lsd2/`. LSD2 needs the\
+  \ alignment,\nso OrthoFinder's tree can only be dated with `chronos`.\n\nBefore\
+  \ dating, either method stops if a calibration names a tip that isn't in the tree,\
+  \ if two\ncalibrations fall on the same node, if `age_min` is above `age_max`, or\
+  \ if a calibrated node\nlies inside another that it can't be younger than. After\
+  \ dating, both check that the tree is\nultrametric and binary with positive branch\
+  \ lengths, and that every calibrated node is within\nits bounds. LSD2 also checks\
+  \ that the topology and root are unchanged, and stops on any LSD2\nwarning.\n\n\
+  > **Dating failures are fatal, by design.** `ape::chronos` reports non-convergence\
+  \ as a\n> *warning* and still returns a tree, so the pipeline treats any chronos\
+  \ warning as an error\n> rather than publishing a tree that did not converge. It\
+  \ also checks that the fitted node ages\n> match the calibrations you asked for,\
+  \ and that the result is ultrametric and binary.\n\n> **Calibrations are yours to\
+  \ justify.** The pipeline applies the ages you give it; it has no\n> opinion on\
+  \ which fossils or published estimates are appropriate. Record their provenance\
+  \ \u2014\n> `dating_calibrations.tsv` is published to make that easy.\n\n### CAFE\
+  \ gene family evolution\n\n| Parameter | Description | Default |\n|-----------|-------------|---------|\n\
   | `--skip_cafe` | Skip CAFE analysis | `null` |\n| `--cafe_max_k` | Maximum number\
   \ of k rate categories to test (runs k=1 through k=N in parallel) | `6` |\n| `--cafe_max_differential`\
   \ | Maximum gene count differential (max \u2212 min copies) for CAFE filtering.\
@@ -421,7 +455,9 @@
   \ rather than only on retries | `false` |\n| `--tree_calibrations` | TSV of node\
   \ ages used to time-calibrate the species tree with `ape::chronos`, so CAFE5's \u03BB\
   \ is per million years. See [Time-calibrating the species tree](#time-calibrating-the-species-tree-optional).\
-  \ Skips `--tree_scale_factor` and `chronoMPL()`. | `null` |\n| `--chronos_model`\
+  \ Skips `--tree_scale_factor` and `chronoMPL()`. | `null` |\n| `--dating_method`\
+  \ | `chronos` (`ape::chronos`, any species tree) or `lsd2` (IQ-TREE's LSD2; needs\
+  \ `--iqtree_species_tree` and at least one exact age) | `chronos` |\n| `--chronos_model`\
   \ | `ape::chronos` rate model: `discrete`, `correlated` or `relaxed` | `discrete`\
   \ |\n| `--chronos_lambda` | `ape::chronos` rate-smoothing parameter | `1` |\n| `--chronos_rate_categories`\
   \ | Rate categories for the `discrete` model | `10` |\n| `--tree_scale_factor` |\
@@ -547,14 +583,19 @@
   \ CPUs per job | `16` |\n| `--max_time` | Maximum runtime per job | `240.h` |\n\n\
   ## Profiles\n\n| Profile | Description |\n|---------|-------------|\n| `docker`\
   \ | Run with Docker containers |\n| `singularity` | Run with Singularity containers\
-  \ |\n| `conda` | Run with Conda environments |\n| `test_bacteria` | Fastest smoke\
-  \ test: 4 small bacterial genomes. Exercises every step, but CAFE5 does not converge\
-  \ on it (see below) |\n| `test_chlamydia` | 10 *Chlamydia* genomes. Slower than\
-  \ `test_bacteria`, but closely related enough for CAFE5 to fit a model, so it exercises\
-  \ the CAFE stages end to end |\n| `test_small` | Test run with small insect genomes\
-  \ |\n\n\n## Profiles\n\nThis pipeline is designed to run in various modes that can\
-  \ be supplied as a comma separated list i.e. `-profile profile1,profile2`.\n\n###\
-  \ Container Profiles\n\nPlease select one of the following profiles when running\
+  \ |\n| `conda` | Run with Conda environments |\n| `test` | The quick end-to-end\
+  \ test that CI runs: the 10 *Chlamydia* genomes of `test_chlamydia`, fetched directly\
+  \ from NCBI's FTP site, with CAFE's k-sweep up to k = 3. Every step runs, CAFE5\
+  \ included, apart from the NCBI download step |\n| `test_proteins` | `test` with\
+  \ 5 of the 10 species given as NCBI proteomes (`--input_proteins`) and 5 as genomes,\
+  \ so one run covers both kinds of input. CI runs it too |\n| `test_bacteria` | Fastest\
+  \ smoke test: 4 small bacterial genomes. Exercises every step, but CAFE5 does not\
+  \ converge on it (see below) |\n| `test_chlamydia` | 10 *Chlamydia* genomes. Slower\
+  \ than `test_bacteria`, but closely related enough for CAFE5 to fit a model, so\
+  \ it exercises the CAFE stages end to end |\n| `test_small` | Test run with small\
+  \ insect genomes |\n\n\n## Profiles\n\nThis pipeline is designed to run in various\
+  \ modes that can be supplied as a comma separated list i.e. `-profile profile1,profile2`.\n\
+  \n### Container Profiles\n\nPlease select one of the following profiles when running\
   \ the pipeline.\n\n* `docker` - This profile uses the container software Docker\
   \ when running the pipeline. This container software requires root permissions so\
   \ is used when running on cloud infrastructure or your local machine (depending\
@@ -566,21 +607,28 @@
   \ - This profile uses the container software Apptainer when running the pipeline.\
   \ This container software does not require root permissions so is used when running\
   \ on on-premise HPCs or you local machine (depending on permissions). **Please Note:**\
-  \ You must have Apptainer installed to use this profile.\n\n### Optional Profiles\n\
-  \n* `local` - This profile is used if you are running the pipeline on your local\
-  \ machine.\n* `aws_batch` - This profile is used if you are running the pipeline\
-  \ on AWS utilising the AWS Batch functionality. **Please Note:** You must use the\
-  \ `Docker` profile with with AWS Batch.\n* `test_small` - This profile is used if\
-  \ you want to test running the pipeline on your infrastructure, running from predownloaded\
-  \ go files. **Please Note:** You do not provide any input parameters if this profile\
-  \ is selected but you still provide a container profile.\n\n> **Which test profile\
-  \ to use.** `test_bacteria` (4 *Mycoplasmoides*) is the quickest way to check the\n\
-  > pipeline runs, but those species are too divergent for CAFE5: about half the orthogroups\
-  \ are identical\n> across all four, leaving almost no copy-number variation across\
-  \ just two internal branches, so\n> `CAFE_PREP` exhausts its retries and the error\
-  \ is ignored. That is a property of the dataset, not a\n> pipeline fault. Use `test_chlamydia`\
-  \ (10 species in one genus) when you need the CAFE stages\n> themselves to be exercised.\n\
-  \n## Custom Configuration\n\nIf you want to run this pipeline on your institute's\
+  \ You must have Apptainer installed to use this profile.\n\n**No internet on your\
+  \ compute nodes?** See [docs/offline.md](https://github.com/Eco-Flow/excon/blob/main/docs/offline.md).\
+  \ `utils/pull_singularity_images.sh` downloads every container image the pipeline\
+  \ uses, so they can be used offline. Genomes, the eggNOG database and BUSCO lineages\
+  \ can all be supplied locally.\n\n### Optional Profiles\n\n* `local` - This profile\
+  \ is used if you are running the pipeline on your local machine.\n* `aws_batch`\
+  \ - This profile is used if you are running the pipeline on AWS utilising the AWS\
+  \ Batch functionality. **Please Note:** You must use the `Docker` profile with with\
+  \ AWS Batch.\n* `test_small` - This profile is used if you want to test running\
+  \ the pipeline on your infrastructure, running from predownloaded go files. **Please\
+  \ Note:** You do not provide any input parameters if this profile is selected but\
+  \ you still provide a container profile.\n\n> **Which test profile to use.** `test_bacteria`\
+  \ (4 *Mycoplasmoides*) is the quickest way to check the\n> pipeline runs, but those\
+  \ species are too divergent for CAFE5: about half the orthogroups are identical\n\
+  > across all four, leaving almost no copy-number variation across just two internal\
+  \ branches, so\n> `CAFE_PREP` exhausts its retries and the error is ignored. That\
+  \ is a property of the dataset, not a\n> pipeline fault. Use `test` or `test_chlamydia`\
+  \ (10 species in one genus) when you need the CAFE\n> stages themselves to be exercised.\
+  \ `test` fetches those genomes by direct URL and is what CI runs;\n> `test_chlamydia`\
+  \ downloads them by accession with ncbi-genome-download, which first fetches NCBI's\n\
+  > 245 MB index of all bacterial assemblies, and runs the full k = 1-6 sweep.\n\n\
+  ## Custom Configuration\n\nIf you want to run this pipeline on your institute's\
   \ on-premise HPC or specific cloud infrastructure then please contact us and we\
   \ will help you build and test a custom config file. This config file will be published\
   \ to our [configs repository](https://github.com/Eco-Flow/configs). \n\n## Running\
