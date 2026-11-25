@@ -51,9 +51,9 @@ top_pages:
   views: 1
 - path: /events/
   views: 1
-- path: /events/2026-09-30-nextflow-workshop-yzg-namur/
-  views: 1
 - path: /partners/
+  views: 1
+- path: /events/2026-09-30-nextflow-workshop-yzg-namur/
   views: 1
 - path: /training/hpc/
   views: 1
