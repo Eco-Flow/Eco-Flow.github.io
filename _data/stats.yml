@@ -6,8 +6,8 @@ pageviews_all: 1040
 visits_all: 670
 pageviews_30d: 450
 visits_30d: 280
-pageviews_7d: 237
-visits_7d: 103
+pageviews_7d: 239
+visits_7d: 105
 countries_7d: 7
 countries_all: 37
 top_pages:
@@ -23,27 +23,27 @@ top_pages:
   views: 10
 - path: /about/
   views: 8
-- path: /training/commandline/
-  views: 5
 - path: /training/pipelines/
   views: 5
-- path: /blog/
-  views: 4
+- path: /training/commandline/
+  views: 5
 - path: /services/
   views: 4
 - path: /events/
   views: 4
+- path: /blog/
+  views: 4
+- path: /training/hpc-config/
+  views: 3
 - path: /pipelines/excon/
   views: 2
 - path: /training/differential/
   views: 2
 - path: /pipelines/synteny/
   views: 1
-- path: /2025/04/01/hackathon-london.html
-  views: 1
 - path: /pipelines/about/
   views: 1
-- path: /training/hpc-config/
+- path: /2025/04/01/hackathon-london.html
   views: 1
 - path: /citations/
   views: 1
@@ -55,9 +55,9 @@ top_pages:
   views: 1
 - path: /numbers/
   views: 1
-- path: /partners/
-  views: 1
 - path: /events/2026-09-30-nextflow-workshop-yzg-namur/
+  views: 1
+- path: /partners/
   views: 1
 - path: /training/hpc/
   views: 1
@@ -66,8 +66,8 @@ top_countries:
   views: 190
   visits: 68
 - name: US
-  views: 27
-  visits: 26
+  views: 29
+  visits: 28
 - name: GH
   views: 15
   visits: 5
