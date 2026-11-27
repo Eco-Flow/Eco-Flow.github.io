@@ -6,17 +6,17 @@ pageviews_all: 1020
 visits_all: 650
 pageviews_30d: 440
 visits_30d: 270
-pageviews_7d: 234
-visits_7d: 100
+pageviews_7d: 237
+visits_7d: 101
 countries_7d: 6
 countries_all: 37
 top_pages:
 - path: /training/nfcore-rnaseq/
-  views: 57
+  views: 58
 - path: /training/
-  views: 57
+  views: 58
 - path: /
-  views: 51
+  views: 52
 - path: /pipelines/
   views: 12
 - path: /training/setup/
@@ -53,16 +53,16 @@ top_pages:
   views: 1
 - path: /numbers/
   views: 1
-- path: /partners/
-  views: 1
 - path: /events/2026-09-30-nextflow-workshop-yzg-namur/
+  views: 1
+- path: /partners/
   views: 1
 - path: /training/hpc/
   views: 1
 top_countries:
 - name: GB
-  views: 189
-  visits: 67
+  views: 192
+  visits: 68
 - name: US
   views: 26
   visits: 25
