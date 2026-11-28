@@ -6,8 +6,8 @@ pageviews_all: 1020
 visits_all: 650
 pageviews_30d: 420
 visits_30d: 250
-pageviews_7d: 229
-visits_7d: 97
+pageviews_7d: 230
+visits_7d: 98
 countries_7d: 6
 countries_all: 37
 top_pages:
@@ -16,7 +16,7 @@ top_pages:
 - path: /training/
   views: 58
 - path: /
-  views: 48
+  views: 49
 - path: /pipelines/
   views: 11
 - path: /training/setup/
@@ -64,8 +64,8 @@ top_countries:
   views: 185
   visits: 65
 - name: US
-  views: 25
-  visits: 24
+  views: 26
+  visits: 25
 - name: GH
   views: 15
   visits: 5
